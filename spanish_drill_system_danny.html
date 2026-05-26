@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish Drill System — Danny</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500;600&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:         #F8FAFC;
+  --bg-card:    #FFFFFF;
+  --bg-subtle:  #F1F5F9;
+  --bg-amber:   #FFFBEB;
+  --bg-indigo:  #EEF2FF;
+  --bg-emerald: #ECFDF5;
+  --bg-red:     #FFF1F2;
+
+  /* Text */
+  --text:       #0F172A;
+  --text-mid:   #475569;
+  --text-soft:  #94A3B8;
+
+  /* Semantic colors — each owns exactly ONE meaning */
+  --indigo:     #6366F1;   /* verb forms being drilled */
+  --emerald:    #10B981;   /* correct / answer key */
+  --amber:      #F59E0B;   /* rules / attention */
+  --red:        #EF4444;   /* errors / what not to do */
+  --slate:      #64748B;   /* secondary labels */
+
+  /* Lines */
+  --line:       #E2E8F0;
+  --line-drill: #CBD5E1;
+
+  /* Fonts */
+  --display: 'Playfair Display', Georgia, serif;
+  --body:    'DM Sans', system-ui, sans-serif;
+  --mono:    'JetBrains Mono', monospace;
+  --roboto:  'Roboto', sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
+  --shadow-md: 0 4px 16px rgba(15,23,42,.08), 0 1px 4px rgba(15,23,42,.04);
+}
+
+/* ─────────────────────────────────────
+   RESET + BASE
+───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────
+   TOP NAV (screen only)
+───────────────────────────────────── */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(248,250,252,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 56px;
+}
+
+.top-bar-brand {
+  font-family: var(--display);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text-mid);
+  margin-right: 32px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tab-scroll {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+.tab-scroll::-webkit-scrollbar { display: none; }
+
+.tab {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--text-soft);
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.tab:hover { background: var(--bg-subtle); color: var(--text-mid); }
+.tab.active { background: var(--text); color: #fff; font-weight: 600; }
+
+.btn-print {
+  margin-left: 20px;
+  flex-shrink: 0;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-mid);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+.btn-print:hover { border-color: var(--text-mid); box-shadow: var(--shadow-sm); }
+
+/* ─────────────────────────────────────
+   SHEET WRAPPER
+───────────────────────────────────── */
+.sheet {
+  display: none;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 56px 32px 120px;
+}
+.sheet.active { display: block; }
+
+/* ─────────────────────────────────────
+   SHEET HEADER
+───────────────────────────────────── */
+.sheet-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.sheet-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.sheet-title em {
+  font-style: italic;
+  color: var(--indigo);
+}
+
+.sheet-subtitle {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-mid);
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.meta-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.meta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.meta-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+.meta-line {
+  width: 140px;
+  height: 1px;
+  background: var(--line-drill);
+  margin-top: 6px;
+}
+
+/* ─────────────────────────────────────
+   SECTION DIVIDER
+───────────────────────────────────── */
+.section {
+  margin-top: 52px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--text-soft);
+  background: var(--bg-subtle);
+  border-radius: 20px;
+  padding: 3px 10px;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.section-note {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-left: auto;
+  font-style: italic;
+}
+
+/* ─────────────────────────────────────
+   REVIEW / RULE CALLOUT
+───────────────────────────────────── */
+.rule-card {
+  background: var(--bg-amber);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 12px 12px 0;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.rule-card + .rule-card { margin-top: 12px; }
+
+.rule-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+.rule-body {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.75;
+}
+.rule-body strong { color: var(--text); font-weight: 600; }
+.rule-body em { color: var(--text-mid); font-style: italic; }
+
+.rule-body code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: rgba(245,158,11,.12);
+  color: #92400E;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.rule-body .correct {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--emerald);
+  font-weight: 600;
+}
+.rule-body .wrong {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--red);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────
+   PARADIGM TABLE
+───────────────────────────────────── */
+.paradigm-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.paradigm-label .irr-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: var(--bg-red);
+  color: var(--red);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.paradigm-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.paradigm-table thead tr {
+  background: var(--bg-subtle);
+}
+.paradigm-table th {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  padding: 11px 16px;
+  text-align: left;
+}
+
+.paradigm-table td {
+  padding: 13px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.paradigm-table tr:hover td { background: var(--bg-subtle); }
+
+.paradigm-table .td-pronoun {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-soft);
+  white-space: nowrap;
+  width: 100px;
+}
+.paradigm-table .td-form {
+  font-family: var(--roboto);
+  font-size: 17px;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--indigo);
+  width: 130px;
+}
+.paradigm-table .td-ending {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--amber);
+  font-weight: 600;
+  width: 70px;
+}
+.paradigm-table .td-example {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+.paradigm-table .td-example strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────
+   COPY GRID (copy paradigm 3×)
+───────────────────────────────────── */
+.copy-instruction {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-soft);
+  margin-bottom: 14px;
+  padding-left: 2px;
+}
+
+.copy-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.copy-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.copy-pronoun {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+.copy-line {
+  height: 28px;
+  border-bottom: 1px solid var(--line-drill);
+  width: 100%;
+}
+
+/* multi-verb copy (side by side) */
+.copy-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+
+/* ─────────────────────────────────────
+   20-REP DRILL
+───────────────────────────────────── */
+.drill-verb-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.drill-verb-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 16px 22px;
+  background: var(--bg-indigo);
+  border-bottom: 1px solid rgba(99,102,241,.12);
+}
+
+.drill-verb-inf {
+  font-family: var(--roboto);
+  font-size: 20px;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--indigo);
+}
+
+.drill-verb-eng {
+  font-size: 13px;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+.drill-verb-target {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--indigo);
+  background: rgba(99,102,241,.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.drill-verb-instruction {
+  font-size: 12.5px;
+  color: var(--text-soft);
+  padding: 10px 22px 14px;
+  font-style: italic;
+  border-bottom: 1px solid var(--line);
+}
+
+.drill-lines-wrap {
+  padding: 16px 22px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+}
+
+.drill-line {
+  position: relative;
+  height: 34px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 5px;
+}
+.drill-line-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--line-drill);
+  position: absolute;
+  left: 0;
+  top: 8px;
+  line-height: 1;
+}
+
+/* ─────────────────────────────────────
+   RAPID FIRE
+───────────────────────────────────── */
+.rf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+
+.rf-item {}
+
+.rf-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.rf-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-soft);
+  min-width: 20px;
+}
+.rf-verb {
+  font-family: var(--roboto);
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--indigo);
+}
+.rf-arrow { color: var(--text-soft); font-size: 12px; }
+.rf-person {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.rf-lines { display: flex; flex-direction: column; gap: 4px; }
+.rf-line {
+  height: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ─────────────────────────────────────
+   SENTENCE SLOTS
+───────────────────────────────────── */
+.sent-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sent-item:last-child { border-bottom: none; }
+
+.sent-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+
+.sent-prompt {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 4px;
+}
+.sent-prompt .blank {
+  display: inline-block;
+  min-width: 110px;
+  border-bottom: 2px solid var(--indigo);
+  margin: 0 4px;
+  vertical-align: bottom;
+}
+.sent-prompt .hint {
+  font-size: 12.5px;
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+.sent-write-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--text-soft);
+  margin: 14px 0 6px;
+}
+.sent-write-line {
+  height: 32px;
+  border-bottom: 1px solid var(--line-drill);
+  margin-bottom: 6px;
+}
+
+/* ─────────────────────────────────────
+   ANSWER KEY
+───────────────────────────────────── */
+.answer-key {
+  margin-top: 52px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.ak-header {
+  font-family: var(--display);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-soft);
+  margin-bottom: 16px;
+}
+
+.ak-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px 16px;
+}
+
+.ak-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+}
+.ak-q {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-soft);
+  min-width: 32px;
+}
+.ak-a {
+  font-family: var(--roboto);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--emerald);
+}
+
+/* ─────────────────────────────────────
+   LOCK CARD (future weeks)
+───────────────────────────────────── */
+.lock-card {
+  margin-top: 48px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: 40px 32px;
+  text-align: center;
+}
+.lock-icon { font-size: 32px; margin-bottom: 16px; opacity: .3; }
+.lock-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.lock-body {
+  font-size: 14px;
+  color: var(--text-mid);
+  max-width: 360px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ─────────────────────────────────────
+   PRINT OVERRIDES
+───────────────────────────────────── */
+@media print {
+  .top-bar { display: none !important; }
+  body { background: white; }
+  .sheet { display: block !important; padding: 16mm 14mm; max-width: 100%; }
+  .sheet:not(.active) { display: none !important; }
+  .drill-verb-card { box-shadow: none; border: 1px solid #E2E8F0; }
+  .paradigm-table { box-shadow: none; border: 1px solid #E2E8F0; }
+  .bg-indigo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (max-width: 600px) {
+  .top-bar { padding: 0 16px; }
+  .sheet { padding: 40px 20px 80px; }
+  .copy-grid { grid-template-columns: repeat(3, 1fr); }
+  .rf-grid { grid-template-columns: 1fr; }
+  .ak-grid { grid-template-columns: repeat(3, 1fr); }
+  .drill-lines-wrap { grid-template-columns: 1fr; }
+  .copy-dual { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ── -->
+<nav class="top-bar">
+  <span class="top-bar-brand">Spanish Drill System</span>
+  <div class="tab-scroll">
+    <button class="tab active" onclick="show('w1d1')">W1 · D1</button>
+    <button class="tab" onclick="show('w1d2')">W1 · D2</button>
+    <button class="tab" onclick="show('w1d3')">W1 · D3</button>
+    <button class="tab" onclick="show('w1d4')">W1 · D4</button>
+    <button class="tab" onclick="show('w1d5')">W1 · D5</button>
+    <button class="tab" onclick="show('w2d1')">W2 · D1</button>
+    <button class="tab" onclick="show('w2d2')">W2 · D2</button>
+    <button class="tab" onclick="show('w2d3')">W2 · D3</button>
+    <button class="tab" onclick="show('w2d4')">W2 · D4</button>
+    <button class="tab" onclick="show('w2d5')">W2 · D5</button>
+    <button class="tab" onclick="show('w3d1')">W3 · D1</button>
+    <button class="tab" onclick="show('w3d2')">W3 · D2</button>
+    <button class="tab" onclick="show('w3d3')">W3 · D3</button>
+    <button class="tab" onclick="show('w3d4')">W3 · D4</button>
+    <button class="tab" onclick="show('w3d5')">W3 · D5</button>
+  </div>
+  <button class="btn-print" onclick="window.print()">Print ↗</button>
+</nav>
+
+
+<!-- ══════════════════════════════════════
+     W1 · D1 — Regular -AR Verbs
+══════════════════════════════════════ -->
+<div class="sheet active" id="w1d1">
+
+  <div class="sheet-eyebrow">Week 1 · Day 1 · Present Indicative</div>
+  <h1 class="sheet-title">Regular <em>-AR</em> Verbs</h1>
+  <p class="sheet-subtitle">The foundation. Every regular -AR verb in Spanish follows this exact pattern. Drill it until the ending sequence fires automatically — before you think about it.</p>
+
+  <div class="meta-row">
+    <div class="meta-field"><span class="meta-label">Date</span><div class="meta-line"></div></div>
+    <div class="meta-field"><span class="meta-label">Started</span><div class="meta-line"></div></div>
+    <div class="meta-field"><span class="meta-label">Finished</span><div class="meta-line"></div></div>
+  </div>
+
+  <!-- ① REVIEW -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">01</span>
+      <span class="section-title">Review</span>
+      <span class="section-note">Read every word before picking up your pen</span>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-label">What is the Present Indicative?</div>
+      <div class="rule-body">
+        The <strong>Presente de Indicativo</strong> is the tense of objective reality — facts, habits, and actions happening right now. In Mexican Spanish it also doubles as the future for confirmed plans: <em>"Mañana trabajo desde casa"</em> (Tomorrow I work from home) is grammatically a present tense but means a guaranteed future event.
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <div class="rule-label">The -AR Ending Sequence — memorize this order</div>
+      <div class="rule-body">
+        Remove the <code>-ar</code> from the infinitive. What remains is the stem. Add these endings in order:<br><br>
+        <code>yo → -o</code> &nbsp;·&nbsp; <code>tú → -as</code> &nbsp;·&nbsp; <code>él/ella → -a</code> &nbsp;·&nbsp; <code>nosotros → -amos</code> &nbsp;·&nbsp; <code>ellos → -an</code><br><br>
+        <strong>The one rule you cannot forget:</strong> The <strong>yo</strong> form of every regular -AR verb ends in <code>-o</code>. Always. No exceptions. <span class="correct">trabajo · analizo · horneo · preparo · corro</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② PARADIGM -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">02</span>
+      <span class="section-title">Paradigm</span>
+      <span class="section-note">Study it. Then cover it and copy 3× from memory.</span>
+    </div>
+
+    <div class="paradigm-label">TRABAJAR — to work &nbsp;·&nbsp; stem: <strong>trabaj-</strong></div>
+    <table class="paradigm-table">
+      <thead>
+        <tr>
+          <th>Pronoun</th><th>Form</th><th>Ending</th><th>Example sentence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-pronoun">yo</td>
+          <td class="td-form">trabajo</td>
+          <td class="td-ending">-o</td>
+          <td class="td-example">Yo <strong>trabajo</strong> en Adobe en análisis de datos.</td>
+        </tr>
+        <tr>
+          <td class="td-pronoun">tú</td>
+          <td class="td-form">trabajas</td>
+          <td class="td-ending">-as</td>
+          <td class="td-example">¿Tú <strong>trabajas</strong> en la oficina hoy?</td>
+        </tr>
+        <tr>
+          <td class="td-pronoun">él / ella</td>
+          <td class="td-form">trabaja</td>
+          <td class="td-ending">-a</td>
+          <td class="td-example">Mi colega <strong>trabaja</strong> desde casa los viernes.</td>
+        </tr>
+        <tr>
+          <td class="td-pronoun">nosotros</td>
+          <td class="td-form">trabajamos</td>
+          <td class="td-ending">-amos</td>
+          <td class="td-example">Nosotros <strong>trabajamos</strong> con Snowflake y Python.</td>
+        </tr>
+        <tr>
+          <td class="td-pronoun">ellos</td>
+          <td class="td-form">trabajan</td>
+          <td class="td-ending">-an</td>
+          <td class="td-example">Ellos <strong>trabajan</strong> en el mismo departamento.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="copy-instruction">Cover the table above. Write the 5 forms from memory — 3 complete rounds below.</p>
+    <div style="margin-bottom:32px">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px">
+        <div class="copy-col"><div class="copy-pronoun">yo</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">tú</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">él</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">nosotros</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">ellos</div><div class="copy-line"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px">
+        <div class="copy-col"><div class="copy-pronoun">yo</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">tú</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">él</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">nosotros</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">ellos</div><div class="copy-line"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+        <div class="copy-col"><div class="copy-pronoun">yo</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">tú</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">él</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">nosotros</div><div class="copy-line"></div></div>
+        <div class="copy-col"><div class="copy-pronoun">ellos</div><div class="copy-line"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 20-REP DRILL -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">03</span>
+      <span class="section-title">20-Rep Drill</span>
+      <span class="section-note">Say it aloud as you write. Do not rush.</span>
+    </div>
+
+    <div class="drill-verb-card">
+      <div class="drill-verb-header">
+        <span class="drill-verb-inf">analizar</span>
+        <span class="drill-verb-eng">to analyze</span>
+        <span class="drill-verb-target">yo analizo</span>
+      </div>
+      <div class="drill-verb-instruction">Write "yo analizo" on every line. You analyze data at Adobe every day. Lock this form to that truth.</div>
+      <div class="drill-lines-wrap">
+        <div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div>
+        <div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div>
+        <div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div>
+        <div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div>
+        <div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div>
+        <div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div>
+        <div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div>
+        <div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div>
+        <div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div>
+        <div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div>
+      </div>
+    </div>
+
+    <div class="drill-verb-card">
+      <div class="drill-verb-header">
+        <span class="drill-verb-inf">preparar</span>
+        <span class="drill-verb-eng">to prepare</span>
+        <span class="drill-verb-target">yo preparo</span>
+      </div>
+      <div class="drill-verb-instruction">Write "yo preparo" on every line. You prepare espresso on the Lelit Bianca. Connect form to reality.</div>
+      <div class="drill-lines-wrap">
+        <div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div>
+        <div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div>
+        <div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div>
+        <div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div>
+        <div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div>
+        <div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div>
+        <div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div>
+        <div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div>
+        <div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div>
+        <div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div>
+      </div>
+    </div>
+
+    <div class="drill-verb-card">
+      <div class="drill-verb-header">
+        <span class="drill-verb-inf">hornear</span>
+        <span class="drill-verb-eng">to bake</span>
+        <span class="drill-verb-target">yo horneo</span>
+      </div>
+      <div class="drill-verb-instruction">Write "yo horneo" on every line. Sunday scones at The Jayne. Form → meaning → automatic.</div>
+      <div class="drill-lines-wrap">
+        <div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div>
+        <div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div>
+        <div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div>
+        <div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div>
+        <div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div>
+        <div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div>
+        <div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div>
+        <div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div>
+        <div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div>
+        <div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ RAPID FIRE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">04</span>
+      <span class="section-title">Rapid Fire</span>
+      <span class="section-note">Memory only. 3 lines each.</span>
+    </div>
+
+    <div class="rf-grid">
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">01</span><span class="rf-verb">trabajar</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">02</span><span class="rf-verb">analizar</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">03</span><span class="rf-verb">preparar</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">04</span><span class="rf-verb">hornear</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">05</span><span class="rf-verb">trabajar</span><span class="rf-arrow">→</span><span class="rf-person">él</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">06</span><span class="rf-verb">analizar</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">07</span><span class="rf-verb">preparar</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">08</span><span class="rf-verb">hornear</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">09</span><span class="rf-verb">trabajar</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">10</span><span class="rf-verb">analizar</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    </div>
+  </div>
+
+  <!-- ⑤ SENTENCE SLOTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge">05</span>
+      <span class="section-title">Sentence Slots</span>
+      <span class="section-note">Fill the blank. Then write the full sentence.</span>
+    </div>
+
+    <div class="sent-item">
+      <div class="sent-num">Sentence 01</div>
+      <div class="sent-prompt">Todos los días yo <span class="blank"></span> (analizar) datos en Snowflake en Adobe. <span class="hint">Every day I analyze data in Snowflake at Adobe.</span></div>
+      <div class="sent-write-label">Write the complete sentence —</div>
+      <div class="sent-write-line"></div>
+    </div>
+
+    <div class="sent-item">
+      <div class="sent-num">Sentence 02</div>
+      <div class="sent-prompt">Los domingos yo <span class="blank"></span> (hornear) scones en mi apartamento en The Jayne. <span class="hint">On Sundays I bake scones in my apartment at The Jayne.</span></div>
+      <div class="sent-write-label">Write the complete sentence —</div>
+      <div class="sent-write-line"></div>
+    </div>
+
+    <div class="sent-item">
+      <div class="sent-num">Sentence 03</div>
+      <div class="sent-prompt">Mi colega <span class="blank"></span> (trabajar) desde casa tres días a la semana. <span class="hint">My colleague works from home three days a week.</span></div>
+      <div class="sent-write-label">Write the complete sentence —</div>
+      <div class="sent-write-line"></div>
+    </div>
+
+    <div class="sent-item">
+      <div class="sent-num">Sentence 04</div>
+      <div class="sent-prompt">Nosotros <span class="blank"></span> (usar) XGBoost para el modelado predictivo en Adobe. <span class="hint">We use XGBoost for predictive modeling at Adobe.</span></div>
+      <div class="sent-write-label">Write the complete sentence —</div>
+      <div class="sent-write-line"></div>
+    </div>
+
+    <div class="sent-item">
+      <div class="sent-num">Sentence 05 — Open</div>
+      <div class="sent-prompt">Write your own -AR verb sentence about something real from today. Any verb, any person.</div>
+      <div class="sent-write-line"></div>
+    </div>
+  </div>
+
+  <!-- ANSWER KEY -->
+  <div class="answer-key">
+    <div class="ak-header">Answer key</div>
+    <div class="ak-grid">
+      <div class="ak-item"><span class="ak-q">RF 01</span><span class="ak-a">trabajo</span></div>
+      <div class="ak-item"><span class="ak-q">RF 02</span><span class="ak-a">analizan</span></div>
+      <div class="ak-item"><span class="ak-q">RF 03</span><span class="ak-a">preparas</span></div>
+      <div class="ak-item"><span class="ak-q">RF 04</span><span class="ak-a">horneamos</span></div>
+      <div class="ak-item"><span class="ak-q">RF 05</span><span class="ak-a">trabaja</span></div>
+      <div class="ak-item"><span class="ak-q">RF 06</span><span class="ak-a">analizamos</span></div>
+      <div class="ak-item"><span class="ak-q">RF 07</span><span class="ak-a">preparan</span></div>
+      <div class="ak-item"><span class="ak-q">RF 08</span><span class="ak-a">horneas</span></div>
+      <div class="ak-item"><span class="ak-q">RF 09</span><span class="ak-a">trabajamos</span></div>
+      <div class="ak-item"><span class="ak-q">RF 10</span><span class="ak-a">analizas</span></div>
+      <div class="ak-item"><span class="ak-q">S 01</span><span class="ak-a">analizo</span></div>
+      <div class="ak-item"><span class="ak-q">S 02</span><span class="ak-a">horneo</span></div>
+      <div class="ak-item"><span class="ak-q">S 03</span><span class="ak-a">trabaja</span></div>
+      <div class="ak-item"><span class="ak-q">S 04</span><span class="ak-a">usamos</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     W1 · D2 — Regular -ER / -IR Verbs
+══════════════════════════════════════ -->
+<div class="sheet" id="w1d2">
+  <div class="sheet-eyebrow">Week 1 · Day 2 · Present Indicative</div>
+  <h1 class="sheet-title">Regular <em>-ER</em> and <em>-IR</em> Verbs</h1>
+  <p class="sheet-subtitle">Almost identical to -AR. One difference only. Drill that difference until it's invisible.</p>
+  <div class="meta-row">
+    <div class="meta-field"><span class="meta-label">Date</span><div class="meta-line"></div></div>
+    <div class="meta-field"><span class="meta-label">Started</span><div class="meta-line"></div></div>
+    <div class="meta-field"><span class="meta-label">Finished</span><div class="meta-line"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-badge">01</span><span class="section-title">Review</span><span class="section-note">Read before drilling</span></div>
+    <div class="rule-card">
+      <div class="rule-label">-ER and -IR endings</div>
+      <div class="rule-body">
+        <code>-ER: yo -o · tú -es · él -e · nosotros -emos · ellos -en</code><br>
+        <code>-IR: yo -o · tú -es · él -e · nosotros -imos · ellos -en</code><br><br>
+        <strong>The only difference between -ER and -IR:</strong> nosotros. -ER uses <code>-emos</code>. -IR uses <code>-imos</code>. Every other ending is identical. That's the entire lesson.
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">Still true from yesterday</div>
+      <div class="rule-body">The <strong>yo</strong> form still ends in <code>-o</code>. Always. For every regular verb regardless of -ar, -er, or -ir. <span class="correct">como · corro · vivo · escribo</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-badge">02</span><span class="section-title">Paradigm</span><span class="section-note">Study both. Cover. Copy 3× each.</span></div>
+
+    <div class="paradigm-label">COMER — to eat &nbsp;·&nbsp; stem: <strong>com-</strong></div>
+    <table class="paradigm-table">
+      <thead><tr><th>Pronoun</th><th>Form</th><th>Ending</th><th>Example sentence</th></tr></thead>
+      <tbody>
+        <tr><td class="td-pronoun">yo</td><td class="td-form">como</td><td class="td-ending">-o</td><td class="td-example">Yo <strong>como</strong> en Black Rabbit Rose con amigos los viernes.</td></tr>
+        <tr><td class="td-pronoun">tú</td><td class="td-form">comes</td><td class="td-ending">-es</td><td class="td-example">¿Tú <strong>comes</strong> en la cafetería de Adobe?</td></tr>
+        <tr><td class="td-pronoun">él / ella</td><td class="td-form">come</td><td class="td-ending">-e</td><td class="td-example">Felix <strong>come</strong> comida suave después de su cirugía dental.</td></tr>
+        <tr><td class="td-pronoun">nosotros</td><td class="td-form">comemos</td><td class="td-ending">-emos</td><td class="td-example">Nosotros <strong>comemos</strong> juntos los viernes después del trabajo.</td></tr>
+        <tr><td class="td-pronoun">ellos</td><td class="td-form">comen</td><td class="td-ending">-en</td><td class="td-example">Ellos <strong>comen</strong> tacos en el centro de Los Ángeles.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="paradigm-label" style="margin-top:24px">VIVIR — to live &nbsp;·&nbsp; stem: <strong>viv-</strong></div>
+    <table class="paradigm-table">
+      <thead><tr><th>Pronoun</th><th>Form</th><th>Ending</th><th>Example sentence</th></tr></thead>
+      <tbody>
+        <tr><td class="td-pronoun">yo</td><td class="td-form">vivo</td><td class="td-ending">-o</td><td class="td-example">Yo <strong>vivo</strong> en The Jayne en West Adams, Los Ángeles.</td></tr>
+        <tr><td class="td-pronoun">tú</td><td class="td-form">vives</td><td class="td-ending">-es</td><td class="td-example">¿Tú <strong>vives</strong> cerca de la oficina de Adobe?</td></tr>
+        <tr><td class="td-pronoun">él / ella</td><td class="td-form">vive</td><td class="td-ending">-e</td><td class="td-example">Mi colega <strong>vive</strong> en Silver Lake.</td></tr>
+        <tr><td class="td-pronoun">nosotros</td><td class="td-form">vivimos</td><td class="td-ending">-imos ←</td><td class="td-example">Nosotros <strong>vivimos</strong> en Los Ángeles. <em>(note: -imos not -emos)</em></td></tr>
+        <tr><td class="td-pronoun">ellos</td><td class="td-form">viven</td><td class="td-ending">-en</td><td class="td-example">Muchos empleados de Adobe <strong>viven</strong> lejos de la oficina.</td></tr>
+      </tbody>
+    </table>
+
+    <p class="copy-instruction">Cover both tables. Write all 10 forms from memory — 3 rounds each.</p>
+    <div class="copy-dual">
+      <div>
+        <div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">comer</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">vivir</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+          <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-badge">03</span><span class="section-title">20-Rep Drill</span><span class="section-note">Say it aloud as you write.</span></div>
+
+    <div class="drill-verb-card">
+      <div class="drill-verb-header"><span class="drill-verb-inf">correr</span><span class="drill-verb-eng">to run</span><span class="drill-verb-target">yo corro</span></div>
+      <div class="drill-verb-instruction">Write "yo corro" on every line. West Adams, Vivobarefoot, every Sunday. Real context = faster recall.</div>
+      <div class="drill-lines-wrap">
+        <div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div>
+      </div>
+    </div>
+
+    <div class="drill-verb-card">
+      <div class="drill-verb-header"><span class="drill-verb-inf">vivir</span><span class="drill-verb-eng">to live</span><span class="drill-verb-target">yo vivo</span></div>
+      <div class="drill-verb-instruction">Write "yo vivo en The Jayne" on every line. Full phrase — location is the anchor.</div>
+      <div class="drill-lines-wrap">
+        <div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-badge">04</span><span class="section-title">Rapid Fire</span><span class="section-note">Memory only. 3 lines each.</span></div>
+    <div class="rf-grid">
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">01</span><span class="rf-verb">comer</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">02</span><span class="rf-verb">vivir</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">03</span><span class="rf-verb">correr</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">04</span><span class="rf-verb">escribir</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">05</span><span class="rf-verb">comer</span><span class="rf-arrow">→</span><span class="rf-person">él</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">06</span><span class="rf-verb">vivir</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">07</span><span class="rf-verb">correr</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">08</span><span class="rf-verb">escribir</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">09</span><span class="rf-verb">comer</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+      <div class="rf-item"><div class="rf-prompt"><span class="rf-num">10</span><span class="rf-verb">vivir</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-badge">05</span><span class="section-title">Sentence Slots</span><span class="section-note">Fill the blank. Write the full sentence.</span></div>
+    <div class="sent-item"><div class="sent-num">Sentence 01</div><div class="sent-prompt">Yo <span class="blank"></span> (vivir) en The Jayne en West Adams, Los Ángeles. <span class="hint">I live at The Jayne in West Adams.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+    <div class="sent-item"><div class="sent-num">Sentence 02</div><div class="sent-prompt">Felix <span class="blank"></span> (comer) comida suave porque se está recuperando. <span class="hint">Felix eats soft food because he is recovering.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+    <div class="sent-item"><div class="sent-num">Sentence 03</div><div class="sent-prompt">Los domingos yo <span class="blank"></span> (correr) por West Adams para entrenar mis piernas. <span class="hint">On Sundays I run through West Adams to train my legs.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+    <div class="sent-item"><div class="sent-num">Sentence 04</div><div class="sent-prompt">Nosotros <span class="blank"></span> (comer) juntos los viernes después del trabajo. <span class="hint">We eat together on Fridays after work.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+    <div class="sent-item"><div class="sent-num">Sentence 05 — Open</div><div class="sent-prompt">Write your own sentence using an -ER or -IR verb about something real from today.</div><div class="sent-write-line"></div></div>
+  </div>
+
+  <div class="answer-key">
+    <div class="ak-header">Answer key</div>
+    <div class="ak-grid">
+      <div class="ak-item"><span class="ak-q">RF 01</span><span class="ak-a">como</span></div>
+      <div class="ak-item"><span class="ak-q">RF 02</span><span class="ak-a">viven</span></div>
+      <div class="ak-item"><span class="ak-q">RF 03</span><span class="ak-a">corremos</span></div>
+      <div class="ak-item"><span class="ak-q">RF 04</span><span class="ak-a">escribo</span></div>
+      <div class="ak-item"><span class="ak-q">RF 05</span><span class="ak-a">come</span></div>
+      <div class="ak-item"><span class="ak-q">RF 06</span><span class="ak-a">vives</span></div>
+      <div class="ak-item"><span class="ak-q">RF 07</span><span class="ak-a">corres</span></div>
+      <div class="ak-item"><span class="ak-q">RF 08</span><span class="ak-a">escribimos</span></div>
+      <div class="ak-item"><span class="ak-q">RF 09</span><span class="ak-a">comen</span></div>
+      <div class="ak-item"><span class="ak-q">RF 10</span><span class="ak-a">vivimos</span></div>
+      <div class="ak-item"><span class="ak-q">S 01</span><span class="ak-a">vivo</span></div>
+      <div class="ak-item"><span class="ak-q">S 02</span><span class="ak-a">come</span></div>
+      <div class="ak-item"><span class="ak-q">S 03</span><span class="ak-a">corro</span></div>
+      <div class="ak-item"><span class="ak-q">S 04</span><span class="ak-a">comemos</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Remaining sheets follow exact same design — locked until W1 complete -->
+<div class="sheet" id="w1d3">
+  <div class="sheet-eyebrow">Week 1 · Day 3 · Present Indicative</div>
+  <h1 class="sheet-title"><em>Ser</em> & <em>Estar</em></h1>
+  <p class="sheet-subtitle">Two verbs. Both mean "to be." Completely irregular — no stem to extract, no pattern to derive. These forms are memorized as fixed units, full stop.</p>
+  <div class="meta-row"><div class="meta-field"><span class="meta-label">Date</span><div class="meta-line"></div></div><div class="meta-field"><span class="meta-label">Started</span><div class="meta-line"></div></div><div class="meta-field"><span class="meta-label">Finished</span><div class="meta-line"></div></div></div>
+  <div class="section"><div class="section-header"><span class="section-badge">01</span><span class="section-title">Review</span></div>
+  <div class="rule-card"><div class="rule-label">SER — the blueprint</div><div class="rule-body">Use for permanent identity: what something fundamentally <em>is</em>. Origin, profession, character, material, time, relationships.<br><br><span class="correct">Soy analista de datos. &nbsp;Adobe es una empresa de software. &nbsp;La reunión es a las diez.</span></div></div>
+  <div class="rule-card"><div class="rule-label">ESTAR — the condition</div><div class="rule-body">Use for temporary states: how something <em>is right now</em>. Location of people and moveable things, emotions, physical states, results of actions.<br><br><span class="correct">Estoy en la oficina. &nbsp;Felix está recuperándose. &nbsp;Los datos están listos.</span></div></div>
+  <div class="rule-card"><div class="rule-label">The forms — fully irregular, memorize as fixed units</div><div class="rule-body"><code>SER: soy · eres · es · somos · son</code><br><code>ESTAR: estoy · estás · está · estamos · están</code></div></div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">02</span><span class="section-title">Paradigm</span></div>
+  <div class="paradigm-label">SER — to be (identity) <span class="irr-tag">Fully Irregular</span></div>
+  <table class="paradigm-table"><thead><tr><th>Pronoun</th><th>Form</th><th>Example sentence</th></tr></thead><tbody>
+    <tr><td class="td-pronoun">yo</td><td class="td-form">soy</td><td class="td-example">Yo <strong>soy</strong> analista de datos en Adobe.</td></tr>
+    <tr><td class="td-pronoun">tú</td><td class="td-form">eres</td><td class="td-example">¿Tú <strong>eres</strong> de Los Ángeles?</td></tr>
+    <tr><td class="td-pronoun">él / ella</td><td class="td-form">es</td><td class="td-example">Adobe <strong>es</strong> una empresa de software muy innovadora.</td></tr>
+    <tr><td class="td-pronoun">nosotros</td><td class="td-form">somos</td><td class="td-example">Nosotros <strong>somos</strong> el equipo de analytics de Adobe.</td></tr>
+    <tr><td class="td-pronoun">ellos</td><td class="td-form">son</td><td class="td-example">Los datos <strong>son</strong> fundamentales para las decisiones del negocio.</td></tr>
+  </tbody></table>
+  <div class="paradigm-label" style="margin-top:24px">ESTAR — to be (state/location) <span class="irr-tag">Fully Irregular</span></div>
+  <table class="paradigm-table"><thead><tr><th>Pronoun</th><th>Form</th><th>Example sentence</th></tr></thead><tbody>
+    <tr><td class="td-pronoun">yo</td><td class="td-form">estoy</td><td class="td-example">Hoy <strong>estoy</strong> en la oficina de Adobe todo el día.</td></tr>
+    <tr><td class="td-pronoun">tú</td><td class="td-form">estás</td><td class="td-example">¿<strong>Estás</strong> cansado después de las reuniones?</td></tr>
+    <tr><td class="td-pronoun">él / ella</td><td class="td-form">está</td><td class="td-example">Felix <strong>está</strong> recuperándose muy bien de su cirugía dental.</td></tr>
+    <tr><td class="td-pronoun">nosotros</td><td class="td-form">estamos</td><td class="td-example">Nosotros <strong>estamos</strong> trabajando en el modelo de XGBoost.</td></tr>
+    <tr><td class="td-pronoun">ellos</td><td class="td-form">están</td><td class="td-example">Los datos <strong>están</strong> listos para el análisis en Snowflake.</td></tr>
+  </tbody></table>
+  <p class="copy-instruction">Cover both tables. Write all 10 forms — 3 rounds each.</p>
+  <div class="copy-dual">
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">ser</div><div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+    </div></div>
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">estar</div><div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div>
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div>
+    </div></div>
+  </div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">03</span><span class="section-title">20-Rep Drill</span></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">ser</span><span class="drill-verb-eng">to be — identity</span><span class="drill-verb-target">yo soy</span></div><div class="drill-verb-instruction">Write "yo soy analista de datos en Adobe" on every line. Identity + profession = SER always.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">estar</span><span class="drill-verb-eng">to be — condition</span><span class="drill-verb-target">yo estoy</span></div><div class="drill-verb-instruction">Write "yo estoy en la oficina de Adobe" on every line. Location = ESTAR always.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">04</span><span class="section-title">Rapid Fire — choose SER or ESTAR, write the correct form</span></div>
+  <div class="rf-grid">
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">01</span><span class="rf-verb">ser</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">02</span><span class="rf-verb">estar</span><span class="rf-arrow">→</span><span class="rf-person">Felix (él)</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">03</span><span class="rf-verb">ser</span><span class="rf-arrow">→</span><span class="rf-person">Adobe (ella)</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">04</span><span class="rf-verb">estar</span><span class="rf-arrow">→</span><span class="rf-person">los datos (ellos)</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">05</span><span class="rf-verb">ser</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">06</span><span class="rf-verb">estar</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">07</span><span class="rf-verb">ser</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">08</span><span class="rf-verb">estar</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">09</span><span class="rf-verb">ser</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">10</span><span class="rf-verb">estar</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+  </div></div>
+  <div class="section"><div class="section-header"><span class="section-badge">05</span><span class="section-title">Sentence Slots</span><span class="section-note">Choose SER or ESTAR. Write why.</span></div>
+  <div class="sent-item"><div class="sent-num">Sentence 01</div><div class="sent-prompt">Yo <span class="blank"></span> analista de datos en Adobe. <span class="hint">profession = permanent identity → SER or ESTAR?</span></div><div class="sent-write-label">Write the sentence + your reasoning —</div><div class="sent-write-line"></div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 02</div><div class="sent-prompt">Los datos <span class="blank"></span> listos para el análisis en Snowflake. <span class="hint">result of action = temporary state → SER or ESTAR?</span></div><div class="sent-write-label">Write the sentence + your reasoning —</div><div class="sent-write-line"></div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 03</div><div class="sent-prompt">Hoy yo <span class="blank"></span> muy cansado después de cinco reuniones. <span class="hint">temporary physical state → SER or ESTAR?</span></div><div class="sent-write-label">Write the sentence + your reasoning —</div><div class="sent-write-line"></div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 04 — Open</div><div class="sent-prompt">Write one SER sentence and one ESTAR sentence about Adobe or your day right now.</div><div class="sent-write-label">SER —</div><div class="sent-write-line"></div><div class="sent-write-label">ESTAR —</div><div class="sent-write-line"></div></div>
+  </div>
+  <div class="answer-key"><div class="ak-header">Answer key</div><div class="ak-grid">
+    <div class="ak-item"><span class="ak-q">RF 01</span><span class="ak-a">soy</span></div><div class="ak-item"><span class="ak-q">RF 02</span><span class="ak-a">está</span></div><div class="ak-item"><span class="ak-q">RF 03</span><span class="ak-a">es</span></div><div class="ak-item"><span class="ak-q">RF 04</span><span class="ak-a">están</span></div>
+    <div class="ak-item"><span class="ak-q">RF 05</span><span class="ak-a">somos</span></div><div class="ak-item"><span class="ak-q">RF 06</span><span class="ak-a">estoy</span></div><div class="ak-item"><span class="ak-q">RF 07</span><span class="ak-a">son</span></div><div class="ak-item"><span class="ak-q">RF 08</span><span class="ak-a">estás</span></div>
+    <div class="ak-item"><span class="ak-q">RF 09</span><span class="ak-a">eres</span></div><div class="ak-item"><span class="ak-q">RF 10</span><span class="ak-a">estamos</span></div><div class="ak-item"><span class="ak-q">S 01</span><span class="ak-a">soy</span></div><div class="ak-item"><span class="ak-q">S 02</span><span class="ak-a">están</span></div>
+    <div class="ak-item"><span class="ak-q">S 03</span><span class="ak-a">estoy</span></div>
+  </div></div>
+</div>
+
+
+<!-- W1D4, W1D5, and all W2/W3 sheets — lock cards until W1 complete -->
+<div class="sheet" id="w1d4">
+  <div class="sheet-eyebrow">Week 1 · Day 4 · Present Indicative</div>
+  <h1 class="sheet-title"><em>Ir, Tener,</em> and <em>Hacer</em></h1>
+  <p class="sheet-subtitle">Three verbs you use every single day. Ir forms the near future. Tener and Hacer are yo-go verbs — their only irregularity is a -go ending in the yo form.</p>
+  <div class="meta-row"><div class="meta-field"><span class="meta-label">Date</span><div class="meta-line"></div></div><div class="meta-field"><span class="meta-label">Started</span><div class="meta-line"></div></div><div class="meta-field"><span class="meta-label">Finished</span><div class="meta-line"></div></div></div>
+  <div class="section"><div class="section-header"><span class="section-badge">01</span><span class="section-title">Review</span></div>
+  <div class="rule-card"><div class="rule-label">IR — fully irregular, memorize as fixed units</div><div class="rule-body"><code>voy · vas · va · vamos · van</code><br><br>IR also builds the Near Future: <strong>voy a + infinitive</strong> = I'm going to [do something]. <span class="correct">Voy a presentar los datos mañana.</span> This is how Mexicans talk about future plans — always.</div></div>
+  <div class="rule-card"><div class="rule-label">TENER and HACER — yo-go verbs</div><div class="rule-body">These are regular in every form <em>except</em> yo. The yo form ends in <code>-go</code> instead of the expected <code>-o</code>.<br><br><code>TENER: tengo · tienes · tiene · tenemos · tienen</code><br><code>HACER: hago · haces · hace · hacemos · hacen</code><br><br>TENER also has a stem change (ie): <span class="correct">tienes, tiene, tienen</span> — but not in yo or nosotros.</div></div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">02</span><span class="section-title">Paradigm</span></div>
+  <div class="paradigm-label">IR · TENER · HACER <span class="irr-tag">Irregular</span></div>
+  <table class="paradigm-table"><thead><tr><th>Pronoun</th><th>ir</th><th>tener</th><th>hacer</th></tr></thead><tbody>
+    <tr><td class="td-pronoun">yo</td><td class="td-form">voy</td><td class="td-form">tengo</td><td class="td-form">hago</td></tr>
+    <tr><td class="td-pronoun">tú</td><td class="td-form">vas</td><td class="td-form">tienes</td><td class="td-form">haces</td></tr>
+    <tr><td class="td-pronoun">él / ella</td><td class="td-form">va</td><td class="td-form">tiene</td><td class="td-form">hace</td></tr>
+    <tr><td class="td-pronoun">nosotros</td><td class="td-form">vamos</td><td class="td-form">tenemos</td><td class="td-form">hacemos</td></tr>
+    <tr><td class="td-pronoun">ellos</td><td class="td-form">van</td><td class="td-form">tienen</td><td class="td-form">hacen</td></tr>
+  </tbody></table>
+  <p class="copy-instruction">Cover the table. Write all 15 forms — 3 rounds.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:8px">
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">ir</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">tener</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">hacer</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nosotros</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+  </div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">03</span><span class="section-title">20-Rep Drill</span></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">ir</span><span class="drill-verb-eng">to go</span><span class="drill-verb-target">yo voy</span></div><div class="drill-verb-instruction">Write "yo voy a la oficina de Adobe" on every line. IR + destination is a core daily sentence.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">tener</span><span class="drill-verb-eng">to have</span><span class="drill-verb-target">yo tengo</span></div><div class="drill-verb-instruction">Write "yo tengo una reunión" on every line. The -go ending is the entire trick.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">hacer</span><span class="drill-verb-eng">to do / make</span><span class="drill-verb-target">yo hago</span></div><div class="drill-verb-instruction">Write "yo hago el análisis de datos" on every line.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">04</span><span class="section-title">Rapid Fire</span></div>
+  <div class="rf-grid">
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">01</span><span class="rf-verb">ir</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">02</span><span class="rf-verb">tener</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">03</span><span class="rf-verb">hacer</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">04</span><span class="rf-verb">ir</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">05</span><span class="rf-verb">tener</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">06</span><span class="rf-verb">hacer</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">07</span><span class="rf-verb">ir</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">08</span><span class="rf-verb">tener</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">09</span><span class="rf-verb">hacer</span><span class="rf-arrow">→</span><span class="rf-person">él</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">10</span><span class="rf-verb">ir</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+  </div></div>
+  <div class="section"><div class="section-header"><span class="section-badge">05</span><span class="section-title">Sentence Slots</span></div>
+  <div class="sent-item"><div class="sent-num">Sentence 01</div><div class="sent-prompt">Los lunes yo <span class="blank"></span> (ir) a la oficina de Adobe. <span class="hint">On Mondays I go to the Adobe office.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 02</div><div class="sent-prompt">Hoy yo <span class="blank"></span> (tener) cinco reuniones — es un día muy ocupado. <span class="hint">Today I have five meetings.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 03</div><div class="sent-prompt">Todos los días yo <span class="blank"></span> (hacer) el análisis de datos en Snowflake. <span class="hint">Every day I do the data analysis in Snowflake.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 04</div><div class="sent-prompt">Nosotros <span class="blank"></span> (ir) a presentar los resultados del trimestre el viernes. <span class="hint">We are going to present the quarterly results on Friday. (Near Future)</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 05 — Open</div><div class="sent-prompt">Write a Near Future sentence using "voy a + infinitive" about something you're actually going to do this week.</div><div class="sent-write-line"></div></div>
+  </div>
+  <div class="answer-key"><div class="ak-header">Answer key</div><div class="ak-grid">
+    <div class="ak-item"><span class="ak-q">RF 01</span><span class="ak-a">voy</span></div><div class="ak-item"><span class="ak-q">RF 02</span><span class="ak-a">tienen</span></div><div class="ak-item"><span class="ak-q">RF 03</span><span class="ak-a">hago</span></div><div class="ak-item"><span class="ak-q">RF 04</span><span class="ak-a">vamos</span></div>
+    <div class="ak-item"><span class="ak-q">RF 05</span><span class="ak-a">tengo</span></div><div class="ak-item"><span class="ak-q">RF 06</span><span class="ak-a">hacemos</span></div><div class="ak-item"><span class="ak-q">RF 07</span><span class="ak-a">vas</span></div><div class="ak-item"><span class="ak-q">RF 08</span><span class="ak-a">tienes</span></div>
+    <div class="ak-item"><span class="ak-q">RF 09</span><span class="ak-a">hace</span></div><div class="ak-item"><span class="ak-q">RF 10</span><span class="ak-a">van</span></div><div class="ak-item"><span class="ak-q">S 01</span><span class="ak-a">voy</span></div><div class="ak-item"><span class="ak-q">S 02</span><span class="ak-a">tengo</span></div>
+    <div class="ak-item"><span class="ak-q">S 03</span><span class="ak-a">hago</span></div><div class="ak-item"><span class="ak-q">S 04</span><span class="ak-a">vamos</span></div>
+  </div></div>
+</div>
+
+<!-- W1D5 + all W2/W3 — lock cards -->
+<div class="sheet" id="w1d5">
+  <div class="sheet-eyebrow">Week 1 · Day 5 · Present Indicative</div>
+  <h1 class="sheet-title"><em>Poder, Querer,</em> Decir, <em>Saber</em></h1>
+  <p class="sheet-subtitle">The final core irregulars — and the modal rule that eliminates your most frequent production error.</p>
+  <div class="meta-row"><div class="meta-field"><span class="meta-label">Date</span><div class="meta-line"></div></div><div class="meta-field"><span class="meta-label">Started</span><div class="meta-line"></div></div><div class="meta-field"><span class="meta-label">Finished</span><div class="meta-line"></div></div></div>
+  <div class="section"><div class="section-header"><span class="section-badge">01</span><span class="section-title">Review</span></div>
+  <div class="rule-card"><div class="rule-label">The four verbs</div><div class="rule-body"><code>PODER: puedo · puedes · puede · podemos · pueden</code> (stem-change ue)<br><code>QUERER: quiero · quieres · quiere · queremos · quieren</code> (stem-change ie)<br><code>DECIR: digo · dices · dice · decimos · dicen</code> (yo-go + stem-change i)<br><code>SABER: sé · sabes · sabe · sabemos · saben</code> (irregular yo only)</div></div>
+  <div class="rule-card"><div class="rule-label">⚠ The modal rule — your most frequent error</div><div class="rule-body">PODER, QUERER, NECESITAR, DEBER connect <strong>directly</strong> to an infinitive. No preposition between them.<br><br><span class="correct">Puedo trabajar. &nbsp;Quiero analizar. &nbsp;Necesito comer. &nbsp;Debo estudiar.</span><br><span class="wrong">Puedo a trabajar. &nbsp;Quiero a analizar. &nbsp;Necesito a comer.</span><br><br>Exception: <strong>Voy a</strong> + infinitive is correct because the "a" belongs to IR, not to the following verb.</div></div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">02</span><span class="section-title">Paradigm</span></div>
+  <table class="paradigm-table"><thead><tr><th>Pronoun</th><th>poder</th><th>querer</th><th>decir</th><th>saber</th></tr></thead><tbody>
+    <tr><td class="td-pronoun">yo</td><td class="td-form">puedo</td><td class="td-form">quiero</td><td class="td-form">digo</td><td class="td-form">sé</td></tr>
+    <tr><td class="td-pronoun">tú</td><td class="td-form">puedes</td><td class="td-form">quieres</td><td class="td-form">dices</td><td class="td-form">sabes</td></tr>
+    <tr><td class="td-pronoun">él</td><td class="td-form">puede</td><td class="td-form">quiere</td><td class="td-form">dice</td><td class="td-form">sabe</td></tr>
+    <tr><td class="td-pronoun">nosotros</td><td class="td-form">podemos</td><td class="td-form">queremos</td><td class="td-form">decimos</td><td class="td-form">sabemos</td></tr>
+    <tr><td class="td-pronoun">ellos</td><td class="td-form">pueden</td><td class="td-form">quieren</td><td class="td-form">dicen</td><td class="td-form">saben</td></tr>
+  </tbody></table>
+  <p class="copy-instruction">Cover the table. Write all 20 forms — 3 rounds.</p>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">poder</div><div style="display:flex;flex-direction:column;gap:7px"><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nos</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">querer</div><div style="display:flex;flex-direction:column;gap:7px"><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nos</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">decir</div><div style="display:flex;flex-direction:column;gap:7px"><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nos</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+    <div><div style="font-size:11px;font-weight:500;color:var(--text-soft);margin-bottom:8px;font-style:italic">saber</div><div style="display:flex;flex-direction:column;gap:7px"><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">yo</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">tú</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">él</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">nos</span><div class="copy-line"></div></div><div style="display:grid;grid-template-columns:50px 1fr;gap:4px;align-items:end"><span class="copy-pronoun">ellos</span><div class="copy-line"></div></div></div></div>
+  </div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">03</span><span class="section-title">20-Rep Drill</span></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">poder</span><span class="drill-verb-eng">can / to be able to</span><span class="drill-verb-target">yo puedo</span></div><div class="drill-verb-instruction">Write "yo puedo analizar los datos" on every line. No "a" after puedo. Direct connection to infinitive.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  <div class="drill-verb-card"><div class="drill-verb-header"><span class="drill-verb-inf">querer</span><span class="drill-verb-eng">to want</span><span class="drill-verb-target">yo quiero</span></div><div class="drill-verb-instruction">Write "yo quiero aprender español" on every line. No "a" after quiero.</div><div class="drill-lines-wrap"><div class="drill-line"><span class="drill-line-num">1</span></div><div class="drill-line"><span class="drill-line-num">2</span></div><div class="drill-line"><span class="drill-line-num">3</span></div><div class="drill-line"><span class="drill-line-num">4</span></div><div class="drill-line"><span class="drill-line-num">5</span></div><div class="drill-line"><span class="drill-line-num">6</span></div><div class="drill-line"><span class="drill-line-num">7</span></div><div class="drill-line"><span class="drill-line-num">8</span></div><div class="drill-line"><span class="drill-line-num">9</span></div><div class="drill-line"><span class="drill-line-num">10</span></div><div class="drill-line"><span class="drill-line-num">11</span></div><div class="drill-line"><span class="drill-line-num">12</span></div><div class="drill-line"><span class="drill-line-num">13</span></div><div class="drill-line"><span class="drill-line-num">14</span></div><div class="drill-line"><span class="drill-line-num">15</span></div><div class="drill-line"><span class="drill-line-num">16</span></div><div class="drill-line"><span class="drill-line-num">17</span></div><div class="drill-line"><span class="drill-line-num">18</span></div><div class="drill-line"><span class="drill-line-num">19</span></div><div class="drill-line"><span class="drill-line-num">20</span></div></div></div>
+  </div>
+  <div class="section"><div class="section-header"><span class="section-badge">04</span><span class="section-title">Rapid Fire</span></div>
+  <div class="rf-grid">
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">01</span><span class="rf-verb">poder</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">02</span><span class="rf-verb">querer</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">03</span><span class="rf-verb">decir</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">04</span><span class="rf-verb">saber</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">05</span><span class="rf-verb">poder</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">06</span><span class="rf-verb">querer</span><span class="rf-arrow">→</span><span class="rf-person">yo</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">07</span><span class="rf-verb">decir</span><span class="rf-arrow">→</span><span class="rf-person">mi jefe (él)</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">08</span><span class="rf-verb">saber</span><span class="rf-arrow">→</span><span class="rf-person">nosotros</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">09</span><span class="rf-verb">poder</span><span class="rf-arrow">→</span><span class="rf-person">ellos</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+    <div class="rf-item"><div class="rf-prompt"><span class="rf-num">10</span><span class="rf-verb">querer</span><span class="rf-arrow">→</span><span class="rf-person">tú</span></div><div class="rf-lines"><div class="rf-line"></div><div class="rf-line"></div><div class="rf-line"></div></div></div>
+  </div></div>
+  <div class="section"><div class="section-header"><span class="section-badge">05</span><span class="section-title">Sentence Slots</span></div>
+  <div class="sent-item"><div class="sent-num">Sentence 01</div><div class="sent-prompt">Yo <span class="blank"></span> (poder) terminar el análisis antes de las cinco. <span class="hint">I can finish the analysis before five.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 02</div><div class="sent-prompt">Yo <span class="blank"></span> (querer) tomar una clase de tueste de café en Minneapolis. <span class="hint">I want to take a coffee roasting class in Minneapolis.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 03</div><div class="sent-prompt">Mi jefe me <span class="blank"></span> (decir) que el proyecto está listo. <span class="hint">My boss tells me the project is ready.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 04</div><div class="sent-prompt">Nosotros <span class="blank"></span> (saber) usar Python y XGBoost para los modelos predictivos. <span class="hint">We know how to use Python and XGBoost for predictive models.</span></div><div class="sent-write-label">Write the complete sentence —</div><div class="sent-write-line"></div></div>
+  <div class="sent-item"><div class="sent-num">Sentence 05 — Open</div><div class="sent-prompt">Write your own sentence using PODER or QUERER. No "a" after the modal. Something real from your week.</div><div class="sent-write-line"></div></div>
+  </div>
+  <div class="answer-key"><div class="ak-header">Answer key</div><div class="ak-grid">
+    <div class="ak-item"><span class="ak-q">RF 01</span><span class="ak-a">puedo</span></div><div class="ak-item"><span class="ak-q">RF 02</span><span class="ak-a">quieren</span></div><div class="ak-item"><span class="ak-q">RF 03</span><span class="ak-a">digo</span></div><div class="ak-item"><span class="ak-q">RF 04</span><span class="ak-a">sé</span></div>
+    <div class="ak-item"><span class="ak-q">RF 05</span><span class="ak-a">podemos</span></div><div class="ak-item"><span class="ak-q">RF 06</span><span class="ak-a">quiero</span></div><div class="ak-item"><span class="ak-q">RF 07</span><span class="ak-a">dice</span></div><div class="ak-item"><span class="ak-q">RF 08</span><span class="ak-a">sabemos</span></div>
+    <div class="ak-item"><span class="ak-q">RF 09</span><span class="ak-a">pueden</span></div><div class="ak-item"><span class="ak-q">RF 10</span><span class="ak-a">quieres</span></div><div class="ak-item"><span class="ak-q">S 01</span><span class="ak-a">puedo</span></div><div class="ak-item"><span class="ak-q">S 02</span><span class="ak-a">quiero</span></div>
+    <div class="ak-item"><span class="ak-q">S 03</span><span class="ak-a">dice</span></div><div class="ak-item"><span class="ak-q">S 04</span><span class="ak-a">sabemos</span></div>
+  </div></div>
+</div>
+
+<!-- W2 + W3 lock cards -->
+<div class="sheet" id="w2d1"><div class="sheet-eyebrow">Week 2 · Day 1</div><h1 class="sheet-title">Regular <em>Preterite</em></h1><p class="sheet-subtitle">The simple past — -AR, -ER, and -IR verbs.</p><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Week 1 first</div><div class="lock-body">Present indicative must be automatic before the preterite begins. Finish all 5 Week 1 sheets, then return here for the Week 2 build.</div></div></div>
+<div class="sheet" id="w2d2"><div class="sheet-eyebrow">Week 2 · Day 2</div><h1 class="sheet-title">Irregular <em>Preterite</em> Stems</h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Week 1 first</div><div class="lock-body">The 10 irregular stems: tuv, estuv, pud, hic, vin, quis, dij, pus, sup, fu.</div></div></div>
+<div class="sheet" id="w2d3"><div class="sheet-eyebrow">Week 2 · Day 3</div><h1 class="sheet-title"><em>CAR / GAR / ZAR</em> Spelling Changes</h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Week 1 first</div><div class="lock-body">Orthographic changes in the yo preterite: buscar → busqué, llegar → llegué, empezar → empecé.</div></div></div>
+<div class="sheet" id="w2d4"><div class="sheet-eyebrow">Week 2 · Day 4</div><h1 class="sheet-title">Regular <em>Imperfect</em></h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Week 1 first</div><div class="lock-body">The background tense — habitual past, ongoing states, scene-setting.</div></div></div>
+<div class="sheet" id="w2d5"><div class="sheet-eyebrow">Week 2 · Day 5</div><h1 class="sheet-title">Preterite <em>vs.</em> Imperfect</h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Week 1 first</div><div class="lock-body">The most tested B1 skill — mixing both tenses correctly in one paragraph.</div></div></div>
+<div class="sheet" id="w3d1"><div class="sheet-eyebrow">Week 3 · Day 1</div><h1 class="sheet-title">Simple <em>Conditional</em></h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Weeks 1 & 2 first</div><div class="lock-body">"Would" — the Mexican gold standard for polite requests. Me gustaría, podría, tendría.</div></div></div>
+<div class="sheet" id="w3d2"><div class="sheet-eyebrow">Week 3 · Day 2</div><h1 class="sheet-title">Simple <em>Future</em></h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Weeks 1 & 2 first</div><div class="lock-body">The Scooby-Doo tense — used for probability and conjecture, not actual future plans.</div></div></div>
+<div class="sheet" id="w3d3"><div class="sheet-eyebrow">Week 3 · Day 3</div><h1 class="sheet-title"><em>Pluperfect</em></h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Weeks 1 & 2 first</div><div class="lock-body">The past of the past — había + participle. Sophisticated narrative sequencing.</div></div></div>
+<div class="sheet" id="w3d4"><div class="sheet-eyebrow">Week 3 · Day 4</div><h1 class="sheet-title"><em>Affirmative</em> & Negative Imperatives</h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Weeks 1 & 2 first</div><div class="lock-body">Commands — enclisis for affirmative, proclisis for negative, subjunctive for formal.</div></div></div>
+<div class="sheet" id="w3d5"><div class="sheet-eyebrow">Week 3 · Day 5</div><h1 class="sheet-title">Present <em>Subjunctive</em></h1><div class="lock-card"><div class="lock-icon">🔒</div><div class="lock-title">Complete Weeks 1 & 2 first</div><div class="lock-body">The parallel universe — D.I.S.H.E.S. irregulars, trigger verbs, and the grammar of social harmony.</div></div></div>
+
+
+<script>
+const SHEETS = ['w1d1','w1d2','w1d3','w1d4','w1d5','w2d1','w2d2','w2d3','w2d4','w2d5','w3d1','w3d2','w3d3','w3d4','w3d5'];
+
+function show(id) {
+  SHEETS.forEach(s => {
+    document.getElementById(s).classList.remove('active');
+  });
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = SHEETS.indexOf(id);
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Persist current sheet
+  try { localStorage.setItem('drill_current', id); } catch(e) {}
+}
+
+// Restore last sheet
+(function init() {
+  try {
+    const last = localStorage.getItem('drill_current');
+    if (last && SHEETS.includes(last)) { show(last); return; }
+  } catch(e) {}
+  show('w1d1');
+})();
+</script>
+</body>
+</html>

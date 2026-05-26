@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish B1 Diagnostic | Pre-Assessment</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+:root {
+  --bg: #0D0D0D;
+  --surface: #161616;
+  --surface2: #1E1E1E;
+  --border: #2A2A2A;
+  --border-mid: #3A3A3A;
+  --text: #E8E4DC;
+  --text-dim: #888;
+  --text-muted: #555;
+  --accent: #E8C547;
+  --accent2: #4A9EFF;
+  --danger: #E05A3A;
+  --success: #4CAF7D;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --section-grammar: #E8C547;
+  --section-vocab: #4A9EFF;
+  --section-reading: #C47AE8;
+  --section-writing: #4CAF7D;
+  --section-listening: #E05A3A;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── SPLASH SCREEN ── */
+#splash {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999;
+  padding: 40px;
+  text-align: center;
+  transition: opacity .5s;
+}
+#splash.hidden { opacity: 0; pointer-events: none; }
+
+.splash-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.splash-title {
+  font-family: var(--mono);
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.splash-title span { color: var(--accent); }
+.splash-sub {
+  font-size: 15px;
+  color: var(--text-dim);
+  max-width: 520px;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+.splash-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.splash-domain {
+  border: 1px solid var(--border-mid);
+  padding: 12px 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  border-radius: 2px;
+}
+.splash-domain .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+}
+.name-row {
+  display: flex; gap: 12px; margin-bottom: 24px;
+  width: 100%; max-width: 400px;
+}
+.name-row input {
+  flex: 1; background: var(--surface);
+  border: 1px solid var(--border-mid);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  border-radius: 2px;
+  transition: border-color .2s;
+}
+.name-row input:focus { border-color: var(--accent); }
+.name-row input::placeholder { color: var(--text-muted); font-style: italic; }
+.btn-start {
+  background: var(--accent);
+  color: #0D0D0D;
+  border: none;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background .15s, transform .1s;
+}
+.btn-start:hover { background: #F5D85C; }
+.btn-start:active { transform: scale(.97); }
+.splash-note {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: .06em;
+}
+
+/* ── MAIN LAYOUT ── */
+#app { display: none; }
+#app.visible { display: block; }
+
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-left {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.header-left strong { color: var(--accent); font-size: 13px; }
+.header-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.header-actions { display: flex; gap: 10px; align-items: center; }
+
+.btn-save-hdr {
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .15s;
+}
+.btn-save-hdr:hover { color: var(--text); border-color: #555; }
+
+/* ── NAV TABS ── */
+.section-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+.nav-tab {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  transition: all .15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--text); border-bottom-color: var(--tab-color, var(--accent)); }
+.nav-tab .status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border-mid);
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.nav-tab.graded .status-dot { background: var(--success); }
+.nav-tab.in-progress .status-dot { background: var(--accent); }
+
+/* ── SECTION PANELS ── */
+.section-panel { display: none; padding: 40px 48px 120px; max-width: 960px; }
+.section-panel.active { display: block; }
+
+.section-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.section-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--section-color, var(--accent));
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-tag::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--section-color, var(--accent));
+}
+.section-title {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.section-desc {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  max-width: 640px;
+  line-height: 1.65;
+}
+.section-desc strong { color: var(--text); }
+
+/* ── TASK BLOCKS ── */
+.task-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  margin-bottom: 20px;
+  border-radius: 2px;
+  transition: border-left-color .2s;
+}
+.task-block:focus-within { border-left-color: var(--section-color, var(--accent)); }
+.task-header {
+  padding: 16px 20px 0;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.task-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--section-color, var(--accent));
+  min-width: 28px;
+}
+.task-prompt {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+  flex: 1;
+}
+.task-prompt em {
+  display: block;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+.task-body { padding: 12px 20px 8px 60px; }
+.task-body textarea {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  line-height: 1.7;
+  padding: 12px 14px;
+  outline: none;
+  border-radius: 2px;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color .2s;
+}
+.task-body textarea:focus { border-color: var(--section-color, var(--accent)); }
+.task-body textarea::placeholder { color: var(--text-muted); font-style: italic; font-size: 12.5px; }
+.task-body textarea.large { min-height: 160px; }
+.task-body textarea.xl { min-height: 220px; }
+.task-hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 6px 0 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ── READING PASSAGE ── */
+.reading-passage {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--section-color, var(--accent));
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+.reading-passage strong { color: var(--text); font-weight: 600; }
+.reading-passage .passage-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ── GRADE SECTION AREA ── */
+.grade-area {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 2px;
+}
+.grade-area-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.btn-grade {
+  background: var(--section-color, var(--accent));
+  color: #0D0D0D;
+  border: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: opacity .15s, transform .1s;
+}
+.btn-grade:hover { opacity: .85; }
+.btn-grade:active { transform: scale(.97); }
+.btn-grade:disabled { opacity: .3; cursor: wait; }
+.btn-grade-note {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* ── RESULTS PANEL ── */
+.result-panel {
+  display: none;
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.result-panel.visible { display: block; }
+.result-header {
+  background: var(--surface2);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.result-score-display {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 700;
+}
+.result-score-display.high { color: var(--success); }
+.result-score-display.mid { color: var(--accent); }
+.result-score-display.low { color: var(--danger); }
+.result-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.result-body { padding: 16px 18px; }
+.result-feedback {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.error-list { display: flex; flex-direction: column; gap: 8px; }
+.error-item {
+  padding: 10px 14px;
+  background: var(--surface2);
+  border-left: 2px solid var(--danger);
+  border-radius: 0 2px 2px 0;
+  font-size: 13px;
+}
+.error-item .err-cat {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--danger);
+  margin-bottom: 4px;
+}
+.error-item .err-what { color: var(--text); font-weight: 600; margin-bottom: 3px; }
+.error-item .err-fix { color: var(--text-dim); font-size: 12.5px; }
+.strength-list { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.strength-item {
+  padding: 8px 14px;
+  background: var(--surface2);
+  border-left: 2px solid var(--success);
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.strength-item::before { content: '✓ '; color: var(--success); font-weight: 700; }
+
+/* ── REPORT SCREEN ── */
+#reportScreen {
+  display: none;
+  padding: 48px;
+  max-width: 960px;
+}
+#reportScreen.visible { display: block; }
+.report-title {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.report-title span { color: var(--accent); }
+.report-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  font-family: var(--mono);
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.score-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px 16px;
+  border-radius: 2px;
+  text-align: center;
+}
+.score-card .sc-domain {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.score-card .sc-score {
+  font-family: var(--mono);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.score-card .sc-bar-wrap {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.score-card .sc-bar { height: 100%; border-radius: 2px; transition: width 1s ease; }
+
+.overall-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border-radius: 2px;
+}
+.overall-num {
+  font-family: var(--mono);
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.overall-meta { flex: 1; }
+.overall-level {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.overall-desc {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.65;
+  max-width: 520px;
+}
+
+.weakness-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+  font-size: 13px;
+}
+.weakness-table th {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.weakness-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  vertical-align: top;
+}
+.weakness-table td:first-child { color: var(--text); font-weight: 600; }
+.priority-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.priority-tag.high { background: rgba(224,90,58,.15); color: var(--danger); }
+.priority-tag.mid { background: rgba(232,197,71,.1); color: var(--accent); }
+.priority-tag.low { background: rgba(76,175,125,.1); color: var(--success); }
+
+.json-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.btn-dl-json {
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .15s;
+  margin-right: 10px;
+}
+.btn-dl-json:hover { border-color: var(--accent); color: var(--accent); }
+.btn-copy-json {
+  background: var(--accent);
+  border: none;
+  color: #0D0D0D;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: opacity .15s;
+}
+.btn-copy-json:hover { opacity: .85; }
+
+/* ── STICKY TOOLBAR ── */
+.sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 12px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 200;
+}
+.sticky-progress {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: .06em;
+}
+.sticky-progress .highlight { color: var(--accent); font-weight: 700; }
+.bar-wrap {
+  width: 120px; height: 2px;
+  background: var(--border);
+  margin-top: 6px;
+  border-radius: 1px;
+}
+.bar-fill {
+  height: 100%; background: var(--accent);
+  border-radius: 1px; transition: width .4s;
+}
+.btn-view-report {
+  background: var(--accent);
+  color: #0D0D0D;
+  border: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: opacity .15s;
+}
+.btn-view-report:hover { opacity: .85; }
+.btn-view-report:disabled { opacity: .3; cursor: not-allowed; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; top: 20px; right: 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border-mid);
+  border-left: 3px solid var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  padding: 12px 18px;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity .25s, transform .25s;
+  pointer-events: none;
+  z-index: 9999;
+}
+.toast.show { opacity: 1; transform: translateX(0); }
+.toast.error { border-left-color: var(--danger); }
+.toast.success { border-left-color: var(--success); }
+
+/* ── LISTENING SECTION EXTRAS ── */
+.listen-scenario {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--section-listening);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+.listen-scenario .scenario-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--section-listening);
+  margin-bottom: 10px;
+}
+.listen-scenario p {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.listen-scenario strong { color: var(--text); }
+
+@media (max-width: 768px) {
+  .app-header { padding: 12px 20px; }
+  .section-nav { padding: 0 20px; }
+  .section-panel { padding: 24px 20px 120px; }
+  .sticky-bar { padding: 12px 20px; }
+  .score-grid { grid-template-columns: repeat(3, 1fr); }
+  #reportScreen { padding: 24px 20px; }
+  .overall-block { flex-direction: column; gap: 16px; }
+  .task-body { padding-left: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── SPLASH ── -->
+<div id="splash">
+  <div class="splash-tag">ICLA Cervantes · A2 → B1 Pathway</div>
+  <div class="splash-title">Spanish<br><span>Diagnostic</span></div>
+  <p class="splash-sub">A comprehensive pre-assessment across all 5 CEFR competency domains. AI-graded. Results saved locally and exportable.</p>
+  <div class="splash-grid">
+    <div class="splash-domain"><div class="dot" style="background:var(--section-grammar)"></div>Grammar</div>
+    <div class="splash-domain"><div class="dot" style="background:var(--section-vocab)"></div>Vocabulary</div>
+    <div class="splash-domain"><div class="dot" style="background:var(--section-reading)"></div>Reading</div>
+    <div class="splash-domain"><div class="dot" style="background:var(--section-writing)"></div>Writing</div>
+    <div class="splash-domain"><div class="dot" style="background:var(--section-listening)"></div>Listening</div>
+  </div>
+  <div class="name-row">
+    <input type="text" id="splashName" placeholder="Your name" autocomplete="off">
+  </div>
+  <button class="btn-start" onclick="startDiagnostic()">Begin Diagnostic →</button>
+  <div class="splash-note">~30–45 min · 5 sections · All answers AI-graded · Auto-saved locally</div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app">
+  <div class="app-header">
+    <div class="header-left">
+      <div>Spanish B1 <strong>Diagnostic</strong></div>
+    </div>
+    <div id="headerName" class="header-name"></div>
+    <div class="header-actions">
+      <button class="btn-save-hdr" onclick="manualSave()">💾 Save Draft</button>
+    </div>
+  </div>
+
+  <nav class="section-nav">
+    <div class="nav-tab active" data-section="grammar" style="--tab-color: var(--section-grammar)" onclick="switchSection('grammar')">
+      <span class="status-dot"></span>01 Grammar
+    </div>
+    <div class="nav-tab" data-section="vocab" style="--tab-color: var(--section-vocab)" onclick="switchSection('vocab')">
+      <span class="status-dot"></span>02 Vocabulary
+    </div>
+    <div class="nav-tab" data-section="reading" style="--tab-color: var(--section-reading)" onclick="switchSection('reading')">
+      <span class="status-dot"></span>03 Reading
+    </div>
+    <div class="nav-tab" data-section="writing" style="--tab-color: var(--section-writing)" onclick="switchSection('writing')">
+      <span class="status-dot"></span>04 Writing
+    </div>
+    <div class="nav-tab" data-section="listening" style="--tab-color: var(--section-listening)" onclick="switchSection('listening')">
+      <span class="status-dot"></span>05 Listening
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════
+       SECTION 1: GRAMMAR
+  ══════════════════════════════════ -->
+  <div class="section-panel active" id="panel-grammar" style="--section-color: var(--section-grammar)">
+    <div class="section-header">
+      <div class="section-tag">Domain 01</div>
+      <div class="section-title">Grammar</div>
+      <div class="section-desc">Tests your understanding of <strong>verb conjugation</strong>, <strong>tense usage</strong> (present, preterite, imperfect, future), <strong>ser vs. estar</strong>, subjunctive basics, and sentence structure. Answer in Spanish. Write complete sentences where prompted.</div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">G1</span>
+        <div class="task-prompt">Conjugate the verb in parentheses in the correct tense. Write each full sentence.
+          <em>a) Ayer yo _____ (ir) al mercado. &nbsp;|&nbsp; b) Cuando era niño, siempre _____ (jugar) en el parque. &nbsp;|&nbsp; c) Mañana nosotros _____ (comer) en un restaurante. &nbsp;|&nbsp; d) Ahora mismo ella _____ (estar) estudiando.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="g1" placeholder="Write all four sentences: a) b) c) d)" oninput="handleInput('g1')"></textarea>
+        <div class="task-hint"><span id="hint-g1">0 chars</span><span>4 sentences required</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">G2</span>
+        <div class="task-prompt">Ser vs. Estar — Write a sentence using SER and a sentence using ESTAR for each of the following concepts. Explain in your sentence why you chose that verb.
+          <em>a) Location of a building &nbsp;|&nbsp; b) Someone's personality &nbsp;|&nbsp; c) A temporary emotional state &nbsp;|&nbsp; d) Origin of a person</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="g2" placeholder="Write 8 sentences total (2 per concept: one with SER, one with ESTAR, showing the contrast)..." class="large" oninput="handleInput('g2')"></textarea>
+        <div class="task-hint"><span id="hint-g2">0 chars</span><span>8 sentences</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">G3</span>
+        <div class="task-prompt">Preterite vs. Imperfect — Describe what you did last weekend AND what your childhood was generally like. Use both tenses correctly. Mix them in your paragraph.
+          <em>Minimum 6 sentences. Use at least 3 preterite verbs and 3 imperfect verbs. Underline or mark which is which if it helps.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="g3" placeholder="El fin de semana pasado yo..." class="large" oninput="handleInput('g3')"></textarea>
+        <div class="task-hint"><span id="hint-g3">0 chars</span><span>6+ sentences mixing tenses</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">G4</span>
+        <div class="task-prompt">Object pronouns and reflexive verbs — Answer the following questions using direct/indirect object pronouns where appropriate.
+          <em>a) ¿Le diste el regalo a tu amigo? &nbsp;|&nbsp; b) ¿A qué hora te despiertas normalmente? &nbsp;|&nbsp; c) ¿Compraste los libros? (answer: yes) &nbsp;|&nbsp; d) ¿Te lavas el pelo todos los días?</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="g4" placeholder="Answer each: a) b) c) d) — use pronouns to avoid repeating the noun..." oninput="handleInput('g4')"></textarea>
+        <div class="task-hint"><span id="hint-g4">0 chars</span><span>4 answers with pronouns</span></div>
+      </div>
+    </div>
+
+    <div class="grade-area">
+      <div class="grade-area-title">Section 1 complete? Submit for AI grading.</div>
+      <button class="btn-grade" id="btn-grade-grammar" style="background: var(--section-grammar); color: #0D0D0D" onclick="gradeSection('grammar')">Grade Grammar →</button>
+      <div class="btn-grade-note">Grading uses Claude AI. Requires internet connection. Results auto-saved.</div>
+      <div class="result-panel" id="result-grammar">
+        <div class="result-header">
+          <div>
+            <div class="result-label">Grammar Score</div>
+            <div class="result-score-display" id="score-grammar">—</div>
+          </div>
+          <div style="text-align:right">
+            <div class="result-label">Status</div>
+            <div id="status-grammar" style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">Pending</div>
+          </div>
+        </div>
+        <div class="result-body">
+          <div class="result-feedback" id="feedback-grammar"></div>
+          <div id="errors-grammar" class="error-list"></div>
+          <div id="strengths-grammar" class="strength-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 2: VOCABULARY
+  ══════════════════════════════════ -->
+  <div class="section-panel" id="panel-vocab" style="--section-color: var(--section-vocab)">
+    <div class="section-header">
+      <div class="section-tag">Domain 02</div>
+      <div class="section-title">Vocabulary</div>
+      <div class="section-desc">Tests your <strong>active vocabulary range</strong>, <strong>lexical precision</strong>, ability to use <strong>synonyms/antonyms</strong>, describe things without the exact word (circumlocution), and handle real-world topic vocabulary (travel, work, daily life).</div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">V1</span>
+        <div class="task-prompt">Define or describe the following words IN SPANISH without using the word itself. Like a dictionary, but in your own words.
+          <em>a) madrugada &nbsp;|&nbsp; b) cotidiano &nbsp;|&nbsp; c) huelga &nbsp;|&nbsp; d) añorar &nbsp;|&nbsp; e) imprescindible</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="v1" placeholder="a) Es el momento del día cuando... b) Algo que es... etc." oninput="handleInput('v1')"></textarea>
+        <div class="task-hint"><span id="hint-v1">0 chars</span><span>Define all 5 in Spanish</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">V2</span>
+        <div class="task-prompt">Circumlocution — You don't know the exact word. Describe the concept in Spanish so a native speaker would understand what you mean.
+          <em>a) You don't know the word "semáforo" (traffic light) — describe it. &nbsp;|&nbsp; b) You don't know "sacacorchos" (corkscrew) — describe it. &nbsp;|&nbsp; c) You don't know "maletero" (car trunk) — describe it.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="v2" placeholder="a) Es una cosa que está en la calle y tiene luces de color... b) Es un objeto que sirve para... c) Es la parte del coche que..." oninput="handleInput('v2')"></textarea>
+        <div class="task-hint"><span id="hint-v2">0 chars</span><span>Describe all 3 without the target word</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">V3</span>
+        <div class="task-prompt">Topic vocabulary — Travel & transportation. Write 8–10 sentences describing a trip you took (real or invented). Use as much specific travel vocabulary as possible: means of transport, booking, accommodation, experiences, problems, etc.
+          <em>Try to include vocabulary like: facturar, equipaje, escala, alojamiento, extranjero, billete, retraso, reservar, aduana...</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="v3" placeholder="El año pasado viajé a... Primero reservé... Cuando llegué al aeropuerto..." class="large" oninput="handleInput('v3')"></textarea>
+        <div class="task-hint"><span id="hint-v3">0 chars</span><span>8–10 sentences, rich travel vocabulary</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">V4</span>
+        <div class="task-prompt">Register & synonyms — Rewrite each sentence in more formal Spanish, changing the underlined casual words.
+          <em>a) El jefe me dijo que el trabajo estaba "genial". &nbsp;|&nbsp; b) Fui al médico porque me encontraba "fatal". &nbsp;|&nbsp; c) El proyecto fue "un lío total". &nbsp;|&nbsp; d) Mi colega es muy "majo".</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="v4" placeholder="a) El director indicó que el trabajo era... b) Acudí al médico porque... etc." oninput="handleInput('v4')"></textarea>
+        <div class="task-hint"><span id="hint-v4">0 chars</span><span>4 rewritten sentences, formal register</span></div>
+      </div>
+    </div>
+
+    <div class="grade-area">
+      <div class="grade-area-title">Section 2 complete? Submit for AI grading.</div>
+      <button class="btn-grade" id="btn-grade-vocab" style="background: var(--section-vocab); color: #0D0D0D" onclick="gradeSection('vocab')">Grade Vocabulary →</button>
+      <div class="btn-grade-note">Grading uses Claude AI. Requires internet connection.</div>
+      <div class="result-panel" id="result-vocab">
+        <div class="result-header">
+          <div><div class="result-label">Vocabulary Score</div><div class="result-score-display" id="score-vocab">—</div></div>
+          <div style="text-align:right"><div class="result-label">Status</div><div id="status-vocab" style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">Pending</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-feedback" id="feedback-vocab"></div>
+          <div id="errors-vocab" class="error-list"></div>
+          <div id="strengths-vocab" class="strength-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 3: READING
+  ══════════════════════════════════ -->
+  <div class="section-panel" id="panel-reading" style="--section-color: var(--section-reading)">
+    <div class="section-header">
+      <div class="section-tag">Domain 03</div>
+      <div class="section-title">Reading Comprehension</div>
+      <div class="section-desc">Tests your ability to <strong>extract information</strong>, <strong>infer meaning</strong>, understand <strong>implicit ideas</strong>, and respond accurately to a written Spanish text. Answer in Spanish.</div>
+    </div>
+
+    <div class="reading-passage">
+      <span class="passage-tag">Texto A — Artículo periodístico (B1 level)</span>
+      <p><strong>El auge del trabajo remoto en España</strong></p>
+      <br>
+      <p>En los últimos años, el trabajo remoto ha experimentado un crecimiento notable en España. Según un informe del Instituto Nacional de Estadística, el porcentaje de trabajadores que trabajan desde casa al menos parte de la semana pasó del 4,8% en 2019 al 16,2% en 2023. Este cambio, impulsado en gran medida por la pandemia de COVID-19, ha transformado la relación entre las empresas y sus empleados.</p>
+      <br>
+      <p>Sin embargo, no todos los sectores se han adaptado de la misma manera. Los trabajos que requieren presencia física, como la hostelería y la construcción, han permanecido prácticamente sin cambios. En contraste, el sector tecnológico y los servicios financieros han adoptado modelos híbridos con entusiasmo, permitiendo a los empleados elegir entre trabajar en casa o en la oficina según sus necesidades.</p>
+      <br>
+      <p>Los defensores del trabajo remoto argumentan que mejora la conciliación familiar y reduce el tiempo perdido en desplazamientos. No obstante, los críticos señalan que puede dificultar la comunicación entre equipos y limitar las oportunidades de desarrollo profesional para los empleados más jóvenes, quienes aprenden en gran parte observando a sus compañeros más experimentados.</p>
+      <br>
+      <p>Ante esta situación, muchas empresas españolas están buscando un equilibrio: dos o tres días en la oficina, el resto en casa. Esta solución intermedia parece satisfacer, al menos por ahora, tanto a trabajadores como a empleadores.</p>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">R1</span>
+        <div class="task-prompt">Literal comprehension — Answer these questions based ONLY on information stated in the text. Answer in complete Spanish sentences.
+          <em>a) ¿Qué porcentaje de trabajadores trabajaba desde casa en 2019? &nbsp;|&nbsp; b) ¿Qué sectores NO han cambiado mucho? ¿Por qué? &nbsp;|&nbsp; c) ¿Qué solución están adoptando muchas empresas?</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="r1" placeholder="a) Según el texto, en 2019... b) Los sectores que no han cambiado son... c) Muchas empresas están..." oninput="handleInput('r1')"></textarea>
+        <div class="task-hint"><span id="hint-r1">0 chars</span><span>3 answers from the text</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">R2</span>
+        <div class="task-prompt">Inferential comprehension — These answers are NOT stated directly. You must deduce from the text.
+          <em>a) ¿Por qué crees que el trabajo remoto aumentó tanto entre 2019 y 2023? (The text implies this but doesn't fully explain) &nbsp;|&nbsp; b) ¿A quiénes perjudica más el trabajo remoto según el texto? ¿Por qué podrían sufrir más que otros?</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="r2" placeholder="a) Aunque el texto no lo dice directamente, se puede deducir que... b) Según el texto, el trabajo remoto perjudica más a..." oninput="handleInput('r2')"></textarea>
+        <div class="task-hint"><span id="hint-r2">0 chars</span><span>2 inferred answers</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">R3</span>
+        <div class="task-prompt">Vocabulary in context — Without a dictionary, explain what these words/phrases from the text mean, based on context.
+          <em>a) "conciliación familiar" (paragraph 3) &nbsp;|&nbsp; b) "desplazamientos" (paragraph 3) &nbsp;|&nbsp; c) "modelo híbrido" (paragraph 2)</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="r3" placeholder="a) Creo que 'conciliación familiar' significa... porque en el texto... b) 'Desplazamientos' probablemente significa... c) Un 'modelo híbrido' es..." oninput="handleInput('r3')"></textarea>
+        <div class="task-hint"><span id="hint-r3">0 chars</span><span>3 contextual definitions</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">R4</span>
+        <div class="task-prompt">Critical response — React to the text. Do you agree with the hybrid model? Use evidence from the text AND your own opinion. Write 4–6 sentences.
+          <em>Use phrases like: En mi opinión... / Según el texto... / Estoy de acuerdo con... porque... / Sin embargo, creo que...</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="r4" placeholder="En mi opinión, el modelo híbrido es... Según el texto, esto beneficia a... Sin embargo, creo que..." oninput="handleInput('r4')"></textarea>
+        <div class="task-hint"><span id="hint-r4">0 chars</span><span>4–6 sentences, mix text + opinion</span></div>
+      </div>
+    </div>
+
+    <div class="grade-area">
+      <div class="grade-area-title">Section 3 complete? Submit for AI grading.</div>
+      <button class="btn-grade" id="btn-grade-reading" style="background: var(--section-reading); color: #fff" onclick="gradeSection('reading')">Grade Reading →</button>
+      <div class="btn-grade-note">AI will evaluate accuracy, comprehension depth, and Spanish quality.</div>
+      <div class="result-panel" id="result-reading">
+        <div class="result-header">
+          <div><div class="result-label">Reading Score</div><div class="result-score-display" id="score-reading">—</div></div>
+          <div style="text-align:right"><div class="result-label">Status</div><div id="status-reading" style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">Pending</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-feedback" id="feedback-reading"></div>
+          <div id="errors-reading" class="error-list"></div>
+          <div id="strengths-reading" class="strength-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 4: WRITING
+  ══════════════════════════════════ -->
+  <div class="section-panel" id="panel-writing" style="--section-color: var(--section-writing)">
+    <div class="section-header">
+      <div class="section-tag">Domain 04</div>
+      <div class="section-title">Written Production</div>
+      <div class="section-desc">Tests your ability to produce <strong>organized, coherent Spanish text</strong> across different text types: formal writing, personal narrative, and opinion. Evaluated on <strong>structure, cohesion, range, and accuracy</strong>.</div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">W1</span>
+        <div class="task-prompt">Formal email — You stayed at a hotel last month. There were several problems (noisy room, broken air conditioning, bad service at breakfast). Write a formal complaint email to the hotel manager asking for compensation.
+          <em>Required elements: formal greeting, describe 3 specific problems, express your dissatisfaction, make a specific request, formal closing. Minimum 120 words.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="w1" placeholder="Estimado/a señor/a director/a:&#10;&#10;Me dirijo a usted para informarle sobre los problemas que experimenté durante mi estancia en su hotel el mes pasado..." class="xl" oninput="handleInput('w1')"></textarea>
+        <div class="task-hint"><span id="hint-w1">0 chars</span><span>Formal email · min 120 words</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">W2</span>
+        <div class="task-prompt">Personal narrative — Describe the most memorable trip or journey you've taken (real or invented). Focus on: what happened in sequence, how you felt, what was unexpected, and what you learned.
+          <em>Use connectors: primero, después, luego, finalmente, sin embargo, además, por eso, aunque. Minimum 150 words.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="w2" placeholder="El viaje que más recuerdo fue cuando..." class="xl" oninput="handleInput('w2')"></textarea>
+        <div class="task-hint"><span id="hint-w2">0 chars</span><span>Personal narrative · min 150 words · use connectors</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">W3</span>
+        <div class="task-prompt">Opinion text — "Las redes sociales tienen más efectos negativos que positivos en la sociedad." Do you agree or disagree? Write a structured opinion paragraph.
+          <em>Structure: thesis statement → 2 arguments for your position → 1 counterargument → conclusion. Min 100 words. Use: En mi opinión / Considero que / Por un lado / Por otro lado / Sin embargo / En conclusión.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="w3" placeholder="En mi opinión, las redes sociales... Por un lado... Por otro lado... Sin embargo... En conclusión..." class="large" oninput="handleInput('w3')"></textarea>
+        <div class="task-hint"><span id="hint-w3">0 chars</span><span>Opinion text · min 100 words · structured</span></div>
+      </div>
+    </div>
+
+    <div class="grade-area">
+      <div class="grade-area-title">Section 4 complete? Submit for AI grading.</div>
+      <button class="btn-grade" id="btn-grade-writing" style="background: var(--section-writing); color: #0D0D0D" onclick="gradeSection('writing')">Grade Writing →</button>
+      <div class="btn-grade-note">AI evaluates: task completion, coherence/cohesion, range, accuracy, register.</div>
+      <div class="result-panel" id="result-writing">
+        <div class="result-header">
+          <div><div class="result-label">Writing Score</div><div class="result-score-display" id="score-writing">—</div></div>
+          <div style="text-align:right"><div class="result-label">Status</div><div id="status-writing" style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">Pending</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-feedback" id="feedback-writing"></div>
+          <div id="errors-writing" class="error-list"></div>
+          <div id="strengths-writing" class="strength-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       SECTION 5: LISTENING (SIMULATED)
+  ══════════════════════════════════ -->
+  <div class="section-panel" id="panel-listening" style="--section-color: var(--section-listening)">
+    <div class="section-header">
+      <div class="section-tag">Domain 05</div>
+      <div class="section-title">Listening Comprehension</div>
+      <div class="section-desc"><strong>Simulated listening:</strong> Instead of audio, you receive transcripts of spoken Spanish at natural speed with colloquialisms, contractions, and incomplete sentences — as you'd hear them. Tests your ability to extract meaning from authentic spoken register. Answer in Spanish.</div>
+    </div>
+
+    <div class="listen-scenario">
+      <div class="scenario-tag">Simulación A — Conversación informal entre amigos</div>
+      <p><strong>Context:</strong> Two friends, Marta and Carlos, are talking after work. Read this as if you just heard it — casual, fast, natural.</p>
+      <br>
+      <p><strong>Marta:</strong> "Oye, ¿te enteraste de lo de Lucía? Resulta que se va a ir a vivir a Berlín, ¿no? Me pareció rarísimo porque ella siempre decía que jamás iba a dejar Madrid."</p>
+      <br>
+      <p><strong>Carlos:</strong> "Sí, sí, me lo contó ella misma. Por lo visto le ofrecieron un trabajo increíble, una multinacional alemana o algo así. Dice que el sueldo es el doble de lo que gana aquí, así que tampoco me sorprende tanto."</p>
+      <br>
+      <p><strong>Marta:</strong> "Buf, el doble... entiendo. Aunque le voy a echar de menos una barbaridad. Llevamos siendo amigas desde el cole, ¿eh? Y encima Berlín está lejísimos."</p>
+      <br>
+      <p><strong>Carlos:</strong> "Bueno, tampoco es que sea la luna... Con los vuelos baratos de hoy en día... Igual hasta vamos a visitarla. Que conste que yo soy el primero apuntado."</p>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">L1</span>
+        <div class="task-prompt">Comprehension questions — Based on the conversation above, answer in Spanish.
+          <em>a) ¿Por qué se va Lucía a Berlín? &nbsp;|&nbsp; b) ¿Por qué le sorprende a Marta que Lucía se vaya? &nbsp;|&nbsp; c) ¿Cómo se siente Marta al respecto? &nbsp;|&nbsp; d) ¿Cuál es la actitud de Carlos hacia la situación?</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="l1" placeholder="a) Lucía se va porque... b) Le sorprende porque... c) Marta se siente... d) Carlos tiene una actitud..." oninput="handleInput('l1')"></textarea>
+        <div class="task-hint"><span id="hint-l1">0 chars</span><span>4 answers</span></div>
+      </div>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">L2</span>
+        <div class="task-prompt">Colloquial language — Explain what these phrases from the conversation mean in standard Spanish or English.
+          <em>a) "Por lo visto..." &nbsp;|&nbsp; b) "Le voy a echar de menos una barbaridad" &nbsp;|&nbsp; c) "Que conste que yo soy el primero apuntado" &nbsp;|&nbsp; d) "Buf"</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="l2" placeholder="a) 'Por lo visto' significa... b) 'Echar de menos una barbaridad' quiere decir... c) 'Ser el primero apuntado' significa... d) 'Buf' es una expresión que..." oninput="handleInput('l2')"></textarea>
+        <div class="task-hint"><span id="hint-l2">0 chars</span><span>4 explanations of colloquial expressions</span></div>
+      </div>
+    </div>
+
+    <div class="listen-scenario" style="margin-top:24px">
+      <div class="scenario-tag">Simulación B — Mensaje de voz (informal)</div>
+      <p><strong>Context:</strong> You receive this voice message from a Spanish colleague.</p>
+      <br>
+      <p><strong>Mensaje:</strong> "Hola, soy Alejandro, del departamento de marketing. Mira, te llamo porque lo de la reunión del jueves al final no puede ser. El cliente de Barcelona confirmó para ese mismo día y... vamos, que es imposible cambiarlo. Entonces, ¿podríamos quedar el miércoles por la tarde? O si no, la semana que viene, pero preferiblemente esta semana. Avísame cuando puedas, ¿vale? Ah, y trae los datos del tercer trimestre si los tienes. Gracias, hasta luego."</p>
+    </div>
+
+    <div class="task-block">
+      <div class="task-header">
+        <span class="task-num">L3</span>
+        <div class="task-prompt">Take a note — You need to pass this message to your manager who doesn't speak Spanish. Write a brief summary in English of the key information: who called, what the problem is, what they're proposing, and what they need.
+          <em>Then, write a short reply in Spanish to Alejandro confirming Wednesday afternoon works for you.</em>
+        </div>
+      </div>
+      <div class="task-body">
+        <textarea id="l3" placeholder="[English summary for manager:]&#10;...&#10;&#10;[Spanish reply to Alejandro:]&#10;Hola Alejandro, ..." class="large" oninput="handleInput('l3')"></textarea>
+        <div class="task-hint"><span id="hint-l3">0 chars</span><span>English summary + Spanish reply</span></div>
+      </div>
+    </div>
+
+    <div class="grade-area">
+      <div class="grade-area-title">Section 5 complete? Submit for AI grading.</div>
+      <button class="btn-grade" id="btn-grade-listening" style="background: var(--section-listening); color: #fff" onclick="gradeSection('listening')">Grade Listening →</button>
+      <div class="btn-grade-note">AI evaluates comprehension accuracy, colloquial recognition, and response quality.</div>
+      <div class="result-panel" id="result-listening">
+        <div class="result-header">
+          <div><div class="result-label">Listening Score</div><div class="result-score-display" id="score-listening">—</div></div>
+          <div style="text-align:right"><div class="result-label">Status</div><div id="status-listening" style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">Pending</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-feedback" id="feedback-listening"></div>
+          <div id="errors-listening" class="error-list"></div>
+          <div id="strengths-listening" class="strength-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       REPORT SCREEN
+  ══════════════════════════════════ -->
+  <div id="reportScreen">
+    <div class="report-title">Diagnostic <span>Report</span></div>
+    <div class="report-sub" id="reportMeta">Generated —</div>
+
+    <div class="overall-block" id="overallBlock">
+      <div class="overall-num" id="overallScore">—</div>
+      <div class="overall-meta">
+        <div class="overall-level" id="overallLevel">Calculating...</div>
+        <div class="overall-desc" id="overallDesc"></div>
+      </div>
+    </div>
+
+    <div class="score-grid" id="scoreGrid"></div>
+
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)">Priority Weakness Map</div>
+    <table class="weakness-table" id="weaknessTable">
+      <thead>
+        <tr>
+          <th>Domain</th>
+          <th>Score</th>
+          <th>Priority</th>
+          <th>Key Issues Identified</th>
+        </tr>
+      </thead>
+      <tbody id="weaknessTbody"></tbody>
+    </table>
+
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;margin-top:32px;padding-bottom:10px;border-bottom:1px solid var(--border)">Raw JSON Report — Paste this to Claude to generate your study plan</div>
+    <div class="json-block" id="jsonOutput"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn-dl-json" onclick="downloadJSON()">⬇ Download JSON</button>
+      <button class="btn-copy-json" onclick="copyJSON()">⎘ Copy to Clipboard</button>
+      <button class="btn-dl-json" onclick="backToSections()">← Back to Sections</button>
+    </div>
+  </div>
+
+  <!-- ── STICKY BAR ── -->
+  <div class="sticky-bar" id="stickyBar">
+    <div class="sticky-progress">
+      Sections graded: <span class="highlight" id="gradedCount">0</span> / 5
+      <div class="bar-wrap"><div class="bar-fill" id="gradedBar" style="width:0%"></div></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn-save-hdr" onclick="manualSave()">💾 Save</button>
+      <button class="btn-view-report" id="btnViewReport" onclick="showReport()" disabled>View Report →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════
+// STATE — single source of truth
+// ══════════════════════════════════════════════
+const STATE = {
+  name: '',
+  startedAt: null,
+  answers: {},
+  results: {
+    grammar: null,
+    vocab: null,
+    reading: null,
+    writing: null,
+    listening: null
+  }
+};
+
+const SECTIONS = ['grammar', 'vocab', 'reading', 'writing', 'listening'];
+const SECTION_LABELS = {
+  grammar: 'Grammar',
+  vocab: 'Vocabulary',
+  reading: 'Reading Comprehension',
+  writing: 'Written Production',
+  listening: 'Listening Comprehension'
+};
+
+const TASK_IDS = {
+  grammar: ['g1', 'g2', 'g3', 'g4'],
+  vocab: ['v1', 'v2', 'v3', 'v4'],
+  reading: ['r1', 'r2', 'r3', 'r4'],
+  writing: ['w1', 'w2', 'w3'],
+  listening: ['l1', 'l2', 'l3']
+};
+
+// ── Debounce utility ──
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+const debouncedSave = debounce(() => persistState(), 500);
+
+// ── Input handler ──
+function handleInput(id) {
+  STATE.answers[id] = document.getElementById(id).value;
+  const hint = document.getElementById('hint-' + id);
+  if (hint) hint.textContent = STATE.answers[id].length + ' chars';
+  updateNavProgress();
+  debouncedSave();
+}
+
+// ── Save to localStorage (with error handling) ──
+function persistState() {
+  try {
+    localStorage.setItem('sp_diag_v1', JSON.stringify(STATE));
+  } catch(e) {
+    showToast('⚠ LocalStorage full — use Download JSON', 'error');
+  }
+}
+
+// ── Manual save ──
+function manualSave() {
+  persistState();
+  showToast('Draft saved ✓', 'success');
+}
+
+// ── Load from localStorage ──
+function loadState() {
+  try {
+    const raw = localStorage.getItem('sp_diag_v1');
+    if (!raw) return false;
+    const saved = JSON.parse(raw);
+    Object.assign(STATE, saved);
+    // Repopulate all textareas
+    Object.entries(STATE.answers || {}).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.value = val;
+        const hint = document.getElementById('hint-' + id);
+        if (hint) hint.textContent = val.length + ' chars';
+      }
+    });
+    // Restore results
+    SECTIONS.forEach(sec => {
+      if (STATE.results[sec]) renderResult(sec, STATE.results[sec]);
+    });
+    updateNavProgress();
+    updateGradedCount();
+    return true;
+  } catch(e) {
+    return false;
+  }
+}
+
+// ── Splash → App ──
+function startDiagnostic() {
+  const name = document.getElementById('splashName').value.trim();
+  STATE.name = name || 'Student';
+  STATE.startedAt = new Date().toISOString();
+  document.getElementById('headerName').textContent = STATE.name;
+  document.getElementById('splash').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app').classList.add('visible');
+  }, 500);
+  persistState();
+}
+
+// ── Section navigation ──
+function switchSection(sec) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + sec).classList.add('active');
+  document.querySelector(`[data-section="${sec}"]`).classList.add('active');
+  // Hide report
+  document.getElementById('reportScreen').classList.remove('visible');
+  document.getElementById('stickyBar').style.display = '';
+}
+
+function backToSections() {
+  document.getElementById('reportScreen').classList.remove('visible');
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-grammar').classList.add('active');
+  document.querySelector('[data-section="grammar"]').classList.add('active');
+  document.getElementById('stickyBar').style.display = '';
+}
+
+// ── Nav progress dots ──
+function updateNavProgress() {
+  SECTIONS.forEach(sec => {
+    const ids = TASK_IDS[sec];
+    const filled = ids.filter(id => (STATE.answers[id] || '').trim().length > 0).length;
+    const tab = document.querySelector(`[data-section="${sec}"]`);
+    if (!tab) return;
+    tab.classList.remove('in-progress', 'graded');
+    if (STATE.results[sec]) {
+      tab.classList.add('graded');
+    } else if (filled > 0) {
+      tab.classList.add('in-progress');
+    }
+  });
+}
+
+function updateGradedCount() {
+  const count = SECTIONS.filter(s => STATE.results[s] !== null).length;
+  document.getElementById('gradedCount').textContent = count;
+  document.getElementById('gradedBar').style.width = (count / 5 * 100) + '%';
+  document.getElementById('btnViewReport').disabled = count === 0;
+}
+
+// ══════════════════════════════════════════════
+// AI GRADING ENGINE
+// ══════════════════════════════════════════════
+
+const RUBRICS = {
+  grammar: `You are an expert Spanish language examiner evaluating a learner at A2 level targeting B1.
+Evaluate the following Spanish grammar answers. The tasks were:
+- G1: Conjugate verbs in correct tense (preterite, imperfect, future, present continuous)
+- G2: Ser vs. Estar usage with explanations
+- G3: Mixed preterite/imperfect paragraph (6+ sentences)
+- G4: Direct/indirect object pronouns and reflexive verbs
+
+Return ONLY a valid JSON object with this exact structure:
+{
+  "score": <integer 0-100>,
+  "level_estimate": "<one of: A1, A2-, A2, A2+, B1-, B1>",
+  "feedback": "<2-3 sentence overall assessment in English>",
+  "errors": [
+    { "category": "<tense|ser_estar|pronouns|conjugation|agreement|word_order>", "what": "<exact error quoted>", "correction": "<corrected form>", "explanation": "<brief explanation in English>" }
+  ],
+  "strengths": ["<strength 1>", "<strength 2>"],
+  "priority_weaknesses": ["<specific grammar point to study 1>", "<specific grammar point to study 2>"]
+}
+Return ONLY the JSON. No markdown, no text outside the JSON.`,
+
+  vocab: `You are an expert Spanish language examiner evaluating a learner at A2 level targeting B1.
+Evaluate the following Spanish vocabulary tasks. The tasks were:
+- V1: Define 5 Spanish words in Spanish (madrugada, cotidiano, huelga, añorar, imprescindible)
+- V2: Circumlocution — describe 3 objects without knowing the word (semáforo, sacacorchos, maletero)
+- V3: Travel vocabulary paragraph (8-10 sentences, rich topic vocabulary)
+- V4: Formal register rewriting (4 sentences)
+
+Return ONLY a valid JSON object:
+{
+  "score": <integer 0-100>,
+  "level_estimate": "<A1|A2-|A2|A2+|B1-|B1>",
+  "feedback": "<2-3 sentence assessment in English>",
+  "errors": [
+    { "category": "<definition_accuracy|circumlocution|register|vocabulary_range|false_friend>", "what": "<the problematic word/phrase>", "correction": "<better alternative>", "explanation": "<brief explanation>" }
+  ],
+  "strengths": ["<strength 1>", "<strength 2>"],
+  "priority_weaknesses": ["<specific vocabulary area to study>"]
+}
+Return ONLY the JSON.`,
+
+  reading: `You are an expert Spanish language examiner evaluating a learner at A2 level targeting B1.
+The learner read a B1-level Spanish article about remote work in Spain and answered 4 tasks:
+- R1: Literal comprehension (3 questions with answers directly in text)
+- R2: Inferential comprehension (2 questions requiring deduction)
+- R3: Vocabulary in context (3 terms: conciliación familiar, desplazamientos, modelo híbrido)
+- R4: Critical response mixing text evidence with personal opinion (4-6 sentences)
+
+Return ONLY a valid JSON object:
+{
+  "score": <integer 0-100>,
+  "level_estimate": "<A1|A2-|A2|A2+|B1-|B1>",
+  "feedback": "<2-3 sentence assessment in English>",
+  "errors": [
+    { "category": "<literal_accuracy|inference|vocabulary_in_context|text_use|opinion_structure>", "what": "<the problematic answer or phrase>", "correction": "<what the correct/better answer would be>", "explanation": "<brief explanation>" }
+  ],
+  "strengths": ["<strength 1>", "<strength 2>"],
+  "priority_weaknesses": ["<reading skill to develop>"]
+}
+Return ONLY the JSON.`,
+
+  writing: `You are an expert Spanish language examiner using CEFR B1 writing criteria.
+Evaluate 3 writing tasks:
+- W1: Formal complaint email to hotel (min 120 words, formal register, 3 problems described)
+- W2: Personal travel narrative (min 150 words, discourse connectors, sequencing)
+- W3: Opinion paragraph about social media (min 100 words, thesis-argument-counterargument-conclusion structure)
+
+Evaluate on: Task Achievement, Coherence & Cohesion, Lexical Range, Grammatical Range & Accuracy, Register Appropriacy.
+
+Return ONLY a valid JSON object:
+{
+  "score": <integer 0-100>,
+  "level_estimate": "<A1|A2-|A2|A2+|B1-|B1>",
+  "feedback": "<2-3 sentence assessment in English covering all 5 criteria>",
+  "errors": [
+    { "category": "<register|coherence|connector_use|task_completion|grammar|vocabulary|word_count>", "what": "<quoted problematic text>", "correction": "<suggested correction>", "explanation": "<brief explanation>" }
+  ],
+  "strengths": ["<strength 1>", "<strength 2>"],
+  "priority_weaknesses": ["<writing skill to develop>"]
+}
+Return ONLY the JSON.`,
+
+  listening: `You are an expert Spanish language examiner evaluating simulated listening comprehension tasks.
+The learner read two transcripts of authentic spoken Spanish (casual conversation + voicemail) and completed:
+- L1: 4 comprehension questions about the friend conversation
+- L2: 4 colloquial expression explanations (por lo visto, echar de menos una barbaridad, ser el primero apuntado, buf)
+- L3: English summary of voicemail for manager + Spanish reply to Alejandro
+
+Return ONLY a valid JSON object:
+{
+  "score": <integer 0-100>,
+  "level_estimate": "<A1|A2-|A2|A2+|B1-|B1>",
+  "feedback": "<2-3 sentence assessment in English>",
+  "errors": [
+    { "category": "<comprehension_accuracy|colloquial_recognition|register_switching|summary_completeness|reply_quality>", "what": "<the problematic answer>", "correction": "<correct answer/better version>", "explanation": "<brief explanation>" }
+  ],
+  "strengths": ["<strength 1>", "<strength 2>"],
+  "priority_weaknesses": ["<listening/spoken Spanish skill to develop>"]
+}
+Return ONLY the JSON.`
+};
+
+async function gradeSection(sec) {
+  const btn = document.getElementById('btn-grade-' + sec);
+  btn.disabled = true;
+  btn.textContent = 'Grading…';
+
+  // Compile all answers for this section
+  const ids = TASK_IDS[sec];
+  const answerText = ids.map(id => {
+    const val = (STATE.answers[id] || document.getElementById(id).value || '').trim();
+    return `[${id.toUpperCase()}]:\n${val || '(no answer provided)'}`;
+  }).join('\n\n');
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: RUBRICS[sec],
+        messages: [{ role: 'user', content: answerText }]
+      })
+    });
+
+    if (!response.ok) throw new Error('API ' + response.status);
+    const data = await response.json();
+    const raw = data.content?.[0]?.text || '{}';
+    let result;
+    try {
+      result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    } catch(e) {
+      result = { score: 0, level_estimate: 'A2', feedback: 'Parsing error. Please retry.', errors: [], strengths: [], priority_weaknesses: [] };
+    }
+
+    // Ensure required fields exist
+    result.errors = result.errors || [];
+    result.strengths = result.strengths || [];
+    result.priority_weaknesses = result.priority_weaknesses || [];
+
+    STATE.results[sec] = result;
+    persistState();
+    renderResult(sec, result);
+    updateNavProgress();
+    updateGradedCount();
+    showToast(SECTION_LABELS[sec] + ' graded ✓', 'success');
+
+  } catch(err) {
+    const errResult = { score: null, error: err.message, feedback: 'Connection error: ' + err.message + '. Check your network and retry.', errors: [], strengths: [], priority_weaknesses: [] };
+    STATE.results[sec] = errResult;
+    renderResult(sec, errResult);
+    showToast('Error: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Regrade ' + SECTION_LABELS[sec] + ' →';
+  }
+}
+
+// ── Render result panel ──
+function renderResult(sec, result) {
+  const panel = document.getElementById('result-' + sec);
+  panel.classList.add('visible');
+
+  const scoreEl = document.getElementById('score-' + sec);
+  const statusEl = document.getElementById('status-' + sec);
+  const feedbackEl = document.getElementById('feedback-' + sec);
+  const errorsEl = document.getElementById('errors-' + sec);
+  const strengthsEl = document.getElementById('strengths-' + sec);
+
+  if (result.score === null || result.error) {
+    scoreEl.textContent = 'ERR';
+    scoreEl.className = 'result-score-display low';
+    statusEl.textContent = 'Failed';
+    feedbackEl.textContent = result.feedback || result.error;
+    errorsEl.innerHTML = '<button style="margin-top:8px;background:var(--danger);color:#fff;border:none;font-family:var(--mono);font-size:11px;padding:8px 16px;cursor:pointer;border-radius:2px" onclick="gradeSection(\'' + sec + '\')">Retry</button>';
+    strengthsEl.innerHTML = '';
+    return;
+  }
+
+  const score = parseInt(result.score) || 0;
+  scoreEl.textContent = score + '%';
+  scoreEl.className = 'result-score-display ' + (score >= 70 ? 'high' : score >= 45 ? 'mid' : 'low');
+  statusEl.textContent = result.level_estimate || 'Graded';
+  feedbackEl.textContent = result.feedback || '';
+
+  // Errors
+  if (result.errors && result.errors.length > 0) {
+    errorsEl.innerHTML = '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Errors Found</div>' +
+      result.errors.map(e => `
+        <div class="error-item">
+          <div class="err-cat">${escHtml(e.category || '')}</div>
+          <div class="err-what">${escHtml(e.what || '')}</div>
+          <div class="err-fix">→ ${escHtml(e.correction || '')} — ${escHtml(e.explanation || '')}</div>
+        </div>`).join('');
+  } else {
+    errorsEl.innerHTML = '<div style="font-family:var(--mono);font-size:11px;color:var(--success);padding:4px 0">✓ No significant errors identified</div>';
+  }
+
+  // Strengths
+  if (result.strengths && result.strengths.length > 0) {
+    strengthsEl.innerHTML = '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;margin-top:12px">Strengths</div>' +
+      result.strengths.map(s => `<div class="strength-item">${escHtml(s)}</div>`).join('');
+  }
+}
+
+// ══════════════════════════════════════════════
+// REPORT GENERATION
+// ══════════════════════════════════════════════
+function showReport() {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('stickyBar').style.display = 'none';
+
+  const reportEl = document.getElementById('reportScreen');
+  reportEl.classList.add('visible');
+
+  const name = STATE.name || 'Student';
+  const date = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('reportMeta').textContent = name + ' · ' + date;
+
+  // Calculate scores
+  const scores = {};
+  let totalScore = 0;
+  let gradedCount = 0;
+  SECTIONS.forEach(sec => {
+    const r = STATE.results[sec];
+    if (r && r.score !== null && !r.error) {
+      scores[sec] = parseInt(r.score) || 0;
+      totalScore += scores[sec];
+      gradedCount++;
+    } else {
+      scores[sec] = null;
+    }
+  });
+
+  const avg = gradedCount > 0 ? Math.round(totalScore / gradedCount) : 0;
+
+  // Overall score
+  const overallEl = document.getElementById('overallScore');
+  overallEl.textContent = avg + '%';
+  overallEl.style.color = avg >= 70 ? 'var(--success)' : avg >= 45 ? 'var(--accent)' : 'var(--danger)';
+
+  let level, desc;
+  if (avg >= 80) { level = 'B1 Ready'; desc = 'Your performance is at or above B1 level across graded domains. Focus on consistency and edge cases before the exam.'; }
+  else if (avg >= 65) { level = 'A2+ → B1'; desc = 'Strong A2+ performance with clear B1 emerging. Targeted work on identified weaknesses should close the gap.'; }
+  else if (avg >= 50) { level = 'Solid A2'; desc = 'Core A2 competencies are in place. Systematic gap-filling in grammar tenses and writing structure needed for B1.'; }
+  else if (avg >= 35) { level = 'A2 Developing'; desc = 'Foundation is present but gaps are significant. A structured study plan starting from A2 consolidation is recommended.'; }
+  else { level = 'A1–A2'; desc = 'Fundamental gaps identified. Priority: grammar basics (tenses, ser/estar), core vocabulary, and sentence construction.'; }
+
+  document.getElementById('overallLevel').textContent = level;
+  document.getElementById('overallDesc').textContent = desc;
+
+  // Score cards
+  const colors = { grammar: 'var(--section-grammar)', vocab: 'var(--section-vocab)', reading: 'var(--section-reading)', writing: 'var(--section-writing)', listening: 'var(--section-listening)' };
+  const grid = document.getElementById('scoreGrid');
+  grid.innerHTML = SECTIONS.map(sec => {
+    const s = scores[sec];
+    const display = s !== null ? s + '%' : 'N/A';
+    const color = colors[sec];
+    const barW = s !== null ? s : 0;
+    return `<div class="score-card">
+      <div class="sc-domain">${SECTION_LABELS[sec]}</div>
+      <div class="sc-score" style="color:${color}">${display}</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text-muted)">${s !== null ? (STATE.results[sec]?.level_estimate || '') : 'Not graded'}</div>
+      <div class="sc-bar-wrap"><div class="sc-bar" style="background:${color};width:${barW}%"></div></div>
+    </div>`;
+  }).join('');
+
+  // Weakness table
+  const tbody = document.getElementById('weaknessTbody');
+  const sortedSections = SECTIONS.filter(s => scores[s] !== null).sort((a, b) => scores[a] - scores[b]);
+  tbody.innerHTML = sortedSections.map((sec, i) => {
+    const s = scores[sec];
+    const r = STATE.results[sec];
+    const pw = (r?.priority_weaknesses || []).join('; ') || '—';
+    const priority = i === 0 ? 'high' : i === 1 ? 'mid' : 'low';
+    const priorityLabel = i === 0 ? 'HIGH' : i === 1 ? 'MEDIUM' : 'LOW';
+    return `<tr>
+      <td>${SECTION_LABELS[sec]}</td>
+      <td style="font-family:var(--mono);color:${s < 50 ? 'var(--danger)' : s < 70 ? 'var(--accent)' : 'var(--success)'}">${s}%</td>
+      <td><span class="priority-tag ${priority}">${priorityLabel}</span></td>
+      <td>${escHtml(pw)}</td>
+    </tr>`;
+  }).join('');
+  if (!tbody.innerHTML) tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-muted);font-family:var(--mono);font-size:11px">No sections graded yet.</td></tr>';
+
+  // JSON output
+  const reportData = {
+    meta: {
+      student: STATE.name,
+      generated: new Date().toISOString(),
+      overall_score: avg,
+      level_estimate: level
+    },
+    domain_scores: scores,
+    results: STATE.results,
+    answers: STATE.answers
+  };
+  document.getElementById('jsonOutput').textContent = JSON.stringify(reportData, null, 2);
+}
+
+function downloadJSON() {
+  const content = document.getElementById('jsonOutput').textContent;
+  const blob = new Blob([content], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = (STATE.name || 'student').replace(/\s+/g, '_');
+  a.href = url;
+  a.download = `spanish_diagnostic_${safeName}_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('JSON downloaded ✓', 'success');
+}
+
+function copyJSON() {
+  const content = document.getElementById('jsonOutput').textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(content).then(() => showToast('Copied to clipboard ✓', 'success')).catch(() => fallbackCopy(content));
+  } else {
+    fallbackCopy(content);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('Copied ✓', 'success');
+  } catch(e) {
+    showToast('Copy failed — use Download instead', 'error');
+  }
+  document.body.removeChild(ta);
+}
+
+// ── Toast ──
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(() => t.className = 'toast', 2800);
+}
+
+// ── Escape HTML ──
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Init ──
+(function init() {
+  const restored = loadState();
+  if (restored && STATE.name) {
+    // Skip splash if we have saved data
+    document.getElementById('splashName').value = STATE.name;
+  }
+  updateGradedCount();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish Vocabulary Tester — Danny</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #F8FAFC;
+  --card:     #FFFFFF;
+  --subtle:   #F1F5F9;
+  --line:     #E2E8F0;
+  --text:     #0F172A;
+  --mid:      #475569;
+  --soft:     #94A3B8;
+  --indigo:   #6366F1;
+  --emerald:  #10B981;
+  --amber:    #F59E0B;
+  --red:      #EF4444;
+  --display:  'Playfair Display', Georgia, serif;
+  --body:     'DM Sans', system-ui, sans-serif;
+  --roboto:   'Roboto', sans-serif;
+  --mono:     'JetBrains Mono', monospace;
+  --shadow:   0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
+  --shadow-lg:0 8px 32px rgba(15,23,42,.1), 0 2px 8px rgba(15,23,42,.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ── WELCOME SCREEN ── */
+#screen-welcome {
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+}
+.welcome-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  background: rgba(99,102,241,.08);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.welcome-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.welcome-title em { color: var(--indigo); font-style: italic; }
+.welcome-desc {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--mid);
+  max-width: 480px;
+  line-height: 1.65;
+  margin: 0 auto 36px;
+}
+.stats-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 22px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.stat-pill .sp-num {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.stat-pill .sp-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.btn-primary {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  background: var(--text);
+  border: none;
+  border-radius: 12px;
+  padding: 16px 40px;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mid);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: border-color .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-secondary:hover { border-color: var(--mid); }
+.btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.resume-banner {
+  background: rgba(99,102,241,.07);
+  border: 1px solid rgba(99,102,241,.2);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 28px;
+  max-width: 400px;
+  font-size: 13.5px;
+  color: var(--mid);
+  text-align: left;
+}
+.resume-banner strong { color: var(--indigo); }
+
+/* ── FLASHCARD SCREEN ── */
+#screen-card {
+  justify-content: space-between;
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.card-progress-text {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--soft);
+  font-weight: 500;
+}
+.card-section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: var(--indigo);
+  background: rgba(99,102,241,.08);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.progress-bar-wrap {
+  height: 3px;
+  background: var(--line);
+  border-radius: 2px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--indigo);
+  border-radius: 2px;
+  transition: width .3s ease;
+}
+
+/* THE CARD */
+.flashcard {
+  background: var(--card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  padding: 40px 32px 28px;
+  text-align: center;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow .2s;
+  user-select: none;
+}
+.flashcard.correct { box-shadow: 0 0 0 3px var(--emerald), var(--shadow-lg); }
+.flashcard.wrong   { box-shadow: 0 0 0 3px var(--red),     var(--shadow-lg); }
+
+.fc-type-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.fc-type-verb  { background: rgba(99,102,241,.1);  color: var(--indigo); }
+.fc-type-noun  { background: rgba(16,185,129,.1);  color: #065F46; }
+.fc-type-adj   { background: rgba(245,158,11,.1);  color: #92400E; }
+.fc-type-phrase{ background: rgba(239,68,68,.1);   color: #991B1B; }
+
+.fc-level-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.fc-level-a1  { background: rgba(16,185,129,.1);  color: #065F46; }
+.fc-level-a2  { background: rgba(99,102,241,.1);  color: #3730A3; }
+.fc-level-b1  { background: rgba(239,68,68,.1);   color: #991B1B; }
+
+.fc-spanish {
+  font-family: var(--display);
+  font-size: clamp(34px, 7vw, 52px);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.fc-hint {
+  font-size: 12px;
+  color: var(--soft);
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+/* FEEDBACK AREA — shown after submission */
+.fc-feedback {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+}
+.fc-feedback.correct { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.25); }
+.fc-feedback.wrong   { background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.2);  }
+.fc-feedback .fb-verdict {
+  font-family: var(--roboto);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.fc-feedback.correct .fb-verdict { color: var(--emerald); }
+.fc-feedback.wrong   .fb-verdict { color: var(--red); }
+.fc-feedback .fb-correct-answer {
+  font-family: var(--roboto);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.fc-feedback .fb-example {
+  font-size: 12.5px;
+  color: var(--mid);
+  font-style: italic;
+  line-height: 1.55;
+}
+
+/* INPUT AREA */
+.input-area {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.translation-input {
+  flex: 1;
+  font-family: var(--body);
+  font-size: 16px;
+  color: var(--text);
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color .15s;
+}
+.translation-input:focus { border-color: var(--indigo); }
+.translation-input::placeholder { color: var(--soft); font-style: italic; }
+.translation-input:disabled { background: var(--subtle); }
+
+.btn-submit {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: var(--text);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+  white-space: nowrap;
+}
+.btn-submit:hover { opacity: .85; transform: translateY(-1px); }
+.btn-submit:active { transform: translateY(0); }
+.btn-submit.correct-btn { background: var(--emerald); }
+.btn-submit.wrong-btn   { background: var(--red); }
+.btn-submit.next-btn    { background: var(--indigo); }
+.btn-submit:disabled    { opacity: .4; cursor: default; transform: none; }
+
+/* ── RESULTS SCREEN ── */
+#screen-results {
+  padding: 40px 24px 80px;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+.results-title {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.results-title em { color: var(--indigo); font-style: italic; }
+.results-subtitle {
+  font-size: 15px;
+  color: var(--mid);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+/* DONUT CHART */
+.donut-wrap {
+  background: var(--card);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.donut-svg { flex-shrink: 0; }
+.donut-legend { flex: 1; min-width: 160px; }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.legend-label { color: var(--mid); }
+.legend-count { font-family: var(--roboto); font-weight: 700; color: var(--text); margin-left: auto; }
+
+/* LEVEL BREAKDOWN */
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.breakdown-card {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 18px 16px;
+  text-align: center;
+}
+.bc-level {
+  font-family: var(--roboto);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.bc-pct {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.bc-label { font-size: 11px; color: var(--soft); }
+
+/* SECTION BREAKDOWN */
+.section-table {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.st-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 12px;
+  padding: 10px 18px;
+  background: var(--subtle);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--soft);
+  font-weight: 600;
+}
+.st-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--line);
+  align-items: center;
+  font-size: 13px;
+}
+.st-row:hover { background: var(--subtle); }
+.st-name { color: var(--text); font-weight: 500; }
+.st-bar-wrap { grid-column: 1; display: flex; align-items: center; gap: 8px; }
+.st-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  width: 80px;
+  overflow: hidden;
+}
+.st-bar-fill { height: 100%; border-radius: 2px; background: var(--emerald); }
+
+/* UNKNOWN WORD LIST */
+.unknown-list {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.ul-header {
+  padding: 14px 18px;
+  background: rgba(239,68,68,.06);
+  border-bottom: 1px solid rgba(239,68,68,.15);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.ul-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+}
+.ul-item:first-of-type { border-top: none; }
+.ul-spanish {
+  font-family: var(--display);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 120px;
+}
+.ul-english { color: var(--mid); flex: 1; }
+.ul-type-badge {
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.ul-section-badge {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--soft);
+}
+
+/* STUDY MODE SCREEN */
+#screen-study {
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: space-between;
+}
+.study-mode-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--red);
+  background: rgba(239,68,68,.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* ── API KEY INPUT ── */
+.api-key-wrap {
+  max-width: 420px;
+  margin: 0 auto 28px;
+  text-align: left;
+}
+.api-key-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.api-key-label .api-optional {
+  font-weight: 400;
+  color: var(--soft);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  font-family: var(--body);
+  font-style: italic;
+}
+.api-key-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.api-key-input {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color .15s;
+}
+.api-key-input:focus { border-color: var(--indigo); }
+.api-key-input::placeholder { color: var(--soft); }
+.api-key-save {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mid);
+  background: var(--subtle);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color .15s;
+}
+.api-key-save:hover { border-color: var(--mid); }
+.api-status {
+  font-size: 11px;
+  margin-top: 6px;
+  font-style: italic;
+  min-height: 16px;
+}
+.api-status.ok    { color: var(--emerald); }
+.api-status.none  { color: var(--soft); }
+.api-status.error { color: var(--red); }
+
+/* Grading indicator on card */
+.grading-indicator {
+  display: none;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--soft);
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: .06em;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.grading-indicator.visible { display: block; }
+@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+/* ── TOP NAV ── */
+.top-nav {
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(248,250,252,.92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 12px;
+}
+.nav-back {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--mid);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-back:hover { color: var(--text); }
+.nav-title {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text);
+  flex: 1;
+  text-align: center;
+}
+.nav-skip {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: .06em;
+}
+.nav-skip:hover { color: var(--mid); }
+
+/* KEYBOARD SHORTCUTS HINT */
+.kbd-hint {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--soft);
+  margin-top: 8px;
+  letter-spacing: .04em;
+}
+kbd {
+  background: var(--subtle);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--mid);
+}
+
+/* PRINT — unknown word list */
+@media print {
+  .top-nav, .btn-row, .answer-buttons, #screen-welcome,
+  #screen-card, #screen-study { display: none !important; }
+  #screen-results { display: block !important; padding: 0; }
+  .unknown-list, .section-table, .breakdown-grid { box-shadow: none; border: 1px solid #E2E8F0; }
+}
+
+@media (max-width: 500px) {
+  .breakdown-grid { grid-template-columns: 1fr; }
+  .donut-wrap { flex-direction: column; }
+  .answer-buttons { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .btn-answer { padding: 12px 4px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     SCREEN: WELCOME
+══════════════════════════════ -->
+<div class="screen active" id="screen-welcome">
+  <div style="max-width:560px;width:100%;margin:auto;text-align:center;padding:40px 24px">
+    <div class="welcome-badge">Vocabulary Diagnostic</div>
+    <h1 class="welcome-title">What words do you<br><em>actually</em> know?</h1>
+    <p class="welcome-desc">Type the English translation for each Spanish word. Claude AI grades your answers for accuracy — no API key needed to run, but adding one gives you smarter grading.</p>
+
+    <div class="api-key-wrap">
+      <div class="api-key-label">
+        Claude API Key
+        <span class="api-optional">optional — enables AI grading</span>
+      </div>
+      <div class="api-key-row">
+        <input
+          class="api-key-input"
+          id="api-key-input"
+          type="password"
+          placeholder="sk-ant-api03-..."
+          autocomplete="off"
+        />
+        <button class="api-key-save" onclick="saveApiKey()">Save</button>
+      </div>
+      <div class="api-status none" id="api-status">No API key saved — using local grading</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><div class="sp-num" id="total-count">—</div><div class="sp-label">Total words</div></div>
+      <div class="stat-pill"><div class="sp-num" id="domain-count">—</div><div class="sp-label">Domains</div></div>
+      <div class="stat-pill"><div class="sp-num">3</div><div class="sp-label">Levels</div></div>
+    </div>
+
+    <div id="resume-banner" class="resume-banner" style="display:none;margin:0 auto 28px">
+      <strong>Previous session found.</strong><br>
+      You've tested <span id="resume-count">0</span> words before. You can resume where you left off or start fresh.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="startFresh()">▶ Start Test</button>
+      <button class="btn-secondary" id="btn-resume" style="display:none" onclick="resumeTest()">↩ Resume</button>
+      <button class="btn-secondary" id="btn-results-only" style="display:none" onclick="showResults()">📊 View Results</button>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:var(--soft);font-family:var(--mono);letter-spacing:.04em">
+      keyboard shortcuts available · <kbd>1</kbd> know · <kbd>2</kbd> unsure · <kbd>3</kbd> don't know · <kbd>space</kbd> flip card
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN: FLASHCARD
+══════════════════════════════ -->
+<div class="screen" id="screen-card">
+  <nav class="top-nav">
+    <button class="nav-back" onclick="goBack()">← Back</button>
+    <span class="nav-title" id="nav-title">Vocabulary Test</span>
+    <button class="nav-skip" onclick="skipToResults()">Skip to results →</button>
+  </nav>
+
+  <div style="flex:1;display:flex;flex-direction:column;padding:24px;max-width:600px;margin:0 auto;width:100%">
+    <div class="card-header">
+      <span class="card-progress-text" id="progress-text">1 / 300</span>
+      <span class="card-section-label" id="section-label">Section 01</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+
+    <div class="flashcard" id="flashcard">
+      <div class="fc-type-badge fc-type-verb" id="fc-type">Verb</div>
+      <div class="fc-level-badge fc-level-a1" id="fc-level">A1</div>
+      <div class="fc-spanish" id="fc-spanish">hablar</div>
+      <div class="fc-hint" id="fc-hint">Type the English translation below</div>
+      <div class="fc-feedback" id="fc-feedback">
+        <div class="fb-verdict" id="fb-verdict"></div>
+        <div class="fb-correct-answer" id="fb-correct"></div>
+        <div class="fb-example" id="fb-example"></div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input
+        class="translation-input"
+        id="translation-input"
+        type="text"
+        placeholder="Type the English translation…"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+      <button class="btn-submit" id="btn-submit" onclick="submitAnswer()">Check →</button>
+    </div>
+
+    <div style="margin-top:8px">
+      <button class="btn-secondary" id="btn-try-again" onclick="tryAgain()" style="display:none;font-size:13px;padding:8px 18px">↺ Try Again</button>
+    </div>
+
+    <div class="grading-indicator" id="grading-indicator">⬤ grading with Claude AI…</div>
+
+    <div class="kbd-hint" style="margin-top:8px">
+      <kbd>Enter</kbd> to check &nbsp;·&nbsp; <kbd>Enter</kbd> again to advance
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN: STUDY MODE (unknown words only)
+══════════════════════════════ -->
+<div class="screen" id="screen-study">
+  <nav class="top-nav">
+    <button class="nav-back" onclick="showResults()">← Results</button>
+    <span class="nav-title">Study: Unknown Words</span>
+    <button class="nav-skip" onclick="showResults()">Done →</button>
+  </nav>
+  <div style="flex:1;display:flex;flex-direction:column;padding:24px;max-width:600px;margin:0 auto;width:100%">
+    <div class="study-mode-label">📚 Study Mode — Unknown Words Only</div>
+    <div class="card-header">
+      <span class="card-progress-text" id="study-progress-text">1 / ?</span>
+      <span class="card-section-label" id="study-section-label">Section</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="study-progress-fill" style="width:0%;background:var(--red)"></div>
+    </div>
+
+    <div class="flashcard" id="study-flashcard" onclick="flipStudyCard()">
+      <div class="fc-type-badge fc-type-verb" id="sfc-type">Verb</div>
+      <div class="fc-level-badge fc-level-a1" id="sfc-level">A1</div>
+      <div class="fc-spanish" id="sfc-spanish">—</div>
+      <div class="fc-hint">tap to reveal translation</div>
+      <div class="fc-english" id="sfc-english">—</div>
+      <div class="fc-example" id="sfc-example">—</div>
+      <div class="fc-tap-hint">tap card to reveal</div>
+    </div>
+
+    <div class="answer-buttons" style="margin-top:20px">
+      <button class="btn-answer btn-know" onclick="studyAnswer('know')" style="grid-column:1/2">
+        <span class="btn-icon">✓</span><span>Got it now</span>
+      </button>
+      <button class="btn-answer btn-unknown" onclick="studyAnswer('still-unknown')" style="grid-column:2/4">
+        <span class="btn-icon">↻</span><span>Still learning</span>
+      </button>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--soft);margin-top:12px;font-style:italic">Words you mark "Got it now" are removed from your unknown list.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN: RESULTS
+══════════════════════════════ -->
+<div class="screen" id="screen-results">
+  <nav class="top-nav">
+    <button class="nav-back" onclick="goHome()">← Home</button>
+    <span class="nav-title">Your Results</span>
+    <button class="nav-skip" onclick="window.print()">🖨 Print</button>
+  </nav>
+
+  <div style="padding:32px 24px 80px;max-width:700px;margin:0 auto;width:100%">
+    <h1 class="results-title">Vocabulary <em>Results</em></h1>
+    <p class="results-subtitle" id="results-subtitle">Here's where you stand.</p>
+
+    <!-- DONUT -->
+    <div class="donut-wrap">
+      <svg class="donut-svg" width="130" height="130" viewBox="0 0 130 130" id="donut-svg">
+        <circle cx="65" cy="65" r="50" fill="none" stroke="#E2E8F0" stroke-width="18"/>
+        <circle cx="65" cy="65" r="50" fill="none" stroke="#10B981" stroke-width="18"
+          stroke-dasharray="314" stroke-dashoffset="314" id="donut-know"
+          stroke-linecap="round" transform="rotate(-90 65 65)"/>
+        <circle cx="65" cy="65" r="50" fill="none" stroke="#F59E0B" stroke-width="18"
+          stroke-dasharray="314" stroke-dashoffset="314" id="donut-unsure"
+          stroke-linecap="round" transform="rotate(-90 65 65)"/>
+        <circle cx="65" cy="65" r="50" fill="none" stroke="#EF4444" stroke-width="18"
+          stroke-dasharray="314" stroke-dashoffset="314" id="donut-unknown"
+          stroke-linecap="round" transform="rotate(-90 65 65)"/>
+        <text x="65" y="60" text-anchor="middle" font-family="Playfair Display" font-size="22" font-weight="700" fill="#0F172A" id="donut-pct">0%</text>
+        <text x="65" y="76" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#94A3B8">known</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#10B981"></div>
+          <span class="legend-label">Know it</span>
+          <span class="legend-count" id="leg-know">—</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#F59E0B"></div>
+          <span class="legend-label">Unsure</span>
+          <span class="legend-count" id="leg-unsure">—</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#EF4444"></div>
+          <span class="legend-label">Don't know</span>
+          <span class="legend-count" id="leg-unknown">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEVEL BREAKDOWN -->
+    <div class="breakdown-grid" id="breakdown-grid"></div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="btn-row" style="margin-bottom:24px">
+      <button class="btn-primary" id="btn-study-unknown" onclick="startStudyMode()" style="background:var(--red)">
+        📚 Study Unknown Words
+      </button>
+      <button class="btn-secondary" onclick="startFresh()">↺ Retest All</button>
+      <button class="btn-secondary" onclick="retestUnknown()">↺ Retest Unknowns</button>
+    </div>
+
+    <!-- SECTION BREAKDOWN -->
+    <div class="section-table">
+      <div class="st-header">
+        <span>Grammar Section</span>
+        <span style="text-align:right">✓</span>
+        <span style="text-align:right">?</span>
+        <span style="text-align:right">✗</span>
+      </div>
+      <div id="section-breakdown"></div>
+    </div>
+
+    <!-- UNKNOWN WORD LIST -->
+    <div class="unknown-list" id="unknown-list-wrap">
+      <div class="ul-header">📋 Words to Learn — <span id="unknown-count-label">0 words</span></div>
+      <div id="unknown-list-items"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="window.print()">🖨 Print Unknown List</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+// VOCABULARY DATABASE — 300 words, 21 sections
+// Each: { es, en, type, level, section, sectionName, example }
+// ══════════════════════════════════════════════════
+const VOCAB = [
+
+  // ── Greetings ──────────────────────────────
+  {es:"hola", en:"hello / hi", type:"phrase", level:"A1", domain:"Greetings", example:"Hola, ¿cómo estás?"},
+  {es:"buenos días", en:"good morning", type:"phrase", level:"A1", domain:"Greetings", example:"Buenos días, ¿cómo amaneciste?"},
+  {es:"buenas tardes", en:"good afternoon", type:"phrase", level:"A1", domain:"Greetings", example:"Buenas tardes, ¿cómo te fue hoy?"},
+  {es:"buenas noches", en:"good evening / good night", type:"phrase", level:"A1", domain:"Greetings", example:"Buenas noches, que descanses."},
+  {es:"¿cómo te llamas?", en:"what is your name?", type:"phrase", level:"A1", domain:"Greetings", example:"¿Cómo te llamas? Me llamo Danny."},
+  {es:"mucho gusto", en:"nice to meet you", type:"phrase", level:"A1", domain:"Greetings", example:"Mucho gusto en conocerte."},
+  {es:"¿de dónde eres?", en:"where are you from?", type:"phrase", level:"A1", domain:"Greetings", example:"¿De dónde eres? Soy de Minnesota."},
+  {es:"¿cómo estás?", en:"how are you?", type:"phrase", level:"A1", domain:"Greetings", example:"¿Cómo estás? Muy bien, gracias."},
+  {es:"¿cuántos años tienes?", en:"how old are you?", type:"phrase", level:"A1", domain:"Greetings", example:"¿Cuántos años tienes? Tengo treinta."},
+  {es:"el nombre", en:"name", type:"noun", level:"A1", domain:"Greetings", example:"¿Cuál es tu nombre completo?"},
+
+  // ── Family ──────────────────────────────
+  {es:"la familia", en:"family", type:"noun", level:"A1", domain:"Family", example:"La familia es muy importante en México."},
+  {es:"el padre", en:"father", type:"noun", level:"A1", domain:"Family", example:"Mi padre vive en Minneapolis."},
+  {es:"la madre", en:"mother", type:"noun", level:"A1", domain:"Family", example:"Mi madre cocina muy bien."},
+  {es:"el hermano", en:"brother", type:"noun", level:"A1", domain:"Family", example:"Tengo un hermano mayor."},
+  {es:"la hermana", en:"sister", type:"noun", level:"A1", domain:"Family", example:"Mi hermana vive en Chicago."},
+  {es:"el amigo", en:"friend (male)", type:"noun", level:"A1", domain:"Family", example:"Mi amigo trabaja en tecnología."},
+  {es:"la amiga", en:"friend (female)", type:"noun", level:"A1", domain:"Family", example:"Mi amiga y yo fuimos al restaurante."},
+  {es:"el novio", en:"boyfriend", type:"noun", level:"A1", domain:"Family", example:"¿Tienes novio?"},
+  {es:"la novia", en:"girlfriend", type:"noun", level:"A1", domain:"Family", example:"Mi novia vive en Silver Lake."},
+  {es:"el jefe", en:"boss", type:"noun", level:"A1", domain:"Family", example:"Mi jefe es muy exigente pero justo."},
+
+  // ── Basic Verbs ──────────────────────────────
+  {es:"querer", en:"to want", type:"verb", level:"A1", domain:"Basic Verbs", example:"Quiero aprender español."},
+  {es:"necesitar", en:"to need", type:"verb", level:"A1", domain:"Basic Verbs", example:"Necesito más tiempo para terminar."},
+  {es:"poder", en:"to be able to / can", type:"verb", level:"A1", domain:"Basic Verbs", example:"¿Puedes hablar más despacio?"},
+  {es:"saber", en:"to know (facts/how to)", type:"verb", level:"A1", domain:"Basic Verbs", example:"Sé hablar español básico."},
+  {es:"ir", en:"to go", type:"verb", level:"A1", domain:"Basic Verbs", example:"Voy al trabajo en Metro."},
+  {es:"venir", en:"to come", type:"verb", level:"A1", domain:"Basic Verbs", example:"¿Vienes a la reunión mañana?"},
+  {es:"tener", en:"to have", type:"verb", level:"A1", domain:"Basic Verbs", example:"Tengo una reunión a las diez."},
+  {es:"hacer", en:"to do / make", type:"verb", level:"A1", domain:"Basic Verbs", example:"¿Qué haces los fines de semana?"},
+  {es:"ver", en:"to see / watch", type:"verb", level:"A1", domain:"Basic Verbs", example:"Veo series en Netflix por las noches."},
+  {es:"dar", en:"to give", type:"verb", level:"A1", domain:"Basic Verbs", example:"Dame tu número de teléfono."},
+  {es:"llevar", en:"to carry / to wear / to take", type:"verb", level:"A1", domain:"Basic Verbs", example:"Llevo mi mochila al trabajo."},
+  {es:"poner", en:"to put / place", type:"verb", level:"A1", domain:"Basic Verbs", example:"Pon el café en la mesa."},
+  {es:"traer", en:"to bring", type:"verb", level:"A1", domain:"Basic Verbs", example:"¿Puedes traer los documentos?"},
+  {es:"usar", en:"to use", type:"verb", level:"A1", domain:"Basic Verbs", example:"Uso Python en el trabajo."},
+
+  // ── Descriptions ──────────────────────────────
+  {es:"grande", en:"big / large", type:"adj", level:"A1", domain:"Descriptions", example:"Los Ángeles es una ciudad muy grande."},
+  {es:"pequeño/a", en:"small", type:"adj", level:"A1", domain:"Descriptions", example:"El apartamento es pequeño pero cómodo."},
+  {es:"nuevo/a", en:"new", type:"adj", level:"A1", domain:"Descriptions", example:"Tengo un nuevo proyecto en Adobe."},
+  {es:"viejo/a", en:"old", type:"adj", level:"A1", domain:"Descriptions", example:"Este es un barrio con casas muy viejas."},
+  {es:"bonito/a", en:"pretty / nice", type:"adj", level:"A1", domain:"Descriptions", example:"West Adams es un barrio muy bonito."},
+  {es:"feo/a", en:"ugly", type:"adj", level:"A1", domain:"Descriptions", example:"El edificio es un poco feo por fuera."},
+  {es:"caro/a", en:"expensive", type:"adj", level:"A1", domain:"Descriptions", example:"Los apartamentos en Silver Lake son caros."},
+  {es:"barato/a", en:"cheap / affordable", type:"adj", level:"A1", domain:"Descriptions", example:"Este café es muy bueno y barato."},
+  {es:"fácil", en:"easy", type:"adj", level:"A1", domain:"Descriptions", example:"El español no es tan fácil como parece."},
+  {es:"difícil", en:"difficult", type:"adj", level:"A1", domain:"Descriptions", example:"La gramática es difícil al principio."},
+  {es:"rápido/a", en:"fast", type:"adj", level:"A1", domain:"Descriptions", example:"El Metro es rápido en horas pico."},
+  {es:"lento/a", en:"slow", type:"adj", level:"A1", domain:"Descriptions", example:"Mi laptop está muy lenta hoy."},
+
+  // ── Food & Drink ──────────────────────────────
+  {es:"el agua", en:"water", type:"noun", level:"A1", domain:"Food & Drink", example:"¿Me trae un vaso de agua, por favor?"},
+  {es:"el café", en:"coffee", type:"noun", level:"A1", domain:"Food & Drink", example:"Preparo un espresso en la Lelit Bianca."},
+  {es:"la comida", en:"food", type:"noun", level:"A1", domain:"Food & Drink", example:"La comida mexicana es increíble en LA."},
+  {es:"el desayuno", en:"breakfast", type:"noun", level:"A1", domain:"Food & Drink", example:"Tomo el desayuno a las ocho."},
+  {es:"el almuerzo", en:"lunch", type:"noun", level:"A1", domain:"Food & Drink", example:"¿Dónde comes el almuerzo hoy?"},
+  {es:"la cena", en:"dinner", type:"noun", level:"A1", domain:"Food & Drink", example:"La cena fue increíble en Black Rabbit Rose."},
+  {es:"el restaurante", en:"restaurant", type:"noun", level:"A1", domain:"Food & Drink", example:"Fuimos a un restaurante en el centro."},
+  {es:"comer", en:"to eat", type:"verb", level:"A1", domain:"Food & Drink", example:"¿Dónde comes normalmente?"},
+  {es:"beber / tomar", en:"to drink", type:"verb", level:"A1", domain:"Food & Drink", example:"Tomo café cada mañana."},
+  {es:"el menú", en:"menu", type:"noun", level:"A1", domain:"Food & Drink", example:"¿Me puede traer el menú?"},
+
+  // ── Time ──────────────────────────────
+  {es:"hoy", en:"today", type:"phrase", level:"A1", domain:"Time", example:"Hoy tengo cinco reuniones."},
+  {es:"mañana", en:"tomorrow", type:"phrase", level:"A1", domain:"Time", example:"Mañana voy a la oficina."},
+  {es:"ayer", en:"yesterday", type:"phrase", level:"A1", domain:"Time", example:"Ayer trabajé desde casa."},
+  {es:"ahora", en:"now", type:"phrase", level:"A1", domain:"Time", example:"Ahora estoy en una reunión."},
+  {es:"tarde", en:"late / afternoon", type:"phrase", level:"A1", domain:"Time", example:"Llegué tarde a la reunión."},
+  {es:"temprano", en:"early", type:"phrase", level:"A1", domain:"Time", example:"Me levanto temprano los lunes."},
+  {es:"la hora", en:"the time / hour", type:"noun", level:"A1", domain:"Time", example:"¿Qué hora es? Son las tres."},
+  {es:"la semana", en:"week", type:"noun", level:"A1", domain:"Time", example:"Esta semana tengo mucho trabajo."},
+  {es:"el mes", en:"month", type:"noun", level:"A1", domain:"Time", example:"El próximo mes voy a Minneapolis."},
+  {es:"el año", en:"year", type:"noun", level:"A1", domain:"Time", example:"Este año aprendí mucho español."},
+
+  // ── Places ──────────────────────────────
+  {es:"la casa", en:"house", type:"noun", level:"A1", domain:"Places", example:"Vivo en un apartamento, no en una casa."},
+  {es:"el apartamento", en:"apartment", type:"noun", level:"A1", domain:"Places", example:"Mi apartamento está en West Adams."},
+  {es:"la ciudad", en:"city", type:"noun", level:"A1", domain:"Places", example:"Los Ángeles es una ciudad enorme."},
+  {es:"el barrio", en:"neighborhood", type:"noun", level:"A1", domain:"Places", example:"West Adams es mi barrio."},
+  {es:"la calle", en:"street", type:"noun", level:"A1", domain:"Places", example:"Corro por esta calle los domingos."},
+  {es:"el supermercado", en:"supermarket", type:"noun", level:"A1", domain:"Places", example:"Voy al supermercado los sábados."},
+  {es:"la oficina", en:"office", type:"noun", level:"A1", domain:"Places", example:"Voy a la oficina de Adobe tres días."},
+  {es:"el banco", en:"bank", type:"noun", level:"A1", domain:"Places", example:"Necesito ir al banco hoy."},
+
+  // ── Social Life ──────────────────────────────
+  {es:"conocer", en:"to meet / to know (people)", type:"verb", level:"A2", domain:"Social Life", example:"Quiero conocer gente nueva en LA."},
+  {es:"salir", en:"to go out", type:"verb", level:"A2", domain:"Social Life", example:"¿Quieres salir a tomar algo?"},
+  {es:"quedar", en:"to meet up / to arrange", type:"verb", level:"A2", domain:"Social Life", example:"¿Quedamos el viernes por la noche?"},
+  {es:"la cita", en:"date / appointment", type:"noun", level:"A2", domain:"Social Life", example:"Tengo una cita esta noche."},
+  {es:"el plan", en:"plan", type:"noun", level:"A2", domain:"Social Life", example:"¿Tienes algún plan para el fin de semana?"},
+  {es:"invitar", en:"to invite", type:"verb", level:"A2", domain:"Social Life", example:"Te invito a tomar un café."},
+  {es:"el cumpleaños", en:"birthday", type:"noun", level:"A2", domain:"Social Life", example:"¿Cuándo es tu cumpleaños?"},
+  {es:"la fiesta", en:"party", type:"noun", level:"A2", domain:"Social Life", example:"Hay una fiesta el sábado en Culver City."},
+  {es:"el/la soltero/a", en:"single person", type:"noun", level:"A2", domain:"Social Life", example:"¿Estás soltero/a?"},
+  {es:"enamorarse", en:"to fall in love", type:"verb", level:"A2", domain:"Social Life", example:"Me enamoré de esta ciudad."},
+  {es:"el/la ex", en:"ex (partner)", type:"noun", level:"A2", domain:"Social Life", example:"No hablo mucho con mi ex."},
+  {es:"tener química", en:"to have chemistry", type:"phrase", level:"A2", domain:"Social Life", example:"Tenemos mucha química, nos entendemos bien."},
+  {es:"coquetear", en:"to flirt", type:"verb", level:"A2", domain:"Social Life", example:"¿Estás coqueteando conmigo?"},
+  {es:"la pareja", en:"partner / couple", type:"noun", level:"A2", domain:"Social Life", example:"Mi pareja y yo vivimos juntos."},
+  {es:"el/la compañero/a", en:"companion / partner", type:"noun", level:"A2", domain:"Social Life", example:"Mi compañero de trabajo es muy amable."},
+
+  // ── Health ──────────────────────────────
+  {es:"la cabeza", en:"head", type:"noun", level:"A2", domain:"Health", example:"Me duele la cabeza después del trabajo."},
+  {es:"la espalda", en:"back", type:"noun", level:"A2", domain:"Health", example:"Me duele la espalda de estar sentado."},
+  {es:"el estómago", en:"stomach", type:"noun", level:"A2", domain:"Health", example:"Tengo dolor de estómago."},
+  {es:"enfermo/a", en:"sick / ill", type:"adj", level:"A2", domain:"Health", example:"Estoy enfermo y no puedo ir al trabajo."},
+  {es:"el médico", en:"doctor", type:"noun", level:"A2", domain:"Health", example:"Voy al médico mañana."},
+  {es:"la cita médica", en:"doctor's appointment", type:"noun", level:"A2", domain:"Health", example:"Tengo cita médica el jueves."},
+  {es:"la medicina", en:"medicine", type:"noun", level:"A2", domain:"Health", example:"Toma esta medicina dos veces al día."},
+  {es:"el hospital", en:"hospital", type:"noun", level:"A2", domain:"Health", example:"Lo llevaron al hospital de emergencia."},
+  {es:"el dolor", en:"pain", type:"noun", level:"A2", domain:"Health", example:"Tengo dolor de cabeza desde ayer."},
+  {es:"la fiebre", en:"fever", type:"noun", level:"A2", domain:"Health", example:"Tengo fiebre de 38 grados."},
+  {es:"descansar", en:"to rest", type:"verb", level:"A2", domain:"Health", example:"Necesito descansar este fin de semana."},
+  {es:"recuperarse", en:"to recover", type:"verb", level:"A2", domain:"Health", example:"Felix se está recuperando muy bien."},
+  {es:"el resfriado", en:"cold (illness)", type:"noun", level:"A2", domain:"Health", example:"Tengo un resfriado desde el lunes."},
+  {es:"alergico/a", en:"allergic", type:"adj", level:"A2", domain:"Health", example:"Soy alérgico al polvo."},
+
+  // ── Emotions ──────────────────────────────
+  {es:"feliz", en:"happy", type:"adj", level:"A2", domain:"Emotions", example:"Estoy muy feliz con mi trabajo."},
+  {es:"triste", en:"sad", type:"adj", level:"A2", domain:"Emotions", example:"Estoy triste porque cancelaron los planes."},
+  {es:"enojado/a", en:"angry", type:"adj", level:"A2", domain:"Emotions", example:"Estoy enojado con el tráfico de LA."},
+  {es:"nervioso/a", en:"nervous", type:"adj", level:"A2", domain:"Emotions", example:"Estoy nervioso antes de hablar en público."},
+  {es:"sorprendido/a", en:"surprised", type:"adj", level:"A2", domain:"Emotions", example:"Estoy sorprendido por los resultados."},
+  {es:"asustado/a", en:"scared / frightened", type:"adj", level:"A2", domain:"Emotions", example:"Me asusté cuando sonó la alarma."},
+  {es:"aburrido/a", en:"bored / boring", type:"adj", level:"A2", domain:"Emotions", example:"Estoy aburrido en esta reunión."},
+  {es:"estresado/a", en:"stressed", type:"adj", level:"A2", domain:"Emotions", example:"Estoy muy estresado con el proyecto."},
+  {es:"el sentimiento", en:"feeling", type:"noun", level:"A2", domain:"Emotions", example:"Es un sentimiento muy difícil de explicar."},
+  {es:"extrañar", en:"to miss (someone/something)", type:"verb", level:"A2", domain:"Emotions", example:"Extraño a mi familia en Minneapolis."},
+  {es:"el miedo", en:"fear", type:"noun", level:"A2", domain:"Emotions", example:"Tengo miedo de hablar en público."},
+
+  // ── Shopping ──────────────────────────────
+  {es:"la tienda", en:"shop / store", type:"noun", level:"A2", domain:"Shopping", example:"Hay una tienda de ropa en el centro."},
+  {es:"el precio", en:"price", type:"noun", level:"A2", domain:"Shopping", example:"¿Cuál es el precio de este producto?"},
+  {es:"la tarjeta", en:"card (credit/debit)", type:"noun", level:"A2", domain:"Shopping", example:"¿Puedo pagar con tarjeta?"},
+  {es:"el efectivo", en:"cash", type:"noun", level:"A2", domain:"Shopping", example:"¿Aceptan efectivo o solo tarjeta?"},
+  {es:"el descuento", en:"discount", type:"noun", level:"A2", domain:"Shopping", example:"Hay un descuento del 20% esta semana."},
+  {es:"comprar", en:"to buy", type:"verb", level:"A2", domain:"Shopping", example:"Quiero comprar un molinillo nuevo."},
+  {es:"vender", en:"to sell", type:"verb", level:"A2", domain:"Shopping", example:"¿Dónde venden café de especialidad?"},
+  {es:"el recibo", en:"receipt", type:"noun", level:"A2", domain:"Shopping", example:"¿Me puede dar el recibo?"},
+  {es:"la talla", en:"size (clothing)", type:"noun", level:"A2", domain:"Shopping", example:"¿Tienen esta camisa en mi talla?"},
+  {es:"el mercado", en:"market", type:"noun", level:"A2", domain:"Shopping", example:"Fui al mercado de farmers el domingo."},
+
+  // ── Transport ──────────────────────────────
+  {es:"el metro", en:"metro / subway", type:"noun", level:"A2", domain:"Transport", example:"Tomo el metro para ir al trabajo."},
+  {es:"el autobús", en:"bus", type:"noun", level:"A2", domain:"Transport", example:"El autobús 33 va por Western."},
+  {es:"el taxi", en:"taxi", type:"noun", level:"A2", domain:"Transport", example:"Pedí un taxi a las dos de la mañana."},
+  {es:"el vuelo", en:"flight", type:"noun", level:"A2", domain:"Transport", example:"Mi vuelo a Minneapolis sale el viernes."},
+  {es:"el aeropuerto", en:"airport", type:"noun", level:"A2", domain:"Transport", example:"El aeropuerto LAX está en el sur de LA."},
+  {es:"el billete / boleto", en:"ticket", type:"noun", level:"A2", domain:"Transport", example:"Compré el boleto de avión en línea."},
+  {es:"la maleta", en:"suitcase", type:"noun", level:"A2", domain:"Transport", example:"Tengo solo una maleta de mano."},
+  {es:"el pasaporte", en:"passport", type:"noun", level:"A2", domain:"Transport", example:"Siempre llevo el pasaporte cuando viajo."},
+  {es:"llegar", en:"to arrive", type:"verb", level:"A2", domain:"Transport", example:"Llegué tarde al aeropuerto."},
+  {es:"perder el vuelo", en:"to miss a flight / to miss", type:"verb", level:"A2", domain:"Transport", example:"Perdí el vuelo por el tráfico."},
+  {es:"el tráfico", en:"traffic", type:"noun", level:"A2", domain:"Transport", example:"El tráfico en LA es terrible a las 5 pm."},
+
+  // ── Hobbies ──────────────────────────────
+  {es:"el deporte", en:"sport", type:"noun", level:"A2", domain:"Hobbies", example:"¿Practicas algún deporte?"},
+  {es:"correr", en:"to run", type:"verb", level:"A2", domain:"Hobbies", example:"Corro por West Adams los domingos."},
+  {es:"el/la aficionado/a", en:"fan / enthusiast", type:"noun", level:"A2", domain:"Hobbies", example:"Soy muy aficionado al café de especialidad."},
+  {es:"cocinar", en:"to cook", type:"verb", level:"A2", domain:"Hobbies", example:"Me encanta cocinar los fines de semana."},
+  {es:"la receta", en:"recipe", type:"noun", level:"A2", domain:"Hobbies", example:"Tengo una receta excelente para scones."},
+  {es:"la película", en:"film / movie", type:"noun", level:"A2", domain:"Hobbies", example:"Fui a ver una película el sábado."},
+  {es:"el concierto", en:"concert", type:"noun", level:"A2", domain:"Hobbies", example:"Fui a un concierto en el Wiltern."},
+  {es:"viajar", en:"to travel", type:"verb", level:"A2", domain:"Hobbies", example:"Me encanta viajar cuando tengo vacaciones."},
+  {es:"la música", en:"music", type:"noun", level:"A2", domain:"Hobbies", example:"¿Qué tipo de música te gusta?"},
+  {es:"leer", en:"to read", type:"verb", level:"A2", domain:"Hobbies", example:"Leo libros de no ficción."},
+  {es:"el libro", en:"book", type:"noun", level:"A2", domain:"Hobbies", example:"Estoy leyendo un libro sobre lingüística."},
+
+  // ── Home Life ──────────────────────────────
+  {es:"el alquiler", en:"rent", type:"noun", level:"A2", domain:"Home Life", example:"El alquiler en West Adams es razonable."},
+  {es:"el vecino/a", en:"neighbor", type:"noun", level:"A2", domain:"Home Life", example:"Mi vecino es muy simpático."},
+  {es:"la cocina", en:"kitchen", type:"noun", level:"A2", domain:"Home Life", example:"Mi cocina es pequeña pero funcional."},
+  {es:"el dormitorio", en:"bedroom", type:"noun", level:"A2", domain:"Home Life", example:"Tengo un dormitorio con mucha luz."},
+  {es:"el baño", en:"bathroom", type:"noun", level:"A2", domain:"Home Life", example:"El baño es moderno y grande."},
+  {es:"la sala", en:"living room", type:"noun", level:"A2", domain:"Home Life", example:"Tengo mi equipo de café en la sala."},
+  {es:"mudarse", en:"to move (home)", type:"verb", level:"A2", domain:"Home Life", example:"Me mudé a The Jayne hace un año."},
+  {es:"el propietario", en:"landlord / owner", type:"noun", level:"A2", domain:"Home Life", example:"El propietario arregló la calefacción."},
+  {es:"el contrato", en:"contract / lease", type:"noun", level:"A2", domain:"Home Life", example:"Firmaré el contrato el próximo mes."},
+  {es:"los muebles", en:"furniture", type:"noun", level:"A2", domain:"Home Life", example:"Compré muebles nuevos el año pasado."},
+
+  // ── Education ──────────────────────────────
+  {es:"el/la estudiante", en:"student", type:"noun", level:"A2", domain:"Education", example:"Soy estudiante de español en el Instituto."},
+  {es:"el/la profesor/a", en:"teacher", type:"noun", level:"A2", domain:"Education", example:"Mi profesora de español es muy buena."},
+  {es:"la clase", en:"class", type:"noun", level:"A2", domain:"Education", example:"Tengo clase de español los martes."},
+  {es:"el examen", en:"exam", type:"noun", level:"A2", domain:"Education", example:"El examen DELE es en junio."},
+  {es:"estudiar", en:"to study", type:"verb", level:"A2", domain:"Education", example:"Estudio español 45 minutos al día."},
+  {es:"aprender", en:"to learn", type:"verb", level:"A2", domain:"Education", example:"Aprendo mejor con ejercicios de escritura."},
+  {es:"la tarea", en:"homework / task", type:"noun", level:"A2", domain:"Education", example:"La tarea de hoy es conjugar verbos."},
+  {es:"el idioma", en:"language", type:"noun", level:"A2", domain:"Education", example:"El español es mi segundo idioma."},
+  {es:"el vocabulario", en:"vocabulary", type:"noun", level:"A2", domain:"Education", example:"Necesito ampliar mi vocabulario."},
+  {es:"la gramática", en:"grammar", type:"noun", level:"A2", domain:"Education", example:"La gramática española tiene muchas reglas."},
+  {es:"el diccionario", en:"dictionary", type:"noun", level:"A2", domain:"Education", example:"Uso el diccionario cuando no entiendo."},
+
+  // ── Directions ──────────────────────────────
+  {es:"la derecha", en:"right", type:"noun", level:"A2", domain:"Directions", example:"Gira a la derecha en el semáforo."},
+  {es:"la izquierda", en:"left", type:"noun", level:"A2", domain:"Directions", example:"La oficina está a la izquierda."},
+  {es:"recto / derecho", en:"straight ahead", type:"phrase", level:"A2", domain:"Directions", example:"Sigue recto dos cuadras."},
+  {es:"la esquina", en:"corner", type:"noun", level:"A2", domain:"Directions", example:"Nos vemos en la esquina de la calle."},
+  {es:"cerca", en:"near / close", type:"phrase", level:"A2", domain:"Directions", example:"El metro está muy cerca de aquí."},
+  {es:"lejos", en:"far", type:"phrase", level:"A2", domain:"Directions", example:"¿Está lejos el aeropuerto de aquí?"},
+  {es:"el semáforo", en:"traffic light", type:"noun", level:"A2", domain:"Directions", example:"Para en el semáforo en rojo."},
+  {es:"la cuadra", en:"block (city)", type:"noun", level:"A2", domain:"Directions", example:"Está a dos cuadras de aquí."},
+
+  // ── Work Basics ──────────────────────────────
+  {es:"el sueldo", en:"salary", type:"noun", level:"A2", domain:"Work Basics", example:"El sueldo en tech es bueno en LA."},
+  {es:"el horario", en:"schedule", type:"noun", level:"A2", domain:"Work Basics", example:"Mi horario es de 9 a 6."},
+  {es:"la empresa", en:"company", type:"noun", level:"A2", domain:"Work Basics", example:"Trabajo en una empresa de software."},
+  {es:"contratar", en:"to hire", type:"verb", level:"A2", domain:"Work Basics", example:"La empresa va a contratar diez personas."},
+  {es:"renunciar", en:"to quit (a job)", type:"verb", level:"A2", domain:"Work Basics", example:"Renuncié a mi trabajo anterior."},
+  {es:"el puesto", en:"position / job title", type:"noun", level:"A2", domain:"Work Basics", example:"Mi puesto es analista de datos."},
+  {es:"la entrevista", en:"interview", type:"noun", level:"A2", domain:"Work Basics", example:"Tengo una entrevista de trabajo mañana."},
+
+  // ── Professional ──────────────────────────────
+  {es:"el plazo", en:"deadline", type:"noun", level:"B1", domain:"Professional", example:"El plazo de entrega es el viernes."},
+  {es:"la reunión", en:"meeting", type:"noun", level:"B1", domain:"Professional", example:"Tengo tres reuniones antes del almuerzo."},
+  {es:"el informe", en:"report", type:"noun", level:"B1", domain:"Professional", example:"Entregué el informe esta mañana."},
+  {es:"el presupuesto", en:"budget", type:"noun", level:"B1", domain:"Professional", example:"El presupuesto del proyecto es limitado."},
+  {es:"la propuesta", en:"proposal", type:"noun", level:"B1", domain:"Professional", example:"Presenté la propuesta al director."},
+  {es:"negociar", en:"to negotiate", type:"verb", level:"B1", domain:"Professional", example:"Negociamos el contrato con el cliente."},
+  {es:"la estrategia", en:"strategy", type:"noun", level:"B1", domain:"Professional", example:"Necesitamos una nueva estrategia."},
+  {es:"el objetivo", en:"objective / goal", type:"noun", level:"B1", domain:"Professional", example:"El objetivo del trimestre es claro."},
+  {es:"el rendimiento", en:"performance", type:"noun", level:"B1", domain:"Professional", example:"El rendimiento del modelo mejoró."},
+  {es:"el colega", en:"colleague", type:"noun", level:"B1", domain:"Professional", example:"Mi colega resolvió el problema primero."},
+  {es:"la habilidad", en:"skill", type:"noun", level:"B1", domain:"Professional", example:"La programación es una habilidad clave."},
+  {es:"el cargo", en:"position / role", type:"noun", level:"B1", domain:"Professional", example:"Mi cargo es analista senior."},
+  {es:"la reunión remota", en:"remote meeting", type:"noun", level:"B1", domain:"Professional", example:"La reunión remota duró dos horas."},
+  {es:"el teletrabajo", en:"remote work", type:"noun", level:"B1", domain:"Professional", example:"El teletrabajo cambió mi rutina."},
+  {es:"el ascenso", en:"promotion", type:"noun", level:"B1", domain:"Professional", example:"Recibí un ascenso el año pasado."},
+
+  // ── University ──────────────────────────────
+  {es:"la carrera", en:"degree / career", type:"noun", level:"B1", domain:"University", example:"Hice mi carrera en ciencias de datos."},
+  {es:"la beca", en:"scholarship", type:"noun", level:"B1", domain:"University", example:"Conseguí una beca para estudiar."},
+  {es:"el máster", en:"master's degree", type:"noun", level:"B1", domain:"University", example:"Estoy pensando en hacer un máster."},
+  {es:"la tesis", en:"thesis", type:"noun", level:"B1", domain:"University", example:"Escribí mi tesis sobre aprendizaje automático."},
+  {es:"el campus", en:"campus", type:"noun", level:"B1", domain:"University", example:"El campus de USC está en el sur."},
+  {es:"la especialización", en:"specialization", type:"noun", level:"B1", domain:"University", example:"Mi especialización es análisis de datos."},
+  {es:"investigar", en:"to research", type:"verb", level:"B1", domain:"University", example:"Investigo tendencias en los datos."},
+  {es:"el aprendizaje", en:"learning", type:"noun", level:"B1", domain:"University", example:"El aprendizaje de idiomas requiere práctica."},
+  {es:"la conferencia", en:"conference", type:"noun", level:"B1", domain:"University", example:"Fui a una conferencia de tecnología."},
+  {es:"la asignatura", en:"subject / course", type:"noun", level:"B1", domain:"University", example:"Mi asignatura favorita era estadística."},
+
+  // ── Medical ──────────────────────────────
+  {es:"la operación", en:"surgery / operation", type:"noun", level:"B1", domain:"Medical", example:"Felix tuvo una operación dental."},
+  {es:"el diagnóstico", en:"diagnosis", type:"noun", level:"B1", domain:"Medical", example:"El diagnóstico fue positivo."},
+  {es:"el síntoma", en:"symptom", type:"noun", level:"B1", domain:"Medical", example:"Describe los síntomas al médico."},
+  {es:"la receta médica", en:"prescription", type:"noun", level:"B1", domain:"Medical", example:"El médico me dio una receta."},
+  {es:"el seguro médico", en:"health insurance", type:"noun", level:"B1", domain:"Medical", example:"El seguro médico cubre la operación."},
+  {es:"la consulta", en:"consultation / office visit", type:"noun", level:"B1", domain:"Medical", example:"La consulta con el médico duró 30 minutos."},
+  {es:"crónico/a", en:"chronic", type:"adj", level:"B1", domain:"Medical", example:"Tiene un dolor crónico de espalda."},
+  {es:"la cirugía", en:"surgery", type:"noun", level:"B1", domain:"Medical", example:"La cirugía duró tres horas."},
+  {es:"el especialista", en:"specialist", type:"noun", level:"B1", domain:"Medical", example:"Me refirieron a un especialista."},
+  {es:"el bienestar", en:"wellbeing", type:"noun", level:"B1", domain:"Medical", example:"El bienestar mental es muy importante."},
+  {es:"la salud mental", en:"mental health", type:"noun", level:"B1", domain:"Medical", example:"La salud mental debe ser una prioridad."},
+  {es:"la ansiedad", en:"anxiety", type:"noun", level:"B1", domain:"Medical", example:"El trabajo remoto redujo mi ansiedad."},
+
+  // ── Relationships ──────────────────────────────
+  {es:"la relación", en:"relationship", type:"noun", level:"B1", domain:"Relationships", example:"Tenemos una relación muy buena."},
+  {es:"discutir", en:"to argue / discuss", type:"verb", level:"B1", domain:"Relationships", example:"Discutimos pero nos reconciliamos."},
+  {es:"reconciliarse", en:"to make up / reconcile", type:"verb", level:"B1", domain:"Relationships", example:"Nos reconciliamos después de la discusión."},
+  {es:"la confianza", en:"trust / confidence", type:"noun", level:"B1", domain:"Relationships", example:"La confianza es la base de toda relación."},
+  {es:"la comprensión", en:"understanding", type:"noun", level:"B1", domain:"Relationships", example:"La comprensión mutua es esencial."},
+  {es:"el compromiso", en:"commitment", type:"noun", level:"B1", domain:"Relationships", example:"El compromiso es importante en una relación."},
+  {es:"la ruptura", en:"breakup", type:"noun", level:"B1", domain:"Relationships", example:"La ruptura fue muy difícil para ambos."},
+  {es:"casarse", en:"to get married", type:"verb", level:"B1", domain:"Relationships", example:"Se casaron después de cinco años juntos."},
+  {es:"la boda", en:"wedding", type:"noun", level:"B1", domain:"Relationships", example:"Fui a una boda en San Diego."},
+  {es:"apoyar", en:"to support", type:"verb", level:"B1", domain:"Relationships", example:"Mi familia me apoya en todo."},
+  {es:"celoso/a", en:"jealous", type:"adj", level:"B1", domain:"Relationships", example:"No soy celoso, confío en mi pareja."},
+  {es:"la primera cita", en:"first date", type:"noun", level:"B1", domain:"Relationships", example:"Tuvimos nuestra primera cita en un café."},
+
+  // ── Technology ──────────────────────────────
+  {es:"la red social", en:"social network", type:"noun", level:"B1", domain:"Technology", example:"Uso las redes sociales con moderación."},
+  {es:"la aplicación", en:"app / application", type:"noun", level:"B1", domain:"Technology", example:"Hay una aplicación para aprender español."},
+  {es:"la contraseña", en:"password", type:"noun", level:"B1", domain:"Technology", example:"Olvidé la contraseña de mi cuenta."},
+  {es:"el correo electrónico", en:"email", type:"noun", level:"B1", domain:"Technology", example:"Reviso el correo electrónico cada hora."},
+  {es:"descargar", en:"to download", type:"verb", level:"B1", domain:"Technology", example:"Descargué la actualización del software."},
+  {es:"actualizar", en:"to update", type:"verb", level:"B1", domain:"Technology", example:"Necesito actualizar el sistema."},
+  {es:"el servidor", en:"server", type:"noun", level:"B1", domain:"Technology", example:"El servidor está caído ahora mismo."},
+  {es:"la nube", en:"the cloud", type:"noun", level:"B1", domain:"Technology", example:"Guardamos los datos en la nube."},
+  {es:"el software", en:"software", type:"noun", level:"B1", domain:"Technology", example:"Usamos software de análisis de datos."},
+  {es:"el algoritmo", en:"algorithm", type:"noun", level:"B1", domain:"Technology", example:"El algoritmo optimiza los resultados."},
+  {es:"la privacidad", en:"privacy", type:"noun", level:"B1", domain:"Technology", example:"La privacidad de datos es fundamental."},
+  {es:"hackear", en:"to hack", type:"verb", level:"B1", domain:"Technology", example:"Hackearon la cuenta de la empresa."},
+
+  // ── Travel ──────────────────────────────
+  {es:"el hotel", en:"hotel", type:"noun", level:"B1", domain:"Travel", example:"El hotel en Carmel Valley es increíble."},
+  {es:"la habitación", en:"room", type:"noun", level:"B1", domain:"Travel", example:"¿Tienen habitaciones disponibles?"},
+  {es:"reservar", en:"to book / reserve", type:"verb", level:"B1", domain:"Travel", example:"Reservé el hotel con un mes de anticipación."},
+  {es:"el turismo", en:"tourism", type:"noun", level:"B1", domain:"Travel", example:"El turismo cultural me interesa mucho."},
+  {es:"el itinerario", en:"itinerary", type:"noun", level:"B1", domain:"Travel", example:"Planifiqué el itinerario del viaje."},
+  {es:"la excursión", en:"excursion / day trip", type:"noun", level:"B1", domain:"Travel", example:"Hicimos una excursión a las montañas."},
+  {es:"perderse", en:"to get lost", type:"verb", level:"B1", domain:"Travel", example:"Me perdí en el metro de Ciudad de México."},
+  {es:"el seguro de viaje", en:"travel insurance", type:"noun", level:"B1", domain:"Travel", example:"Siempre compro seguro de viaje."},
+  {es:"la aduana", en:"customs", type:"noun", level:"B1", domain:"Travel", example:"Tardé una hora en pasar la aduana."},
+  {es:"el alojamiento", en:"accommodation", type:"noun", level:"B1", domain:"Travel", example:"El alojamiento en Airbnb fue perfecto."},
+  {es:"las vacaciones", en:"vacation / holidays", type:"noun", level:"B1", domain:"Travel", example:"Tengo dos semanas de vacaciones en agosto."},
+  {es:"el destino", en:"destination", type:"noun", level:"B1", domain:"Travel", example:"El destino perfecto para mí es México."},
+
+  // ── Opinions ──────────────────────────────
+  {es:"opinar", en:"to have an opinion", type:"verb", level:"B1", domain:"Opinions", example:"¿Qué opinas sobre el trabajo remoto?"},
+  {es:"estar de acuerdo", en:"to agree", type:"phrase", level:"B1", domain:"Opinions", example:"Estoy de acuerdo contigo en ese punto."},
+  {es:"estar en desacuerdo", en:"to disagree", type:"phrase", level:"B1", domain:"Opinions", example:"No estoy de acuerdo con esa idea."},
+  {es:"desde mi punto de vista", en:"from my point of view", type:"phrase", level:"B1", domain:"Opinions", example:"Desde mi punto de vista, es la mejor opción."},
+  {es:"en mi opinión", en:"in my opinion", type:"phrase", level:"B1", domain:"Opinions", example:"En mi opinión, el proyecto necesita más tiempo."},
+  {es:"el argumento", en:"argument (debate)", type:"noun", level:"B1", domain:"Opinions", example:"Tu argumento es muy convincente."},
+  {es:"convencer", en:"to convince", type:"verb", level:"B1", domain:"Opinions", example:"No me convences con ese argumento."},
+  {es:"la ventaja", en:"advantage", type:"noun", level:"B1", domain:"Opinions", example:"La ventaja del trabajo remoto es el tiempo."},
+  {es:"la desventaja", en:"disadvantage", type:"noun", level:"B1", domain:"Opinions", example:"La desventaja es la falta de contacto."},
+  {es:"depende", en:"it depends", type:"phrase", level:"B1", domain:"Opinions", example:"Depende del contexto y la situación."},
+  {es:"sin duda", en:"without a doubt", type:"phrase", level:"B1", domain:"Opinions", example:"Sin duda, es la mejor opción disponible."},
+  {es:"es cierto que", en:"it is true that", type:"phrase", level:"B1", domain:"Opinions", example:"Es cierto que el español es difícil."},
+
+  // ── News ──────────────────────────────
+  {es:"las noticias", en:"news", type:"noun", level:"B1", domain:"News", example:"Veo las noticias cada mañana."},
+  {es:"el periódico", en:"newspaper", type:"noun", level:"B1", domain:"News", example:"Leo el periódico digital en el desayuno."},
+  {es:"el titular", en:"headline", type:"noun", level:"B1", domain:"News", example:"El titular decía que subieron los precios."},
+  {es:"el suceso", en:"event / happening", type:"noun", level:"B1", domain:"News", example:"El suceso ocurrió en el centro de LA."},
+  {es:"reportar", en:"to report", type:"verb", level:"B1", domain:"News", example:"Los medios reportaron el incidente."},
+  {es:"la crisis", en:"crisis", type:"noun", level:"B1", domain:"News", example:"Hay una crisis económica en el sector."},
+  {es:"el desastre", en:"disaster", type:"noun", level:"B1", domain:"News", example:"El desastre natural afectó a miles."},
+  {es:"afectar", en:"to affect", type:"verb", level:"B1", domain:"News", example:"La huelga afectó el transporte."},
+  {es:"la huelga", en:"strike", type:"noun", level:"B1", domain:"News", example:"Los trabajadores convocaron una huelga."},
+  {es:"el acuerdo", en:"agreement / deal", type:"noun", level:"B1", domain:"News", example:"Firmaron un acuerdo histórico."},
+
+  // ── Politics ──────────────────────────────
+  {es:"el gobierno", en:"government", type:"noun", level:"B1", domain:"Politics", example:"El gobierno anunció nuevas medidas."},
+  {es:"las elecciones", en:"elections", type:"noun", level:"B1", domain:"Politics", example:"Las elecciones presidenciales son en noviembre."},
+  {es:"el partido político", en:"political party", type:"noun", level:"B1", domain:"Politics", example:"No sigo ningún partido político."},
+  {es:"votar", en:"to vote", type:"verb", level:"B1", domain:"Politics", example:"Es importante votar en las elecciones."},
+  {es:"la ley", en:"law", type:"noun", level:"B1", domain:"Politics", example:"La ley protege los derechos de los trabajadores."},
+  {es:"el derecho", en:"right", type:"noun", level:"B1", domain:"Politics", example:"Tenemos derecho a la educación pública."},
+  {es:"la desigualdad", en:"inequality", type:"noun", level:"B1", domain:"Politics", example:"La desigualdad económica es un problema grave."},
+  {es:"la democracia", en:"democracy", type:"noun", level:"B1", domain:"Politics", example:"La democracia requiere participación ciudadana."},
+  {es:"el impuesto", en:"tax", type:"noun", level:"B1", domain:"Politics", example:"Los impuestos financian los servicios públicos."},
+  {es:"la política", en:"politics / policy", type:"noun", level:"B1", domain:"Politics", example:"La política me interesa pero no me apasiona."},
+  {es:"el ciudadano", en:"citizen", type:"noun", level:"B1", domain:"Politics", example:"Como ciudadano, tengo derechos y obligaciones."},
+
+  // ── Environment ──────────────────────────────
+  {es:"el medio ambiente", en:"environment", type:"noun", level:"B1", domain:"Environment", example:"El medio ambiente necesita protección."},
+  {es:"el cambio climático", en:"climate change", type:"noun", level:"B1", domain:"Environment", example:"El cambio climático afecta todo el planeta."},
+  {es:"reciclar", en:"to recycle", type:"verb", level:"B1", domain:"Environment", example:"Reciclo el cartón y el plástico."},
+  {es:"la energía renovable", en:"renewable energy", type:"noun", level:"B1", domain:"Environment", example:"California invierte en energía renovable."},
+  {es:"la contaminación", en:"pollution", type:"noun", level:"B1", domain:"Environment", example:"La contaminación del aire es un problema."},
+  {es:"sostenible", en:"sustainable", type:"adj", level:"B1", domain:"Environment", example:"Quiero llevar un estilo de vida sostenible."},
+  {es:"el calentamiento global", en:"global warming", type:"noun", level:"B1", domain:"Environment", example:"El calentamiento global es urgente."},
+  {es:"la sequía", en:"drought", type:"noun", level:"B1", domain:"Environment", example:"California sufre sequías cada verano."},
+  {es:"la naturaleza", en:"nature", type:"noun", level:"B1", domain:"Environment", example:"Me gusta salir a la naturaleza los fines."},
+
+  // ── Economy ──────────────────────────────
+  {es:"el presupuesto personal", en:"personal budget", type:"noun", level:"B1", domain:"Economy", example:"Tengo un presupuesto mensual estricto."},
+  {es:"ahorrar", en:"to save (money)", type:"verb", level:"B1", domain:"Economy", example:"Ahorro el 20% de mi sueldo cada mes."},
+  {es:"invertir", en:"to invest", type:"verb", level:"B1", domain:"Economy", example:"Quiero invertir en el mercado de valores."},
+  {es:"la deuda", en:"debt", type:"noun", level:"B1", domain:"Economy", example:"Pagué toda mi deuda de la universidad."},
+  {es:"el préstamo", en:"loan", type:"noun", level:"B1", domain:"Economy", example:"Pedí un préstamo para el auto."},
+  {es:"la inflación", en:"inflation", type:"noun", level:"B1", domain:"Economy", example:"La inflación subió el costo de vida."},
+  {es:"el salario mínimo", en:"minimum wage", type:"noun", level:"B1", domain:"Economy", example:"El salario mínimo en California es alto."},
+  {es:"la cuenta bancaria", en:"bank account", type:"noun", level:"B1", domain:"Economy", example:"Tengo dos cuentas bancarias."},
+  {es:"el costo de vida", en:"cost of living", type:"noun", level:"B1", domain:"Economy", example:"El costo de vida en LA es muy alto."},
+  {es:"la hipoteca", en:"mortgage", type:"noun", level:"B1", domain:"Economy", example:"Estoy pensando en comprar una casa."},
+
+  // ── Culture ──────────────────────────────
+  {es:"la exposición", en:"exhibition", type:"noun", level:"B1", domain:"Culture", example:"Fui a una exposición de arte moderno."},
+  {es:"el museo", en:"museum", type:"noun", level:"B1", domain:"Culture", example:"El Broad Museum está en el centro de LA."},
+  {es:"la obra de teatro", en:"play (theater)", type:"noun", level:"B1", domain:"Culture", example:"Fui a ver una obra de teatro en Broadway."},
+  {es:"la pintura", en:"painting", type:"noun", level:"B1", domain:"Culture", example:"Esa pintura es de un artista mexicano."},
+  {es:"la escultura", en:"sculpture", type:"noun", level:"B1", domain:"Culture", example:"La escultura en el museo es impresionante."},
+  {es:"el/la artista", en:"artist", type:"noun", level:"B1", domain:"Culture", example:"Es un artista muy reconocido."},
+  {es:"la literatura", en:"literature", type:"noun", level:"B1", domain:"Culture", example:"La literatura latinoamericana es fascinante."},
+  {es:"el patrimonio", en:"heritage", type:"noun", level:"B1", domain:"Culture", example:"El patrimonio cultural de México es enorme."},
+  {es:"la tradición", en:"tradition", type:"noun", level:"B1", domain:"Culture", example:"Es una tradición muy importante en México."},
+  {es:"el festival", en:"festival", type:"noun", level:"B1", domain:"Culture", example:"El festival de música fue espectacular."},
+
+  // ── Sports ──────────────────────────────
+  {es:"el entrenamiento", en:"training", type:"noun", level:"B1", domain:"Sports", example:"Mi entrenamiento de running dura 45 min."},
+  {es:"el/la atleta", en:"athlete", type:"noun", level:"B1", domain:"Sports", example:"Es un atleta muy disciplinado."},
+  {es:"la lesión", en:"injury", type:"noun", level:"B1", domain:"Sports", example:"Tengo una lesión en la rodilla."},
+  {es:"el campeonato", en:"championship", type:"noun", level:"B1", domain:"Sports", example:"El campeonato de la NBA fue emocionante."},
+  {es:"el partido", en:"match / game", type:"noun", level:"B1", domain:"Sports", example:"Fui a ver el partido de USC el sábado."},
+  {es:"ganar", en:"to win", type:"verb", level:"B1", domain:"Sports", example:"El equipo ganó el campeonato."},
+  {es:"perder", en:"to lose", type:"verb", level:"B1", domain:"Sports", example:"Perdimos el partido en tiempo extra."},
+  {es:"la maratón", en:"marathon", type:"noun", level:"B1", domain:"Sports", example:"Quiero correr una maratón el próximo año."},
+  {es:"el/la entrenador/a", en:"coach / trainer", type:"noun", level:"B1", domain:"Sports", example:"El entrenador preparó un buen plan."},
+
+  // ── Food Culture ──────────────────────────────
+  {es:"la gastronomía", en:"gastronomy / food culture", type:"noun", level:"B1", domain:"Food Culture", example:"La gastronomía mexicana es patrimonio mundial."},
+  {es:"el taco", en:"taco", type:"noun", level:"B1", domain:"Food Culture", example:"Los tacos de canasta son increíbles."},
+  {es:"la tortilla", en:"tortilla", type:"noun", level:"B1", domain:"Food Culture", example:"La tortilla es base de la comida mexicana."},
+  {es:"el mercado de comida", en:"food market", type:"noun", level:"B1", domain:"Food Culture", example:"El mercado de Grand Central está en DTLA."},
+  {es:"el mariscos", en:"seafood", type:"noun", level:"B1", domain:"Food Culture", example:"Los mariscos en Los Ángeles son frescos."},
+  {es:"el brunch", en:"brunch", type:"noun", level:"B1", domain:"Food Culture", example:"Hago brunch los domingos con amigos."},
+  {es:"la especialidad", en:"specialty", type:"noun", level:"B1", domain:"Food Culture", example:"La especialidad del chef es el mole."},
+  {es:"vegetariano/a", en:"vegetarian", type:"adj", level:"B1", domain:"Food Culture", example:"Tengo amigos vegetarianos y veganos."},
+  {es:"el café de especialidad", en:"specialty coffee", type:"noun", level:"B1", domain:"Food Culture", example:"El café de especialidad requiere técnica."},
+
+  // ── Media ──────────────────────────────
+  {es:"la serie", en:"TV series", type:"noun", level:"B1", domain:"Media", example:"Estoy viendo una serie en Netflix."},
+  {es:"el documental", en:"documentary", type:"noun", level:"B1", domain:"Media", example:"Vi un documental sobre el cambio climático."},
+  {es:"el podcast", en:"podcast", type:"noun", level:"B1", domain:"Media", example:"Escucho podcasts para aprender español."},
+  {es:"la plataforma", en:"platform (streaming)", type:"noun", level:"B1", domain:"Media", example:"Uso varias plataformas de streaming."},
+  {es:"la temporada", en:"season (TV)", type:"noun", level:"B1", domain:"Media", example:"La tercera temporada es la mejor."},
+  {es:"el/la influencer", en:"influencer", type:"noun", level:"B1", domain:"Media", example:"Sigo a varios influencers de tecnología."},
+  {es:"la reseña", en:"review", type:"noun", level:"B1", domain:"Media", example:"Leí la reseña antes de ver la película."},
+  {es:"el contenido", en:"content", type:"noun", level:"B1", domain:"Media", example:"El contenido de esa cuenta es excelente."},
+
+  // ── Community ──────────────────────────────
+  {es:"el ayuntamiento", en:"city hall / town council", type:"noun", level:"B1", domain:"Community", example:"El ayuntamiento aprobó el nuevo proyecto."},
+  {es:"la comunidad", en:"community", type:"noun", level:"B1", domain:"Community", example:"La comunidad de West Adams es muy unida."},
+  {es:"la zona", en:"zone / area", type:"noun", level:"B1", domain:"Community", example:"Esta zona de LA está creciendo rápido."},
+  {es:"el parque", en:"park", type:"noun", level:"B1", domain:"Community", example:"Corro por el parque los fines de semana."},
+  {es:"el transporte público", en:"public transportation", type:"noun", level:"B1", domain:"Community", example:"El transporte público en LA es limitado."},
+  {es:"la gentrificación", en:"gentrification", type:"noun", level:"B1", domain:"Community", example:"La gentrificación cambió muchos barrios."},
+  {es:"la diversidad", en:"diversity", type:"noun", level:"B1", domain:"Community", example:"LA tiene una diversidad cultural increíble."},
+  {es:"el voluntariado", en:"volunteering", type:"noun", level:"B1", domain:"Community", example:"Hago voluntariado los fines de semana."},
+
+  // ── Safety ──────────────────────────────
+  {es:"la seguridad", en:"security / safety", type:"noun", level:"B1", domain:"Safety", example:"La seguridad en el trabajo es importante."},
+  {es:"el robo", en:"theft / robbery", type:"noun", level:"B1", domain:"Safety", example:"Hubo un robo en mi barrio el lunes."},
+  {es:"la policía", en:"police", type:"noun", level:"B1", domain:"Safety", example:"La policía llegó en diez minutos."},
+  {es:"denunciar", en:"to report (a crime)", type:"verb", level:"B1", domain:"Safety", example:"Denuncié el robo en la comisaría."},
+  {es:"peligroso/a", en:"dangerous", type:"adj", level:"B1", domain:"Safety", example:"Esa zona es un poco peligrosa de noche."},
+  {es:"la emergencia", en:"emergency", type:"noun", level:"B1", domain:"Safety", example:"Llama al 911 en caso de emergencia."},
+
+  // ── Daily Routine ──────────────────────────────
+  {es:"levantarse", en:"to get up / wake up", type:"verb", level:"A1", domain:"Daily Routine", example:"Me levanto a las siete de la mañana."},
+  {es:"desayunar", en:"to have breakfast", type:"verb", level:"A1", domain:"Daily Routine", example:"Desayuno café y tostadas cada día."},
+  {es:"normalmente", en:"usually / normally", type:"phrase", level:"A1", domain:"Daily Routine", example:"Normalmente llego al trabajo a las nueve."},
+  {es:"siempre", en:"always", type:"phrase", level:"A1", domain:"Daily Routine", example:"Siempre tomo café negro por la mañana."},
+  {es:"a veces", en:"sometimes", type:"phrase", level:"A1", domain:"Daily Routine", example:"A veces trabajo desde casa los viernes."},
+  {es:"cada día", en:"every day", type:"phrase", level:"A1", domain:"Daily Routine", example:"Estudio español cada día, aunque sea poco."},
+  {es:"la mañana", en:"morning", type:"noun", level:"A1", domain:"Daily Routine", example:"Por la mañana hago ejercicio antes del trabajo."},
+  {es:"el fin de semana", en:"weekend", type:"noun", level:"A1", domain:"Daily Routine", example:"El fin de semana no pongo despertador."},
+
+  // ── Basic Verbs (additions) ────────────────────
+  {es:"gustar", en:"to like / to be pleasing", type:"verb", level:"A1", domain:"Basic Verbs", example:"Me gusta mucho el café de especialidad."},
+  {es:"vivir", en:"to live", type:"verb", level:"A1", domain:"Basic Verbs", example:"Vivo en West Adams, Los Ángeles."},
+  {es:"escuchar", en:"to listen / to hear", type:"verb", level:"A1", domain:"Basic Verbs", example:"Escucho podcasts en español cada mañana."},
+  {es:"escribir", en:"to write", type:"verb", level:"A1", domain:"Basic Verbs", example:"Escribo mis notas de reuniones en inglés."},
+  {es:"buscar", en:"to look for / to search", type:"verb", level:"A1", domain:"Basic Verbs", example:"Busco un buen café cerca del trabajo."},
+  {es:"entender", en:"to understand", type:"verb", level:"A1", domain:"Basic Verbs", example:"No entiendo esa palabra, ¿me la explicas?"},
+  {es:"recordar", en:"to remember", type:"verb", level:"A1", domain:"Basic Verbs", example:"No recuerdo cómo se dice eso en español."},
+  {es:"creer", en:"to believe / to think", type:"verb", level:"A2", domain:"Basic Verbs", example:"Creo que el español es muy útil para mi trabajo."},
+  {es:"preguntar", en:"to ask", type:"verb", level:"A1", domain:"Basic Verbs", example:"No tengas miedo de preguntar en clase."},
+  {es:"intentar", en:"to try", type:"verb", level:"A2", domain:"Basic Verbs", example:"Intento hablar español todos los días."},
+  {es:"preferir", en:"to prefer", type:"verb", level:"A2", domain:"Basic Verbs", example:"Prefiero el café solo sin azúcar."},
+  {es:"encantar", en:"to love (something)", type:"verb", level:"A1", domain:"Basic Verbs", example:"Me encanta la comida mexicana de LA."},
+  {es:"descubrir", en:"to discover", type:"verb", level:"A2", domain:"Basic Verbs", example:"Me gusta descubrir nuevos barrios en LA."},
+  {es:"sorprender", en:"to surprise", type:"verb", level:"A2", domain:"Basic Verbs", example:"Me sorprendió lo rápido que mejoré mi español."},
+
+  // ── Family (additions) ─────────────────────────
+  {es:"el hijo / la hija", en:"son / daughter", type:"noun", level:"A1", domain:"Family", example:"Mi amiga tiene dos hijos pequeños."},
+  {es:"el abuelo / la abuela", en:"grandfather / grandmother", type:"noun", level:"A1", domain:"Family", example:"Mi abuela vivía en Minnesota toda su vida."},
+  {es:"el niño / la niña", en:"child / boy / girl", type:"noun", level:"A1", domain:"Family", example:"Había muchos niños jugando en el parque."},
+
+  // ── Descriptions (additions) ───────────────────
+  {es:"guapo/a", en:"good-looking / handsome / pretty", type:"adj", level:"A1", domain:"Descriptions", example:"Ese café nuevo en Culver City es muy guapo."},
+  {es:"interesante", en:"interesting", type:"adj", level:"A1", domain:"Descriptions", example:"El trabajo en diseño de producto es muy interesante."},
+  {es:"la vida", en:"life", type:"noun", level:"A1", domain:"Descriptions", example:"La vida en Los Ángeles nunca es aburrida."},
+  {es:"la gente", en:"people", type:"noun", level:"A1", domain:"Descriptions", example:"La gente en LA es muy diversa y abierta."},
+  {es:"la cultura", en:"culture", type:"noun", level:"A1", domain:"Descriptions", example:"Me interesa mucho la cultura latinoamericana."},
+  {es:"la experiencia", en:"experience", type:"noun", level:"A2", domain:"Descriptions", example:"Vivir en LA fue una experiencia increíble."},
+
+  // ── Places (additions) ─────────────────────────
+  {es:"la escuela", en:"school", type:"noun", level:"A1", domain:"Places", example:"Voy a una escuela de idiomas los martes."},
+  {es:"el país", en:"country", type:"noun", level:"A1", domain:"Places", example:"España es el país donde más quiero vivir."},
+  {es:"el campo", en:"countryside", type:"noun", level:"A1", domain:"Places", example:"Me gusta salir al campo los fines de semana."},
+  {es:"la librería", en:"bookshop / bookstore", type:"noun", level:"A1", domain:"Places", example:"Compré un libro de gramática en la librería."},
+  {es:"el extranjero", en:"abroad / foreign country", type:"noun", level:"B1", domain:"Places", example:"Quiero vivir en el extranjero al menos un año."},
+
+  // ── Time (additions) ───────────────────────────
+  {es:"el día", en:"day", type:"noun", level:"A1", domain:"Time", example:"Hoy ha sido un día muy productivo."},
+  {es:"la fecha", en:"date", type:"noun", level:"A1", domain:"Time", example:"¿Cuál es la fecha de hoy exactamente?"},
+
+  // ── Food & Drink (additions) ───────────────────
+  {es:"la bebida", en:"drink / beverage", type:"noun", level:"A1", domain:"Food & Drink", example:"¿Qué bebida quieres con la comida?"},
+
+  // ── Emotions (additions) ───────────────────────
+  {es:"la emoción", en:"emotion", type:"noun", level:"A2", domain:"Emotions", example:"Aprender un idioma genera muchas emociones."},
+  {es:"la frustración", en:"frustration", type:"noun", level:"A2", domain:"Emotions", example:"La frustración es normal cuando aprendes algo nuevo."},
+  {es:"la ilusión", en:"excitement / eager anticipation", type:"noun", level:"A2", domain:"Emotions", example:"Tengo mucha ilusión con este viaje a México."},
+  {es:"el entusiasmo", en:"enthusiasm", type:"noun", level:"A2", domain:"Emotions", example:"Empezó el nuevo proyecto con mucho entusiasmo."},
+  {es:"la libertad", en:"freedom", type:"noun", level:"A2", domain:"Emotions", example:"Hablar otro idioma da una sensación de libertad."},
+
+  // ── Languages ──────────────────────────────────
+  {es:"el inglés", en:"English (language)", type:"noun", level:"A1", domain:"Languages", example:"El inglés es mi lengua materna."},
+  {es:"el francés", en:"French (language)", type:"noun", level:"A1", domain:"Languages", example:"Aprendí un poco de francés en la universidad."},
+  {es:"el alemán", en:"German (language)", type:"noun", level:"A1", domain:"Languages", example:"El alemán tiene una gramática muy compleja."},
+  {es:"el italiano", en:"Italian (language)", type:"noun", level:"A1", domain:"Languages", example:"El italiano y el español son muy similares."},
+  {es:"el chino", en:"Chinese (language)", type:"noun", level:"A2", domain:"Languages", example:"El chino es el idioma más hablado del mundo."},
+  {es:"la lengua materna", en:"mother tongue / native language", type:"noun", level:"B1", domain:"Languages", example:"Mi lengua materna es el inglés, aprendo el español."},
+
+  // ── Communication ──────────────────────────────
+  {es:"la conversación", en:"conversation", type:"noun", level:"A1", domain:"Communication", example:"Tuve una conversación muy buena en español hoy."},
+  {es:"el consejo", en:"advice / tip", type:"noun", level:"A2", domain:"Communication", example:"¿Tienes algún consejo para aprender vocabulario?"},
+  {es:"por ejemplo", en:"for example", type:"phrase", level:"A1", domain:"Communication", example:"Por ejemplo, puedes ver series en español con subtítulos."},
+  {es:"pasarlo bien", en:"to have fun / have a good time", type:"phrase", level:"A1", domain:"Communication", example:"Lo pasamos muy bien en la fiesta del sábado."},
+
+  // ── Language Learning ──────────────────────────
+  {es:"la palabra", en:"word", type:"noun", level:"A1", domain:"Language Learning", example:"Aprendo diez palabras nuevas en español cada día."},
+  {es:"la frase", en:"sentence / phrase", type:"noun", level:"A1", domain:"Language Learning", example:"Practica la frase en voz alta hasta memorizarla."},
+  {es:"traducir", en:"to translate", type:"verb", level:"A2", domain:"Language Learning", example:"No traduzcas todo, intenta pensar en español."},
+  {es:"pronunciar", en:"to pronounce", type:"verb", level:"A2", domain:"Language Learning", example:"Es difícil pronunciar bien la erre en español."},
+  {es:"memorizar", en:"to memorize", type:"verb", level:"A2", domain:"Language Learning", example:"Memorizo el vocabulario con tarjetas de repaso."},
+  {es:"repetir", en:"to repeat", type:"verb", level:"A1", domain:"Language Learning", example:"Repite la frase en voz alta tres veces."},
+  {es:"la entonación", en:"intonation", type:"noun", level:"B1", domain:"Language Learning", example:"La entonación española sube y baja muy naturalmente."},
+
+  // ── Hobbies (additions) ────────────────────────
+  {es:"el cine", en:"cinema / movies", type:"noun", level:"A1", domain:"Hobbies", example:"Voy al cine casi todos los domingos."},
+  {es:"la televisión", en:"television / TV", type:"noun", level:"A1", domain:"Hobbies", example:"No veo mucho la televisión, prefiero series en streaming."},
+  {es:"la revista", en:"magazine", type:"noun", level:"A1", domain:"Hobbies", example:"Leo una revista de diseño cada semana."},
+  {es:"la novela", en:"novel", type:"noun", level:"A2", domain:"Hobbies", example:"Estoy leyendo mi primera novela en español."},
+  {es:"el poema", en:"poem", type:"noun", level:"B1", domain:"Hobbies", example:"Leí un poema de Neruda en clase de español."},
+  {es:"la radio", en:"radio", type:"noun", level:"A1", domain:"Hobbies", example:"Escucho la radio en español mientras corro."},
+
+  // ── Transport (additions) ──────────────────────
+  {es:"conducir", en:"to drive", type:"verb", level:"A2", domain:"Transport", example:"En LA casi todos conducen al trabajo."},
+
+  // ── Technology (additions) ─────────────────────
+  {es:"el móvil", en:"mobile phone / cell phone", type:"noun", level:"A1", domain:"Technology", example:"Uso el móvil para repasar vocabulario español."},
+];
+
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
+const STORAGE_KEY  = 'vocab_results_v2';
+const API_KEY_KEY  = 'vocab_claude_key';
+let claudeApiKey   = '';
+let currentDeck = [];
+let currentIdx  = 0;
+let results        = {};  // word.es → 'know'|'unsure'|'unknown'
+let waitingForNext = false;
+let mode           = 'full';
+
+let studyDeck   = [];
+let studyIdx    = 0;
+let studyFlipped= false;
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+function init() {
+  document.getElementById('total-count').textContent = VOCAB.filter(w => w && w.es).length;
+  document.getElementById('domain-count').textContent = new Set(VOCAB.filter(w => w && w.domain).map(w => w.domain)).size;
+
+  // Load saved API key
+  try {
+    const savedKey = localStorage.getItem(API_KEY_KEY);
+    if (savedKey) {
+      claudeApiKey = savedKey;
+      document.getElementById('api-key-input').value = savedKey;
+      updateApiStatus('ok');
+    }
+  } catch(e) {}
+
+  const saved = loadResults();
+  const testedCount = Object.keys(saved).length;
+
+  if (testedCount > 0) {
+    document.getElementById('resume-banner').style.display = 'block';
+    document.getElementById('resume-count').textContent = testedCount;
+    document.getElementById('btn-resume').style.display = 'inline-flex';
+    document.getElementById('btn-results-only').style.display = 'inline-flex';
+    results = saved;
+  }
+
+  document.addEventListener('keydown', handleKey);
+}
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key) {
+    claudeApiKey = '';
+    try { localStorage.removeItem(API_KEY_KEY); } catch(e) {}
+    updateApiStatus('none');
+    return;
+  }
+  claudeApiKey = key;
+  try { localStorage.setItem(API_KEY_KEY, key); } catch(e) {}
+  updateApiStatus('ok');
+}
+
+function updateApiStatus(state) {
+  const el = document.getElementById('api-status');
+  if (!el) return;
+  if (state === 'ok') {
+    el.className = 'api-status ok';
+    el.textContent = '✓ API key saved — Claude AI grading active';
+  } else if (state === 'error') {
+    el.className = 'api-status error';
+    el.textContent = '✗ API key error — check key and try again';
+  } else {
+    el.className = 'api-status none';
+    el.textContent = 'No API key saved — using local grading';
+  }
+}
+
+function loadResults() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveResults() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(results)); } catch(e) {}
+}
+
+// ══════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goHome() { showScreen('screen-welcome'); }
+function showResults() { buildResults(); showScreen('screen-results'); }
+function skipToResults() { buildResults(); showScreen('screen-results'); }
+
+// ══════════════════════════════════════════════════
+// TEST FLOW
+// ══════════════════════════════════════════════════
+function startFresh() {
+  results = {};
+  currentDeck = shuffle([...VOCAB]);
+  currentIdx = 0;
+  mode = 'full';
+  showScreen('screen-card');
+  renderCard();
+}
+
+function resumeTest() {
+  const remaining = VOCAB.filter(w => !results[w.es]);
+  if (remaining.length === 0) { showResults(); return; }
+  currentDeck = shuffle(remaining);
+  currentIdx = 0;
+  mode = 'full';
+  showScreen('screen-card');
+  renderCard();
+}
+
+function retestUnknown() {
+  const unknowns = VOCAB.filter(w => results[w.es] === 'unknown' || results[w.es] === 'unsure');
+  if (unknowns.length === 0) { alert('No unknown or unsure words to retest!'); return; }
+  // Clear their results for retesting
+  unknowns.forEach(w => delete results[w.es]);
+  currentDeck = shuffle(unknowns);
+  currentIdx = 0;
+  mode = 'full';
+  showScreen('screen-card');
+  renderCard();
+}
+
+function renderCard() {
+  if (currentIdx >= currentDeck.length) {
+    saveResults();
+    showResults();
+    return;
+  }
+  const w = currentDeck[currentIdx];
+  waitingForNext = false;
+
+  const pct = (currentIdx / currentDeck.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${currentIdx + 1} / ${currentDeck.length}`;
+  document.getElementById('section-label').textContent = w.domain;
+  document.getElementById('nav-title').textContent = w.domain;
+
+  const card = document.getElementById('flashcard');
+  card.className = 'flashcard';
+
+  document.getElementById('fc-spanish').textContent = w.es;
+  document.getElementById('fc-hint').textContent = 'Type the English translation below';
+
+  const fb = document.getElementById('fc-feedback');
+  fb.style.display = 'none';
+  fb.className = 'fc-feedback';
+
+  const input = document.getElementById('translation-input');
+  input.value = '';
+  input.disabled = false;
+  input.placeholder = 'Type the English translation…';
+  input.className = 'translation-input';
+
+  const btn = document.getElementById('btn-submit');
+  btn.textContent = 'Check →';
+  btn.className = 'btn-submit';
+  btn.disabled = false;
+
+  const typeBadge = document.getElementById('fc-type');
+  typeBadge.textContent = w.type.charAt(0).toUpperCase() + w.type.slice(1);
+  typeBadge.className = 'fc-type-badge fc-type-' + w.type.split(' ')[0];
+
+  const lvlBadge = document.getElementById('fc-level');
+  lvlBadge.textContent = w.level;
+  lvlBadge.className = 'fc-level-badge fc-level-' + w.level.toLowerCase();
+
+  const indicator = document.getElementById('grading-indicator');
+  if (indicator) indicator.classList.remove('visible');
+
+  const tryBtn = document.getElementById('btn-try-again');
+  if (tryBtn) tryBtn.style.display = 'none';
+
+  setTimeout(() => input.focus(), 60);
+}
+
+// ── GRADING ──────────────────────────────────────
+function normalize(str) {
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9\s\/]/g, '')
+    .trim();
+}
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  const dp = [];
+  for (let i = 0; i <= m; i++) { dp[i] = new Array(n + 1).fill(0); dp[i][0] = i; }
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]);
+  return dp[m][n];
+}
+
+// Returns { verdict: 'know'|'unknown', spellingNote: string|null }
+function grade(userAnswer, correctAnswer) {
+  if (!userAnswer.trim()) return { verdict: 'unknown', spellingNote: null };
+  const userN = normalize(userAnswer);
+  const parts = correctAnswer.split('/').map(a => a.trim());
+  const accepted = parts.map(a => normalize(a));
+
+  for (const acc of accepted) {
+    if (userN === acc) return { verdict: 'know', spellingNote: null };
+  }
+
+  const userStripped = userN.replace(/^to /, '');
+  for (let i = 0; i < accepted.length; i++) {
+    const accStripped = accepted[i].replace(/^to /, '');
+    if (userStripped === accStripped) return { verdict: 'know', spellingNote: null };
+    if (userStripped.length >= 4 && accStripped.includes(userStripped)) return { verdict: 'know', spellingNote: null };
+    if (accStripped.length >= 4 && userStripped.includes(accStripped)) return { verdict: 'know', spellingNote: null };
+  }
+
+  // Spelling tolerance: right translation, small typo
+  for (let i = 0; i < accepted.length; i++) {
+    const accStripped = accepted[i].replace(/^to /, '');
+    const dist = levenshtein(userStripped, accStripped);
+    const maxLen = Math.max(userStripped.length, accStripped.length);
+    if (maxLen >= 3 && dist <= Math.max(1, Math.floor(maxLen / 5))) {
+      return { verdict: 'know', spellingNote: parts[i] };
+    }
+  }
+
+  return { verdict: 'unknown', spellingNote: null };
+}
+
+async function submitAnswer() {
+  if (waitingForNext) { advanceCard(); return; }
+  if (currentIdx >= currentDeck.length) return;
+
+  const w          = currentDeck[currentIdx];
+  const input      = document.getElementById('translation-input');
+  const userAnswer = input.value.trim();
+
+  // Blank → unknown immediately
+  if (!userAnswer) {
+    showFeedback(w, 'unknown', '', null, null);
+    return;
+  }
+
+  // If no API key → local grading only
+  if (!claudeApiKey) {
+    const { verdict, spellingNote } = grade(userAnswer, w.en);
+    showFeedback(w, verdict, userAnswer, null, spellingNote);
+    return;
+  }
+
+  // With API key → Claude grading
+  input.disabled = true;
+  document.getElementById('btn-submit').disabled = true;
+  document.getElementById('grading-indicator').classList.add('visible');
+
+  try {
+    const result = await gradeWithClaude(w, userAnswer);
+    document.getElementById('grading-indicator').classList.remove('visible');
+    showFeedback(w, result.verdict, userAnswer, result.explanation, result.spellingNote || null);
+  } catch(err) {
+    document.getElementById('grading-indicator').classList.remove('visible');
+    console.warn('Claude API error, using local grade:', err.message);
+    input.disabled = false;
+    document.getElementById('btn-submit').disabled = false;
+    const { verdict, spellingNote } = grade(userAnswer, w.en);
+    showFeedback(w, verdict, userAnswer, verdict === 'know' ? null : 'Local grade (API unavailable)', spellingNote);
+  }
+}
+
+async function gradeWithClaude(word, userAnswer) {
+  const systemPrompt = `You are grading a Spanish vocabulary translation exercise for a B1 learner.
+Be generous — accept synonyms, alternate translations, dropped "to" for verbs, and partial answers that show genuine understanding.
+IMPORTANT: If the student clearly knows the meaning but made a spelling mistake, set verdict to "know" and spellingNote to the correctly spelled word.
+Reject (verdict "unknown") only if the answer is clearly wrong or unrelated to the correct translation.
+Return ONLY valid JSON with no markdown: {"verdict": "know" or "unknown", "explanation": "one concise sentence", "spellingNote": "correctly spelled word if spelling error, otherwise null"}`;
+
+  const userPrompt = `Spanish word: "${word.es}" (${word.type}, ${word.level})
+Correct translation(s): "${word.en}"
+Student answered: "${userAnswer}"
+Example context: "${word.example}"
+
+Is the student's answer correct?`;
+
+  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': claudeApiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 120,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userPrompt }]
+    })
+  });
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    if (resp.status === 401) updateApiStatus('error');
+    throw new Error(`API ${resp.status}: ${err.error?.message || 'unknown'}`);
+  }
+
+  const data = await resp.json();
+  const raw  = (data.content?.[0]?.text || '{}').replace(/```json|```/g, '').trim();
+
+  let parsed;
+  try { parsed = JSON.parse(raw); }
+  catch(e) {
+    const { verdict } = grade(userAnswer, word.en);
+    return { verdict, explanation: null, spellingNote: null };
+  }
+
+  return {
+    verdict:     parsed.verdict === 'know' ? 'know' : 'unknown',
+    explanation: parsed.explanation || null,
+    spellingNote: parsed.spellingNote || null,
+  };
+}
+
+
+function showFeedback(w, verdict, userAnswer, explanation, spellingNote) {
+  results[w.es] = verdict;
+  saveResults();
+  waitingForNext = true;
+
+  const card   = document.getElementById('flashcard');
+  const fb     = document.getElementById('fc-feedback');
+  const input  = document.getElementById('translation-input');
+  const btn    = document.getElementById('btn-submit');
+  const tryBtn = document.getElementById('btn-try-again');
+
+  card.classList.add(verdict === 'know' ? 'correct' : 'wrong');
+  fb.style.display = 'block';
+  fb.className = 'fc-feedback ' + (verdict === 'know' ? 'correct' : 'wrong');
+
+  if (verdict === 'know') {
+    if (spellingNote) {
+      document.getElementById('fb-verdict').textContent = '✓ Correct! (check your spelling)';
+      document.getElementById('fb-correct').textContent = `Correct spelling: "${spellingNote}"`;
+    } else {
+      document.getElementById('fb-verdict').textContent = '✓ Correct!';
+      document.getElementById('fb-correct').textContent = w.en;
+    }
+  } else {
+    document.getElementById('fb-verdict').textContent =
+      userAnswer ? `✗  "${userAnswer}"` : '✗  No answer';
+    document.getElementById('fb-correct').textContent =
+      explanation || `Correct answer: "${w.en}"`;
+  }
+  document.getElementById('fb-example').textContent = w.example;
+  document.getElementById('fc-hint').textContent = verdict === 'know' ? 'Well done!' : 'Study this one.';
+
+  input.disabled = true;
+  btn.textContent = 'Next →';
+  btn.className = 'btn-submit next-btn';
+  btn.focus();
+
+  if (tryBtn) tryBtn.style.display = verdict === 'unknown' ? 'inline-flex' : 'none';
+}
+
+function advanceCard() {
+  currentIdx++;
+  renderCard();
+  setTimeout(() => {
+    const input = document.getElementById('translation-input');
+    if (input && !input.disabled) input.focus();
+  }, 80);
+}
+
+function tryAgain() {
+  const w = currentDeck[currentIdx];
+  delete results[w.es];
+  waitingForNext = false;
+
+  const card   = document.getElementById('flashcard');
+  const fb     = document.getElementById('fc-feedback');
+  const input  = document.getElementById('translation-input');
+  const btn    = document.getElementById('btn-submit');
+  const tryBtn = document.getElementById('btn-try-again');
+
+  card.className = 'flashcard';
+  fb.style.display = 'none';
+  fb.className = 'fc-feedback';
+  document.getElementById('fc-hint').textContent = 'Type the English translation below';
+
+  input.value = '';
+  input.disabled = false;
+  input.placeholder = 'Try again…';
+  input.focus();
+
+  btn.textContent = 'Check →';
+  btn.className = 'btn-submit';
+  btn.disabled = false;
+
+  if (tryBtn) tryBtn.style.display = 'none';
+}
+
+function goBack() {
+  if (currentIdx <= 0) { goHome(); return; }
+  currentIdx--;
+  waitingForNext = false;
+  renderCard();
+}
+
+
+function startStudyMode() {
+  studyDeck = shuffle(VOCAB.filter(w => results[w.es] === 'unknown'));
+  if (studyDeck.length === 0) { alert('No unknown words to study!'); return; }
+  studyIdx = 0;
+  studyFlipped = false;
+  showScreen('screen-study');
+  renderStudyCard();
+}
+
+function renderStudyCard() {
+  if (studyIdx >= studyDeck.length) {
+    saveResults();
+    showResults();
+    return;
+  }
+  const w = studyDeck[studyIdx];
+  studyFlipped = false;
+  document.getElementById('study-flashcard').classList.remove('flipped');
+
+  const pct = (studyIdx / studyDeck.length) * 100;
+  document.getElementById('study-progress-fill').style.width = pct + '%';
+  document.getElementById('study-progress-text').textContent = `${studyIdx + 1} / ${studyDeck.length}`;
+  document.getElementById('study-section-label').textContent = w.domain;
+
+  document.getElementById('sfc-spanish').textContent = w.es;
+  document.getElementById('sfc-english').textContent = w.en;
+  document.getElementById('sfc-example').textContent = w.example;
+
+  const tb = document.getElementById('sfc-type');
+  tb.textContent = w.type.charAt(0).toUpperCase() + w.type.slice(1);
+  tb.className = 'fc-type-badge fc-type-' + w.type;
+
+  const lb = document.getElementById('sfc-level');
+  lb.textContent = w.level;
+  lb.className = 'fc-level-badge fc-level-' + w.level.toLowerCase();
+}
+
+function flipStudyCard() {
+  studyFlipped = !studyFlipped;
+  document.getElementById('study-flashcard').classList.toggle('flipped', studyFlipped);
+}
+
+function studyAnswer(verdict) {
+  if (verdict === 'know') {
+    results[studyDeck[studyIdx].es] = 'know';
+    saveResults();
+  }
+  studyIdx++;
+  renderStudyCard();
+}
+
+// ══════════════════════════════════════════════════
+// RESULTS
+// ══════════════════════════════════════════════════
+function buildResults() {
+  const know    = VOCAB.filter(w => results[w.es] === 'know').length;
+  const unsure  = VOCAB.filter(w => results[w.es] === 'unsure').length;
+  const unknown = VOCAB.filter(w => results[w.es] === 'unknown').length;
+  const tested  = know + unsure + unknown;
+  const total   = VOCAB.length;
+
+  document.getElementById('results-subtitle').textContent =
+    tested === 0 ? "You haven't tested any words yet. Start the test above."
+    : `You've tested ${tested} of ${total} words. ${Math.round((know/Math.max(tested,1))*100)}% known.`;
+
+  document.getElementById('leg-know').textContent    = know;
+  document.getElementById('leg-unsure').textContent  = unsure;
+  document.getElementById('leg-unknown').textContent = unknown;
+
+  // Donut chart
+  const circ = 2 * Math.PI * 50;
+  if (tested > 0) {
+    const knowPct    = know    / tested;
+    const unsurePct  = unsure  / tested;
+    const unknownPct = unknown / tested;
+
+    const knowLen    = knowPct    * circ;
+    const unsureLen  = unsurePct  * circ;
+    const unknownLen = unknownPct * circ;
+
+    const knowOff    = circ - knowLen;
+    const unsureOff  = circ - unsureLen;
+    const unknownOff = circ - unknownLen;
+
+    const knowRotStart    = -90;
+    const unsureRotStart  = knowRotStart    + (knowPct    * 360);
+    const unknownRotStart = unsureRotStart  + (unsurePct  * 360);
+
+    setDonutSegment('donut-know',    knowLen,    knowOff,    knowRotStart);
+    setDonutSegment('donut-unsure',  unsureLen,  unsureOff,  unsureRotStart);
+    setDonutSegment('donut-unknown', unknownLen, unknownOff, unknownRotStart);
+
+    document.getElementById('donut-pct').textContent = Math.round(knowPct * 100) + '%';
+  }
+
+  // Level breakdown
+  const levels = ['A1','A2','B1'];
+  const levelColors = { A1:'#10B981', A2:'#6366F1', B1:'#EF4444' };
+  const grid = document.getElementById('breakdown-grid');
+  grid.innerHTML = levels.map(lvl => {
+    const words  = VOCAB.filter(w => w.level === lvl);
+    const kn     = words.filter(w => results[w.es] === 'know').length;
+    const pct    = words.length > 0 ? Math.round((kn / words.length) * 100) : 0;
+    return `<div class="breakdown-card">
+      <div class="bc-level" style="color:${levelColors[lvl]}">${lvl}</div>
+      <div class="bc-pct" style="color:${levelColors[lvl]}">${pct}%</div>
+      <div class="bc-label">${kn} / ${words.length} known</div>
+    </div>`;
+  }).join('');
+
+  // Section breakdown
+  const sections = [...new Set(VOCAB.map(w => w.domain))];
+  const secNames = {};
+  VOCAB.forEach(w => { secNames[w.domain] = w.domain; });
+
+  const secBreak = document.getElementById('section-breakdown');
+  secBreak.innerHTML = sections.map(sec => {
+    const words   = VOCAB.filter(w => w.domain === sec);
+    const kn      = words.filter(w => results[w.es] === 'know').length;
+    const un      = words.filter(w => results[w.es] === 'unsure').length;
+    const unk     = words.filter(w => results[w.es] === 'unknown').length;
+    const pct     = words.length > 0 ? (kn / words.length) * 100 : 0;
+    return `<div class="st-row">
+      <div>
+        <div class="st-name">${secNames[sec]}</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+          <div class="st-bar"><div class="st-bar-fill" style="width:${pct}%"></div></div>
+          <span style="font-size:11px;color:var(--soft);font-family:var(--mono)">${Math.round(pct)}%</span>
+        </div>
+      </div>
+      <span style="font-family:var(--roboto);font-weight:700;color:#10B981;font-size:13px">${kn}</span>
+      <span style="font-family:var(--roboto);font-weight:700;color:#F59E0B;font-size:13px">${un}</span>
+      <span style="font-family:var(--roboto);font-weight:700;color:#EF4444;font-size:13px">${unk}</span>
+    </div>`;
+  }).join('');
+
+  // Unknown word list
+  const unknowns = VOCAB.filter(w => results[w.es] === 'unknown' || results[w.es] === 'unsure');
+  document.getElementById('unknown-count-label').textContent = `${unknowns.length} word${unknowns.length !== 1 ? 's' : ''}`;
+
+  const typeColors = {
+    verb:  { bg:'rgba(99,102,241,.1)',  c:'var(--indigo)' },
+    noun:  { bg:'rgba(16,185,129,.1)', c:'#065F46' },
+    adj:   { bg:'rgba(245,158,11,.1)', c:'#92400E' },
+    phrase:{ bg:'rgba(239,68,68,.1)',  c:'#991B1B' },
+  };
+
+  document.getElementById('unknown-list-items').innerHTML = unknowns.map(w => {
+    const tc = typeColors[w.type] || typeColors.phrase;
+    const verdict = results[w.es] === 'unknown' ? '✗' : '?';
+    const verdictColor = results[w.es] === 'unknown' ? 'var(--red)' : 'var(--amber)';
+    return `<div class="ul-item">
+      <span style="font-size:14px;font-weight:700;color:${verdictColor};font-family:var(--mono);min-width:16px">${verdict}</span>
+      <span class="ul-spanish">${w.es}</span>
+      <span class="ul-english">${w.en}</span>
+      <span class="ul-type-badge" style="background:${tc.bg};color:${tc.c}">${w.type}</span>
+      <span class="ul-section-badge">${w.domain}</span>
+    </div>`;
+  }).join('') || '<div style="padding:16px 18px;color:var(--soft);font-style:italic;font-size:13px">No unknown words — great job!</div>';
+
+  // Study button
+  document.getElementById('btn-study-unknown').style.display =
+    unknowns.filter(w => results[w.es] === 'unknown').length > 0 ? 'inline-flex' : 'none';
+}
+
+function setDonutSegment(id, len, off, rotDeg) {
+  const el = document.getElementById(id);
+  el.setAttribute('stroke-dasharray', `${len} ${314 - len}`);
+  el.setAttribute('stroke-dashoffset', `${off}`);
+  el.setAttribute('transform', `rotate(${rotDeg} 65 65)`);
+}
+
+// ══════════════════════════════════════════════════
+// KEYBOARD
+// ══════════════════════════════════════════════════
+function handleKey(e) {
+  const activeScreen = document.querySelector('.screen.active')?.id;
+  if (activeScreen === 'screen-card') {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submitAnswer();
+    }
+  }
+  if (activeScreen === 'screen-study') {
+    if (e.key === ' ') { e.preventDefault(); flipStudyCard(); }
+    if (e.key === '1') studyAnswer('know');
+    if (e.key === '2') studyAnswer('still-unknown');
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!studyFlipped) { flipStudyCard(); } else { studyAnswer('know'); }
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+init();
+</script>
+</body>
+</html>
