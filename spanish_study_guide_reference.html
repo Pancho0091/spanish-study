@@ -1928,6 +1928,36 @@ body {
 .heat-word.hot  { background: #FFF1F2; color: var(--red);   border: 1px solid #FCA5A5; font-size: 14px; }
 .heat-word.warm { background: #FFFBEB; color: #D97706;      border: 1px solid #FCD34D; font-size: 12px; }
 .heat-word.cool { background: var(--bg-subtle); color: var(--text-mid); border: 1px solid var(--line); font-size: 11px; }
+
+/* ── PLAIN ENGLISH CALLOUT ── */
+.plain-en {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+.plain-en-icon { font-size: 20px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+.plain-en-inner { flex: 1; }
+.plain-en-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 5px;
+}
+.plain-en-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.plain-en-text strong { font-weight: 700; color: var(--text); }
+.plain-en-text em     { color: var(--text-mid); font-style: italic; }
 </style>
 </head>
 <body>
@@ -2079,6 +2109,14 @@ body {
       <div class="section-en">The Present Indicative</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">Your <strong>default tense</strong> for stating facts, describing habits, and expressing who you are. In English: "I work", "she eats", "we live". In Mexican Spanish it also covers <strong>confirmed future plans</strong> — "Tomorrow I fly to Minneapolis" → <em>Mañana vuelo a Minneapolis</em> (present tense, not future). If you're not sure which tense to use, this one is usually correct.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">The tense of <strong>objective reality</strong>. States facts, habits, and current actions. The anchor of the entire language.</div>
@@ -2199,6 +2237,14 @@ body {
       <div class="section-num">02</div>
       <h2 class="section-title"><em>Ser</em> vs. <em>Estar</em> <span class="level-badge a1">A1 → B1</span></h2>
       <div class="section-en">Both mean "to be" — completely different functions</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">English has one verb — "to be" — for everything. Spanish splits it into two. <strong>Ser</strong> is for identity and permanent reality: <em>I am a data analyst · she is from Guadalajara · today is Thursday.</em> <strong>Estar</strong> is for current state: <em>I am tired · the report is ready · he is in a meeting right now.</em> The same adjective changes meaning depending on which you use — <em>es listo</em> = he's clever; <em>está listo</em> = he's ready right now. This distinction doesn't exist in English, which is why it trips everyone up at first.</div>
+      </div>
     </div>
 
     <div class="concept">
@@ -2410,6 +2456,14 @@ body {
       <div class="section-num">03</div>
       <h2 class="section-title">Acentos · <em>SEGA</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Accent Marks & Syllable Stress — The SEGA System</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">Every Spanish word has one stressed syllable when spoken. The accent mark (tilde — the little dash over a vowel like <strong>é, á, ó</strong>) is not a decoration. It appears on a word <strong>only when the spelling would mislead you</strong> about which syllable to stress. If the word stresses the syllable you'd naturally expect based on its ending, there's no mark. If it doesn't, the mark appears exactly on the stressed syllable to correct your prediction. Once you understand the 2-rule prediction system, every single tilde in the language makes sense.</div>
+      </div>
     </div>
 
     <div class="concept">
@@ -2837,6 +2891,14 @@ body {
       <div class="section-en">Accent Marks as Tense Signals — The Most Important Orthographic Rule</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">One accent mark can flip a verb's entire meaning. <strong>habla</strong> = he speaks (right now, present tense). <strong>habló</strong> = he spoke (past tense, done). The only difference is one tilde on the final vowel. Miss it in writing and you've stated the wrong tense and the wrong person simultaneously. This matters especially in Mexican Spanish, which uses the completed past constantly — almost every sentence about something that happened requires one of these accent marks.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">A single accent mark on the final vowel of a verb is not a spelling detail — it is a <strong>tense switch</strong>. Removing or adding one accent mark changes the person, the tense, and sometimes the mood of a verb entirely. This is the most consequential orthographic rule in Spanish.</div>
@@ -2989,6 +3051,14 @@ body {
       <div class="section-en">Impersonal Haber — There is / There are</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">"There is" and "there are" in English. The key: Spanish uses <strong>only one form regardless of quantity</strong> — <em>hay un problema</em> (there is one problem) and <em>hay tres problemas</em> (there are three problems) both use <em>hay</em>. Then: <strong>había</strong> = there was/were (imperfect past), <strong>hubo</strong> = there was/were (completed past event), <strong>habrá</strong> = there will be. These three forms cover the vast majority of situations you'll encounter.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">Impersonal HABER announces the <strong>existence</strong> of something. It is always singular regardless of what follows — no agreement with the noun. One of the most-used structures in all of Spanish.</div>
@@ -3126,6 +3196,14 @@ body {
       <div class="section-en">The Present Continuous</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The "-ing" tense — but <strong>only for right-now, active actions</strong>. "I am eating" = <em>estoy comiendo</em>. Important: Spanish uses this much more narrowly than English. You don't use it for jobs ("I am working at Adobe" → wrong; use present simple), habits, or plans. Only for something actively unfolding at this exact moment. Formed with <strong>estar + gerund</strong> (-ando/-iendo).</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">The <strong>magnifying glass</strong>. Only use it when you want to hyper-focus on an action happening at this exact, literal millisecond — not for general habits or routines.</div>
@@ -3223,6 +3301,14 @@ body {
       <div class="section-en">The Near Future — "Going to"</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">"Going to" — exactly like English. <strong>ir + a + infinitive</strong>: <em>voy a comer</em> = I'm going to eat. This is actually the most natural way to express future plans in Mexican Spanish — more common in speech than the actual "will" future tense. If you want to say something is going to happen, use this. Simple, reliable, sounds fluent immediately.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">The <strong>engine of intent</strong>. IR + a + infinitive. Represents an intention already formed or an event about to happen. Implies physical movement toward the goal.</div>
@@ -3315,6 +3401,14 @@ body {
       <div class="section-num">07</div>
       <h2 class="section-title">Pretérito <em>Indefinido</em> <span class="level-badge a2">A2</span></h2>
       <div class="section-en">The Simple Past — Preterite</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The <strong>completed past</strong>. Something happened, it's done, the door has slammed shut. "I ate", "she called", "we arrived", "the meeting ended". This is the main past tense in Mexican Spanish — nearly every story about something that happened uses this tense. The mental model: <em>think of each action as a dot on a timeline, not a line. Dot = Indefinido.</em> The tricky part: -AR verbs require accent marks on the yo and él/ella forms (<em>hablé, habló</em>) or you accidentally write present tense.</div>
+      </div>
     </div>
 
     <div class="concept">
@@ -3442,6 +3536,14 @@ body {
       <div class="section-en">The Imperfect Past</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The <strong>background past</strong>. Used for three things: (1) what <em>used to</em> happen repeatedly (<em>every Friday we would meet</em>), (2) what <em>was happening</em> when something else occurred (<em>I was eating when she called</em>), and (3) describing a past scene or state (<em>it was dark, there were people everywhere</em>). Think of it as a <em>line</em> on the timeline — an ongoing stretch — whereas the Indefinido is a dot. You use both together constantly: the Imperfecto paints the scene, the Indefinido fires the action.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">The <strong>background video loop</strong>. Views the action from the inside — ongoing, continuous, habitual — with no reference to its beginning or end. It sets the stage; it never moves the plot forward.</div>
@@ -3550,6 +3652,14 @@ body {
       <div class="section-en">The Affirmative Imperative — Commands</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">How to give a direct command: "Eat this", "Come here", "Send it to me". The tú (informal) command uses the él/ella present-tense form — so <em>habla, come, escribe</em>. Usted (formal) commands use the subjunctive. The key quirk: <strong>when you attach pronouns, they glue onto the END of the verb</strong> — <em>mándamelo</em> (send it to me), not "me lo manda". Add enough pronouns and you'll need an accent mark to keep the original stress in place.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">Telling someone to <strong>do</strong> something. The informal tú command uses the 3rd-person present indicative form. Formal commands (usted) borrow from the subjunctive.</div>
@@ -3643,6 +3753,14 @@ body {
       <div class="section-num">10</div>
       <h2 class="section-title"><em>Pronombres</em> <span class="level-badge a2">A2</span></h2>
       <div class="section-en">Direct, Indirect & Reflexive Pronouns</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">Spanish has three pronoun types based on a word's <strong>role in the sentence</strong>. <strong>Direct object</strong> = who/what directly receives the action (<em>lo, la</em> — "it/him/her"). <strong>Indirect object</strong> = who receives it on behalf of (<em>me, te, le</em> — "to me/you/him"). <strong>Reflexive</strong> = subject acts on itself (<em>me lavo</em> — I wash myself). Two rules that matter immediately: (1) when both IO and DO appear, IO always goes first; (2) both pronouns float <em>before</em> conjugated verbs, but attach to the <em>end</em> of infinitives and affirmative commands — flipping position completely.</div>
+      </div>
     </div>
 
     <div class="concept">
@@ -3822,6 +3940,14 @@ body {
       <div class="section-en">Gustar-type Verbs — Reverse-subject verbs</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text"><em>Gustar</em> and verbs like it work <strong>backwards from English</strong>. In English: "I like coffee." In Spanish, it literally says: "Coffee is pleasing to me" → <em>Me gusta el café.</em> The coffee is the subject; you are the indirect object. The verb agrees with what's liked, not with you. So: <em>me gusta</em> (one thing) vs. <em>me gustan</em> (multiple things). This pattern applies to a whole family: <em>encantar</em> (to love), <em>molestar</em> (to bother), <em>parecer</em> (to seem), <em>interesar</em> (to interest), <em>doler</em> (to hurt).</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">These verbs work <strong>backwards</strong> from English. In "I like coffee," the subject is I. In Spanish "me gusta el café," the subject is <em>el café</em> — the thing doing the pleasing. The person is the indirect object receiver, not the subject.</div>
@@ -3999,6 +4125,14 @@ body {
       <div class="section-en">Both can mean "for" — completely different directions</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">Both translate as "for" in English, but they point in <strong>opposite directions</strong>. <strong>Por</strong> looks backward — it's about cause, reason, exchange, movement through, duration: <em>Gracias por el café · Lo hice por ti · Caminé por el parque · Trabajé por dos horas.</em> <strong>Para</strong> looks forward — it's about purpose, destination, recipient, deadline: <em>Salgo para Guadalajara · Esto es para ti · Necesito el reporte para el viernes.</em> The shortcut: Por = because of / through / in exchange. Para = in order to / headed toward / due by.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body"><strong>POR</strong> = backward-looking. The engine behind — cause, motivation, exchange, movement through space.<br><strong>PARA</strong> = forward-looking (teleological). The target ahead — destination, deadline, recipient, purpose.</div>
@@ -4086,6 +4220,14 @@ body {
       <div class="section-en">When to use infinitive vs. when to trigger subjunctive</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">When two verbs connect in a sentence, Spanish chooses between two structures. <strong>Same subject</strong> (I want to eat) → use the infinitive directly: <em>Quiero comer.</em> <strong>Different subjects</strong> (I want you to eat) → use <em>que</em> + subjunctive: <em>Quiero que comas.</em> This is the gateway to the subjunctive. The rule is dead simple once you see it: one person = infinitive, two people = que + subjunctive. The challenge is recognizing which verbs trigger the subjunctive (want, need, hope, prefer, order, recommend).</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body"><strong>One subject = infinitive.</strong> Two subjects = subjunctive with <em>que</em>. This single rule governs hundreds of sentences. If the same person wants something and does it — infinitive. If one person wants another person to do it — que + subjunctive.</div>
@@ -4171,6 +4313,14 @@ body {
       <div class="section-num">14</div>
       <h2 class="section-title">Comparativos y <em>Superlativos</em> <span class="level-badge a2b1">A2 → B1</span></h2>
       <div class="section-en">Comparatives & Superlatives</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">"More than", "less than", "as…as", "the most". Structurally similar to English and fairly easy. The pattern: <strong>más/menos + adjective + que</strong> for comparisons; <strong>el/la más + adjective</strong> for superlatives. The only real traps are the four irregular forms you'll use constantly: <em>mejor</em> (better/best), <em>peor</em> (worse/worst), <em>mayor</em> (older/greatest), <em>menor</em> (younger/least). These four replace "más bueno", "más malo", "más grande" in most contexts.</div>
+      </div>
     </div>
 
     <div class="concept">
@@ -4273,6 +4423,14 @@ body {
       <div class="section-en">The Past Perfect — Pluperfect</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The "had done" tense — for actions that were <strong>already finished before another past event</strong>. "When I arrived, she had already left." Two past events: the one that happened earlier uses this tense. Formed with <strong>había/habías/había… + past participle</strong>. The participle never changes form. The most common use: setting up background that explains why a past situation was already a certain way when the main story begins.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">The <strong>deep background</strong>. "The past of the past." Its entire purpose is to establish that something had already happened before another past event. A relative tense — it cannot stand alone.</div>
@@ -4367,6 +4525,14 @@ body {
       <div class="section-num">16</div>
       <h2 class="section-title">Futuro <em>Simple</em> <span class="level-badge b1">B1</span></h2>
       <div class="section-en">The Simple Future — "Will"</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The "will" future — but in Mexican Spanish it's <strong>not used for plans</strong>. Plans and intentions use the near future (<em>voy a comer</em>) or even the present tense. The Simple Future is used for: (1) genuine uncertainty and speculation — <em>¿Dónde estará?</em> (I wonder where he is), (2) formal/written declarations, and (3) the second half of conditional sentences. Formed by adding endings directly to the full infinitive: <em>hablar → hablaré, hablarás, hablará…</em></div>
+      </div>
     </div>
 
     <div class="concept">
@@ -4467,6 +4633,14 @@ body {
       <div class="section-en">The Simple Conditional — "Would"</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The "would" tense — for hypotheticals, polite requests, and "if…then" consequences. <em>Si tuviera tiempo, viajaría más</em> (If I had time, I would travel more). Also used for softening requests: <em>¿Podría ayudarme?</em> (Could you help me?) sounds much more polite than <em>¿Puede ayudarme?</em>. Uses the same stems as the Future tense + endings that look like Imperfecto (-ía, -ías, -ía, -íamos, -ían). <strong>Critical:</strong> every single form has an accent on the í — missing them is an instant error.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">The <strong>anatomy of "would"</strong>. Creates a hypothetical scenario — an action that depends on a condition being met. Also the ultimate shield of politeness in daily Mexican speech.</div>
@@ -4563,6 +4737,14 @@ body {
       <div class="section-en">The Negative Imperative</div>
     </div>
 
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">"Don't do this." Negative commands are <strong>structurally the opposite</strong> of affirmative commands in two ways. First, they use the subjunctive form instead of the present tense: <em>no hables, no comas, no escribas</em>. Second, pronouns go <em>before</em> the verb (not attached after): <em>no me lo envíes</em> (don't send it to me). If you get these two things right — subjunctive form, pronouns in front — negative commands are locked.</div>
+      </div>
+    </div>
+
     <div class="concept">
       <div class="concept-label">Conceptual anchor</div>
       <div class="concept-body">Completely structurally divorced from the affirmative. The moment a command becomes negative, Spanish forces a shift to the <strong>subjunctive mood</strong> — because telling someone NOT to do something is discussing a hypothetical, non-existent action.</div>
@@ -4655,6 +4837,14 @@ body {
       <div class="section-num">19</div>
       <h2 class="section-title">Presente de <em>Subjuntivo</em> <span class="level-badge b1">B1</span></h2>
       <div class="section-en">The Present Subjunctive</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">Not a tense — a <strong>mood</strong>. The Indicative mood states facts. The Subjunctive mood appears when the main clause expresses something unreal, uncertain, emotional, or desired. It almost always appears in a subordinate clause after <em>que</em>: <em>Quiero que vengas</em> (I want you to come — "come" is in subjunctive because your coming is a desire, not a fact). The trigger verbs are: want, need, hope, prefer, recommend, doubt, be happy that, be necessary that. If the main verb is one of those, the second verb (different subject) goes subjunctive. It's the hardest concept in Spanish — but the logic is consistent.</div>
+      </div>
     </div>
 
     <div class="concept">
@@ -4755,6 +4945,14 @@ body {
       <div class="section-num">20</div>
       <h2 class="section-title">Conectores del <em>Discurso</em> <span class="level-badge b1">B1</span></h2>
       <div class="section-en">Discourse Connectors — The glue of B1 writing and speaking</div>
+    </div>
+
+    <div class="plain-en">
+      <div class="plain-en-icon">💬</div>
+      <div class="plain-en-inner">
+        <div class="plain-en-label">In plain English</div>
+        <div class="plain-en-text">The words that link sentences and paragraphs — "however", "therefore", "in addition", "although", "as a result". In English you use these automatically. In Spanish, using them correctly is what separates B1-level output from a series of disconnected sentences. The most important ones to lock immediately: <em>sin embargo</em> (however), <em>además</em> (in addition), <em>aunque</em> (although/even though), <em>por lo tanto</em> (therefore), <em>es decir</em> (that is to say). Master these six and your written Spanish immediately sounds like a fluent speaker.</div>
+      </div>
     </div>
 
     <div class="concept">
