@@ -221,7 +221,7 @@ body {
   flex: 1;
   min-width: 0;
   padding: 56px 52px 120px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ── PAGE HEADER ── */
@@ -3270,7 +3270,7 @@ body {
       <div class="rule-label">The SEGA names — just labels for stress position</div>
       <div class="rule-body">
         SEGA = <strong>S</strong>obreesdrújula · <strong>E</strong>sdrújula · <strong>G</strong>rave · <strong>A</strong>guda. These are just category names, counted from the right:<br><br>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px;min-width:0;overflow-x:auto">
           <div style="background:var(--bg-subtle);border-radius:8px;padding:10px 12px;border-top:3px solid var(--red)">
             <div style="font-family:var(--display);font-size:20px;font-weight:700;font-style:italic;color:var(--indigo);margin-bottom:3px">S</div>
             <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--red);margin-bottom:4px">SOBREESDRÚJULA</div>
@@ -5339,6 +5339,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
+// Prevent browser scroll restoration on refresh
+if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
+window.addEventListener('load', function() { window.scrollTo(0, 0); });
+
 // Sidebar active link on scroll
 const sections = document.querySelectorAll('.section[id^="n"]');
 const navLinks = document.querySelectorAll('.nav-link');
