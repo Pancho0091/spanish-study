@@ -108,14 +108,7 @@ body {
   flex: 1;
 }
 
-.nav-group-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  padding: 12px 24px 6px;
-}
+/* nav-group-label moved to collapsible CSS */
 
 .nav-link {
   display: flex;
@@ -2338,6 +2331,47 @@ body {
   max-width: 100%;
 }
 .tbl-wrap table { min-width: 560px; }
+
+/* ── Collapsible nav groups ── */
+.nav-group { }
+
+.nav-group-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 14px 20px 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: color .15s;
+}
+.nav-group-label:hover { opacity: .8; }
+
+.ng-title { flex: 1; }
+
+.ng-chevron {
+  font-size: 11px;
+  line-height: 1;
+  transition: transform .2s ease;
+  margin-left: 6px;
+  color: var(--text-soft);
+}
+.nav-group.collapsed .ng-chevron {
+  transform: rotate(-90deg);
+}
+
+.ng-items {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height .28s ease;
+}
+.nav-group.collapsed .ng-items {
+  max-height: 0;
+}
+
 </style>
 </head>
 <body>
@@ -2361,48 +2395,76 @@ body {
   
   </div>
   <nav class="sidebar-nav" id="sb-nav-ref">
-    <div class="nav-group-label" style="color:#065F46">● Nivel A1</div>
-    <a class="nav-link" href="#n4b"><span class="nav-num">01</span>Género y Número <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n4c"><span class="nav-num">02</span>Artículos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n1"><span class="nav-num">03</span>Presente Indicativo <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n2"><span class="nav-num">04</span>Ser vs. Estar <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n4"><span class="nav-num">05</span>Hay · Había · Habrá <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n4d"><span class="nav-num">06</span>Interrogativas <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n4e"><span class="nav-num">07</span>Negación Básica <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-link" href="#n3"><span class="nav-num">08</span>Acentos · SEGA <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-    <a class="nav-drill-link vocab" href="#fc-vocab-a1">📋 Vocab Review</a>
-    <a class="nav-drill-link conj"  href="#fc-a1">⚡ Conjugation Drill</a>
-    <div class="nav-group-label" style="color:#3730A3">● Nivel A2</div>
-    <a class="nav-link" href="#n5"><span class="nav-num">09</span>Presente Continuo <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n6"><span class="nav-num">10</span>Futuro Próximo <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n7"><span class="nav-num">11</span>Pretérito Indefinido <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n8"><span class="nav-num">12</span>Pretérito Imperfecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n11b"><span class="nav-num">13</span>Verbos Reflexivos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n10"><span class="nav-num">14</span>Pronombres OD/OI <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n11"><span class="nav-num">15</span>Verbos tipo Gustar <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n11c"><span class="nav-num">16</span>Demostrativos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n11d"><span class="nav-num">17</span>Posesivos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n11e"><span class="nav-num">18</span>Oraciones con que <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n9"><span class="nav-num">19</span>Imperativo <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <div class="nav-group-label" style="color:#6B21A8">● A2 → B1 Bridge</div>
-    <a class="nav-link" href="#n12"><span class="nav-num">20</span>Por vs. Para <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n14"><span class="nav-num">21</span>Comparativos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-link" href="#n13"><span class="nav-num">22</span>Infinitivo vs. Que <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-    <a class="nav-drill-link vocab" href="#fc-vocab-a2">📋 Vocab Review</a>
-    <a class="nav-drill-link conj"  href="#fc-a2">⚡ Conjugation Drill</a>
-    <div class="nav-group-label" style="color:#991B1B">● Nivel B1</div>
-    <a class="nav-link" href="#n16"><span class="nav-num">23</span>Futuro Simple <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n17"><span class="nav-num">24</span>Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n24"><span class="nav-num">25</span>Si Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n19"><span class="nav-num">26</span>Presente Subjuntivo <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n15"><span class="nav-num">27</span>Pluscuamperfecto <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n21"><span class="nav-num">28</span>Voz Pasiva <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n23"><span class="nav-num">29</span>Pronombres Relativos <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n22"><span class="nav-num">30</span>Estilo Indirecto <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n26"><span class="nav-num">31</span>Pronombres Indefinidos <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-link" href="#n20"><span class="nav-num">32</span>Conectores <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-    <a class="nav-drill-link vocab" href="#fc-vocab-b1">📋 Vocab Review</a>
-    <a class="nav-drill-link conj"  href="#fc-b1">⚡ Conjugation Drill</a>
+    <div class="nav-group" data-group="a1">
+      <div class="nav-group-label" style="color:#065F46" onclick="toggleNavGroup('a1')">
+        <span class="ng-title">● Nivel A1</span>
+        <span class="ng-chevron">▾</span>
+      </div>
+      <div class="ng-items">
+      <a class="nav-link" href="#n4b"><span class="nav-num">01</span>Género y Número <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4c"><span class="nav-num">02</span>Artículos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n1"><span class="nav-num">03</span>Presente Indicativo <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n2"><span class="nav-num">04</span>Ser vs. Estar <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4"><span class="nav-num">05</span>Hay · Había · Habrá <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4d"><span class="nav-num">06</span>Interrogativas <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4e"><span class="nav-num">07</span>Negación Básica <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n3"><span class="nav-num">08</span>Acentos · SEGA <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-drill-link vocab" href="#fc-vocab-a1">📋 Vocab Review</a>
+      <a class="nav-drill-link conj"  href="#fc-a1">⚡ Conjugation Drill</a>
+      </div>
+    </div>
+    <div class="nav-group collapsed" data-group="a2">
+      <div class="nav-group-label" style="color:#3730A3" onclick="toggleNavGroup('a2')">
+        <span class="ng-title">● Nivel A2</span>
+        <span class="ng-chevron">▾</span>
+      </div>
+      <div class="ng-items">
+      <a class="nav-link" href="#n5"><span class="nav-num">09</span>Presente Continuo <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n6"><span class="nav-num">10</span>Futuro Próximo <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n7"><span class="nav-num">11</span>Pretérito Indefinido <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n8"><span class="nav-num">12</span>Pretérito Imperfecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n11b"><span class="nav-num">13</span>Verbos Reflexivos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n10"><span class="nav-num">14</span>Pronombres OD/OI <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n11"><span class="nav-num">15</span>Verbos tipo Gustar <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n11c"><span class="nav-num">16</span>Demostrativos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n11d"><span class="nav-num">17</span>Posesivos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n11e"><span class="nav-num">18</span>Oraciones con que <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n9"><span class="nav-num">19</span>Imperativo <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-drill-link vocab" href="#fc-vocab-a2">📋 Vocab Review</a>
+      <a class="nav-drill-link conj"  href="#fc-a2">⚡ Conjugation Drill</a>
+      </div>
+    </div>
+    <div class="nav-group collapsed" data-group="bridge">
+      <div class="nav-group-label" style="color:#6B21A8" onclick="toggleNavGroup('bridge')">
+        <span class="ng-title">● A2 → B1 Bridge</span>
+        <span class="ng-chevron">▾</span>
+      </div>
+      <div class="ng-items">
+      <a class="nav-link" href="#n12"><span class="nav-num">20</span>Por vs. Para <span class="level-badge bridge" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n14"><span class="nav-num">21</span>Comparativos <span class="level-badge bridge" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n13"><span class="nav-num">22</span>Infinitivo vs. Que <span class="level-badge bridge" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      </div>
+    </div>
+    <div class="nav-group collapsed" data-group="b1">
+      <div class="nav-group-label" style="color:#991B1B" onclick="toggleNavGroup('b1')">
+        <span class="ng-title">● Nivel B1</span>
+        <span class="ng-chevron">▾</span>
+      </div>
+      <div class="ng-items">
+      <a class="nav-link" href="#n16"><span class="nav-num">23</span>Futuro Simple <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n17"><span class="nav-num">24</span>Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n24"><span class="nav-num">25</span>Si Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n19"><span class="nav-num">26</span>Presente Subjuntivo <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n15"><span class="nav-num">27</span>Pluscuamperfecto <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n21"><span class="nav-num">28</span>Voz Pasiva <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n23"><span class="nav-num">29</span>Pronombres Relativos <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n22"><span class="nav-num">30</span>Estilo Indirecto <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n26"><span class="nav-num">31</span>Pronombres Indefinidos <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n20"><span class="nav-num">32</span>Conectores <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-drill-link vocab" href="#fc-vocab-b1">📋 Vocab Review</a>
+      <a class="nav-drill-link conj"  href="#fc-b1">⚡ Conjugation Drill</a>
+      </div>
+    </div>
   </nav>
 </aside>
 
@@ -5371,6 +5433,7 @@ const observer = new IntersectionObserver((entries) => {
       const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
       if (active) {
         active.classList.add('active');
+        expandGroupForSection(entry.target.id);
         // Only scroll sidebar after user has manually scrolled (prevents jump-to-bottom on load)
         if (_navScrollReady) {
           active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
@@ -5381,6 +5444,44 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-20% 0px -70% 0px' });
 
 sections.forEach(s => observer.observe(s));
+
+// ── Collapsible sidebar nav ──────────────────────────────────────────────
+const _SEC_TO_GROUP = {"n4b": "a1", "n4c": "a1", "n1": "a1", "n2": "a1", "n4": "a1", "n4d": "a1", "n4e": "a1", "n3": "a1", "n5": "a2", "n6": "a2", "n7": "a2", "n8": "a2", "n11b": "a2", "n10": "a2", "n11": "a2", "n11c": "a2", "n11d": "a2", "n11e": "a2", "n9": "a2", "n12": "bridge", "n14": "bridge", "n13": "bridge", "n16": "b1", "n17": "b1", "n24": "b1", "n19": "b1", "n15": "b1", "n21": "b1", "n23": "b1", "n22": "b1", "n26": "b1", "n20": "b1"};
+
+function toggleNavGroup(groupId) {
+  const group = document.querySelector('.nav-group[data-group="' + groupId + '"]');
+  if (!group) return;
+  group.classList.toggle('collapsed');
+  const state = JSON.parse(localStorage.getItem('navGroupState') || '{}');
+  state[groupId] = group.classList.contains('collapsed') ? 0 : 1;
+  localStorage.setItem('navGroupState', JSON.stringify(state));
+}
+
+function expandGroupForSection(sectionId) {
+  const groupId = _SEC_TO_GROUP[sectionId];
+  if (!groupId) return;
+  const group = document.querySelector('.nav-group[data-group="' + groupId + '"]');
+  if (group && group.classList.contains('collapsed')) {
+    group.classList.remove('collapsed');
+    const state = JSON.parse(localStorage.getItem('navGroupState') || '{}');
+    state[groupId] = 1;
+    localStorage.setItem('navGroupState', JSON.stringify(state));
+  }
+}
+
+// Restore saved states; default: a1 open, rest collapsed
+(function() {
+  const state = JSON.parse(localStorage.getItem('navGroupState') || '{}');
+  ['a1','a2','bridge','b1'].forEach(function(g) {
+    const group = document.querySelector('.nav-group[data-group="' + g + '"]');
+    if (!group) return;
+    if (g in state) {
+      if (state[g] === 0) group.classList.add('collapsed');
+      else group.classList.remove('collapsed');
+    }
+  });
+})();
+
 </script>
 
 <script>
