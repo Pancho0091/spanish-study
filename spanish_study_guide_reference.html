@@ -54,6 +54,7 @@ body {
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ── LAYOUT ── */
@@ -221,7 +222,6 @@ body {
   flex: 1;
   min-width: 0;
   padding: 56px 52px 120px;
-  overflow-x: clip;
 }
 
 /* ── PAGE HEADER ── */
@@ -2329,6 +2329,15 @@ body {
 }
 .sidebar-brand { position: relative; }
 
+
+/* ── Wide-table scroll wrapper ── */
+.tbl-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 16px;
+  max-width: 100%;
+}
+.tbl-wrap table { min-width: 560px; }
 </style>
 </head>
 <body>
@@ -3089,7 +3098,7 @@ body {
       <div class="rule-label">The reader's prediction — built from the word's last letter</div>
       <div class="rule-body">
         Every Spanish word ends in either a vowel/N/S or something else. That ending generates a prediction:<br><br>
-        <table style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px">
+        <div class="tbl-wrap"><table style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px">
           <thead>
             <tr style="background:var(--bg-subtle)">
               <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Word ends in…</th>
@@ -3109,7 +3118,7 @@ body {
               <td style="padding:10px 14px;border:1px solid var(--line);font-family:var(--mono);color:var(--text-mid)">ha-<strong>BLAR</strong> · ciu-<strong>DAD</strong> · es-pa-<strong>ÑOL</strong></td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
         <br>
         These two predictions are correct for <strong>75–80% of all Spanish words</strong>. That's why most words have no tilde — the reader's automatic prediction just works.
       </div>
@@ -3147,59 +3156,61 @@ body {
     <div class="rule">
       <div class="rule-label">The complete mismatch matrix — all 4 combinations</div>
       <div class="rule-body">
-        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:2px">
+        <div class="tbl-wrap">
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:2px">
           <thead>
             <tr style="background:var(--bg-subtle)">
-              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Ending type</th>
-              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Predicted stress</th>
-              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Actual stress</th>
-              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Match?</th>
-              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Tilde?</th>
-              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Example</th>
+              <th style="padding:6px 9px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Ending type</th>
+              <th style="padding:6px 9px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Predicted stress</th>
+              <th style="padding:6px 9px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Actual stress</th>
+              <th style="padding:6px 9px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Match?</th>
+              <th style="padding:6px 9px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Tilde?</th>
+              <th style="padding:6px 9px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Example</th>
             </tr>
           </thead>
           <tbody>
             <tr style="background:rgba(16,185,129,.04)">
-              <td style="padding:9px 14px;border:1px solid var(--line)">Vowel / N / S</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">2nd-to-last</td>
-              <td style="padding:9px 14px;border:1px solid var(--line)">2nd-to-last</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✓ Match</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">No tilde</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">casa, hablan, datos</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">Vowel / N / S</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--indigo)">2nd-to-last</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">2nd-to-last</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✓ Match</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--emerald);font-weight:700">No tilde</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">casa, hablan, datos</td>
             </tr>
             <tr style="background:rgba(239,68,68,.04)">
-              <td style="padding:9px 14px;border:1px solid var(--line)">Vowel / N / S</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">2nd-to-last</td>
-              <td style="padding:9px 14px;border:1px solid var(--line)">Last syllable</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Mismatch</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">café, japonés, habló</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">Vowel / N / S</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--indigo)">2nd-to-last</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">Last syllable</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Mismatch</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">café, japonés, habló</td>
             </tr>
             <tr style="background:rgba(16,185,129,.04)">
-              <td style="padding:9px 14px;border:1px solid var(--line)">Other consonant</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">Last syllable</td>
-              <td style="padding:9px 14px;border:1px solid var(--line)">Last syllable</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✓ Match</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">No tilde</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">hablar, ciudad, español</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">Other consonant</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--indigo)">Last syllable</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">Last syllable</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✓ Match</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--emerald);font-weight:700">No tilde</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">hablar, ciudad, español</td>
             </tr>
             <tr style="background:rgba(239,68,68,.04)">
-              <td style="padding:9px 14px;border:1px solid var(--line)">Other consonant</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">Last syllable</td>
-              <td style="padding:9px 14px;border:1px solid var(--line)">2nd-to-last</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Mismatch</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">fácil, árbol, Héctor</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">Other consonant</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--indigo)">Last syllable</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">2nd-to-last</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Mismatch</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">fácil, árbol, Héctor</td>
             </tr>
             <tr style="background:rgba(239,68,68,.06)">
-              <td style="padding:9px 14px;border:1px solid var(--line)" colspan="2"><em>Either ending type</em></td>
-              <td style="padding:9px 14px;border:1px solid var(--line)">3rd or 4th syllable back</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Always mismatch</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE always</td>
-              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">análisis, médico, prepáralo</td>
+              <td style="padding:6px 9px;border:1px solid var(--line)" colspan="2"><em>Either ending type</em></td>
+              <td style="padding:6px 9px;border:1px solid var(--line)">3rd or 4th syllable back</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Always mismatch</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE always</td>
+              <td style="padding:6px 9px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">análisis, médico, prepáralo</td>
             </tr>
           </tbody>
         </table>
+</div>
         <br>
         <strong>The last row is the easy one:</strong> No default rule ever predicts stress on the 3rd or 4th syllable from the end. So any word stressed that far back is <em>automatically</em> a mismatch — no calculation needed. Tilde always.
       </div>
@@ -3307,8 +3318,8 @@ body {
 
     <div class="rule">
       <div class="rule-label">Worked examples — apply the two questions to each word</div>
-      <div class="rule-body" style="padding-bottom:4px">
-        <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <div class="rule-body"
+        <div class="tbl-wrap"><table style="width:100%;border-collapse:collapse;font-size:13px">
           <thead>
             <tr style="background:var(--bg-subtle)">
               <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Word</th>
@@ -3385,6 +3396,8 @@ body {
               <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red);font-weight:700">✓ Tilde (Esdrújula)</td>
             </tr>
           </tbody>
+        </table></div>
+      ody>
         </table>
       </div>
     </div>
