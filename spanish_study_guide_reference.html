@@ -904,9 +904,9 @@ body {
 
 /* ── FLASHCARD DRILL ── */
 .fc-drill {
-  background: var(--bg-card);
+  background: rgba(139, 92, 246, 0.10);
   border-radius: 12px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(139, 92, 246, 0.30);
   margin-top: 24px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -916,8 +916,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg-subtle);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.20);
+  background: rgba(139, 92, 246, 0.12);
 }
 .fc-drill-label {
   font-family: var(--mono);
@@ -925,7 +925,7 @@ body {
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--text-mid);
+  color: var(--purple);
 }
 .fc-drill-meta {
   font-family: var(--mono);
@@ -2295,6 +2295,17 @@ body {
 
 /* exam-bar */
 [data-theme="dark"] .exam-bar-fill { filter: brightness(.85); }
+
+/* fc-drill dark mode */
+[data-theme="dark"] .fc-drill {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.35);
+}
+[data-theme="dark"] .fc-drill-header {
+  background: rgba(139, 92, 246, 0.18);
+  border-bottom-color: rgba(139, 92, 246, 0.25);
+}
+[data-theme="dark"] .fc-drill-label { color: #C4B5FD; }
 
 /* ── Theme toggle button ── */
 .theme-toggle {
