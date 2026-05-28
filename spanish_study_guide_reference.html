@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spanish Grammar Reference — Danny</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 
 /* ── TOKENS ── */
@@ -217,7 +218,7 @@ body {
 .main {
   margin-left: var(--sidebar-w);
   flex: 1;
-  max-width: 800px;
+  min-width: 0;
   padding: 56px 52px 120px;
 }
 
@@ -940,6 +941,126 @@ body {
   letter-spacing: .08em;
   cursor: pointer;
 }
+/* Stats panel */
+.stats-panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 420px;
+  background: var(--bg-card);
+  border-left: 1px solid var(--line);
+  box-shadow: -4px 0 24px rgba(15,23,42,.10);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .25s ease;
+}
+.stats-panel.open { transform: translateX(0); }
+.stats-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.stats-panel-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+}
+.stats-close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-soft);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.stats-close-btn:hover { background: var(--bg-subtle); }
+.stats-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 32px;
+}
+.stats-section-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 20px 0 10px;
+}
+.stats-section-label:first-child { margin-top: 0; }
+.stats-kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 4px; }
+.stats-kpi {
+  background: var(--bg-subtle);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+}
+.stats-kpi-val {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--indigo);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stats-kpi-lbl { font-size: 11px; color: var(--text-soft); }
+.stats-struggle-list { display: flex; flex-direction: column; gap: 6px; }
+.stats-struggle-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  border-left: 3px solid var(--red);
+}
+.stats-struggle-item.med { border-left-color: var(--amber); }
+.stats-struggle-word {
+  flex: 1;
+  font-family: var(--roboto);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.stats-struggle-detail { font-size: 11px; color: var(--text-mid); }
+.stats-struggle-pct {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+}
+.stats-struggle-item.med .stats-struggle-pct { color: var(--amber); }
+.stats-deck-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.stats-deck-row:last-child { border-bottom: none; }
+.stats-deck-name { flex: 1; font-size: 13px; color: var(--text); }
+.stats-deck-bar-wrap { width: 80px; height: 6px; background: var(--line); border-radius: 3px; }
+.stats-deck-bar { height: 100%; border-radius: 3px; background: var(--indigo); }
+.stats-deck-pct { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--text-mid); width: 36px; text-align: right; }
+.stats-loading { text-align: center; padding: 40px 0; color: var(--text-soft); font-size: 13px; }
+.stats-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.2);
+  z-index: 199;
+}
+.stats-overlay.open { display: block; }
+
 /* Inline drill links in sidebar nav */
 .nav-drill-link {
   display: flex;
@@ -1198,6 +1319,7 @@ body {
   <div class="sidebar-brand">
     <div class="brand-label">Grammar Reference</div>
     <div class="brand-title">Mexican <em>Spanish</em><br>Master Guide</div>
+    <button onclick="openStats()" style="margin-top:10px;width:100%;padding:7px 12px;background:var(--bg-indigo);color:var(--indigo);border:1px solid #C7D2FE;border-radius:8px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;cursor:pointer;text-align:left;">📊 My Performance</button>
   </div>
   <nav class="sidebar-nav" id="sb-nav-ref">
     <div class="nav-group-label" style="color:#065F46">● Nivel A1</div>
@@ -3830,6 +3952,153 @@ sections.forEach(s => observer.observe(s));
 </script>
 
 <script>
+// ── SUPABASE PERFORMANCE TRACKER ──
+(function () {
+  var SUPA_URL  = 'https://xwkztprurcxdlufsfczn.supabase.co';
+  var SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3a3p0cHJ1cmN4ZGx1ZnNmY3puIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NzE4NDAsImV4cCI6MjA4OTU0Nzg0MH0.2qwyoX0IZdH5ZAVlFpIkt49HmIEhLMQDcBY6U8vdxRU';
+  var db = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+  // Random session ID for this page load
+  var SESSION_ID = 'sess_' + Math.random().toString(36).slice(2, 10) + '_' + Date.now();
+
+  // Log a single card result
+  window.logCardResult = function(deckId, deckMode, card, userAnswer, isCorrect) {
+    var row = {
+      session_id:   SESSION_ID,
+      deck_id:      deckId,
+      deck_mode:    deckMode,
+      card_front:   deckMode === 'type' ? card.word  : card.front,
+      card_prompt:  deckMode === 'type' ? card.prompt : null,
+      card_answer:  deckMode === 'type' ? card.answer : card.back,
+      user_answer:  userAnswer,
+      is_correct:   isCorrect,
+      is_irregular: !!card.irregular
+    };
+    db.from('spanish_performance').insert(row).then(function(res) {
+      if (res.error) console.warn('[tracker]', res.error.message);
+    });
+  };
+
+  // ── STATS PANEL ──
+  window.openStats = function() {
+    document.getElementById('stats-panel').classList.add('open');
+    document.getElementById('stats-overlay').classList.add('open');
+    loadStats();
+  };
+  window.closeStats = function() {
+    document.getElementById('stats-panel').classList.remove('open');
+    document.getElementById('stats-overlay').classList.remove('open');
+  };
+
+  function loadStats() {
+    var body = document.getElementById('stats-body');
+    body.innerHTML = '<div class="stats-loading">Loading your stats…</div>';
+
+    db.from('spanish_performance').select('*').then(function(res) {
+      if (res.error) {
+        body.innerHTML = '<div class="stats-loading">Could not load stats.</div>';
+        return;
+      }
+      renderStats(res.data || []);
+    });
+  }
+
+  function renderStats(rows) {
+    if (rows.length === 0) {
+      document.getElementById('stats-body').innerHTML =
+        '<div class="stats-loading">No data yet — complete some drills first.</div>';
+      return;
+    }
+
+    var total    = rows.length;
+    var correct  = rows.filter(function(r) { return r.is_correct; }).length;
+    var sessions = new Set(rows.map(function(r) { return r.session_id; })).size;
+    var pctAll   = Math.round((correct / total) * 100);
+
+    // Per-deck accuracy
+    var deckMap = {};
+    rows.forEach(function(r) {
+      if (!deckMap[r.deck_id]) deckMap[r.deck_id] = { correct: 0, total: 0 };
+      deckMap[r.deck_id].total++;
+      if (r.is_correct) deckMap[r.deck_id].correct++;
+    });
+
+    // Per-word mistake count (wrong answers only)
+    var wordMap = {};
+    rows.forEach(function(r) {
+      var key = r.card_front + (r.card_prompt ? ' · ' + r.card_prompt : '');
+      var deck = r.deck_id;
+      var mapKey = key + '|||' + deck;
+      if (!wordMap[mapKey]) wordMap[mapKey] = { front: key, deck: deck, wrong: 0, total: 0, irregular: r.is_irregular };
+      wordMap[mapKey].total++;
+      if (!r.is_correct) wordMap[mapKey].wrong++;
+    });
+
+    // Sort words by error rate (min 2 attempts)
+    var struggles = Object.values(wordMap)
+      .filter(function(w) { return w.total >= 2 && w.wrong > 0; })
+      .sort(function(a, b) { return (b.wrong / b.total) - (a.wrong / a.total); })
+      .slice(0, 15);
+
+    var deckLabels = {
+      'a1': 'A1 Conjugation (Presente)',
+      'a2': 'A2 Conjugation (Indefinido)',
+      'b1': 'B1 Conjugation (Subjuntivo)',
+      'vocab-a1': 'A1 Vocab Review',
+      'vocab-a2': 'A2 Vocab Review',
+      'vocab-b1': 'B1 Vocab Review'
+    };
+
+    var html = '';
+
+    // KPIs
+    html += '<div class="stats-section-label">Overview</div>';
+    html += '<div class="stats-kpi-row">';
+    html += '<div class="stats-kpi"><div class="stats-kpi-val">' + pctAll + '%</div><div class="stats-kpi-lbl">Overall</div></div>';
+    html += '<div class="stats-kpi"><div class="stats-kpi-val">' + total + '</div><div class="stats-kpi-lbl">Cards done</div></div>';
+    html += '<div class="stats-kpi"><div class="stats-kpi-val">' + sessions + '</div><div class="stats-kpi-lbl">Sessions</div></div>';
+    html += '</div>';
+
+    // Per-deck breakdown
+    html += '<div class="stats-section-label">By Deck</div>';
+    Object.keys(deckMap).sort().forEach(function(did) {
+      var d = deckMap[did];
+      var pct = Math.round((d.correct / d.total) * 100);
+      var label = deckLabels[did] || did;
+      html += '<div class="stats-deck-row">';
+      html += '<span class="stats-deck-name">' + label + '</span>';
+      html += '<div class="stats-deck-bar-wrap"><div class="stats-deck-bar" style="width:' + pct + '%"></div></div>';
+      html += '<span class="stats-deck-pct">' + pct + '%</span>';
+      html += '</div>';
+    });
+
+    // Struggle words
+    if (struggles.length > 0) {
+      html += '<div class="stats-section-label">Words to Focus On</div>';
+      html += '<div class="stats-struggle-list">';
+      struggles.forEach(function(w) {
+        var pct = Math.round((w.wrong / w.total) * 100);
+        var cls = pct >= 60 ? '' : 'med';
+        html += '<div class="stats-struggle-item ' + cls + '">';
+        html += '<div class="stats-struggle-word">' + w.front;
+        if (w.irregular) html += ' <span style="font-family:var(--mono);font-size:9px;color:#D97706;">★</span>';
+        html += '</div>';
+        html += '<span class="stats-struggle-detail">' + (deckLabels[w.deck] || w.deck) + ' · ' + w.wrong + '/' + w.total + ' wrong</span>';
+        html += '<span class="stats-struggle-pct">' + pct + '%</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    } else {
+      html += '<div class="stats-section-label">Words to Focus On</div>';
+      html += '<div class="stats-loading" style="padding:16px 0;">Not enough data yet — keep drilling!</div>';
+    }
+
+    document.getElementById('stats-body').innerHTML = html;
+  }
+})();
+</script>
+
+<script>
 (function () {
   const DECKS = {
     a1: {
@@ -4151,6 +4420,7 @@ sections.forEach(s => observer.observe(s));
     s.answered = true;
     s.history.push({ card: card, userAnswer: user, isCorrect: isCorrect });
     if (isCorrect) s.correct++;
+    if (typeof logCardResult === 'function') logCardResult(id, 'type', card, user, isCorrect);
     renderCard(id);
   };
 
@@ -4165,6 +4435,7 @@ sections.forEach(s => observer.observe(s));
     s.history.push({ card: card, userAnswer: knew ? '(knew it)' : '(missed it)', isCorrect: knew });
     if (knew) s.correct++;
     s.answered = true;
+    if (typeof logCardResult === 'function') logCardResult(id, 'reveal', card, knew ? '(knew it)' : '(missed it)', knew);
     fcAdvance(id);
   };
 
@@ -4313,6 +4584,18 @@ sections.forEach(s => observer.observe(s));
   });
 })();
 </script>
+
+<!-- Stats overlay + panel -->
+<div class="stats-overlay" id="stats-overlay" onclick="closeStats()"></div>
+<div class="stats-panel" id="stats-panel">
+  <div class="stats-panel-header">
+    <span class="stats-panel-title">📊 My Performance</span>
+    <button class="stats-close-btn" onclick="closeStats()">✕</button>
+  </div>
+  <div class="stats-body" id="stats-body">
+    <div class="stats-loading">Loading…</div>
+  </div>
+</div>
 
 </body>
 </html>
