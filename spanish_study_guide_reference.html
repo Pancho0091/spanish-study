@@ -2413,8 +2413,160 @@ body {
     </div>
 
     <div class="concept">
-      <div class="concept-label">The one insight that unlocks everything</div>
-      <div class="concept-body">Spanish has a <strong>built-in default stress position</strong>. Accent marks (tildes) are <em>not decorations</em> — they are <strong>deviation signals</strong>. A tilde only appears when a word breaks the default. Once you know the default, you only need to ask one question: <em>"Does this word deviate from it?"</em></div>
+      <div class="concept-label">The actual reason a tilde exists on any given word</div>
+      <div class="concept-body">
+        When a Spanish reader sees a word they've never seen before, they make an <strong>automatic prediction</strong> about which syllable is stressed — based purely on what the word ends with. That prediction is almost always right.<br><br>
+        The tilde exists for the cases where the prediction is <strong>wrong</strong>. It appears ON the stressed syllable and says: <em>"Ignore what you'd normally predict. Stress here instead."</em><br><br>
+        That's the entire system. No tilde = the reader's prediction is correct. Tilde = the reader's prediction is wrong — here's the real stress.
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">The reader's prediction — built from the word's last letter</div>
+      <div class="rule-body">
+        Every Spanish word ends in either a vowel/N/S or something else. That ending generates a prediction:<br><br>
+        <table style="width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px">
+          <thead>
+            <tr style="background:var(--bg-subtle)">
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Word ends in…</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--indigo)">Reader predicts…</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Examples where prediction is CORRECT (no tilde)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 14px;border:1px solid var(--line);font-weight:700">Vowel, N, or S</td>
+              <td style="padding:10px 14px;border:1px solid var(--line);color:var(--indigo);font-weight:700">"Stress the 2nd-to-last syllable"</td>
+              <td style="padding:10px 14px;border:1px solid var(--line);font-family:var(--mono);color:var(--text-mid)"><strong>CA</strong>-sa · <strong>HA</strong>-bla · da-<strong>TOS</strong> → wait, <strong>DA</strong>-tos · co-<strong>MEN</strong></td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:10px 14px;border:1px solid var(--line);font-weight:700">Any other consonant (R, L, D, Z…)</td>
+              <td style="padding:10px 14px;border:1px solid var(--line);color:var(--indigo);font-weight:700">"Stress the last syllable"</td>
+              <td style="padding:10px 14px;border:1px solid var(--line);font-family:var(--mono);color:var(--text-mid)">ha-<strong>BLAR</strong> · ciu-<strong>DAD</strong> · es-pa-<strong>ÑOL</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        These two predictions are correct for <strong>75–80% of all Spanish words</strong>. That's why most words have no tilde — the reader's automatic prediction just works.
+      </div>
+    </div>
+
+    <div class="rule" style="border-left-color:var(--red)">
+      <div class="rule-label" style="color:var(--red)">When the prediction is WRONG — this is the only time a tilde appears</div>
+      <div class="rule-body">
+        A tilde appears when a word's actual spoken stress <strong>doesn't match what the ending predicts</strong>. The tilde is placed exactly on the stressed syllable to say "override the prediction — stress here."<br><br>
+        <strong>Walkthrough: why does "café" have a tilde?</strong><br><br>
+        <div style="background:var(--bg-subtle);border-radius:8px;padding:14px 18px;margin-bottom:16px">
+          <div style="display:grid;grid-template-columns:28px 1fr;gap:8px 12px;font-size:13.5px;align-items:start">
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--indigo);padding-top:2px">1</span>
+            <span>The reader sees <strong style="font-family:var(--roboto)">cafe</strong> (imagining no accent mark for a moment). The word ends in <strong>e</strong> — a vowel.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--indigo);padding-top:2px">2</span>
+            <span>Vowel ending → prediction: <em>"stress the 2nd-to-last syllable"</em> → the reader would say <strong>CA</strong>-fe.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red);padding-top:2px">3</span>
+            <span>But the actual spoken word is ca-<strong>FÉ</strong>. The stress is on the LAST syllable. The prediction was wrong.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber);padding-top:2px">4</span>
+            <span>So a tilde is placed on the vowel of the REAL stressed syllable: <strong style="font-family:var(--roboto)">café</strong>. It says: "ignore the prediction — stress fé, not ca."</span>
+          </div>
+        </div>
+        <strong>Walkthrough: why does "casa" have NO tilde?</strong><br><br>
+        <div style="background:var(--bg-subtle);border-radius:8px;padding:14px 18px;margin-bottom:16px">
+          <div style="display:grid;grid-template-columns:28px 1fr;gap:8px 12px;font-size:13.5px;align-items:start">
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--indigo);padding-top:2px">1</span>
+            <span>The word ends in <strong>a</strong> — a vowel.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--indigo);padding-top:2px">2</span>
+            <span>Vowel ending → prediction: <em>"stress the 2nd-to-last syllable"</em> → the reader predicts <strong>CA</strong>-sa.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--emerald);padding-top:2px">3</span>
+            <span>The actual spoken word is <strong>CA</strong>-sa. The prediction is correct.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--emerald);padding-top:2px">4</span>
+            <span>No tilde needed — the reader's automatic prediction already gives the right answer.</span>
+          </div>
+        </div>
+        <strong>Walkthrough: why does "fácil" have a tilde?</strong><br><br>
+        <div style="background:var(--bg-subtle);border-radius:8px;padding:14px 18px">
+          <div style="display:grid;grid-template-columns:28px 1fr;gap:8px 12px;font-size:13.5px;align-items:start">
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--indigo);padding-top:2px">1</span>
+            <span>The word ends in <strong>l</strong> — a consonant (not N or S).</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--indigo);padding-top:2px">2</span>
+            <span>Consonant (not N/S) ending → prediction: <em>"stress the last syllable"</em> → the reader would say fa-<strong>CIL</strong>.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red);padding-top:2px">3</span>
+            <span>But the actual word is <strong>FÁ</strong>-cil. Stress is on the FIRST syllable. The prediction was wrong.</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber);padding-top:2px">4</span>
+            <span>Tilde on <strong>á</strong>: <strong style="font-family:var(--roboto)">fácil</strong>. It says: "ignore the prediction — stress fá, not cil."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">The complete mismatch matrix — all 4 combinations</div>
+      <div class="rule-body">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:2px">
+          <thead>
+            <tr style="background:var(--bg-subtle)">
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Ending type</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Predicted stress</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Actual stress</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Match?</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Tilde?</th>
+              <th style="padding:9px 14px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:rgba(16,185,129,.04)">
+              <td style="padding:9px 14px;border:1px solid var(--line)">Vowel / N / S</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">2nd-to-last</td>
+              <td style="padding:9px 14px;border:1px solid var(--line)">2nd-to-last</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✓ Match</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">No tilde</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">casa, hablan, datos</td>
+            </tr>
+            <tr style="background:rgba(239,68,68,.04)">
+              <td style="padding:9px 14px;border:1px solid var(--line)">Vowel / N / S</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">2nd-to-last</td>
+              <td style="padding:9px 14px;border:1px solid var(--line)">Last syllable</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Mismatch</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">café, japonés, habló</td>
+            </tr>
+            <tr style="background:rgba(16,185,129,.04)">
+              <td style="padding:9px 14px;border:1px solid var(--line)">Other consonant</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">Last syllable</td>
+              <td style="padding:9px 14px;border:1px solid var(--line)">Last syllable</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✓ Match</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--emerald);font-weight:700">No tilde</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">hablar, ciudad, español</td>
+            </tr>
+            <tr style="background:rgba(239,68,68,.04)">
+              <td style="padding:9px 14px;border:1px solid var(--line)">Other consonant</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--indigo)">Last syllable</td>
+              <td style="padding:9px 14px;border:1px solid var(--line)">2nd-to-last</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Mismatch</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">fácil, árbol, Héctor</td>
+            </tr>
+            <tr style="background:rgba(239,68,68,.06)">
+              <td style="padding:9px 14px;border:1px solid var(--line)" colspan="2"><em>Either ending type</em></td>
+              <td style="padding:9px 14px;border:1px solid var(--line)">3rd or 4th syllable back</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">✗ Always mismatch</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);color:var(--red);font-weight:700">TILDE always</td>
+              <td style="padding:9px 14px;border:1px solid var(--line);font-family:var(--roboto);font-weight:700">análisis, médico, prepáralo</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <strong>The last row is the easy one:</strong> No default rule ever predicts stress on the 3rd or 4th syllable from the end. So any word stressed that far back is <em>automatically</em> a mismatch — no calculation needed. Tilde always.
+      </div>
+    </div>
+
+    <div class="concept" style="background:var(--bg-amber);border-left-color:var(--amber)">
+      <div class="concept-label" style="color:var(--amber)">The one-sentence mental model</div>
+      <div class="concept-body">
+        <strong>"The ending makes a promise. The tilde appears when the word breaks it."</strong><br><br>
+        — Vowel/N/S ending promises: "I stress second-to-last."<br>
+        — Other consonant ending promises: "I stress last."<br>
+        — Word keeps the promise → no tilde.<br>
+        — Word breaks the promise → tilde on the REAL stressed syllable.
+      </div>
     </div>
 
     <!-- SYLLABLE SPLITTER -->
@@ -2478,104 +2630,41 @@ body {
     </div>
 
     <div class="rule">
-      <div class="rule-label">Step 1 — Understand the default (this is the engine of the whole system)</div>
+      <div class="rule-label">The SEGA names — just labels for stress position</div>
       <div class="rule-body">
-        Spanish default stress is based purely on what the word <strong>ends with</strong>:<br><br>
-        <strong>If the word ends in a vowel, N, or S</strong> → default stress is on the <strong>second-to-last</strong> syllable<br>
-        <code>ha-<u>bla</u>  ·  co-<u>men</u>  ·  ca-<u>sa</u>s  ·  <u>ga</u>-to  ·  <u>li</u>-bros</code> — all natural, no mark needed<br><br>
-        <strong>If the word ends in any other consonant</strong> (B, D, L, R, Z, etc.) → default stress is on the <strong>last</strong> syllable<br>
-        <code>ha-<u>blar</u>  ·  ciu-<u>dad</u>  ·  es-pa-<u>ñol</u>  ·  re-<u>loj</u></code> — all natural, no mark needed<br><br>
-        <strong>The tilde only appears when a word breaks its own default.</strong> That's the entire system.
-      </div>
-    </div>
-
-    <div class="rule">
-      <div class="rule-label">Step 2 — Count syllables from the RIGHT (not left)</div>
-      <div class="rule-body">
-        SEGA labels stress positions by counting back from the last syllable. Position 1 is always the final syllable, position 2 is second-from-last, etc.:<br><br>
-        <div style="font-family:var(--mono);font-size:13px;line-height:2.2;background:var(--bg-subtle);padding:14px 18px;border-radius:8px;margin-top:4px">
-          <span style="color:var(--text-soft)">Word:</span>&nbsp;&nbsp;&nbsp;
-          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">a</span>&nbsp;-&nbsp;
-          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">ná</span>&nbsp;-&nbsp;
-          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">li</span>&nbsp;-&nbsp;
-          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">sis</span><br>
-          <span style="color:var(--text-soft)">Position:</span>&nbsp;
-          <span style="color:var(--text-soft)">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color:var(--indigo);font-weight:700">3 ← stress</span>&nbsp;&nbsp;&nbsp;
-          <span style="color:var(--text-soft)">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color:var(--text-soft)">1</span>
-        </div><br>
-        Stress is on position 3 (third from right) → that is the <strong>Esdrújula</strong> category → <strong>always</strong> requires a tilde.<br><br>
-        <div style="font-family:var(--mono);font-size:13px;line-height:2.2;background:var(--bg-subtle);padding:14px 18px;border-radius:8px;margin-top:4px">
-          <span style="color:var(--text-soft)">Word:</span>&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">ca</span>&nbsp;-&nbsp;
-          <span style="background:#EEF2FF;padding:2px 7px;border-radius:4px;color:var(--indigo)">fé</span><br>
-          <span style="color:var(--text-soft)">Position:</span>&nbsp;&nbsp;
-          <span style="color:var(--text-soft)">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color:var(--indigo);font-weight:700">1 ← stress</span>
-        </div><br>
-        Stress is on position 1 (last syllable) → <strong>Aguda</strong> category. Ends in a vowel (é) → default for vowel endings is position 2 → this word <strong>deviates</strong> → tilde required.
-      </div>
-    </div>
-
-    <div class="rule">
-      <div class="rule-label">Step 3 — The SEGA decision table (apply this to every word)</div>
-      <div class="rule-body">
-        SEGA is an acronym listing the four stress positions from most-stressed-back to least: <strong>S</strong>obreesdrújula → <strong>E</strong>sdrújula → <strong>G</strong>rave → <strong>A</strong>guda.<br><br>
-        <table style="width:100%;border-collapse:collapse;font-size:13px">
-          <thead>
-            <tr style="background:var(--bg-subtle)">
-              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Letter</th>
-              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Name</th>
-              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Stress at position…</th>
-              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Tilde rule</th>
-              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Why</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">S</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)">Sobreesdrújula</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">4th from right</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--red)">Always</strong> — no exceptions</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">No default ever puts stress this far back</td>
-            </tr>
-            <tr style="background:#FAFBFD">
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">E</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)">Esdrújula</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">3rd from right</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--red)">Always</strong> — no exceptions</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">No default ever puts stress this far back</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">G</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)">Grave / Llana</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">2nd from right</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--emerald)">Only if</strong> ending is NOT a vowel/N/S</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">Words ending in vowel/N/S are <em>expected</em> to stress position 2 — no mark needed. Words ending in other consonants are <em>expected</em> to stress position 1 — so position 2 is a deviation → mark required</td>
-            </tr>
-            <tr style="background:#FAFBFD">
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">A</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)">Aguda</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">1st from right (last)</td>
-              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--emerald)">Only if</strong> ending IS a vowel, N, or S</td>
-              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">Words ending in vowel/N/S are <em>expected</em> to stress position 2 — so position 1 is a deviation → mark required. Words ending in other consonants are <em>expected</em> to stress position 1 — no deviation → no mark</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="rule">
-      <div class="rule-label">The shortcut — the only two questions you need</div>
-      <div class="rule-body">
-        <strong>Q1: Is stress on the 3rd or 4th syllable from the right?</strong><br>
-        → YES → tilde always. Done. (Esdrújula or Sobreesdrújula)<br><br>
-        <strong>Q2: Is there a mismatch between the ending type and the stress position?</strong><br>
-        → Ending is vowel/N/S but stress is on the <em>last</em> syllable → tilde. (café, japonés, habló)<br>
-        → Ending is consonant (not N/S) but stress is on the <em>2nd-to-last</em> → tilde. (fácil, útil, Héctor)<br>
-        → No mismatch → no tilde.<br><br>
-        <strong>If no mismatch and stress is not past position 2 → NO tilde. Every time.</strong>
+        SEGA = <strong>S</strong>obreesdrújula · <strong>E</strong>sdrújula · <strong>G</strong>rave · <strong>A</strong>guda. These are just category names, counted from the right:<br><br>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px">
+          <div style="background:var(--bg-subtle);border-radius:8px;padding:10px 12px;border-top:3px solid var(--red)">
+            <div style="font-family:var(--display);font-size:20px;font-weight:700;font-style:italic;color:var(--indigo);margin-bottom:3px">S</div>
+            <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--red);margin-bottom:4px">SOBREESDRÚJULA</div>
+            <div style="font-size:12px;color:var(--text-mid)">Stress on syllable <strong>4</strong> from end</div>
+            <div style="font-family:var(--roboto);font-size:11px;font-weight:700;margin-top:4px;color:var(--text)">prepáramelo</div>
+            <div style="font-size:10px;color:var(--red);font-weight:700;margin-top:3px">TILDE always</div>
+          </div>
+          <div style="background:var(--bg-subtle);border-radius:8px;padding:10px 12px;border-top:3px solid var(--amber)">
+            <div style="font-family:var(--display);font-size:20px;font-weight:700;font-style:italic;color:var(--indigo);margin-bottom:3px">E</div>
+            <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--amber);margin-bottom:4px">ESDRÚJULA</div>
+            <div style="font-size:12px;color:var(--text-mid)">Stress on syllable <strong>3</strong> from end</div>
+            <div style="font-family:var(--roboto);font-size:11px;font-weight:700;margin-top:4px;color:var(--text)">análisis</div>
+            <div style="font-size:10px;color:var(--red);font-weight:700;margin-top:3px">TILDE always</div>
+          </div>
+          <div style="background:var(--bg-subtle);border-radius:8px;padding:10px 12px;border-top:3px solid var(--indigo)">
+            <div style="font-family:var(--display);font-size:20px;font-weight:700;font-style:italic;color:var(--indigo);margin-bottom:3px">G</div>
+            <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--indigo);margin-bottom:4px">GRAVE / LLANA</div>
+            <div style="font-size:12px;color:var(--text-mid)">Stress on syllable <strong>2</strong> from end</div>
+            <div style="font-family:var(--roboto);font-size:11px;font-weight:700;margin-top:4px;color:var(--text)">casa / fácil</div>
+            <div style="font-size:10px;color:var(--text-soft);font-weight:700;margin-top:3px">Only if consonant ending</div>
+          </div>
+          <div style="background:var(--bg-subtle);border-radius:8px;padding:10px 12px;border-top:3px solid var(--emerald)">
+            <div style="font-family:var(--display);font-size:20px;font-weight:700;font-style:italic;color:var(--indigo);margin-bottom:3px">A</div>
+            <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--emerald);margin-bottom:4px">AGUDA</div>
+            <div style="font-size:12px;color:var(--text-mid)">Stress on syllable <strong>1</strong> (last)</div>
+            <div style="font-family:var(--roboto);font-size:11px;font-weight:700;margin-top:4px;color:var(--text)">hablar / café</div>
+            <div style="font-size:10px;color:var(--text-soft);font-weight:700;margin-top:3px">Only if vowel/N/S ending</div>
+          </div>
+        </div>
+        <br>
+        The names just describe <em>where</em> stress falls. The decision about whether to write a tilde still comes down to one question: <strong>does the stress match the prediction?</strong>
       </div>
     </div>
 
