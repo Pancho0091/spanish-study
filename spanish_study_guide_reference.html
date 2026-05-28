@@ -665,39 +665,134 @@ body {
 }
 .dialect-row .dr-text { color: var(--text-mid); line-height: 1.6; }
 
-/* ── LINGUISTIC DEEP DIVE ── */
-.ling-dive {
-  background: #FAF5FF;
-  border-left: 3px solid #8B5CF6;
-  border-radius: 0 10px 10px 0;
-  padding: 14px 20px;
-  margin-bottom: 14px;
+/* ── FORMULA CARD ── */
+.formula-card {
+  background: linear-gradient(135deg,#EEF2FF 0%,#F5F3FF 100%);
+  border: 1px solid #C7D2FE;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
 }
-.ling-dive .ld-label {
+.formula-card .fc-title {
   font-family: var(--mono);
   font-size: 9px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: #6366F1;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.formula-card .fc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.formula-card .fc-row:last-child { margin-bottom: 0; }
+.fc-slot {
+  display: inline-block;
+  padding: 5px 13px;
+  border-radius: 7px;
+  font-family: var(--roboto);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.fc-slot.subj  { background:#ECFDF5; color:#065F46; border:1px solid #6EE7B7; }
+.fc-slot.verb  { background:#EEF2FF; color:#3730A3; border:1px solid #A5B4FC; }
+.fc-slot.aux   { background:#FDF4FF; color:#7E22CE; border:1px solid #E9D5FF; }
+.fc-slot.part  { background:#FFFBEB; color:#92400E; border:1px solid #FDE68A; }
+.fc-slot.obj   { background:#FFF7ED; color:#C2410C; border:1px solid #FED7AA; }
+.fc-slot.neg   { background:#FFF1F2; color:#991B1B; border:1px solid #FCA5A5; }
+.fc-slot.time  { background:#F0FDF4; color:#166534; border:1px solid #86EFAC; }
+.fc-slot.note  { background:var(--bg-subtle); color:var(--text-mid); border:1px solid var(--line); font-weight:400; font-size:12px; }
+.fc-plus, .fc-arrow, .fc-sep { color:var(--text-soft); font-weight:400; font-size:14px; }
+.fc-row-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  min-width: 70px;
+  flex-shrink: 0;
+}
+.fc-result { color:var(--indigo); font-weight:700; font-size:13px; margin-left:4px; }
+
+/* ── PATTERN GRID ── */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.pg-card {
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+.pg-card.masc { background:#EFF6FF; border-color:#BFDBFE; }
+.pg-card.fem  { background:#FDF2F8; border-color:#F9A8D4; }
+.pg-card.neut { background:#F8FAFC; border-color:#E2E8F0; }
+.pg-card.pos  { background:#ECFDF5; border-color:#6EE7B7; }
+.pg-card.neg  { background:#FFF1F2; border-color:#FCA5A5; }
+.pg-card.a1   { background:#ECFDF5; border-color:#6EE7B7; }
+.pg-card.a2   { background:#EEF2FF; border-color:#A5B4FC; }
+.pg-card.b1   { background:#FFF1F2; border-color:#FCA5A5; }
+.pg-card .pg-tag {
+  font-family: var(--mono);
+  font-size: 8px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #6D28D9;
-  font-weight: 600;
+  color: var(--text-soft);
   margin-bottom: 6px;
 }
-.ling-dive .ld-body {
-  font-size: 13.5px;
-  color: var(--text);
-  line-height: 1.75;
-}
-.ling-dive .ld-body strong { color: #6D28D9; font-weight: 600; }
-.ling-dive .ld-body code {
+.pg-card .pg-es {
   font-family: var(--roboto);
-  font-size: 12.5px;
+  font-size: 17px;
   font-weight: 700;
-  background: rgba(139,92,246,.1);
-  color: #5B21B6;
-  padding: 1px 6px;
-  border-radius: 4px;
+  color: var(--text);
+  line-height: 1.2;
 }
-.ling-dive .ld-body em { color: var(--text-mid); font-style: italic; }
+.pg-card .pg-en {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.pg-card .pg-ex {
+  font-size: 11.5px;
+  color: var(--text-mid);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ── VISUAL RULE MATRIX ── */
+.rule-matrix {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.rm-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.rm-row:last-child { border-bottom: none; }
+.rm-row.header { background: var(--bg-subtle); }
+.rm-cell {
+  padding: 11px 16px;
+  font-size: 13.5px;
+  border-right: 1px solid var(--line);
+}
+.rm-cell:last-child { border-right: none; }
+.rm-cell.head { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-soft); }
+.rm-cell.es   { font-family:var(--roboto); font-weight:700; color:var(--text); }
+.rm-cell.en   { color:var(--text-mid); font-style:italic; }
 
 /* ── LEVEL DIVIDER ── */
 .level-divider {
@@ -2159,9 +2254,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Presente de Indicativo descends directly from Latin's <strong>present indicative</strong> — the oldest, most stable tense in all Romance languages. Latin had six grammatical persons; Spanish collapsed "vos" (2nd person plural) into "ustedes" throughout Latin America during colonization, while Spain preserved it as <em>vosotros</em>.<br><br>
     The term <strong>Indicative Mood</strong> comes from Latin <em>indicare</em> (to point out, to declare). It is the mood of assertion — you are pointing at reality and stating it as fact. This is why it cannot express doubt, hypothesis, or emotion: those require the Subjunctive (the "other mood").
   </div>
@@ -2216,15 +2309,10 @@ body {
     <span class="ex-tag ar">-AR · Habitual Present</span>
     <div class="ex-sp">Yo <strong>trabajo</strong> en Adobe todos los días de lunes a viernes como analista de datos.</div>
     <div class="ex-en">I work at Adobe every day Monday through Friday as a data analyst.</div>
-    <div class="ex-why">This is a permanent, habitual fact about your professional life — not something happening at this exact second. "Todos los días" signals routine → Simple Present. Never use Continuous ("estoy trabajando") for a professional identity or recurring schedule. The Simple Present handles both "I work" and "I am working" in Spanish when the context is routine or fact.</div>
+    <div class="ex-why">This is a permanent, habitual fact about your professional life — not something happening at this exact second. "Todos los días" signals routine → Simple Present.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Present Fact + Causal Chain</span>
-    <div class="ex-sp">Felix <strong>come</strong> comida suave porque se está recuperando de su cirugía dental — el veterinario dice que necesita tres semanas más.</div>
-    <div class="ex-en">Felix eats soft food because he is recovering from his dental surgery — the vet says he needs three more weeks.</div>
-    <div class="ex-why">Two structures working together: "come" (Simple Present for current diet fact) + "se está recuperando" (Present Continuous for the ongoing recovery process). The diet is a stated fact; the recovery is an active, in-progress event. Notice how both tenses coexist naturally in the same sentence.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Present Fact + Presente Pro-Futuro</span>
@@ -2236,12 +2324,12 @@ body {
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Continuous for Permanent Fact</span>
     <div class="ex-sp"><span class="wrong">Estoy trabajando en Adobe como analista de datos.</span> → <span class="right">Trabajo en Adobe como analista de datos.</span></div>
-    <div class="ex-why">The Present Continuous magnifies what is happening at this literal millisecond. Your profession is not a millisecond activity — it is a stable fact about who you are. "Estoy trabajando en Adobe" implies you are physically mid-task right now, not that Adobe is your employer. If someone asks "¿Dónde trabajas?" at a party, the answer is "Trabajo en Adobe" (Simple Present), not "Estoy trabajando en Adobe."</div>
+    <div class="ex-why">The Present Continuous magnifies what is happening at this literal millisecond. Your profession is not a millisecond activity — it is a stable fact about who you are.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Future Tense for Mexican Plans</span>
     <div class="ex-sp"><span class="wrong">En octubre viajaré a Minneapolis para mi clase de tueste.</span> → <span class="right">En octubre viajo a Minneapolis para mi clase de tueste.</span></div>
-    <div class="ex-why">Using the morphological future ("viajaré") for a confirmed plan sounds stiff and formal in Mexican Spanish — like a news broadcast, not a conversation. The Presente Pro-Futuro ("viajo") is the natural Mexican choice because it drags the future event into the present reality, making it sound guaranteed and immediate. Reserve "viajaré" for the Scooby-Doo conjecture use: "¿Dónde estará mi colega?" (I wonder where my colleague is).</div>
+    <div class="ex-why">Using the morphological future ("viajaré") for a confirmed plan sounds stiff and formal in Mexican Spanish — like a news broadcast, not a conversation. The Presente Pro-Futuro ("viajo") is the natural Mexican choice because it drags the future event into the present reality, making it sound guaranteed and immediate.</div>
   </div>
 </div>
   </section>
@@ -2296,9 +2384,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     Spanish has <strong>two verbs for "to be"</strong> because it inherited them from two different Latin verbs with different meanings:<br><br>
     <strong>SER</strong> comes from Latin <code>esse</code> (to exist, to be at the core). This is the philosophical "being" — what something <em>is</em> at its essence. When you say "soy analista," you're making a statement about your fundamental nature.<br><br>
     <strong>ESTAR</strong> comes from Latin <code>stare</code> (to stand, to be positioned somewhere). This is the physical "standing" — where something is positioned or how it currently stands. When you say "estoy en la oficina," you're describing a position in space and time.<br><br>
@@ -2434,32 +2520,27 @@ body {
     <span class="ex-tag ar">-AR · Right This Second</span>
     <div class="ex-sp">No puedo contestar el teléfono — <strong>estoy hablando</strong> con un cliente de Adobe en este momento. Te llamo en diez minutos.</div>
     <div class="ex-en">I can't answer the phone — I'm talking with an Adobe client right this moment. I'll call you in ten minutes.</div>
-    <div class="ex-why">The Present Continuous is justified here because the conversation is actively happening at the literal second the phone rings. The signal phrases "en este momento" and "ahorita" always pair correctly with the Continuous. Notice the contrast: you wouldn't say "estoy hablando con clientes" to describe your job (that would be habitual → Simple Present), but "estoy hablando con un cliente" for the specific active call is correct.</div>
+    <div class="ex-why">The Present Continuous is justified here because the conversation is actively happening at the literal second the phone rings. The signal phrases "en este momento" and "ahorita" always pair correctly with the Continuous.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Ahorita = Continuous Trigger</span>
-    <div class="ex-sp">Felix <strong>está comiendo</strong> su comida suave ahorita mismo — no lo molestes, está concentrado en su tazón.</div>
-    <div class="ex-en">Felix is eating his soft food right this moment — don't bother him, he's focused on his bowl.</div>
-    <div class="ex-why">"Ahorita mismo" is the linguistic tripwire for the Continuous — it means "at this very millisecond." The Continuous here emphasizes that Felix is mid-action and should not be interrupted. This is the magnifying glass function: you're zooming in on one specific ongoing moment. Compare: "Felix come comida suave" (Simple Present = his dietary routine) vs. "Felix está comiendo" (Continuous = he is eating right now, specifically).</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · escribir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Imperfect Continuous as Background</span>
     <div class="ex-sp"><strong>Estaba escribiendo</strong> el reporte de análisis de datos cuando mi jefe entró a la sala sin avisar y preguntó si estaba listo.</div>
     <div class="ex-en">I was writing the data analysis report when my boss walked into the room without warning and asked if it was ready.</div>
-    <div class="ex-why">Imperfect Continuous (estaba + gerund) = the background action that was already in progress when a single completed event interrupted it. "Estaba escribiendo" is the looping background video. "Entró" (preterite) is the single photograph that punctuates it. This structure — Imperfect Continuous + preterite interruption — is one of the most natural narrative constructions in Spanish storytelling.</div>
+    <div class="ex-why">Imperfect Continuous (estaba + gerund) = the background action that was already in progress when a single completed event interrupted it. "Estaba escribiendo" is the looping background video.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Continuous for Professional Identity</span>
     <div class="ex-sp"><span class="wrong">Estoy trabajando en Adobe como analista de datos.</span> → <span class="right">Trabajo en Adobe como analista de datos.</span></div>
-    <div class="ex-why">This is the most common Continuous error for English speakers, because English uses "I'm working at Adobe" naturally for employment. In Spanish, "estoy trabajando" means you are physically performing work tasks this second — not that Adobe is your employer. Your profession, title, and employer are permanent identity facts → Simple Present. Only use the Continuous when you can point at someone mid-action and say "look, right now, this very second."</div>
+    <div class="ex-why">This is the most common Continuous error for English speakers, because English uses "I'm working at Adobe" naturally for employment. In Spanish, "estoy trabajando" means you are physically performing work tasks this second — not that Adobe is your employer.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Irregular Gerund</span>
     <div class="ex-sp"><span class="wrong">Estoy leendo el reporte de Snowflake.</span> → <span class="right">Estoy leyendo el reporte de Snowflake.</span></div>
-    <div class="ex-why">When an -ER or -IR verb has a stem that ends in a vowel, the gerund ending -iendo becomes -yendo to avoid a triple vowel collision. Leer: le + iendo → le-iendo is awkward → leyendo. Same rule: creer → creyendo, oír → oyendo, caer → cayendo, traer → trayendo. The y acts as a phonetic bridge between the vowel stem and the -endo ending.</div>
+    <div class="ex-why">When an -ER or -IR verb has a stem that ends in a vowel, the gerund ending -iendo becomes -yendo to avoid a triple vowel collision. Leer: le + iendo → le-iendo is awkward → leyendo.</div>
   </div>
 </div>
 
@@ -2866,9 +2947,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Spanish tilde system was codified in the 18th century by the <strong>Real Academia Española</strong> to resolve print ambiguity — without tildes, readers had no signal for stress, and stress changes meaning entirely (<em>hablo</em> vs. <em>habló</em>).<br><br>
     The deeper logic: Spanish inherited Latin's <strong>phonemic stress</strong> (stress that changes word identity), but collapsed Latin's distinct verb endings into similar-looking forms. The tilde is a compensatory device — it rescues the distinctions Latin made through sound that Spanish's simplified endings can no longer make automatically.<br><br>
     The Grave category dominates: roughly <strong>75–80% of Spanish words</strong> are Grave (stress on second-to-last). This is why the default assumption works so well — most words you encounter need no tilde at all.
@@ -2880,17 +2959,17 @@ body {
   <div class="ex-item warn">
     <span class="ex-tag err">Error · Over-accenting default Grave words</span>
     <div class="ex-sp"><span class="wrong">Los dátos de Snowflake están lístos para el análisis.</span> → <span class="right">Los datos de Snowflake están listos para el análisis.</span></div>
-    <div class="ex-why">"Datos" ends in S → default stress is position 2 → DA-tos is already correct → no tilde. "Listos" ends in S → same logic → LIS-tos → no tilde. Adding tildes to these is an overcorrection — you are marking words that are following the rule perfectly. Only "análisis" earns its tilde because stress is at position 3 (Esdrújula), which is never the default for any word.</div>
+    <div class="ex-why">"Datos" ends in S → default stress is position 2 → DA-tos is already correct → no tilde. "Listos" ends in S → same logic → LIS-tos → no tilde.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error · Missing tilde on a deviation word</span>
     <div class="ex-sp"><span class="wrong">El examen fue facil pero util para el analisis del proyecto.</span> → <span class="right">El examen fue fácil pero útil para el análisis del proyecto.</span></div>
-    <div class="ex-why">Three misses, same rule: "fácil" ends in L (consonant, not N/S) → default is stress on position 1 → but stress is on position 2 (FÁ-cil) → deviation → tilde required. "útil" same pattern: ends in L → default position 1 → stress is on position 2 (Ú-til) → tilde required. "análisis" ends in S → default position 2 → but stress is position 3 → Esdrújula → tilde required. All three are deviating from their default. None of the tildes are optional.</div>
+    <div class="ex-why">Three misses, same rule: "fácil" ends in L (consonant, not N/S) → default is stress on position 1 → but stress is on position 2 (FÁ-cil) → deviation → tilde required. "útil" same pattern: ends in L → default position 1 → stress is on position 2 (Ú-til) → tilde required.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error · Missing verb tense accent (the most costly error)</span>
     <div class="ex-sp"><span class="wrong">Mi jefe hablo con el cliente ayer.</span> → <span class="right">Mi jefe habló con el cliente ayer.</span></div>
-    <div class="ex-why">"habló" ends in a vowel (o) → default stress is position 2. But the preterite él/ella form stresses the final syllable (ha-BLÓ, position 1) → that deviates from the default → tilde required. Without it, "hablo" = yo present tense (I speak) — the subject "mi jefe" is third person but the verb is first person, producing a grammatically broken sentence. One missing tilde creates both a tense error and a person agreement error simultaneously.</div>
+    <div class="ex-why">"habló" ends in a vowel (o) → default stress is position 2. But the preterite él/ella form stresses the final syllable (ha-BLÓ, position 1) → that deviates from the default → tilde required.</div>
   </div>
 </div>
   </section>
@@ -2937,9 +3016,8 @@ body {
       </div>
     </div>
 
-    <div class="ling-dive">
-      <div class="ld-label">🔬 Linguistic Deep Dive</div>
-      <div class="ld-body">
+    
+<div class="ld-body">
         This phenomenon exists because Latin's verb endings were <strong>phonetically distinct</strong> — different vowel lengths and stress patterns marked tense automatically. As Latin evolved into Spanish, many of these distinctions collapsed into similar-looking forms. The <strong>written accent mark</strong> was introduced by the Real Academia Española (18th century) precisely to rescue these collisions — to mark the cases where two valid words would otherwise be written identically. The accent mark is the written record of a spoken stress difference that native speakers produce automatically but learners must consciously mark in writing.
       </div>
     </div>
@@ -3035,12 +3113,12 @@ body {
       <div class="ex-item warn">
         <span class="ex-tag err">Error Type · Missing él/ella Preterite Accent</span>
         <div class="ex-sp"><span class="wrong">Mi jefe hablo con el cliente ayer por la tarde.</span> → <span class="right">Mi jefe habló con el cliente ayer por la tarde.</span></div>
-        <div class="ex-why">Without the accent, "hablo" = I speak (yo, present tense). The sentence now reads: "My boss I-speak with the client yesterday" — grammatically broken because the subject is "mi jefe" (third person) but the verb form is first person present. The accent on the ó is the only signal that this is third person preterite. Cost on B1 exam: grammar error + tense error simultaneously.</div>
+        <div class="ex-why">Without the accent, "hablo" = I speak (yo, present tense). The sentence now reads: "My boss I-speak with the client yesterday" — grammatically broken because the subject is "mi jefe" (third person) but the verb form is first person present.</div>
       </div>
       <div class="ex-item warn">
         <span class="ex-tag err">Error Type · Preterite yo vs. Subjunctive Confusion</span>
         <div class="ex-sp"><span class="wrong">Ayer trabaje en la oficina de Adobe.</span> → <span class="right">Ayer trabajé en la oficina de Adobe.</span></div>
-        <div class="ex-why">"Trabaje" (no accent) = subjunctive form — "that I/he work." "Ayer trabaje" means "Yesterday that I work" — grammatically broken. The accent on trabajé marks it as completed past fact. "Ayer" (yesterday) demands preterite; the accent on -é is non-negotiable. This error is nearly invisible visually but changes the entire meaning.</div>
+        <div class="ex-why">"Trabaje" (no accent) = subjunctive form — "that I/he work." "Ayer trabaje" means "Yesterday that I work" — grammatically broken. The accent on trabajé marks it as completed past fact.</div>
       </div>
       <div class="ex-item warn">
         <span class="ex-tag err">Error Type · Nosotros Ambiguity — Use Time Markers</span>
@@ -3050,7 +3128,7 @@ body {
       <div class="ex-item warn">
         <span class="ex-tag err">Error Type · Missing él pronoun Accent</span>
         <div class="ex-sp"><span class="wrong">El habló con mi jefe ayer.</span> → <span class="right">Él habló con mi jefe ayer.</span></div>
-        <div class="ex-why">"El" (no accent) = the definite article "the." "Él" (accent) = the subject pronoun "he." "El habló" = "The spoke" — nonsensical. Both the pronoun and the verb require their accent marks. This is a compound error: missing accent on the pronoun AND (often) missing accent on the verb produce a sentence that is both grammatically and semantically broken.</div>
+        <div class="ex-why">"El" (no accent) = the definite article "the." "Él" (accent) = the subject pronoun "he." "El habló" = "The spoke" — nonsensical. Both the pronoun and the verb require their accent marks.</div>
       </div>
     </div>
 
@@ -3097,9 +3175,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     <strong>Hay</strong> is a fossilized form — it froze in time from Old Spanish <em>ha y</em> ("there has it" = "it has there"), where <em>y</em> was an archaic adverb meaning "there" (from Latin <em>ibi</em>). Over centuries, the two words fused into a single invariable word.<br><br>
     This explains why <code>hay</code> never changes for number. It is not truly conjugated — it is a <strong>lexicalized phrase</strong> that became a single grammatical unit. The same Latin <em>habere</em> (to have) that gave us <em>haber</em> as an auxiliary verb also gave us this existence marker — two completely different grammatical functions from one Latin ancestor.
   </div>
@@ -3123,32 +3199,27 @@ body {
     <span class="ex-tag ar">-AR · Hay (Present Existence)</span>
     <div class="ex-sp"><strong>Hay</strong> cinco reuniones en el calendario de Adobe hoy — entre ellas, una revisión de XGBoost y una llamada con el cliente internacional.</div>
     <div class="ex-en">There are five meetings in the Adobe calendar today — including an XGBoost review and a call with the international client.</div>
-    <div class="ex-why">Hay is invariable — it never changes regardless of whether the noun that follows is singular or plural, masculine or feminine. "Hay una reunión" AND "hay cinco reuniones" both use exactly the same form. This distinguishes it from English "there is / there are," which changes. The moment you conjugate haber to match the noun (han, son, están), you have committed the most common hay error in Spanish.</div>
+    <div class="ex-why">Hay is invariable — it never changes regardless of whether the noun that follows is singular or plural, masculine or feminine. "Hay una reunión" AND "hay cinco reuniones" both use exactly the same form.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb context · haber / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Había (Ongoing Past State)</span>
-    <div class="ex-sp">Antes <strong>había</strong> una cafetería excelente en el edificio de Adobe, pero la cerraron durante la pandemia y nunca la reabrieron.</div>
-    <div class="ex-en">There used to be an excellent cafeteria in the Adobe building, but they closed it during the pandemic and never reopened it.</div>
-    <div class="ex-why">Había uses the imperfect form of haber — appropriate here because the cafeteria's existence was an ongoing, habitual state with no specific start or end point being referenced. Compare with "Hubo un problema ayer" (Preterite — single event) vs. "Había mucho tráfico normalmente" (Imperfect — ongoing background state). The choice between había and hubo follows the same Imperfect vs. Preterite logic applied to all other verbs.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb context · haber / vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Hubo vs. Había Contrast</span>
     <div class="ex-sp"><strong>Había</strong> mucho tráfico en la 10 todos los días, y ayer <strong>hubo</strong> un accidente en la salida de Crenshaw que lo empeoró todo.</div>
     <div class="ex-en">There was always a lot of traffic on the 10 every day, and yesterday there was an accident at the Crenshaw exit that made everything worse.</div>
-    <div class="ex-why">Both forms in one sentence to show the contrast directly. "Había mucho tráfico todos los días" — ongoing, habitual background state = Imperfect. "Hubo un accidente ayer" — single completed event with a specific time reference = Preterite. The accident happened once, started, and ended. The traffic was a permanent condition. Same verb, same meaning ("there was"), but the aspect changes everything about which form to use.</div>
+    <div class="ex-why">Both forms in one sentence to show the contrast directly. "Había mucho tráfico todos los días" — ongoing, habitual background state = Imperfect.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Conjugating Hay for Number</span>
     <div class="ex-sp"><span class="wrong">Han muchos errores en el código de Python.</span> → <span class="right">Hay muchos errores en el código de Python.</span></div>
-    <div class="ex-why">"Han" is the third-person plural of haber used in the Present Perfect ("han comido" = they have eaten). It is not the plural of hay. Hay has no plural — it is a fossilized, invariable form. The error of using "han" for "there are" comes from applying normal conjugation logic to an irregular structure. Whether there is one error or one thousand errors in your code, the form is always "hay."</div>
+    <div class="ex-why">"Han" is the third-person plural of haber used in the Present Perfect ("han comido" = they have eaten). It is not the plural of hay.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Estar for Existence</span>
     <div class="ex-sp"><span class="wrong">Están muchos archivos en el servidor de Adobe.</span> → <span class="right">Hay muchos archivos en el servidor de Adobe.</span></div>
-    <div class="ex-why">Estar announces location of already-known, specific things. Hay announces existence — introducing something to the conversation for the first time. "Están los archivos en el servidor" = "The files (specific, known ones) are on the server" (location). "Hay archivos en el servidor" = "There are files on the server" (existence announcement — you're telling someone files exist there). The distinction: hay introduces, estar locates. When in doubt about which one to use for "there are," the answer is hay.</div>
+    <div class="ex-why">Estar announces location of already-known, specific things. Hay announces existence — introducing something to the conversation for the first time.</div>
   </div>
 </div>
 
@@ -3245,7 +3316,7 @@ body {
       <span class="ex-tag ar">Agreement Chain — All descriptors follow the noun</span>
       <div class="ex-sp">El análisis de datos es <strong>complejo</strong> y <strong>detallado</strong>. Los análisis son <strong>complejos</strong> y <strong>detallados</strong>.</div>
       <div class="ex-en">The data analysis is complex and detailed. The analyses are complex and detailed.</div>
-      <div class="ex-why"><em>análisis</em> is masculine (ends in -is — a group that skews masculine). Both adjectives follow: <em>complejo, detallado</em> → masculine singular. Plural: <em>complejos, detallados</em> → both flip to masculine plural. Everything tracks the noun.</div>
+      <div class="ex-why">análisis is masculine (ends in -is — a group that skews masculine). Both adjectives follow: complejo, detallado → masculine singular.</div>
     </div>
     <div class="ex-item good">
       <span class="ex-tag er">Feminine Agreement</span>
@@ -3256,7 +3327,7 @@ body {
     <div class="ex-item warn">
       <span class="ex-tag err">Treating all adjectives as -o/-a variable</span>
       <div class="ex-sp"><span class="wrong">una mesa granda</span> → <span class="right">una mesa grande</span></div>
-      <div class="ex-why"><em>grande</em> ends in -e → it does NOT change for gender. Only for number: <em>mesas grandes</em>. Many learners add -a thinking feminine always requires -a on adjectives. That rule only applies to adjectives that end in -o in masculine form.</div>
+      <div class="ex-why">grande ends in -e → it does NOT change for gender. Only for number: mesas grandes.</div>
     </div>
   </div>
 </section>
@@ -3370,12 +3441,12 @@ body {
       <span class="ex-tag ar">Real-world question chain</span>
       <div class="ex-sp">¿<strong>Dónde</strong> vives ahora? — En West Adams. ¿<strong>Cuánto</strong> tiempo llevas ahí? — Casi dos años.</div>
       <div class="ex-en">Where do you live now? — In West Adams. How long have you been there? — Almost two years.</div>
-      <div class="ex-why">¿Dónde? = location (static). ¿Cuánto tiempo? = duration (cuánto is invariable in this idiomatic phrase — it doesn't agree because tiempo is the implied noun, not a preceding one). <em>Llevar + tiempo + gerund</em> is the standard Spanish structure for "how long have you been doing X."</div>
+      <div class="ex-why">¿Dónde? = location (static). ¿Cuánto tiempo? = duration (cuánto is invariable in this idiomatic phrase — it doesn't agree because tiempo is the implied noun, not a preceding one).</div>
     </div>
     <div class="ex-item warn">
       <span class="ex-tag err">¿Qué / Cuál confusion</span>
       <div class="ex-sp"><span class="wrong">¿Qué es tu nombre?</span> → <span class="right">¿Cuál es tu nombre?</span></div>
-      <div class="ex-why">Names are not definitions — you're selecting an identity from possibilities, not defining a concept. <em>¿Cuál es tu nombre?</em> is correct. The equivalent error in reverse: using <em>¿Cuál es la diferencia entre ser y estar?</em> when asking for a conceptual definition is fine because you're identifying something specific.</div>
+      <div class="ex-why">Names are not definitions — you're selecting an identity from possibilities, not defining a concept. ¿Cuál es tu nombre? is correct.</div>
     </div>
   </div>
 </section>
@@ -3423,12 +3494,12 @@ body {
       <span class="ex-tag ar">Double negative — correct Spanish</span>
       <div class="ex-sp">No tengo <strong>ningún</strong> dato de esa tabla todavía. <strong>Nadie</strong> me lo ha enviado.</div>
       <div class="ex-en">I don't have any data from that table yet. Nobody has sent it to me.</div>
-      <div class="ex-why"><em>No tengo ningún</em> = double negative (no + ningún both present because ningún follows the verb). <em>Nadie</em> appears before the verb → no extra <em>no</em> needed. Both are grammatically correct Spanish. <em>ningún</em> (masc) vs. <em>ninguna</em> (fem) — agrees with the noun it precedes.</div>
+      <div class="ex-why">No tengo ningún = double negative (no + ningún both present because ningún follows the verb). Nadie appears before the verb → no extra no needed.</div>
     </div>
     <div class="ex-item warn">
       <span class="ex-tag err">English logic — missing no before verb</span>
       <div class="ex-sp"><span class="wrong">Tengo nada que hacer hoy.</span> → <span class="right">No tengo nada que hacer hoy.</span></div>
-      <div class="ex-why">English: "I have nothing to do" — nothing after have, no double marker needed. Spanish: <em>nada</em> after the verb requires <em>no</em> before the verb. The two negative markers reinforce each other — they don't cancel.</div>
+      <div class="ex-why">English: "I have nothing to do" — nothing after have, no double marker needed. Spanish: nada after the verb requires no before the verb.</div>
     </div>
   </div>
 </section>
@@ -3480,9 +3551,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Spanish gerund (<em>-ando/-iendo</em>) descends from the Latin <strong>gerundive</strong> — a verbal noun form. In classical Latin it expressed obligation ("something to be done"). Over centuries in Vulgar Latin, it shifted function entirely — from obligation to ongoing action description.<br><br>
     Spanish uses <strong>estar</strong> as the continuous auxiliary (not ser) because <em>stare</em> (to stand, to be positioned) already contained the idea of an ongoing, positioned state. "I am standing in the act of working" → "estoy trabajando." The choice of estar over ser as the continuous helper is not arbitrary — it reflects estar's core DNA of physical, positioned existence.
   </div>
@@ -3516,32 +3585,27 @@ body {
     <span class="ex-tag ar">-AR · Concrete Plan Any Horizon</span>
     <div class="ex-sp">Esta tarde <strong>voy a analizar</strong> los datos del tercer trimestre en Snowflake — ya tengo el dashboard abierto y el modelo de XGBoost cargado.</div>
     <div class="ex-en">This afternoon I'm going to analyze the Q3 data in Snowflake — I already have the dashboard open and the XGBoost model loaded.</div>
-    <div class="ex-why">The Near Future signals that an intention already exists in the present moment and there is current evidence of it ("ya tengo el dashboard abierto"). This is what separates it from simple future: you are not predicting something will happen, you are announcing that movement toward it has already begun. The Near Future always implies present preparation, present intention, or present evidence.</div>
+    <div class="ex-why">The Near Future signals that an intention already exists in the present moment and there is current evidence of it ("ya tengo el dashboard abierto"). This is what separates it from simple future: you are not predicting something will happen, you are announcing that movement toward it has already begun.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Group Plans</span>
-    <div class="ex-sp">El equipo de analytics de Adobe <strong>va a comer</strong> en Black Rabbit Rose el viernes — ya hicimos la reservación para ocho personas.</div>
-    <div class="ex-en">The Adobe analytics team is going to eat at Black Rabbit Rose on Friday — we already made the reservation for eight people.</div>
-    <div class="ex-why">The reservation confirms the plan is real, concrete, and already initiated — exactly the register the Near Future captures. Notice "ya hicimos la reservación" (preterite — past completed action) feeding directly into "vamos a comer" (Near Future — upcoming committed event). This combination — a past setup action followed by the Near Future — is one of the most natural Spanish sentence structures.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · escribir / salir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Imminent Action With Evidence</span>
     <div class="ex-sp">Ahora mismo <strong>voy a escribir</strong> el reporte final y <strong>voy a salir</strong> de la oficina antes de las seis — le prometí a mi veterinario que llevaría a Felix a su cita de revisión.</div>
     <div class="ex-en">Right now I'm going to write the final report and leave the office before six — I promised my vet I'd take Felix to his checkup.</div>
-    <div class="ex-why">Two Near Future constructions chained with "y" — both actions are immediately upcoming. The promise to the vet ("le prometí") is the present evidence that makes both actions feel inevitable. In Mexican Spanish, this is the natural way to describe your next immediate actions. Using the Simple Future here ("escribiré, saldré") would sound like you're reading from a calendar entry, not talking about your actual evening.</div>
+    <div class="ex-why">Two Near Future constructions chained with "y" — both actions are immediately upcoming. The promise to the vet ("le prometí") is the present evidence that makes both actions feel inevitable.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Missing "a" — Broken Bridge</span>
     <div class="ex-sp"><span class="wrong">Esta tarde voy analizar los datos de Snowflake.</span> → <span class="right">Esta tarde voy a analizar los datos de Snowflake.</span></div>
-    <div class="ex-why">The structure is ir + A + infinitive — the "a" is the preposition that connects the verb of movement (ir) to the destination action (the infinitive). Without it, the sentence is grammatically incomplete. Think of it as: "I am going" (voy) + "toward" (a) + "analyzing" (analizar). The preposition encodes the physical movement toward the goal that is the Near Future's core DNA. Dropping it is like saying "I'm going do it" in English — a missing connecting word.</div>
+    <div class="ex-why">The structure is ir + A + infinitive — the "a" is the preposition that connects the verb of movement (ir) to the destination action (the infinitive). Without it, the sentence is grammatically incomplete.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Conjugated Verb After "Voy a"</span>
     <div class="ex-sp"><span class="wrong">Voy a analizo los datos mañana.</span> → <span class="right">Voy a analizar los datos mañana.</span></div>
-    <div class="ex-why">After "voy a" (or any modal/auxiliary construction), the following verb must always be an infinitive — never conjugated. Only the first verb (ir) gets conjugated to match the subject. "Voy a analizo" would mean "I go to I analyze" — two first-person conjugations where only one belongs. This error often happens when the speaker knows the conjugation rule and applies it to every verb in the sentence. The rule: one subject, one conjugation, everything after the auxiliary stays as infinitive.</div>
+    <div class="ex-why">After "voy a" (or any modal/auxiliary construction), the following verb must always be an infinitive — never conjugated. Only the first verb (ir) gets conjugated to match the subject.</div>
   </div>
 </div>
   </section>
@@ -3585,9 +3649,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     <strong>Periphrasis</strong> is the use of multiple words to express what could be a single inflected form. "Voy a comer" (I'm going to eat) is periphrastic — three words doing the job of one: <em>comeré</em>.<br><br>
     This is not laziness — it is a universal tendency in language evolution. English went through the same shift: Old English had a morphological future; Modern English replaced it almost entirely with "going to" and "will." Spanish is in the middle of the same process. The Near Future is winning in Mexico because it <strong>encodes intention and present evidence</strong> — "I am currently moving toward eating" — giving it communicative precision the single-word form cannot match.
   </div>
@@ -3621,29 +3683,24 @@ body {
     <div class="ex-why">Three -AR preterites in sequence, all with spelling changes: empezar → empecé (-ZAR → -CÉ), llegar → llegué (-GAR → -GUÉ), buscar → busqué (-CAR → -QUÉ). Each spelling change protects the original hard consonant sound — without them, "empezé" would sound like "empe-SEH," "llegé" would sound like "lle-HEH," and "buscé" would sound like "bus-SEH." These are not optional stylistic choices — they are phonetic protection rules.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer / hacer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Irregular Stem in Narrative</span>
-    <div class="ex-sp">Anoche <strong>fui</strong> a cenar a Black Rabbit Rose, <strong>pedí</strong> el menú de degustación y <strong>comí</strong> los mejores tacos de mi vida — el chef <strong>hizo</strong> un trabajo increíble.</div>
-    <div class="ex-en">Last night I went to dinner at Black Rabbit Rose, ordered the tasting menu, and ate the best tacos of my life — the chef did an incredible job.</div>
-    <div class="ex-why">Four preterite verbs driving the narrative forward in sequence — each one is a photograph clicking the story one frame ahead. Fui (irregular — ser/ir share this form), pedí (regular -IR), comí (regular -ER), hizo (irregular stem — hic-, but yo form is hice, él form is hizo to avoid "hicé" which would mispronounce the soft C). The sequence communicates that events happened in exactly this order with clear completion at each step.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · salir / vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Mexican Preterite for Today</span>
     <div class="ex-sp">Hoy en la mañana <strong>salí</strong> de The Jayne a las siete, <strong>subí</strong> al Metro, <strong>llegué</strong> a la oficina de Adobe a las ocho y <strong>abrí</strong> Snowflake antes de mi primera reunión.</div>
     <div class="ex-en">This morning I left The Jayne at seven, got on the Metro, arrived at the Adobe office at eight, and opened Snowflake before my first meeting.</div>
-    <div class="ex-why">In Mexican Spanish, these actions happened today — but the door to the past slammed shut the moment each was completed. A Spaniard would say "esta mañana he salido, he subido..." using the Present Perfect because "today" is still active. A Mexican uses Preterite for all of these because each action is fully completed the millisecond it ends, regardless of the calendar day. This is the most important dialect distinction in all of Spanish grammar for daily use.</div>
+    <div class="ex-why">In Mexican Spanish, these actions happened today — but the door to the past slammed shut the moment each was completed. A Spaniard would say "esta mañana he salido, he subido..." using the Present Perfect because "today" is still active.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Missing Preterite Accent = Wrong Tense</span>
     <div class="ex-sp"><span class="wrong">Mi jefe hablo con el cliente ayer — parece que fue bien.</span> → <span class="right">Mi jefe habló con el cliente ayer — parece que fue bien.</span></div>
-    <div class="ex-why">"Hablo" (no accent) = yo present tense. The sentence says "My boss I-speak with the client yesterday" — wrong person AND wrong tense. The accent on the ó is the only orthographic signal that distinguishes third-person preterite from first-person present. "Ayer" demands preterite — but without the ó accent, the verb form contradicts the time marker. This is simultaneously a tense error and a subject-verb agreement error caused by one missing accent mark.</div>
+    <div class="ex-why">"Hablo" (no accent) = yo present tense. The sentence says "My boss I-speak with the client yesterday" — wrong person AND wrong tense.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Present Perfect for Today (Spanish Context)</span>
     <div class="ex-sp"><span class="wrong">Esta mañana he preparado el espresso en la Lelit Bianca. (Mexican context)</span> → <span class="right">Esta mañana preparé el espresso en la Lelit Bianca.</span></div>
-    <div class="ex-why">The Present Perfect ("he preparado") sounds natural in Peninsular Spain, where "today" keeps the door to the past open until midnight. In Mexican Spanish, it sounds foreign, overly formal, or like you are imitating European Spanish. The moment the espresso was prepared — even at 6 AM — the Mexican door slammed shut and Preterite ("preparé") is the only correct choice. In Latin America, "he preparado" is reserved exclusively for bucket-list experiences: "He visitado Japón una vez en mi vida."</div>
+    <div class="ex-why">The Present Perfect ("he preparado") sounds natural in Peninsular Spain, where "today" keeps the door to the past open until midnight. In Mexican Spanish, it sounds foreign, overly formal, or like you are imitating European Spanish.</div>
   </div>
 </div>
   </section>
@@ -3691,9 +3748,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Grammatical Aspect</div>
-  <div class="ld-body">
+<div class="ld-body">
     <strong>Aspect</strong> is one of the most important and least-taught grammatical concepts. It does not describe <em>when</em> something happened — it describes <em>how the speaker is viewing it</em>.<br><br>
     The Preterite has <strong>perfective aspect</strong> — from Latin <em>perfectus</em> (completed, brought to perfection/finish). You view the action from the outside as a sealed whole: it has a defined start, a defined end, it's done.<br><br>
     This is why the Preterite drives narrative forward. Every preterite verb is a <strong>snapshot</strong> — a photograph dropped onto the editing board. The sequence of preterite verbs is the sequence of events: llegué → vi → entré → hablé → salí. Each one clicks the story one frame forward.
@@ -3751,32 +3806,27 @@ body {
     <span class="ex-tag ar">-AR · Habitual Past + Courtesy Register</span>
     <div class="ex-sp">Cuando era niño en Minneapolis, siempre <strong>hablaba</strong> español con mi abuela los domingos — era nuestra tradición. / Hola, <strong>llamaba</strong> para confirmar mi cita en el Instituto Cervantes el jueves.</div>
     <div class="ex-en">(1) When I was a child in Minneapolis, I always used to speak Spanish with my grandmother on Sundays — it was our tradition. (2) Hello, I was calling to confirm my appointment at Instituto Cervantes on Thursday.</div>
-    <div class="ex-why">(1) "Siempre hablaba" — the combination of "siempre" with Imperfect is a classic habitual past formula. No defined start or end date; just a looping routine from that era of life. (2) "Llamaba para confirmar" — the Imperfecto de Cortesía. The caller steps into the past tense to soften the request, removing the aggressive urgency of "llamo para exigir." This is standard professional Mexican Spanish — hotels, doctors' offices, service desks all use it automatically.</div>
+    <div class="ex-why">(1) "Siempre hablaba" — the combination of "siempre" with Imperfect is a classic habitual past formula. No defined start or end date; just a looping routine from that era of life. (2) "Llamaba para confirmar" — the Imperfecto de Cortesía.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Background Loop Interrupted</span>
-    <div class="ex-sp"><strong>Comía</strong> en la cafetería de Adobe cuando <strong>llegó</strong> un mensaje urgente de mi director — <strong>dejé</strong> el plato a medias y <strong>corrí</strong> a la sala de conferencias.</div>
-    <div class="ex-en">I was eating in the Adobe cafeteria when an urgent message from my director arrived — I left my plate half-eaten and ran to the conference room.</div>
-    <div class="ex-why">Classic Imperfect + Preterite narrative structure. "Comía" is the looping background video (ongoing, in progress, no defined end). "Llegó" is the single preterite photograph that interrupts it. Then two more preterites ("dejé," "corrí") drive the plot forward. The pattern is: Imperfect sets the scene → Preterite interrupts it → more Preterites advance the story. The Imperfect never moves the plot; it only creates the stage for the Preterite to act on.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Era + Background State</span>
     <div class="ex-sp">Antes de mudarme a The Jayne, <strong>vivía</strong> cerca de Fig en un apartamento más pequeño — <strong>era</strong> más barato pero el vecindario no tenía la misma energía que West Adams.</div>
     <div class="ex-en">Before moving to The Jayne, I used to live near Fig in a smaller apartment — it was cheaper but the neighborhood didn't have the same energy as West Adams.</div>
-    <div class="ex-why">"Vivía" and "era" are both Imperfect — both describe ongoing background states from that period of life. Neither has a defined start or endpoint being referenced. This is the Imperfect's primary domain: describing how things were, what life was like, what the weather/mood/circumstances were during a period. The Imperfect is the language of memory and description; the Preterite is the language of events and sequence.</div>
+    <div class="ex-why">"Vivía" and "era" are both Imperfect — both describe ongoing background states from that period of life. Neither has a defined start or endpoint being referenced.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Imperfect for Single Completed Event</span>
     <div class="ex-sp"><span class="wrong">Ayer llegaba a la oficina de Adobe a las nueve en punto.</span> → <span class="right">Ayer llegué a la oficina de Adobe a las nueve en punto.</span></div>
-    <div class="ex-why">"Ayer" (yesterday) pinpoints a specific, completed, bounded calendar day — it is a preterite trigger. "Llegaba" (Imperfect) would mean the arriving was a habitual, ongoing, unbounded activity — which contradicts the specific time stamp "a las nueve en punto." The Imperfect is incompatible with precise one-time references. Signal words that demand Preterite: ayer, anteayer, el lunes pasado, hace dos días, a las tres, de repente, en ese momento.</div>
+    <div class="ex-why">"Ayer" (yesterday) pinpoints a specific, completed, bounded calendar day — it is a preterite trigger. "Llegaba" (Imperfect) would mean the arriving was a habitual, ongoing, unbounded activity — which contradicts the specific time stamp "a las nueve en punto." The Imperfect is incompatible with precise one-time references.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Preterite for Background Action</span>
     <div class="ex-sp"><span class="wrong">Horneé scones el domingo cuando Felix saltó a la mesa.</span> → <span class="right">Horneaba scones el domingo cuando Felix saltó a la mesa.</span></div>
-    <div class="ex-why">The baking was the ongoing background — it had already been in progress when the jumping happened. Using Preterite for both verbs ("horneé... saltó") puts them on the same timeline as two sequential completed events, which destroys the story. "Horneé scones" means the baking was one completed, bounded event — like a photograph. "Horneaba scones" means it was an ongoing looping video — the background stage. The story only makes sense with the contrast: background (Imperfect) + interruption (Preterite).</div>
+    <div class="ex-why">The baking was the ongoing background — it had already been in progress when the jumping happened. Using Preterite for both verbs ("horneé... saltó") puts them on the same timeline as two sequential completed events, which destroys the story.</div>
   </div>
 </div>
   </section>
@@ -3820,9 +3870,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Grammatical Aspect</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Imperfect has <strong>imperfective aspect</strong> — from Latin <em>imperfectus</em> (unfinished, not brought to completion). You view the action from the inside, while it is still unfolding, with no reference to its beginning or end.<br><br>
     The metaphor of <strong>background video vs. photograph</strong> reflects a deep linguistic truth: the Imperfect is the <em>durational</em> tense. It describes states, habits, and ongoing processes that existed as a backdrop. It never pushes the story forward — it sets the stage.<br><br>
     This is also why the Imperfect is used for courtesy. Stepping into the past tense psychologically <strong>removes the pressure</strong> of the present moment: "quería pedir" distances the desire slightly, making it feel less demanding than "quiero pedir." The grammar encodes politeness.
@@ -3867,32 +3915,27 @@ body {
     <span class="ex-tag ar">-AR · Deep Chronology Established</span>
     <div class="ex-sp">Cuando <strong>llegué</strong> a la reunión de Adobe a las nueve, mi jefe ya <strong>había empezado</strong> la presentación y los clientes internacionales ya <strong>habían recibido</strong> el reporte de análisis.</div>
     <div class="ex-en">When I arrived at the Adobe meeting at nine, my boss had already started the presentation and the international clients had already received the analysis report.</div>
-    <div class="ex-why">One anchor event (llegué — preterite, specific moment of arrival) with two pluperfect events that had been completed before that anchor. The "ya" (already) is the linguistic signal that a prior completion is being referenced — it almost always pairs with the Pluperfect. The timeline: 1) Boss started presentation (deep past) → 2) Clients received report (deep past) → 3) I arrived (preterite anchor). The Pluperfect makes this three-layer chronology precise and unambiguous.</div>
+    <div class="ex-why">One anchor event (llegué — preterite, specific moment of arrival) with two pluperfect events that had been completed before that anchor. The "ya" (already) is the linguistic signal that a prior completion is being referenced — it almost always pairs with the Pluperfect.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Irregular Participle in Context</span>
-    <div class="ex-sp">Fui a construir el modelo predictivo en Snowflake, pero mi colega ya lo <strong>había hecho</strong> — incluso <strong>había escrito</strong> la documentación completa. Me ahorró dos horas.</div>
-    <div class="ex-en">I went to build the predictive model in Snowflake, but my colleague had already done it — she had even written the complete documentation. She saved me two hours.</div>
-    <div class="ex-why">Two irregular participles: hacer → hecho, escribir → escrito. Both require the Pluperfect because both were completed before the anchor event (fui). Notice the narrative value: by using the Pluperfect, the speaker can start at the moment of realization ("fui a construir") and then flashback to explain what had happened before. This is the tense of sophisticated storytelling — you can begin at any point in time and reach backward to provide context.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · vivir / escribir / salir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Backstory Before the Story</span>
     <div class="ex-sp">Cuando por fin <strong>salí</strong> a buscar apartamento en West Adams, ya <strong>había vivido</strong> tres años en Silver Lake y <strong>había decidido</strong> que quería algo con más carácter de barrio.</div>
     <div class="ex-en">When I finally went out to look for an apartment in West Adams, I had already lived three years in Silver Lake and had decided I wanted something with more neighborhood character.</div>
-    <div class="ex-why">The Pluperfect here provides the backstory that explains the decision. The anchor (salí a buscar) is preterite. The context that motivated the decision (había vivido, había decidido) happened before and requires Pluperfect. This is the B1 narrative skill: rather than telling events in strict chronological order, you can start at a key moment and reach backward to explain the context that led to it. Mastering this structure immediately elevates your Spanish from A2 storytelling to B1 sophistication.</div>
+    <div class="ex-why">The Pluperfect here provides the backstory that explains the decision. The anchor (salí a buscar) is preterite.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Preterite for Both Events — Timeline Flattened</span>
     <div class="ex-sp"><span class="wrong">Cuando llegué a la reunión, mi jefe ya empezó la presentación.</span> → <span class="right">Cuando llegué a la reunión, mi jefe ya había empezado la presentación.</span></div>
-    <div class="ex-why">"Ya empezó" (Preterite) places both events on the same level of pastness — it reads as "my boss started the presentation right when I arrived" or "my boss had already started" (ambiguous). "Ya había empezado" (Pluperfect) is unambiguous — the starting was definitively completed BEFORE the arriving. The "ya" gives a strong signal that Pluperfect is needed. Whenever you see "ya" in a past context with a completed prior action, the Pluperfect should fire automatically.</div>
+    <div class="ex-why">"Ya empezó" (Preterite) places both events on the same level of pastness — it reads as "my boss started the presentation right when I arrived" or "my boss had already started" (ambiguous). "Ya había empezado" (Pluperfect) is unambiguous — the starting was definitively completed BEFORE the arriving.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Regular Participle on Irregular Verb</span>
     <div class="ex-sp"><span class="wrong">Ya había hacido el análisis. / Ya había escribido el reporte. / Ya había visto el error.</span> → <span class="right">Ya había hecho. / Había escrito. / Había visto.</span></div>
-    <div class="ex-why">These are the six most important irregular participles to memorize: hacer→hecho, escribir→escrito, ver→visto, poner→puesto, decir→dicho, volver→vuelto. Adding the regular -ido ending to them is a systematic error that marks you as a learner immediately. Memory trick: these are short, punchy forms — hecho, dicho, visto, puesto. They were already short in Latin and Spanish preserved their brevity. If a participle feels too short to be correct, it probably is correct.</div>
+    <div class="ex-why">These are the six most important irregular participles to memorize: hacer→hecho, escribir→escrito, ver→visto, poner→puesto, decir→dicho, volver→vuelto. Adding the regular -ido ending to them is a systematic error that marks you as a learner immediately.</div>
   </div>
 </div>
   </section>
@@ -3936,9 +3979,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Affirmative Imperative is one of the oldest grammatical structures in any language — it predates complex syntax. In Latin, the imperative was formed simply by using the <strong>bare verb stem</strong> without any personal ending: <em>ama!</em> (love!), <em>veni!</em> (come!).<br><br>
     The Spanish informal tú command preserved this: <code>habla, come, vive</code> — it uses the 3rd person singular present (which is itself very close to the bare stem). The formal Usted command borrows from the Subjunctive because commanding a social superior is — grammatically and culturally — entering <strong>irrealis territory</strong>: you're not asserting reality, you're requesting a change to it.
   </div>
@@ -3970,32 +4011,27 @@ body {
     <span class="ex-tag ar">-AR · Formal vs. Informal Command Contrast</span>
     <div class="ex-sp">A un amigo: "<strong>Habla</strong> más despacio, por favor — no te entiendo bien." / Al director de Adobe: "Señor García, por favor <strong>hable</strong> más despacio durante la presentación."</div>
     <div class="ex-en">To a friend: "Speak more slowly, please — I don't understand you well." / To the Adobe director: "Mr. García, please speak more slowly during the presentation."</div>
-    <div class="ex-why">Same verb, same meaning, completely different grammatical forms depending on social relationship. "Habla" (tú command) = 3rd person singular present indicative form, used with friends, family, peers. "Hable" (usted command) = subjunctive form with -e ending, used with superiors, professionals, elders. Using "habla" to your director is a social error equivalent to using first names in a formal culture. The form choice encodes respect.</div>
+    <div class="ex-why">Same verb, same meaning, completely different grammatical forms depending on social relationship. "Habla" (tú command) = 3rd person singular present indicative form, used with friends, family, peers.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer / leer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Command + Enclisis Cascade</span>
-    <div class="ex-sp">Felix, <strong>come</strong> tu comida. / El análisis está listo — <strong>léelo</strong> antes de la reunión. / Los resultados llegaron — <strong>envíamelos</strong> al teléfono.</div>
-    <div class="ex-en">Felix, eat your food. / The analysis is ready — read it before the meeting. / The results arrived — send them to me on my phone.</div>
-    <div class="ex-why">Three levels of enclisis complexity. "Come" = plain tú command, no pronoun. "Léelo" = leer command (lee) + lo — one pronoun attached; irregular gerund note: the accent on "lee" is maintained → léelo (Esdrújula). "Envíamelos" = enviar command (envía) + me + los — two pronouns attached; Sobreesdrújula category, accent required to protect the stressed syllable. Each level demonstrates how adding pronouns to affirmative commands follows the SEGA stress-protection rules learned in Section 03.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · venir / salir / decir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Irregular Tú Commands in Daily Life</span>
     <div class="ex-sp"><strong>Ven</strong> a mi oficina cuando termines. / <strong>Sal</strong> de la reunión si no es relevante para ti. / <strong>Di</strong> lo que piensas — aquí todos pueden opinar.</div>
     <div class="ex-en">Come to my office when you finish. / Leave the meeting if it's not relevant to you. / Say what you think — everyone can share their opinion here.</div>
-    <div class="ex-why">Three of the eight irregular tú commands (Vin Diesel Has Ten Weapons): venir→ven, salir→sal, decir→di. These do not follow the standard "3rd person present = tú command" rule. They are fixed, memorized units. The mnemonic "VIN DIESEL HAS TEN WEAPONS" (ven, ir→ve, no, di, ir→ve... sal, el, haz, ten) covers all eight. For -IR irregular commands specifically: venir and decir both lose their stem entirely in the command form.</div>
+    <div class="ex-why">Three of the eight irregular tú commands (Vin Diesel Has Ten Weapons): venir→ven, salir→sal, decir→di. These do not follow the standard "3rd person present = tú command" rule.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Tú Command with Superior — Social Error</span>
     <div class="ex-sp"><span class="wrong">Señor director de Adobe, habla más despacio en la presentación.</span> → <span class="right">Señor director, hable más despacio en la presentación.</span></div>
-    <div class="ex-why">"Habla" is the informal tú command — grammatically identical to the él/ella present tense form. Addressing a director with the tú command register is equivalent to aggressively addressing your boss by first name in English. The formal usted command borrows the subjunctive ending: -AR verbs take -e (hable), -ER/-IR verbs take -a (coma, viva). Always assess the social relationship before choosing the command register.</div>
+    <div class="ex-why">"Habla" is the informal tú command — grammatically identical to the él/ella present tense form. Addressing a director with the tú command register is equivalent to aggressively addressing your boss by first name in English.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Pronoun Before Affirmative Command</span>
     <div class="ex-sp"><span class="wrong">Me lo envía ahora mismo.</span> → <span class="right">Envíamelo ahora mismo.</span></div>
-    <div class="ex-why">In affirmative commands, pronouns are physically forced to the end of the verb (enclisis). They cannot float before it. "Me lo envía" is actually the present indicative third person — "he sends it to me" — not a command at all. The command requires the imperative form "envía" with pronouns attached to the back: envía + me + lo = envíamelo. The accent mark appears because attaching two pronouns pushes the stressed vowel into Sobreesdrújula territory. The rule is absolute: affirmative command = pronouns go AFTER.</div>
+    <div class="ex-why">In affirmative commands, pronouns are physically forced to the end of the verb (enclisis). They cannot float before it.</div>
   </div>
 </div>
   </section>
@@ -4109,9 +4145,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — The Collapse of the Latin Case System</div>
-  <div class="ld-body">
+<div class="ld-body">
     Latin had a full <strong>case system</strong> — nouns changed their endings to show their grammatical role (subject, direct object, indirect object, possession). Spanish inherited the pronoun system as the <em>last surviving remnant</em> of this case system:<br><br>
     Latin <em>ille</em> (that one — nominative/subject) → Spanish <code>él</code><br>
     Latin <em>illum</em> (that one — accusative/direct object) → Spanish <code>lo</code><br>
@@ -4155,32 +4189,27 @@ body {
     <span class="ex-tag ar">-AR · Negative Command + Immediate Affirmative Alternative</span>
     <div class="ex-sp">¡<strong>No corras</strong> con esos zapatos viejos por West Adams — <strong>usa</strong> los Vivobarefoot que son mucho mejores para tu postura!</div>
     <div class="ex-en">Don't run in those old shoes through West Adams — use the Vivobarefoot ones that are much better for your posture!</div>
-    <div class="ex-why">Negative and affirmative commands in the same sentence — note how the form completely changes. "No corras" = no + corras (subjunctive tú of correr: corra → corras). "Usa" = affirmative tú command (3rd person present of usar). The subjunctive is forced by the negative because not-running is a hypothetical non-event — an irrealis reality. The affirmative alternative "usa" returns immediately to the indicative-derived command form because using the Vivobarefoot is a real proposed action.</div>
+    <div class="ex-why">Negative and affirmative commands in the same sentence — note how the form completely changes. "No corras" = no + corras (subjunctive tú of correr: corra → corras).</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer / hacer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Formal Negative + Pronoun Proclisis</span>
-    <div class="ex-sp">Señor veterinario, por favor <strong>no le dé</strong> comida seca a Felix hoy — está recuperándose de la cirugía y su sistema digestivo todavía es delicado.</div>
-    <div class="ex-en">Doctor, please don't give Felix dry food today — he's recovering from surgery and his digestive system is still delicate.</div>
-    <div class="ex-why">Formal usted negative command: no + le (indirect pronoun, floats before verb — proclisis) + dé (subjunctive of dar, irregular DISHES verb). The pronoun "le" must float between "no" and the verb — it cannot attach to the end. Compare with the affirmative equivalent "Déle comida suave" (dé + le, enclisis — attached to end). The pronoun position flips completely between affirmative and negative commands. This is the rule that catches most learners off guard.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · escribir / enviar</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Double Pronoun Proclisis</span>
     <div class="ex-sp">¿El código roto de Python? <strong>No me lo envíes</strong> todavía — <strong>termina</strong> de arreglarlo primero y después <strong>mándamelo</strong> con las notas de cambios.</div>
     <div class="ex-en">The broken Python code? Don't send it to me yet — finish fixing it first and then send it to me with the change notes.</div>
-    <div class="ex-why">The same verb (enviar/mandar) appears twice — once as a negative command (no me lo envíes — proclisis, both pronouns before verb) and once as an affirmative command (mándamelo — enclisis, both pronouns after verb). The structural contrast in one sentence demonstrates the rule perfectly. In "no me lo envíes": No + me (IO) + lo (DO) + envíes (subjunctive). In "mándamelo": mánda (command) + me (IO) + lo (DO). The IO always precedes the DO regardless of position.</div>
+    <div class="ex-why">The same verb (enviar/mandar) appears twice — once as a negative command (no me lo envíes — proclisis, both pronouns before verb) and once as an affirmative command (mándamelo — enclisis, both pronouns after verb). The structural contrast in one sentence demonstrates the rule perfectly.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Affirmative Form After "No"</span>
     <div class="ex-sp"><span class="wrong">No habla tan rápido en la reunión.</span> → <span class="right">No hables tan rápido en la reunión.</span></div>
-    <div class="ex-why">"No habla" is present indicative third person — "he/she doesn't speak." Putting "no" in front of the affirmative tú command does NOT create a negative command in Spanish. You must switch to the subjunctive form entirely. "No hables" — the form changes completely. This error is so common because English creates negatives by adding "don't" without changing the verb ("don't speak" vs. "speak"). Spanish requires a completely different verb form for negative commands.</div>
+    <div class="ex-why">"No habla" is present indicative third person — "he/she doesn't speak." Putting "no" in front of the affirmative tú command does NOT create a negative command in Spanish. You must switch to the subjunctive form entirely.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Enclisis in Negative Command</span>
     <div class="ex-sp"><span class="wrong">No envíamelo todavía.</span> → <span class="right">No me lo envíes todavía.</span></div>
-    <div class="ex-why">"No envíamelo" commits two errors simultaneously: (1) it uses the affirmative command form (envía) after "no" instead of the subjunctive (envíes), and (2) it keeps the pronouns attached to the end (enclisis) when negative commands require proclisis (pronouns float before the verb). The correct form breaks down as: No (negation) + me (IO, floating) + lo (DO, floating) + envíes (subjunctive tú of enviar). Both the verb form AND the pronoun position must change together when switching from affirmative to negative.</div>
+    <div class="ex-why">"No envíamelo" commits two errors simultaneously: (1) it uses the affirmative command form (envía) after "no" instead of the subjunctive (envíes), and (2) it keeps the pronouns attached to the end (enclisis) when negative commands require proclisis (pronouns float before the verb). The correct form breaks down as: No (negation) + me (IO, floating) + lo (DO, floating) + envíes (subjunctive tú of enviar).</div>
   </div>
 </div>
   </section>
@@ -4224,9 +4253,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive</div>
-  <div class="ld-body">
+<div class="ld-body">
     <strong>Gustar</strong> comes from Latin <em>gustare</em> — meaning <em>to taste, to sample</em>. In classical Latin it was a transitive verb with a normal subject-object structure: "I taste the wine." Over time in Vulgar Latin, it shifted to describe the experience being felt by a person, inverting the subject-object relationship.<br><br>
     This structural inversion — where the <strong>thing doing the pleasing is the grammatical subject</strong> — is called a <strong>psych verb</strong> construction. The "experiencer" (the person feeling the emotion) is demoted to indirect object. Spanish has dozens of these: <em>interesar, molestar, fascinar, aburrir, sorprender</em>. The logic: emotions happen <em>to</em> you, not <em>by</em> you.
   </div>
@@ -4260,32 +4287,27 @@ body {
     <span class="ex-tag ar">-AR · Reverse Subject — Singular Agreement</span>
     <div class="ex-sp">A mí <strong>me encanta</strong> el café de especialidad preparado en la Lelit Bianca — especialmente el espresso doble por la mañana antes de revisar los datos en Snowflake.</div>
     <div class="ex-en">I love specialty coffee prepared in the Lelit Bianca — especially the double espresso in the morning before reviewing the data in Snowflake.</div>
-    <div class="ex-why">The subject is "el café" (singular masculine) → encanta (singular). "A mí me" establishes the experiencer through both the full prepositional phrase (a mí) and the indirect object pronoun (me) — this is optional emphasis, not required. The logic: coffee is doing the pleasing; I am receiving the experience. Without this inversion, "yo encanto el café" would mean "I am enchanting to the coffee" — which is backwards. In gustar-type verbs, the thing that causes the experience is always the grammatical subject.</div>
+    <div class="ex-why">The subject is "el café" (singular masculine) → encanta (singular). "A mí me" establishes the experiencer through both the full prepositional phrase (a mí) and the indirect object pronoun (me) — this is optional emphasis, not required.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · interesar / parecer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Plural Subject Agreement + Clitic Doubling</span>
-    <div class="ex-sp">A mi equipo de analytics de Adobe <strong>le interesan</strong> los modelos predictivos con XGBoost — <strong>les parece</strong> que son más precisos que la regresión lineal tradicional.</div>
-    <div class="ex-en">My Adobe analytics team is interested in predictive models with XGBoost — they think they are more precise than traditional linear regression.</div>
-    <div class="ex-why">Two gustar-type verbs in sequence. "Los modelos" (plural) → interesan (plural). "Que son más precisos" → parece (singular — "que son..." is a subordinate clause, which is singular as a unit). Both use "le" for the team (singular collective noun). Clitic doubling: "a mi equipo" names the receiver but "le" is still mandatory — Spanish requires the pronoun tracking code even when the recipient is explicitly named. Removing "le" would be grammatically incorrect.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · molestar / aburrir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Molestar + Faltar in Professional Context</span>
     <div class="ex-sp">A Felix <strong>le molesta</strong> el ruido cuando duerme después de su cirugía. / A mí <strong>me faltan</strong> dos horas de trabajo para terminar el análisis de Snowflake.</div>
     <div class="ex-en">Felix is bothered by the noise when he sleeps after his surgery. / I am two hours short of finishing the Snowflake analysis.</div>
-    <div class="ex-why">(1) "Le molesta el ruido" — ruido (singular) → molesta (singular). Felix is the experiencer receiving the bother. (2) "Me faltan dos horas" — dos horas (plural) → faltan (plural). Faltar means "to be missing/lacking" — the hours are the subject doing the lacking, not me. This is the professional faltar use: "me falta un dato" (I'm missing one data point), "nos falta tiempo" (we're short on time). Essential for workplace Spanish.</div>
+    <div class="ex-why">(1) "Le molesta el ruido" — ruido (singular) → molesta (singular). Felix is the experiencer receiving the bother. (2) "Me faltan dos horas" — dos horas (plural) → faltan (plural).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Verb Agrees With Person, Not Thing</span>
     <div class="ex-sp"><span class="wrong">A mi equipo le interesan los modelos → Me gustan el análisis de datos.</span> → <span class="right">Me gusta el análisis de datos.</span></div>
-    <div class="ex-why">"El análisis" is singular → gusta (singular). The verb must agree with "el análisis" (the subject that does the pleasing), NOT with "me" (the person experiencing the pleasure). This is the defining structural feature of gustar-type verbs and the error that reveals whether a learner has truly internalized the inversion. Test: ask "what is doing the pleasing?" That answer is the subject. If it is singular, use gusta/encanta/interesa. If plural, use gustan/encantan/interesan.</div>
+    <div class="ex-why">"El análisis" is singular → gusta (singular). The verb must agree with "el análisis" (the subject that does the pleasing), NOT with "me" (the person experiencing the pleasure).</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Subject Pronoun Instead of Object Pronoun</span>
     <div class="ex-sp"><span class="wrong">Yo gusto el café de especialidad.</span> → <span class="right">Me gusta el café de especialidad.</span></div>
-    <div class="ex-why">"Yo gusto el café" is a double grammatical disaster: (1) It puts "yo" as the subject, which would mean "I please the coffee" — the person is pleasing the coffee, not the other way around. (2) It omits the indirect object pronoun "me" that marks the experiencer. The correct structure has NO subject pronoun (the coffee is the subject) and uses "me" as the indirect object receiver of the pleasure. When you want to say "I like X," reach for the structure "me gusta X" — never "yo gusto X."</div>
+    <div class="ex-why">"Yo gusto el café" is a double grammatical disaster: (1) It puts "yo" as the subject, which would mean "I please the coffee" — the person is pleasing the coffee, not the other way around. (2) It omits the indirect object pronoun "me" that marks the experiencer. The correct structure has NO subject pronoun (the coffee is the subject) and uses "me" as the indirect object receiver of the pleasure.</div>
   </div>
 </div>
 
@@ -4421,12 +4443,12 @@ body {
       <span class="ex-tag er">Meaning shift — reflexive changes the verb entirely</span>
       <div class="ex-sp">El proyecto <strong>va</strong> bien, pero mi jefe <strong>se va</strong> a otra empresa el mes que viene.</div>
       <div class="ex-en">The project is going well, but my boss is leaving for another company next month.</div>
-      <div class="ex-why"><em>va</em> (goes / is going — motion) vs. <em>se va</em> (is leaving / departing — departure). The <em>se</em> doesn't mean "to himself" — it shifts the meaning entirely. This idiomatic reflexive pattern is very common: <em>quedar</em> (to remain) / <em>quedarse</em> (to stay); <em>llevar</em> (to carry) / <em>llevarse</em> (to take away); <em>parecer</em> (to seem) / <em>parecerse</em> (to look like someone).</div>
+      <div class="ex-why">va (goes / is going — motion) vs. se va (is leaving / departing — departure). The se doesn't mean "to himself" — it shifts the meaning entirely.</div>
     </div>
     <div class="ex-item warn">
       <span class="ex-tag err">Missing reflexive pronoun — changes who receives the action</span>
       <div class="ex-sp"><span class="wrong">Levanto a las 7 todos los días.</span> → <span class="right">Me levanto a las 7 todos los días.</span></div>
-      <div class="ex-why">Without <em>me</em>, the sentence means "I get someone/something up at 7" — as in waking up another person. The reflexive pronoun is never optional in reflexive verbs; it is part of the verb's grammar. <em>Levanto</em> and <em>Me levanto</em> are different verbs with different subjects/objects.</div>
+      <div class="ex-why">Without me, the sentence means "I get someone/something up at 7" — as in waking up another person. The reflexive pronoun is never optional in reflexive verbs; it is part of the verb's grammar.</div>
     </div>
   </div>
 </section>
@@ -4471,13 +4493,13 @@ body {
       <span class="ex-tag ar">All three distances in one sentence</span>
       <div class="ex-sp"><strong>Este</strong> dashboard es mío. <strong>Ese</strong> informe es el tuyo. <strong>Aquel</strong> modelo de machine learning lo construimos juntos el año pasado.</div>
       <div class="ex-en">This dashboard is mine. That report is yours. That ML model over there — we built it together last year.</div>
-      <div class="ex-why"><em>este</em> = close to speaker. <em>ese</em> = close to the other person / in their space. <em>aquel</em> = distant in space AND time (last year). All masculine singular, agreeing with their nouns. The three-tier distance system encodes both physical and temporal/emotional proximity.</div>
+      <div class="ex-why">este = close to speaker. ese = close to the other person / in their space. aquel = distant in space AND time (last year). All masculine singular, agreeing with their nouns.</div>
     </div>
     <div class="ex-item good">
       <span class="ex-tag er">Neuter — for the abstract</span>
       <div class="ex-sp">Nos pidieron más datos sin darte contexto? <strong>Eso</strong> no tiene ningún sentido.</div>
       <div class="ex-en">They asked for more data without giving you context? That doesn't make any sense.</div>
-      <div class="ex-why"><em>Eso</em> = the entire situation just described (abstract, not a specific noun). No gender because the reference is conceptual. This is the most common use of the neuter demonstrative in everyday speech — referring back to something just said.</div>
+      <div class="ex-why">Eso = the entire situation just described (abstract, not a specific noun). No gender because the reference is conceptual.</div>
     </div>
   </div>
 </section>
@@ -4585,12 +4607,12 @@ body {
       <span class="ex-tag er">Stacking two que clauses</span>
       <div class="ex-sp">El informe <strong>que</strong> terminé ayer tiene los resultados <strong>que</strong> necesitaban para la presentación del martes.</div>
       <div class="ex-en">The report that I finished yesterday has the results that they needed for Tuesday's presentation.</div>
-      <div class="ex-why">Two relative clauses in sequence. First: <em>que terminé ayer</em> describes <em>el informe</em>. Second: <em>que necesitaban</em> describes <em>los resultados</em>. Both <em>que</em> are mandatory — removing either one breaks the sentence structurally.</div>
+      <div class="ex-why">Two relative clauses in sequence. First: que terminé ayer describes el informe.</div>
     </div>
     <div class="ex-item warn">
       <span class="ex-tag err">Dropped connector — English interference</span>
       <div class="ex-sp"><span class="wrong">El modelo construí funciona bien.</span> → <span class="right">El modelo <strong>que</strong> construí funciona bien.</span></div>
-      <div class="ex-why">English: "The model I built works well" — connector optional. Spanish: <em>que</em> is always required to link the relative clause to the noun. Without <em>que</em>, <em>construí</em> hangs without a connector and the sentence is ungrammatical.</div>
+      <div class="ex-why">English: "The model I built works well" — connector optional. Spanish: que is always required to link the relative clause to the noun.</div>
     </div>
   </div>
 </section>
@@ -4642,9 +4664,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Two Latin Prepositions Became One English Word</div>
-  <div class="ld-body">
+<div class="ld-body">
     The confusion between por and para exists entirely because <strong>English collapsed two Latin prepositions into one word</strong>:<br><br>
     Latin <code>PER</code> → Spanish <code>por</code> — expressed movement through, agency, cause: <em>"per viam"</em> (through the road), <em>"per te"</em> (because of you/through you)<br>
     Latin <code>PRO</code> → Spanish <code>para</code> — expressed forward motion toward a goal, benefit for someone: <em>"pro patria"</em> (for the homeland — on its behalf/toward its benefit)<br><br>
@@ -4668,32 +4688,27 @@ body {
     <span class="ex-tag ar">-AR · Por (Route) and Para (Purpose) Together</span>
     <div class="ex-sp">Los domingos corro <strong>por</strong> West Adams durante cuarenta minutos <strong>para</strong> entrenar mis piernas y despejarme antes de la semana laboral en Adobe.</div>
     <div class="ex-en">On Sundays I run through West Adams for forty minutes in order to train my legs and clear my head before the work week at Adobe.</div>
-    <div class="ex-why">Por and para in the same sentence, each serving a different function. "Por West Adams" = the route traversed (backward: I am moving through the physical space). "Para entrenar" = the purpose/goal (forward: the reason that motivates the running). If you swapped them: "corro para West Adams" would imply West Adams is the destination you're heading toward, and "corro por entrenar" would mean you are running on behalf of / because of training (as if training were a person or cause that motivated you). The direction matters completely.</div>
+    <div class="ex-why">Por and para in the same sentence, each serving a different function. "Por West Adams" = the route traversed (backward: I am moving through the physical space).</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Por vs. Para for Same Verb, Opposite Meaning</span>
-    <div class="ex-sp"><strong>Hice</strong> el análisis de XGBoost <strong>para</strong> mi colega — es para que ella lo presente al cliente. / <strong>Hice</strong> el análisis <strong>por</strong> mi colega — ella estaba enferma y no pudo hacerlo.</div>
-    <div class="ex-en">I did the XGBoost analysis for my colleague — it's for her to present to the client. / I did the analysis for (on behalf of) my colleague — she was sick and couldn't do it.</div>
-    <div class="ex-why">Identical verb, identical noun, completely opposite meaning. "Para mi colega" = intended recipient, beneficiary — you made it as a deliverable for her use. "Por mi colega" = substitution, on her behalf — you did it in her place because she couldn't. This contrast is the core of por/para: para points toward the recipient/purpose/destination (forward); por points toward the cause/substitution/motivation (backward). The distinction is not about time — it is about the direction of the relationship between action and person.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · salir / vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Para for Deadline, Por for Exchange</span>
     <div class="ex-sp">El reporte de datos tiene que estar listo <strong>para</strong> el viernes a las cinco. Lo vendimos <strong>por</strong> veinte horas de consultoría — es un precio justo para el cliente.</div>
     <div class="ex-en">The data report has to be ready by Friday at five. We sold it for twenty hours of consulting — it's a fair price for the client.</div>
-    <div class="ex-why">"Para el viernes" = deadline target (a point in time being aimed toward). "Por veinte horas" = exchange value (what was traded to obtain the work). These are two entirely different uses of por/para that cannot be swapped: "para veinte horas" would mean the report is intended to last twenty hours, and "por el viernes" would imply the report exists because of Friday (Friday as a cause), which makes no sense.</div>
+    <div class="ex-why">"Para el viernes" = deadline target (a point in time being aimed toward). "Por veinte horas" = exchange value (what was traded to obtain the work).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Por/Para Swap That Changes Meaning Entirely</span>
     <div class="ex-sp"><span class="wrong">Compré este café especial por ti.</span> vs. <span class="right">Compré este café especial para ti.</span> — These are BOTH correct but mean opposite things.</div>
-    <div class="ex-why">"Para ti" = I bought it as a gift intended for you to receive (you are the recipient). "Por ti" = I bought it because of you / on your behalf / substituting for you (you motivated the action or I did it in your place). Neither is grammatically wrong — the error is using one when you mean the other. The practical test: if you are giving something as a present, use para. If you are acting on someone's behalf or because of them, use por. In a gift situation, "compré esto por ti" would imply you bought it because they couldn't, not as a gift.</div>
+    <div class="ex-why">"Para ti" = I bought it as a gift intended for you to receive (you are the recipient). "Por ti" = I bought it because of you / on your behalf / substituting for you (you motivated the action or I did it in your place).</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Para for Duration (Incorrect)</span>
     <div class="ex-sp"><span class="wrong">Estudié español para dos años en el Instituto Cervantes.</span> → <span class="right">Estudié español durante dos años en el Instituto Cervantes.</span></div>
-    <div class="ex-why">Para cannot express duration of time — it is teleological (points toward a goal, deadline, or recipient). "Para dos años" would mean "for the purpose of two years" or "targeted toward two years," which is nonsensical. Duration in Spanish uses "durante" (for/during). Compare: "Estudié para el examen" (I studied for the exam — purpose/goal) vs. "Estudié durante dos horas" (I studied for two hours — duration). "Por" also expresses duration in some contexts: "Lo hice por dos horas" (I did it for two hours) — but "durante" is always safe and unambiguous.</div>
+    <div class="ex-why">Para cannot express duration of time — it is teleological (points toward a goal, deadline, or recipient). "Para dos años" would mean "for the purpose of two years" or "targeted toward two years," which is nonsensical.</div>
   </div>
 </div>
   </section>
@@ -4737,9 +4752,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — The Complementizer "Que"</div>
-  <div class="ld-body">
+<div class="ld-body">
     The word <strong>que</strong> (that) in "quiero que comas" is a <em>complementizer</em> — a word that introduces a subordinate clause and links it to the main clause. It comes from Latin <em>quod</em> (that, which).<br><br>
     When there is a change of subject, Spanish requires the full subordinate clause with <em>que</em> + subjunctive because the second action is now <strong>in someone else's control</strong>. You cannot encode someone else's action as part of your own infinitive — that would grammatically imply you are doing the action yourself.<br><br>
     This is the same logic English uses: "I want <em>to eat</em>" (me) vs. "I want <em>you to eat</em>" (you). English uses the accusative + infinitive construction. Spanish uses the complementizer + subjunctive. Both languages handle the same conceptual problem of <strong>cross-subject control</strong> — just differently.
@@ -4763,32 +4776,27 @@ body {
     <span class="ex-tag ar">-AR · Same Subject = Infinitive, No "que"</span>
     <div class="ex-sp">Necesito <strong>terminar</strong> el análisis de XGBoost antes del viernes — lo haré yo mismo esta noche en Snowflake.</div>
     <div class="ex-en">I need to finish the XGBoost analysis before Friday — I'll do it myself tonight in Snowflake.</div>
-    <div class="ex-why">Same subject throughout: I need, I finish, I'll do. When the same person is both the wanter and the doer, you use the infinitive directly after the trigger verb — no "que," no subjunctive, no subordinate clause. "Necesito terminar" is two linked actions performed by the same person. The moment a second person enters the picture ("I need you to finish"), the grammar fundamentally changes. The single-subject rule is the decision point: ask "who is doing the second action?" If same person → infinitive. If different person → que + subjunctive.</div>
+    <div class="ex-why">Same subject throughout: I need, I finish, I'll do. When the same person is both the wanter and the doer, you use the infinitive directly after the trigger verb — no "que," no subjunctive, no subordinate clause.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Different Subject = Que + Subjunctive</span>
-    <div class="ex-sp">Quiero que mi equipo de analytics <strong>haga</strong> el análisis antes del viernes — yo estaré en Minneapolis en la clase de tueste de café y no podré hacerlo.</div>
-    <div class="ex-en">I want my analytics team to do the analysis before Friday — I'll be in Minneapolis at the coffee roasting class and won't be able to do it.</div>
-    <div class="ex-why">The grammar shifts completely because two different subjects are involved: yo (quiero) and mi equipo (haga). The subjunctive "haga" marks that the team's doing is a desired, not-yet-real action — a wish in the speaker's mind being projected onto someone else's future behavior. The subordinate clause "que mi equipo haga" could not use the indicative "hace" because "hace" would assert a fact, not express a desire. Trigger (quiero) + que + new subject + subjunctive is the non-negotiable formula.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · escribir / vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Recomendar Trigger + Context</span>
     <div class="ex-sp">Mi jefe me <strong>recomienda</strong> que <strong>escriba</strong> los reportes de análisis en inglés para los clientes internacionales — dice que es más profesional.</div>
     <div class="ex-en">My boss recommends that I write the analysis reports in English for international clients — he says it's more professional.</div>
-    <div class="ex-why">Recomendar is a volition/influence trigger. Boss (recommends) → me (different subject) → write (subjunctive). "Escriba" is the subjunctive yo form of escribir (the -IR verb flips to -AR endings: escriba, escribas, escriba). Note: "dice que es más profesional" uses the INDICATIVE because "decir" here introduces a factual statement (he states a fact), not a desire. The same verb "decir" can trigger either mood: "Dice que ES bueno" (fact) vs. "Le digo que LO HAGA" (command via speech) → two different subjunctive triggers.</div>
+    <div class="ex-why">Recomendar is a volition/influence trigger. Boss (recommends) → me (different subject) → write (subjunctive).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Subjunctive With Same Subject</span>
     <div class="ex-sp"><span class="wrong">Quiero que termine el proyecto yo mismo esta semana.</span> → <span class="right">Quiero terminar el proyecto yo mismo esta semana.</span></div>
-    <div class="ex-why">"Yo mismo" confirms it is the same person wanting and doing. The subjunctive + "que" implies a second subject is being addressed. Using "quiero que termine yo mismo" grammatically sounds like you are issuing a desire toward yourself as if you were a separate entity — it creates an odd detachment. When the subject of both verbs is identical, the infinitive is not just preferred — it is the grammatically correct form. The subjunctive construction requires a distinct second subject to have any grammatical purpose.</div>
+    <div class="ex-why">"Yo mismo" confirms it is the same person wanting and doing. The subjunctive + "que" implies a second subject is being addressed.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Indicative After Volition Trigger</span>
     <div class="ex-sp"><span class="wrong">Quiero que mi colega revisa el análisis de Snowflake esta tarde.</span> → <span class="right">Quiero que mi colega revise el análisis de Snowflake esta tarde.</span></div>
-    <div class="ex-why">"Revisa" is present indicative — it states a fact ("my colleague reviews"). "Quiero que revisa" reads as "I want that my colleague reviews" — asserting the reviewing as a current fact rather than expressing a desire about a future action. The subjunctive "revise" marks that the reviewing is desired, not currently happening. Indicative = reporting reality. Subjunctive = expressing desire about something not yet real. After querer + que, the action being wished for is always in the subjunctive.</div>
+    <div class="ex-why">"Revisa" is present indicative — it states a fact ("my colleague reviews"). "Quiero que revisa" reads as "I want that my colleague reviews" — asserting the reviewing as a current fact rather than expressing a desire about a future action.</div>
   </div>
 </div>
   </section>
@@ -4832,9 +4840,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Suppletive Comparatives</div>
-  <div class="ld-body">
+<div class="ld-body">
     The irregular comparatives <strong>mejor, peor, mayor, menor</strong> are called <em>suppletive forms</em> — they come from completely different Latin words than their base adjectives:<br><br>
     <code>bueno</code> (Latin <em>bonus</em>) → <code>mejor</code> (Latin <em>melior</em>) — entirely different root<br>
     <code>malo</code> (Latin <em>malus</em>) → <code>peor</code> (Latin <em>pejor</em>) — entirely different root<br><br>
@@ -4863,32 +4869,27 @@ body {
     <span class="ex-tag ar">-AR · Superiority + Context</span>
     <div class="ex-sp">El espresso preparado en la Lelit Bianca es <strong>más sabroso que</strong> el café de la máquina de la oficina de Adobe — la diferencia de calidad es enorme.</div>
     <div class="ex-en">The espresso prepared in the Lelit Bianca is more flavorful than the coffee from the Adobe office machine — the quality difference is enormous.</div>
-    <div class="ex-why">Más + adjective + que = superiority. The adjective must agree with the subject: "sabroso" agrees with "espresso" (masculine singular). The comparison item comes after "que." If you want to compare actions rather than qualities: "analizar datos es más complejo que escribir reportes" — the structure scales to verbs and entire clauses. "Que" never becomes "como" in superiority comparisons — "como" belongs exclusively to equality.</div>
+    <div class="ex-why">Más + adjective + que = superiority. The adjective must agree with the subject: "sabroso" agrees with "espresso" (masculine singular).</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Equality + Irregular Superlative</span>
-    <div class="ex-sp">El modelo de Python es <strong>tan preciso como</strong> el de R para este dataset, pero el de XGBoost es definitivamente <strong>el mejor</strong> de los tres.</div>
-    <div class="ex-en">The Python model is as precise as the R one for this dataset, but the XGBoost one is definitively the best of the three.</div>
-    <div class="ex-why">Equality (tan + adjective + como) and superlative (el mejor) in one sentence. "El mejor" is the superlative of bueno using the irregular form — never "el más bueno." The "de" after the superlative introduces the group being compared within: "el mejor de los tres" (the best of the three), "el más complejo de todos los modelos" (the most complex of all models). This "de" construction after superlatives is a common omission error in learner Spanish.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · vivir / salir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Inferiority + Mayor/Menor Age</span>
     <div class="ex-sp">West Adams es <strong>menos caro que</strong> Silver Lake o Los Feliz, pero tiene <strong>mayor</strong> diversidad cultural y una escena artística <strong>más</strong> interesante.</div>
     <div class="ex-en">West Adams is less expensive than Silver Lake or Los Feliz, but it has greater cultural diversity and a more interesting arts scene.</div>
-    <div class="ex-why">Inferiority comparison (menos + adjective + que) and use of mayor. Mayor can mean "greater" (in size, quantity, or importance) or "older" (in age). Here it means "greater" diversity. When comparing ages: "mi colega es mayor que yo" (my colleague is older than me). Use mayor/menor for age — avoid "más viejo/a" as it can sound insulting. For objects and abstract concepts, "más grande/pequeño" is standard, but mayor is used for quantities and importance.</div>
+    <div class="ex-why">Inferiority comparison (menos + adjective + que) and use of mayor. Mayor can mean "greater" (in size, quantity, or importance) or "older" (in age).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Double Comparative With Irregular Form</span>
     <div class="ex-sp"><span class="wrong">Este modelo de XGBoost es más mejor que el de Python.</span> → <span class="right">Este modelo de XGBoost es mejor que el de Python.</span></div>
-    <div class="ex-why">"Mejor" already encodes the comparative — it means "more good / better." Adding "más" doubles the comparison redundantly, like saying "more better" in English. The same applies to all four irregular comparatives: mejor (never "más bueno"), peor (never "más malo"), mayor (never "más grande" for age), menor (never "más pequeño" for age). These irregular forms existed in Latin as dedicated comparative words and were inherited directly — they contain the comparative meaning inside them without needing "más."</div>
+    <div class="ex-why">"Mejor" already encodes the comparative — it means "more good / better." Adding "más" doubles the comparison redundantly, like saying "more better" in English. The same applies to all four irregular comparatives: mejor (never "más bueno"), peor (never "más malo"), mayor (never "más grande" for age), menor (never "más pequeño" for age).</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Tan...Que vs. Tan...Como</span>
     <div class="ex-sp"><span class="wrong">El modelo de Python es tan preciso que el de R.</span> → <span class="right">El modelo de Python es tan preciso como el de R.</span></div>
-    <div class="ex-why">"Tan...que" introduces a result or consequence clause, not equality: "El modelo es tan preciso que todos lo usan" (The model is so precise that everyone uses it). "Tan...como" is the equality formula: "as...as." Confusing these two creates sentences with completely different meanings. Test: if you can replace "que" with "that" and it makes a consequence statement → use "tan...que." If you are comparing two things as equal → use "tan...como." Never use "que" for equality comparisons.</div>
+    <div class="ex-why">"Tan...que" introduces a result or consequence clause, not equality: "El modelo es tan preciso que todos lo usan" (The model is so precise that everyone uses it). "Tan...como" is the equality formula: "as...as." Confusing these two creates sentences with completely different meanings.</div>
   </div>
 </div>
   </section>
@@ -4940,9 +4941,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Compound Tenses and the Auxiliary Haber</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Pluperfect is a <strong>compound tense</strong> — it uses an auxiliary verb (haber) plus a past participle. Latin had a synthetic pluperfect (<em>amaveram</em> — I had loved) that was a single inflected word. As Latin evolved into Spanish, these single-word forms collapsed and were replaced by <strong>analytical (compound) structures</strong> using haber.<br><br>
     The word <strong>Pluperfect</strong> comes from Latin <em>plus quam perfectum</em> — "more than perfect/completed." It is the super-past: an action that was already completed <em>before</em> another past action. This layered chronology — past inside past — is what gives sophisticated narrative its depth. Without the Pluperfect, all past events are on the same timeline. With it, you can establish a causal backstory.
   </div>
@@ -4975,32 +4974,27 @@ body {
     <span class="ex-tag ar">-AR · Wish Trigger → Subjunctive</span>
     <div class="ex-sp">Quiero que el equipo de Adobe <strong>hable</strong> con el cliente antes de enviar el análisis final — es importante que <strong>estén</strong> alineados sobre los objetivos del proyecto.</div>
     <div class="ex-en">I want the Adobe team to speak with the client before sending the final analysis — it's important that they are aligned on the project objectives.</div>
-    <div class="ex-why">Two subjunctive triggers in one sentence. (1) "Quiero que + different subject" → hable (subjunctive tú/él of hablar). (2) "Es importante que" is an impersonal expression that always triggers subjunctive — it expresses a value judgment about someone else's state. "Estén" is the subjunctive of estar (DISHES: esté, estés, esté, estemos, estén). Impersonal expressions like es necesario que, es posible que, es bueno que, es urgente que all force the subjunctive in the following clause.</div>
+    <div class="ex-why">Two subjunctive triggers in one sentence. (1) "Quiero que + different subject" → hable (subjunctive tú/él of hablar). (2) "Es importante que" is an impersonal expression that always triggers subjunctive — it expresses a value judgment about someone else's state. "Estén" is the subjunctive of estar (DISHES: esté, estés, esté, estemos, estén).</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Emotion Trigger in Full Sentence</span>
-    <div class="ex-sp">Me alegra mucho que Felix <strong>coma</strong> bien y <strong>se recupere</strong> tan rápidamente de su cirugía dental — el veterinario dice que está progresando mejor de lo esperado.</div>
-    <div class="ex-en">I'm very happy that Felix is eating well and recovering so quickly from his dental surgery — the vet says he's progressing better than expected.</div>
-    <div class="ex-why">The emotion "me alegra" infects both verbs in the subordinate clause: coma and se recupere are both subjunctive. Notice the difference with the final clause: "dice que está progresando" uses the INDICATIVE because "decir" here introduces a factual report, not an emotion. The vet is stating a fact. This contrast within one sentence demonstrates that the subjunctive is triggered by the speaker's emotional frame, not by the grammatical structure alone.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · tener / vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Ojalá — No Exceptions</span>
     <div class="ex-sp">Ojalá que el hotel en Carmel Valley Ranch <strong>tenga</strong> habitaciones disponibles para octubre — y ojalá que el precio <strong>sea</strong> razonable para el presupuesto.</div>
     <div class="ex-en">I hope the hotel in Carmel Valley Ranch has rooms available for October — and I hope the price is reasonable for the budget.</div>
-    <div class="ex-why">Ojalá is an absolute trigger — it always forces the subjunctive with no exceptions. It comes from Arabic "wa-shallah" (God willing) and carries a sense of hope over something entirely outside your control. Tener → tenga (DISHES verb: dé, vaya, sea, haya, esté, sepa — wait, tener is not DISHES, it follows normal subjunctive: drop -o from yo present = teng- + a = tenga). Ser → sea (DISHES). Both subjunctive forms in one sentence triggered by the same ojalá.</div>
+    <div class="ex-why">Ojalá is an absolute trigger — it always forces the subjunctive with no exceptions. It comes from Arabic "wa-shallah" (God willing) and carries a sense of hope over something entirely outside your control.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Indicative After Emotion Trigger</span>
     <div class="ex-sp"><span class="wrong">Me alegra que Felix se recupera bien de su cirugía.</span> → <span class="right">Me alegra que Felix se recupere bien de su cirugía.</span></div>
-    <div class="ex-why">"Se recupera" (indicative) would turn the clause into a factual report: "It pleases me that Felix recovers well" — as if stating a repeated fact. "Se recupere" (subjunctive) correctly frames it as: "It pleases me regarding Felix's recovery" — the emotion applies to the reality, filtering it through the speaker's subjective lens. Whenever a clause is viewed through the lens of emotion, doubt, or volition rather than objective fact, the subjunctive applies. Emotion triggers: me alegra, me sorprende, me molesta, me preocupa, me gusta, es bueno, es importante, es extraño que.</div>
+    <div class="ex-why">"Se recupera" (indicative) would turn the clause into a factual report: "It pleases me that Felix recovers well" — as if stating a repeated fact. "Se recupere" (subjunctive) correctly frames it as: "It pleases me regarding Felix's recovery" — the emotion applies to the reality, filtering it through the speaker's subjective lens.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Subjunctive Without Change of Subject</span>
     <div class="ex-sp"><span class="wrong">Quiero que yo termine el análisis de XGBoost esta tarde.</span> → <span class="right">Quiero terminar el análisis de XGBoost esta tarde.</span></div>
-    <div class="ex-why">Using "quiero que yo" with the same subject creates a grammatically odd structure that sounds like you are addressing yourself as if you were a separate entity. The rule is firm: same subject → infinitive. The subjunctive construction exists specifically to handle the grammatical challenge of one subject exerting will onto another. When the subject is the same person, that tension does not exist and the infinitive is both grammatically correct and stylistically natural.</div>
+    <div class="ex-why">Using "quiero que yo" with the same subject creates a grammatically odd structure that sounds like you are addressing yourself as if you were a separate entity. The rule is firm: same subject → infinitive.</div>
   </div>
 </div>
   </section>
@@ -5044,9 +5038,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — How the Future Tense Was Built from "To Have"</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Spanish Simple Future has one of the most fascinating etymologies in the language. It did not exist in classical Latin — it was <strong>invented in Vulgar Latin</strong> by fusing the infinitive with the present tense of <em>habere</em> (to have):<br><br>
     <code>viajar + hé</code> → <em>viajaré</em> (I will travel / "I have to travel")<br>
     <code>viajar + has</code> → <em>viajarás</em><br>
@@ -5081,32 +5073,27 @@ body {
     <span class="ex-tag ar">-AR · Future Conjecture — Present Wonder</span>
     <div class="ex-sp">¿Por qué no <strong>contestará</strong> mi colega? <strong>Estará</strong> en una reunión de Adobe o quizás <strong>tendrá</strong> el teléfono en silencio.</div>
     <div class="ex-en">Why isn't my colleague answering? She must be in an Adobe meeting or maybe she has her phone on silent.</div>
-    <div class="ex-why">Three consecutive Simple Future forms — all expressing present-moment conjecture, not predictions about the future. "Contestará" wonders about a current behavior. "Estará" guesses at a current location. "Tendrá" guesses at a current state of the phone. None of these are asking about tomorrow. The Simple Future in Mexican Spanish has been repurposed as the "I wonder" / "must be" tense — epistemic modality about present reality. This is its primary living function in daily speech.</div>
+    <div class="ex-why">Three consecutive Simple Future forms — all expressing present-moment conjecture, not predictions about the future. "Contestará" wonders about a current behavior.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Irregular Stem + Educated Guess</span>
-    <div class="ex-sp">El servidor de Snowflake <strong>tendrá</strong> unos veinte terabytes de datos, calculo. Y el proceso de análisis <strong>hará</strong> unos cien cálculos por segundo, aproximadamente.</div>
-    <div class="ex-en">The Snowflake server probably has about twenty terabytes of data, I calculate. And the analysis process probably runs about a hundred calculations per second, approximately.</div>
-    <div class="ex-why">Both "tendrá" and "hará" use irregular stems (tener → tendr-, hacer → har-) and express educated guesses about current/ongoing states — not future events. The signal words "calculo" and "aproximadamente" confirm the epistemic register. This is the professional/analytical use of the Simple Future: making calibrated estimates about the present state of systems, quantities, or processes. It encodes "I'm not certain but I'm making an informed estimate."</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · salir / vivir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Ser Irregular — Identity Guess</span>
     <div class="ex-sp">¿Qué hora <strong>será</strong> ahora en Minneapolis? <strong>Serán</strong> las dos de la tarde allá — hay dos horas de diferencia con Los Ángeles.</div>
     <div class="ex-en">I wonder what time it is now in Minneapolis? It must be two in the afternoon there — there's a two-hour difference from Los Angeles.</div>
-    <div class="ex-why">Ser uses the same irregular stem as the future (ser → será/serán). Wondering about the time is classic epistemic use: you are estimating a current fact, not predicting a future one. "¿Qué hora será?" = "I wonder what time it is" — a present mystery. "Serán las dos" = "It must be two" — a probability estimate. Both express uncertainty about the present state of the world. If you were actually asking about future time: "¿Qué hora será cuando lleguemos?" (What time will it be when we arrive?) — that is genuine future use.</div>
+    <div class="ex-why">Ser uses the same irregular stem as the future (ser → será/serán). Wondering about the time is classic epistemic use: you are estimating a current fact, not predicting a future one.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Simple Future for Concrete Plans (Mexico)</span>
     <div class="ex-sp"><span class="wrong">Mañana iré a la reunión de Adobe a las nueve.</span> → <span class="right">Mañana voy a ir a la reunión de Adobe a las nueve.</span></div>
-    <div class="ex-why">In Mexican Spanish, using the morphological future tense for actual, concrete plans sounds overly formal — like a legal document or news broadcast. "Iré" carries an emotional distance and formality that Mexican conversational speech avoids for real plans. "Voy a ir" sounds committed, grounded, and certain — it implies present intention and movement toward the plan. The Simple Future should be reserved for conjecture ("I wonder...," "it must be...") and probability estimates, not your calendar.</div>
+    <div class="ex-why">In Mexican Spanish, using the morphological future tense for actual, concrete plans sounds overly formal — like a legal document or news broadcast. "Iré" carries an emotional distance and formality that Mexican conversational speech avoids for real plans.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Missing Accent on Future Endings</span>
     <div class="ex-sp"><span class="wrong">El hablara con el director de Adobe sobre el proyecto.</span> → <span class="right">Él hablará con el director de Adobe sobre el proyecto.</span></div>
-    <div class="ex-why">Two errors: (1) "El" without accent = article "the." "Él" with accent = "he." (2) "hablara" without accent = imperfect subjunctive — a completely different tense used in hypothetical si-clauses ("si hablara español mejor..."). "hablará" with accent on á = Simple Future. Every future tense ending carries a written accent: -é, -ás, -á, -emos, -án. The accents are not optional orthographic details — they are the tense markers. Without them, you are writing the imperfect subjunctive, which has an entirely different meaning and function.</div>
+    <div class="ex-why">Two errors: (1) "El" without accent = article "the." "Él" with accent = "he." (2) "hablara" without accent = imperfect subjunctive — a completely different tense used in hypothetical si-clauses ("si hablara español mejor..."). "hablará" with accent on á = Simple Future.</div>
   </div>
 </div>
   </section>
@@ -5150,9 +5137,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — The Conditional and Its Twin</div>
-  <div class="ld-body">
+<div class="ld-body">
     The Conditional was built by the same Vulgar Latin fusion process as the Future — but using the <strong>imperfect</strong> of <em>habere</em> instead of the present:<br><br>
     Future: <code>viajar + hé</code> → <em>viajaré</em> (present of haber = certain future)<br>
     Conditional: <code>viajar + había</code> → <em>viajaría</em> (imperfect of haber = hypothetical)<br><br>
@@ -5185,32 +5170,27 @@ body {
     <span class="ex-tag ar">-AR · Polite Request — Conditional vs. Present</span>
     <div class="ex-sp">¿<strong>Trabajarías</strong> en este proyecto de análisis conmigo la próxima semana? <strong>Me gustaría</strong> mucho tener tu perspectiva sobre los datos de Snowflake.</div>
     <div class="ex-en">Would you work on this analysis project with me next week? I would really like to have your perspective on the Snowflake data.</div>
-    <div class="ex-why">Both Conditional forms create maximum politeness by framing both the request and the desire as hypothetical rather than demanding. Compare the registers: "Trabaja conmigo" (affirmative command — sounds like an order), "¿Trabajas conmigo?" (present tense — sounds presumptuous, almost assumes yes), "¿Trabajarías conmigo?" (conditional — sounds like a genuine invitation that can be declined without awkwardness). The Conditional signals: I am inviting, not commanding; your choice is genuinely respected.</div>
+    <div class="ex-why">Both Conditional forms create maximum politeness by framing both the request and the desire as hypothetical rather than demanding. Compare the registers: "Trabaja conmigo" (affirmative command — sounds like an order), "¿Trabajas conmigo?" (present tense — sounds presumptuous, almost assumes yes), "¿Trabajarías conmigo?" (conditional — sounds like a genuine invitation that can be declined without awkwardness).</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · True Hypothetical With Condition</span>
-    <div class="ex-sp">Yo <strong>haría</strong> el análisis en Python esta tarde, pero no tengo acceso a los datos de Snowflake hasta que el equipo de IT resuelva el problema del servidor.</div>
-    <div class="ex-en">I would do the analysis in Python this afternoon, but I don't have access to the Snowflake data until the IT team resolves the server issue.</div>
-    <div class="ex-why">Classic true hypothetical: an action that depends on a condition not currently being met. "Haría" (haber → har- irregular stem + ía) signals "this action is on hold, blocked by a real-world obstacle." The "pero" introduces the blocking condition. The Conditional perfectly encodes this reality: the intention is there, but the precondition is absent. In English: "I would do it, but..." In Spanish: "haría, pero..." — the structure is identical, which makes this one of the more intuitive Conditional uses for English speakers.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · poder / salir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Poder Conditional — "Could You?"</span>
     <div class="ex-sp">¿<strong>Podrías</strong> revisar mi análisis de XGBoost antes de que lo envíe al cliente? Te lo <strong>agradecería</strong> mucho — son solo diez minutos.</div>
     <div class="ex-en">Could you review my XGBoost analysis before I send it to the client? I would really appreciate it — it's only ten minutes.</div>
-    <div class="ex-why">"Podrías" (poder → podr- irregular stem + ías) = "Could you?" — the most universally polite request formula in Mexican professional Spanish. It is dramatically softer than "¿Puedes?" (can you?) which presumes ability and almost demands yes. The Conditional of poder creates a request that simultaneously checks ability, invites consent, and signals that refusal is acceptable. Adding "te lo agradecería" (another Conditional) compounds the politeness. This is the standard register for making requests of peers and superiors at Adobe.</div>
+    <div class="ex-why">"Podrías" (poder → podr- irregular stem + ías) = "Could you?" — the most universally polite request formula in Mexican professional Spanish. It is dramatically softer than "¿Puedes?" (can you?) which presumes ability and almost demands yes.</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Conditional for Confirmed Plans</span>
     <div class="ex-sp"><span class="wrong">Mañana comería en Black Rabbit Rose con mi equipo de Adobe.</span> → <span class="right">Mañana vamos a comer en Black Rabbit Rose con mi equipo de Adobe.</span></div>
-    <div class="ex-why">"Comería" (conditional) implies "I would eat" — suggesting uncertainty, a hypothetical, or a polite softening. For a confirmed, actual plan, this sounds like you are unsure whether the lunch will happen. "Vamos a comer" (Near Future) sounds committed and certain. The Conditional is for plans that are contingent on something else being true. If the reservation is made and everyone is confirmed, it is not conditional — it is a real plan requiring the Near Future or even the Presente Pro-Futuro.</div>
+    <div class="ex-why">"Comería" (conditional) implies "I would eat" — suggesting uncertainty, a hypothetical, or a polite softening. For a confirmed, actual plan, this sounds like you are unsure whether the lunch will happen.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Missing Accent on Conditional Endings</span>
     <div class="ex-sp"><span class="wrong">Me gustaria mucho tomar la clase de tueste de café en Minneapolis.</span> → <span class="right">Me gustaría mucho tomar la clase de tueste de café en Minneapolis.</span></div>
-    <div class="ex-why">The accent on the í in -ía is not optional — it breaks the diphthong. Without the accent, "ia" is pronounced as a single flowing syllable (like the "ia" in "tiara"). With the accent, "ía" forces two separate syllables: gus-ta-RÍ-a. The distinction changes the entire vowel quality of the ending. Every conditional form requires this accent: -ía, -ías, -ía, -íamos, -ían. Missing the accent makes the endings sound like a completely different vowel combination and marks the text as non-native on any formal exam.</div>
+    <div class="ex-why">The accent on the í in -ía is not optional — it breaks the diphthong. Without the accent, "ia" is pronounced as a single flowing syllable (like the "ia" in "tiara").</div>
   </div>
 </div>
   </section>
@@ -5254,9 +5234,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Why Negation Forces the Subjunctive</div>
-  <div class="ld-body">
+<div class="ld-body">
     The shift from Affirmative to Negative Imperative is not just grammatical housekeeping — it reflects a deep cognitive distinction between <strong>Realis and Irrealis</strong> moods.<br><br>
     An Affirmative command (<em>habla</em>) describes an action you want to enter reality. It uses the Indicative because you are rooting the command in the real world — "do this real thing."<br><br>
     A Negative command (<em>no hables</em>) describes an action that should <strong>not</strong> exist — a non-event, a hypothetical non-reality. Grammarians call this the <strong>Irrealis</strong> mood: you are legislating against a reality that hasn't happened yet. The Subjunctive — the mood of the unreal, the hypothetical, the not-yet-asserted — is the only grammatically appropriate tool for commanding someone to maintain a non-reality.
@@ -5287,32 +5265,27 @@ body {
     <span class="ex-tag ar">-AR · Negative Command in Professional Setting</span>
     <div class="ex-sp">¡<strong>No hables</strong> tan rápido durante la presentación al cliente internacional — <strong>habla</strong> con más calma y <strong>usa</strong> ejemplos visuales para que te entiendan mejor.</div>
     <div class="ex-en">Don't speak so fast during the international client presentation — speak more calmly and use visual examples so they understand you better.</div>
-    <div class="ex-why">Negative command (no hables — subjunctive) immediately followed by affirmative commands (habla, usa — indicative-derived). The structural contrast in one sentence shows how the grammar switches with the meaning: prohibiting requires subjunctive (irrealis — commanding a non-action), permitting or instructing requires the standard imperative (realis — commanding an action that should enter reality). Three imperative forms back to back, each using the correct register.</div>
+    <div class="ex-why">Negative command (no hables — subjunctive) immediately followed by affirmative commands (habla, usa — indicative-derived). The structural contrast in one sentence shows how the grammar switches with the meaning: prohibiting requires subjunctive (irrealis — commanding a non-action), permitting or instructing requires the standard imperative (realis — commanding an action that should enter reality).</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer / hacer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Formal Negative + Pronoun Position</span>
-    <div class="ex-sp">Doctor, por favor <strong>no le dé</strong> comida seca a Felix por dos semanas más — y <strong>no lo deje</strong> correr hasta que las extracciones sanen completamente.</div>
-    <div class="ex-en">Doctor, please don't give Felix dry food for two more weeks — and don't let him run until the extractions heal completely.</div>
-    <div class="ex-why">Two formal usted negative commands. "No le dé" = no + le (IO pronoun floating before verb) + dé (subjunctive of dar, irregular DISHES verb). "No lo deje" = no + lo (DO pronoun floating before verb) + deje (subjunctive of dejar). Both pronouns float between "no" and their verbs — proclisis is mandatory for negative commands. The affirmative equivalents would flip: "Déle" and "Déjelo" — pronouns attach to the back in affirmatives (enclisis). One rule, opposite applications.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · escribir / enviar</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Contrast Affirmative vs. Negative Same Verb</span>
     <div class="ex-sp">El código funciona — <strong>envíamelo</strong> cuando termines. / El código está roto — <strong>no me lo envíes</strong> todavía, termínalo primero.</div>
     <div class="ex-en">The code works — send it to me when you're done. / The code is broken — don't send it to me yet, finish it first.</div>
-    <div class="ex-why">Same verb (enviar), same pronouns (me + lo), completely different structures. Affirmative: envía (command) + me (IO) + lo (DO) attached to back = envíamelo (accent required, Sobreesdrújula). Negative: No + me (IO floating) + lo (DO floating) + envíes (subjunctive tú). The accent on envíamelo protects the original stress. The subjunctive envíes uses the "flip the vowel" rule (-AR verbs take -ES ending in subjunctive). Both the form AND the pronoun position flip completely between affirmative and negative.</div>
+    <div class="ex-why">Same verb (enviar), same pronouns (me + lo), completely different structures. Affirmative: envía (command) + me (IO) + lo (DO) attached to back = envíamelo (accent required, Sobreesdrújula).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Affirmative Command Form After "No"</span>
     <div class="ex-sp"><span class="wrong">No habla tan rápido en la reunión de Adobe.</span> → <span class="right">No hables tan rápido en la reunión de Adobe.</span></div>
-    <div class="ex-why">"No habla" is present indicative third person: "he/she doesn't speak." This is a statement, not a command. To create a negative command, the verb must switch to the subjunctive form entirely — not just add "no" in front of the affirmative. The transformation is: habla (affirmative command) is discarded completely, replaced by hables (subjunctive, negative command). Spanish has no "no + affirmative command" structure — the negative command is a completely different grammatical form that simply happens to use the subjunctive.</div>
+    <div class="ex-why">"No habla" is present indicative third person: "he/she doesn't speak." This is a statement, not a command. To create a negative command, the verb must switch to the subjunctive form entirely — not just add "no" in front of the affirmative.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Enclisis in Negative Command</span>
     <div class="ex-sp"><span class="wrong">No envíamelo todavía — el análisis no está listo.</span> → <span class="right">No me lo envíes todavía — el análisis no está listo.</span></div>
-    <div class="ex-why">"No envíamelo" fails on two levels: (1) "envíame" uses the affirmative command form (envía) — but negative commands require the subjunctive (envíes). (2) The pronouns are attached to the back (enclisis) — but negative commands require proclisis (pronouns float before the verb). Both the verb form and the pronoun position must change simultaneously. The complete transformation: affirmative "envíamelo" → negative "no me lo envíes" — every element changes. This is the most structurally complex aspect of the Spanish imperative system.</div>
+    <div class="ex-why">"No envíamelo" fails on two levels: (1) "envíame" uses the affirmative command form (envía) — but negative commands require the subjunctive (envíes). (2) The pronouns are attached to the back (enclisis) — but negative commands require proclisis (pronouns float before the verb). Both the verb form and the pronoun position must change simultaneously.</div>
   </div>
 </div>
   </section>
@@ -5356,9 +5329,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Realis vs. Irrealis: The Two Worlds of Grammar</div>
-  <div class="ld-body">
+<div class="ld-body">
     All human languages distinguish between two fundamental grammatical worlds:<br><br>
     <strong>Realis</strong> (Latin: <em>res</em> = thing) — the realm of things that are, that exist, that can be pointed to. The Indicative Mood governs this world.<br><br>
     <strong>Irrealis</strong> (Latin: <em>irrealis</em> = not real) — the realm of things that might be, are hoped for, are feared, are doubted. The Subjunctive Mood governs this world.<br><br>
@@ -5395,32 +5366,27 @@ body {
     <span class="ex-tag ar">-AR · Direct Object — lo/la Agreement</span>
     <div class="ex-sp">¿Preparaste el análisis de Snowflake para el cliente? Sí, <strong>lo</strong> preparé esta mañana. / ¿Revisaste la presentación? Sí, <strong>la</strong> revisé anoche.</div>
     <div class="ex-en">Did you prepare the Snowflake analysis for the client? Yes, I prepared it this morning. / Did you review the presentation? Yes, I reviewed it last night.</div>
-    <div class="ex-why">Direct object pronouns agree with the noun they replace in both gender and number. "El análisis" is masculine singular → lo. "La presentación" is feminine singular → la. The pronoun takes the gender of the Spanish noun — not the gender of the English translation. Important: the pronoun position is before the conjugated verb in normal statements (proclisis in all non-imperative contexts). "Lo preparé" not "preparélo."</div>
+    <div class="ex-why">Direct object pronouns agree with the noun they replace in both gender and number. "El análisis" is masculine singular → lo.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · hacer / comer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Clitic Doubling — Mandatory Tracking Code</span>
-    <div class="ex-sp"><strong>Le</strong> hice el reporte de análisis <strong>a mi colega</strong> ayer por la tarde — <strong>se lo</strong> mandé por correo antes de las seis.</div>
-    <div class="ex-en">I made the analysis report for my colleague yesterday afternoon — I sent it to her by email before six.</div>
-    <div class="ex-why">Clitic doubling: "le" is mandatory even though "a mi colega" explicitly names the receiver. Spanish requires the indirect object pronoun as a tracking code regardless of whether the recipient is named. Then "se lo": le + lo → se lo (the le/les automatically becomes se when followed by lo/la/los/las to avoid the awkward sound of "le lo"). Order: receiver (se) before target (lo). This se/lo combination is one of the most common pronoun patterns in daily Spanish.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · vivir / recuperarse</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Reflexive — Middle Voice vs. Meaning Change</span>
     <div class="ex-sp">Felix <strong>se está recuperando</strong> de su cirugía. / Antes de la reunión <strong>me voy</strong> del apartamento a las ocho. / Esta mañana <strong>me comí</strong> tres scones completos — estaban riquísimos.</div>
     <div class="ex-en">Felix is recovering from his surgery. / Before the meeting I leave the apartment at eight. / This morning I ate (devoured) three complete scones — they were absolutely delicious.</div>
-    <div class="ex-why">Three distinct reflexive uses. (1) Recuperarse = middle voice — Felix undergoes an internal biological process. The se marks that the action stays within the subject. (2) Irse = meaning change — ir (to go) + se = irse (to leave, to depart). The reflexive completely transforms the verb's meaning. (3) Me comí = totality reflexive — adding "me" to comer implies you consumed everything with intense focus or enjoyment. You didn't eat the scones; you devoured them all. Each reflexive use encodes different information.</div>
+    <div class="ex-why">Three distinct reflexive uses. (1) Recuperarse = middle voice — Felix undergoes an internal biological process. The se marks that the action stays within the subject. (2) Irse = meaning change — ir (to go) + se = irse (to leave, to depart).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Leísmo in Mexican Context</span>
     <div class="ex-sp"><span class="wrong">¿Viste al director de Adobe? Sí, le vi en la oficina. (Mexican Spanish)</span> → <span class="right">¿Viste al director de Adobe? Sí, lo vi en la oficina.</span></div>
-    <div class="ex-why">The director is the direct target of your eyesight — he takes the direct object pronoun "lo." In Mexico and all Latin America, using "le vi" for a male human (Leísmo) sounds like an imitation of Peninsular Spanish and marks you as either non-native or overly formal. Spain's use of "le vi" for male humans is grammatically accepted there but etymologically incorrect — it uses the indirect object pronoun where the direct object is required. Mexico follows strict grammatical logic: if he is what you saw directly, he is "lo."</div>
+    <div class="ex-why">The director is the direct target of your eyesight — he takes the direct object pronoun "lo." In Mexico and all Latin America, using "le vi" for a male human (Leísmo) sounds like an imitation of Peninsular Spanish and marks you as either non-native or overly formal. Spain's use of "le vi" for male humans is grammatically accepted there but etymologically incorrect — it uses the indirect object pronoun where the direct object is required.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Le/Les for Direct Objects (Things)</span>
     <div class="ex-sp"><span class="wrong">¿Compraste los modelos de XGBoost? Sí, les compré.</span> → <span class="right">¿Compraste los modelos de XGBoost? Sí, los compré.</span></div>
-    <div class="ex-why">"Los modelos" are things — they are the direct target of the buying action (DO). Direct objects always use lo/la/los/las. "Le/les" is reserved for indirect objects — the receivers or beneficiaries of an action, not the thing being acted upon directly. "Les compré" would mean "I bought for them" — implying you bought something FOR a group of people, not that you bought the models themselves. The diagnostic: ask "what was bought?" (the models — direct object → los) vs. "for whom?" (a person — indirect object → le/les).</div>
+    <div class="ex-why">"Los modelos" are things — they are the direct target of the buying action (DO). Direct objects always use lo/la/los/las.</div>
   </div>
 </div>
   </section>
@@ -5464,9 +5430,7 @@ body {
   </div>
 </div>
 
-<div class="ling-dive">
-  <div class="ld-label">🔬 Linguistic Deep Dive — Cohesion and the Architecture of Argument</div>
-  <div class="ld-body">
+<div class="ld-body">
     Discourse connectors belong to a category linguists call <strong>cohesive devices</strong> — tools that bind sentences into a unified text. Without them, writing is merely a list of observations. With them, writing becomes an argument with internal logic.<br><br>
     Each connector class encodes a specific <strong>logical relationship</strong> between propositions:<br>
     <em>Additive</em> (además, también) — "this is true AND this is also true"<br>
@@ -5509,32 +5473,27 @@ body {
     <span class="ex-tag ar">-AR · Además — Adding Force</span>
     <div class="ex-sp">El trabajo remoto ahorra tiempo de desplazamiento. <strong>Además,</strong> <strong>trabajar</strong> desde casa mejora la concentración para el análisis de datos en Snowflake.</div>
     <div class="ex-en">Remote work saves commute time. Furthermore, working from home improves concentration for data analysis in Snowflake.</div>
-    <div class="ex-why">"Además" adds a second argument that reinforces and strengthens the first — it is an additive connector. Punctuation rule: Además always starts the new clause (after a period or semicolon) and is followed by a comma: "Además, [clause]." Never mid-sentence without punctuation. The second argument should add new information, not simply restate the first. For the B1 exam, using además with distinct supporting points signals organized analytical thinking.</div>
+    <div class="ex-why">"Además" adds a second argument that reinforces and strengthens the first — it is an additive connector. Punctuation rule: Además always starts the new clause (after a period or semicolon) and is followed by a comma: "Además, [clause]." Never mid-sentence without punctuation.</div>
   </div>
   <div class="ex-group-label er" style="color:#0891B2">-ER Verb · comer / hacer</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Sin Embargo — Introducing Complication</span>
-    <div class="ex-sp">Me gusta <strong>comer</strong> en la oficina de Adobe con mis colegas. <strong>Sin embargo,</strong> prefiero <strong>hacer</strong> el análisis en Snowflake desde casa sin interrupciones.</div>
-    <div class="ex-en">I like eating in the Adobe office with my colleagues. However, I prefer doing the Snowflake analysis from home without interruptions.</div>
-    <div class="ex-why">"Sin embargo" (however/nevertheless) introduces a contrasting reality that complicates the first statement without completely negating it. It acknowledges the first idea as valid ("I like the office") while introducing a competing preference ("I prefer home for work"). Punctuation: same as además — starts new clause, followed by comma. Avoid using "pero" and "sin embargo" interchangeably. "Pero" is mid-sentence ("Me gusta, pero prefiero..."). "Sin embargo" is more formal and always opens a new sentence or clause.</div>
-  </div>
+  
   <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb · vivir / salir</div>
   <div class="ex-item good">
     <span class="ex-tag ir">-IR · Por Eso + Porque — Cause and Effect Chain</span>
     <div class="ex-sp"><strong>Vivo</strong> en The Jayne en West Adams <strong>porque</strong> el barrio tiene mucha personalidad — <strong>por eso</strong> <strong>salgo</strong> a correr por sus calles cada domingo.</div>
     <div class="ex-en">I live at The Jayne in West Adams because the neighborhood has a lot of character — that's why I go out running through its streets every Sunday.</div>
-    <div class="ex-why">"Porque" introduces the cause (the neighborhood's character motivated the choice to live there). "Por eso" introduces the consequence (the love of the neighborhood leads to the Sunday runs). Both connectors in one sentence create a full cause → fact → consequence chain. The distinction is directional: porque looks backward (this is true BECAUSE of that cause), por eso looks forward (this is true THEREFORE this follows). They are the two halves of a causal argument.</div>
+    <div class="ex-why">"Porque" introduces the cause (the neighborhood's character motivated the choice to live there). "Por eso" introduces the consequence (the love of the neighborhood leads to the Sunday runs).</div>
   </div>
   <div class="ex-group-label err">Common Errors</div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Sin Embargo Without Punctuation Boundaries</span>
     <div class="ex-sp"><span class="wrong">Me gusta Adobe sin embargo el trayecto es muy largo todos los días.</span> → <span class="right">Me gusta Adobe. Sin embargo, el trayecto es muy largo todos los días.</span></div>
-    <div class="ex-why">"Sin embargo" is a sentence connector — it must be preceded by a period (or semicolon) and followed by a comma. Using it mid-sentence without any punctuation creates a run-on that is penalized on the B1 writing exam. The rule: connector words that introduce a new clause (además, sin embargo, por lo tanto, no obstante, en conclusión) require clear boundary punctuation. Think of them as hinge words between sentences, not conjunctions within a sentence like "pero" or "y."</div>
+    <div class="ex-why">"Sin embargo" is a sentence connector — it must be preceded by a period (or semicolon) and followed by a comma. Using it mid-sentence without any punctuation creates a run-on that is penalized on the B1 writing exam.</div>
   </div>
   <div class="ex-item warn">
     <span class="ex-tag err">Error Type · Porque/Por Eso Directional Confusion</span>
     <div class="ex-sp"><span class="wrong">No terminé el análisis de Snowflake porque eso tuve reuniones todo el día.</span> → <span class="right">Tuve reuniones todo el día; por eso no terminé el análisis de Snowflake.</span></div>
-    <div class="ex-why">"Porque eso" fuses two separate connectors into a nonsensical hybrid. "Porque" (one word) introduces the cause and looks backward. "Por eso" (two separate words) introduces the consequence and looks forward. They cannot be merged, and they go in opposite positions in the causal chain. Correct structure: cause + "por eso" + consequence. Or: consequence + "porque" + cause. "Tuve reuniones" is the cause → "por eso no terminé" is the result. Flipping the direction: "No terminé porque tuve reuniones" — both correct.</div>
+    <div class="ex-why">"Porque eso" fuses two separate connectors into a nonsensical hybrid. "Porque" (one word) introduces the cause and looks backward.</div>
   </div>
 </div>
 
@@ -5724,7 +5683,7 @@ body {
       <span class="ex-tag ar">Ser pasiva — the action happened</span>
       <div class="ex-sp">El dashboard <strong>fue desarrollado</strong> por mi equipo en Adobe durante el Q3.</div>
       <div class="ex-en">The dashboard was developed by my team at Adobe during Q3.</div>
-      <div class="ex-why"><em>fue</em> (ser, preterite, 3rd sg) + <em>desarrollado</em> (participio, masc sing to agree with <em>el dashboard</em>) + <em>por mi equipo</em> (agent). Classic ser-pasiva structure. In real conversation, this would often be: <em>Mi equipo desarrolló el dashboard</em> (active) or <em>El dashboard se desarrolló</em> (se-pasiva).</div>
+      <div class="ex-why">fue (ser, preterite, 3rd sg) + desarrollado (participio, masc sing to agree with el dashboard) + por mi equipo (agent). Classic ser-pasiva structure.</div>
     </div>
     <div class="ex-item good">
       <span class="ex-tag er">Estar + participio — the resulting state</span>
@@ -5735,7 +5694,7 @@ body {
     <div class="ex-item warn">
       <span class="ex-tag err">Ser vs. Estar confusion in passive</span>
       <div class="ex-sp"><span class="wrong">La reunión es cancelada.</span> → <span class="right">La reunión fue cancelada. / La reunión está cancelada. / La reunión se canceló.</span></div>
-      <div class="ex-why"><em>es cancelada</em> in present tense ser-pasiva sounds unnatural for a one-time event. For completed event: <em>fue cancelada</em> (it was canceled). For current state: <em>está cancelada</em> (it is [in a state of being] canceled — still the case right now). For natural speech: <em>se canceló</em> (the se-pasiva).</div>
+      <div class="ex-why">es cancelada in present tense ser-pasiva sounds unnatural for a one-time event. For completed event: fue cancelada (it was canceled).</div>
     </div>
   </div>
 </section>
@@ -5788,12 +5747,12 @@ body {
       <span class="ex-tag ar">Reporting a colleague's statement</span>
       <div class="ex-sp">Mi jefe dijo que el modelo <strong>necesitaba</strong> más datos de entrenamiento y que lo <strong>revisaríamos</strong> juntos el viernes.</div>
       <div class="ex-en">My boss said that the model needed more training data and that we would review it together on Friday.</div>
-      <div class="ex-why"><em>dijo</em> (past reporting verb) triggers backshift: <em>necesita</em> → <em>necesitaba</em> (pres → imp), <em>revisaremos</em> → <em>revisaríamos</em> (fut → cond). Both shifts mandatory because the reporting verb is in the past. Notice <em>el viernes</em> stays — specific day reference doesn't shift unless the context is unclear.</div>
+      <div class="ex-why">dijo (past reporting verb) triggers backshift: necesita → necesitaba (pres → imp), revisaremos → revisaríamos (fut → cond). Both shifts mandatory because the reporting verb is in the past.</div>
     </div>
     <div class="ex-item warn">
       <span class="ex-tag err">No tense shift after present reporting verb</span>
       <div class="ex-sp"><span class="wrong">Mi jefa dice que el análisis <strong>necesitara</strong> revisión.</span> → <span class="right">Mi jefa dice que el análisis <strong>necesita</strong> revisión.</span></div>
-      <div class="ex-why">When the reporting verb is present (<em>dice</em>), no tense shift occurs. The reported clause stays in the same tense as the original statement. Shifts only happen when the reporting verb is past (<em>dijo, explicó, comentó</em>).</div>
+      <div class="ex-why">When the reporting verb is present (dice), no tense shift occurs. The reported clause stays in the same tense as the original statement.</div>
     </div>
   </div>
 </section>
@@ -5901,7 +5860,7 @@ body {
       <span class="ex-tag ar">Real condition — present → future</span>
       <div class="ex-sp">Si <strong>terminamos</strong> el análisis de Snowflake esta semana, <strong>podremos</strong> presentarlo el jueves.</div>
       <div class="ex-en">If we finish the Snowflake analysis this week, we'll be able to present it on Thursday.</div>
-      <div class="ex-why">Real condition — we might actually finish it. <em>si + presente indicativo</em> (terminamos) + <em>futuro</em> (podremos). The condition is genuinely possible. No subjunctive because this is real-world, achievable.</div>
+      <div class="ex-why">Real condition — we might actually finish it. si + presente indicativo (terminamos) + futuro (podremos). The condition is genuinely possible.</div>
     </div>
     <div class="ex-item good">
       <span class="ex-tag er">Hypothetical — imperfect subjunctive → conditional</span>
@@ -6026,7 +5985,7 @@ body {
       <span class="ex-tag ar">Positive vs. negative pairs</span>
       <div class="ex-sp">¿Hay <strong>algo</strong> en los datos que explique el patrón? No, no hay <strong>nada</strong> obvio. ¿Sabe <strong>alguien</strong> del equipo? <strong>Nadie</strong> lo ha visto todavía.</div>
       <div class="ex-en">Is there something in the data that explains the pattern? No, there's nothing obvious. Does anyone from the team know? Nobody has seen it yet.</div>
-      <div class="ex-why">Four indefinite pronouns: <em>algo</em> (positive, thing) / <em>nada</em> (negative, thing) / <em>alguien</em> (positive, person) / <em>nadie</em> (negative, person). All invariable — no gender/number agreement needed. Note: <em>no hay nada</em> — double negative required because <em>nada</em> follows the verb.</div>
+      <div class="ex-why">Four indefinite pronouns: algo (positive, thing) / nada (negative, thing) / alguien (positive, person) / nadie (negative, person). All invariable — no gender/number agreement needed.</div>
     </div>
     <div class="ex-item good">
       <span class="ex-tag er">cualquier — any without restriction</span>
