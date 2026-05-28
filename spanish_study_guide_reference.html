@@ -1706,18 +1706,223 @@ body {
 <section class="section" id="n3">
     <div class="section-header">
       <div class="section-num">03</div>
-      <h2 class="section-title">Acentos y <em>Sílabas</em> <span class="level-badge a1">A1</span></h2>
+      <h2 class="section-title">Acentos · <em>SEGA</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Accent Marks & Syllable Stress — The SEGA System</div>
     </div>
 
     <div class="concept">
-      <div class="concept-label">Conceptual anchor</div>
-      <div class="concept-body">Accent marks are <strong>structural roadmaps</strong>, not decorations. Count syllables from right to left to find where stress falls. The SEGA acronym names the four stress positions.</div>
+      <div class="concept-label">The one insight that unlocks everything</div>
+      <div class="concept-body">Spanish has a <strong>built-in default stress position</strong>. Accent marks (tildes) are <em>not decorations</em> — they are <strong>deviation signals</strong>. A tilde only appears when a word breaks the default. Once you know the default, you only need to ask one question: <em>"Does this word deviate from it?"</em></div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">Step 1 — Understand the default (this is the engine of the whole system)</div>
+      <div class="rule-body">
+        Spanish default stress is based purely on what the word <strong>ends with</strong>:<br><br>
+        <strong>If the word ends in a vowel, N, or S</strong> → default stress is on the <strong>second-to-last</strong> syllable<br>
+        <code>ha-<u>bla</u>  ·  co-<u>men</u>  ·  ca-<u>sa</u>s  ·  <u>ga</u>-to  ·  <u>li</u>-bros</code> — all natural, no mark needed<br><br>
+        <strong>If the word ends in any other consonant</strong> (B, D, L, R, Z, etc.) → default stress is on the <strong>last</strong> syllable<br>
+        <code>ha-<u>blar</u>  ·  ciu-<u>dad</u>  ·  es-pa-<u>ñol</u>  ·  re-<u>loj</u></code> — all natural, no mark needed<br><br>
+        <strong>The tilde only appears when a word breaks its own default.</strong> That's the entire system.
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">Step 2 — Count syllables from the RIGHT (not left)</div>
+      <div class="rule-body">
+        SEGA labels stress positions by counting back from the last syllable. Position 1 is always the final syllable, position 2 is second-from-last, etc.:<br><br>
+        <div style="font-family:var(--mono);font-size:13px;line-height:2.2;background:var(--bg-subtle);padding:14px 18px;border-radius:8px;margin-top:4px">
+          <span style="color:var(--text-soft)">Word:</span>&nbsp;&nbsp;&nbsp;
+          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">a</span>&nbsp;-&nbsp;
+          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">ná</span>&nbsp;-&nbsp;
+          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">li</span>&nbsp;-&nbsp;
+          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">sis</span><br>
+          <span style="color:var(--text-soft)">Position:</span>&nbsp;
+          <span style="color:var(--text-soft)">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color:var(--indigo);font-weight:700">3 ← stress</span>&nbsp;&nbsp;&nbsp;
+          <span style="color:var(--text-soft)">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color:var(--text-soft)">1</span>
+        </div><br>
+        Stress is on position 3 (third from right) → that is the <strong>Esdrújula</strong> category → <strong>always</strong> requires a tilde.<br><br>
+        <div style="font-family:var(--mono);font-size:13px;line-height:2.2;background:var(--bg-subtle);padding:14px 18px;border-radius:8px;margin-top:4px">
+          <span style="color:var(--text-soft)">Word:</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="background:#FEF3C7;padding:2px 7px;border-radius:4px;color:#92400E">ca</span>&nbsp;-&nbsp;
+          <span style="background:#EEF2FF;padding:2px 7px;border-radius:4px;color:var(--indigo)">fé</span><br>
+          <span style="color:var(--text-soft)">Position:</span>&nbsp;&nbsp;
+          <span style="color:var(--text-soft)">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color:var(--indigo);font-weight:700">1 ← stress</span>
+        </div><br>
+        Stress is on position 1 (last syllable) → <strong>Aguda</strong> category. Ends in a vowel (é) → default for vowel endings is position 2 → this word <strong>deviates</strong> → tilde required.
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">Step 3 — The SEGA decision table (apply this to every word)</div>
+      <div class="rule-body">
+        SEGA is an acronym listing the four stress positions from most-stressed-back to least: <strong>S</strong>obreesdrújula → <strong>E</strong>sdrújula → <strong>G</strong>rave → <strong>A</strong>guda.<br><br>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="background:var(--bg-subtle)">
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Letter</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Name</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Stress at position…</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Tilde rule</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">S</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)">Sobreesdrújula</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">4th from right</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--red)">Always</strong> — no exceptions</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">No default ever puts stress this far back</td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">E</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)">Esdrújula</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">3rd from right</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--red)">Always</strong> — no exceptions</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">No default ever puts stress this far back</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">G</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)">Grave / Llana</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">2nd from right</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--emerald)">Only if</strong> ending is NOT a vowel/N/S</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">Words ending in vowel/N/S are <em>expected</em> to stress position 2 — no mark needed. Words ending in other consonants are <em>expected</em> to stress position 1 — so position 2 is a deviation → mark required</td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--display);font-size:22px;font-weight:700;color:var(--indigo)">A</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)">Aguda</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);font-family:var(--mono);font-size:12px">1st from right (last)</td>
+              <td style="padding:8px 12px;border:1px solid var(--line)"><strong style="color:var(--emerald)">Only if</strong> ending IS a vowel, N, or S</td>
+              <td style="padding:8px 12px;border:1px solid var(--line);color:var(--text-mid);font-size:12px">Words ending in vowel/N/S are <em>expected</em> to stress position 2 — so position 1 is a deviation → mark required. Words ending in other consonants are <em>expected</em> to stress position 1 — no deviation → no mark</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">The shortcut — the only two questions you need</div>
+      <div class="rule-body">
+        <strong>Q1: Is stress on the 3rd or 4th syllable from the right?</strong><br>
+        → YES → tilde always. Done. (Esdrújula or Sobreesdrújula)<br><br>
+        <strong>Q2: Is there a mismatch between the ending type and the stress position?</strong><br>
+        → Ending is vowel/N/S but stress is on the <em>last</em> syllable → tilde. (café, japonés, habló)<br>
+        → Ending is consonant (not N/S) but stress is on the <em>2nd-to-last</em> → tilde. (fácil, útil, Héctor)<br>
+        → No mismatch → no tilde.<br><br>
+        <strong>If no mismatch and stress is not past position 2 → NO tilde. Every time.</strong>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">Worked examples — apply the two questions to each word</div>
+      <div class="rule-body" style="padding-bottom:4px">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="background:var(--bg-subtle)">
+              <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Word</th>
+              <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Syllables (stress bold)</th>
+              <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Ends in</th>
+              <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Stress at</th>
+              <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Mismatch?</th>
+              <th style="padding:7px 12px;text-align:left;border:1px solid var(--line);font-family:var(--mono);font-size:10px">Tilde?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">casa</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)"><strong>CA</strong>-sa</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">vowel (a)</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 2</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--emerald)">No — expected</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✗ No tilde</td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">café</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)">ca-<strong>FÉ</strong></td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">vowel (e)</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 1</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red)">Yes — vowel ending expected position 2</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red);font-weight:700">✓ Tilde</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">hablar</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)">ha-<strong>BLAR</strong></td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">R (consonant)</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 1</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--emerald)">No — R ending expected position 1</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✗ No tilde</td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">fácil</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)"><strong>FÁ</strong>-cil</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">L (consonant)</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 2</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red)">Yes — L ending expected position 1</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red);font-weight:700">✓ Tilde</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">datos</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)"><strong>DA</strong>-tos</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">S</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 2</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--emerald)">No — S ending expected position 2</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--emerald);font-weight:700">✗ No tilde</td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">japonés</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)">ja-po-<strong>NÉS</strong></td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">S</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 1</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red)">Yes — S ending expected position 2</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red);font-weight:700">✓ Tilde</td>
+            </tr>
+            <tr>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">análisis</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)">a-<strong>NÁ</strong>-li-sis</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">S</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 3</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red)">Position 3 — auto-tilde</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red);font-weight:700">✓ Tilde (Esdrújula)</td>
+            </tr>
+            <tr style="background:#FAFBFD">
+              <td style="padding:7px 12px;border:1px solid var(--line);font-weight:700">prepáralo</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);font-family:var(--mono)">pre-<strong>PÁ</strong>-ra-lo</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">vowel (o)</td>
+              <td style="padding:7px 12px;border:1px solid var(--line)">position 3</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red)">Position 3 — auto-tilde</td>
+              <td style="padding:7px 12px;border:1px solid var(--line);color:var(--red);font-weight:700">✓ Tilde (Esdrújula)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">Pronoun attachment — why commands cascade upward</div>
+      <div class="rule-body">
+        When you attach object pronouns to a command, the word gets longer but the <strong>original stress stays on the same vowel</strong>. As the word grows, that vowel migrates further from the end — eventually requiring a tilde to protect it:<br><br>
+        <code>prepara</code> → stress on <strong>PA</strong> (position 2, vowel ending → no mark needed)<br>
+        <code>prepáralo</code> → same stress on <strong>PA</strong>, now position 3 → Esdrújula → tilde required<br>
+        <code>prepáramelo</code> → same stress on <strong>PA</strong>, now position 4 → Sobreesdrújula → tilde required<br><br>
+        The tilde is <em>pinning the stress in place</em> as the word grows. Remove it and a native speaker defaults to the new expected position — completely wrong pronunciation.
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-label">Spanish vowels — the other accent rule (always fixed)</div>
+      <div class="rule-body">
+        A = "ah" · E = "eh" · I = "ee" · O = "oh" · U = "oo"<br>
+        Unlike English (where "a" in "cat," "cake," "car," "about" produces four different sounds), Spanish vowels are <strong>invariant</strong>. The same vowel in the same position always sounds identical — stressed or not. This is why syllable stress is so salient in Spanish: everything else stays constant.
+      </div>
     </div>
 
     <div class="mx-note">
       <span class="mx-flag">🇲🇽</span>
-      <div class="mx-body"><strong>Why this matters for verbs:</strong> The preterite relies heavily on accent marks to distinguish tenses. "Habló" (he spoke, preterite) vs. "habla" (he speaks, present). One accent mark = completely different meaning.</div>
+      <div class="mx-body"><strong>Why this matters for verbs specifically:</strong> The preterite tense signal for -AR verbs is <em>entirely carried by the accent mark</em>. <strong>habló</strong> (he spoke, preterite) vs. <strong>habla</strong> (he speaks, present) differ only in the ó tilde. Miss it = wrong tense, wrong person, wrong meaning — all from one missing mark.</div>
     </div>
 
 <div class="dialect-note">
@@ -1737,7 +1942,7 @@ body {
     </div>
     <div class="dialect-row">
       <span class="dr-flag">🇨🇺 Caribbean</span>
-      <span class="dr-text"><strong>S-Aspiration:</strong> The letter S at the end of syllables is breathed out like "H" or dropped entirely. "Los pasteles" = "Loh pasteleh." Plural markers and verb endings disappear from the audio — context carries the grammar.</span>
+      <span class="dr-text"><strong>S-Aspiration:</strong> The letter S at the end of syllables is breathed out like "H" or dropped entirely. "Los pasteles" = "Loh pasteleh." Plural markers and verb endings disappear from audio — context carries the grammar.</span>
     </div>
   </div>
 </div>
@@ -1745,94 +1950,28 @@ body {
 <div class="ling-dive">
   <div class="ld-label">🔬 Linguistic Deep Dive</div>
   <div class="ld-body">
-    The Spanish accent system (tildes) was systematized in the 18th century by the <strong>Real Academia Española</strong> to resolve ambiguity in print. Without them, readers couldn't know where to stress a word — stress in Spanish changes meaning entirely (<em>hablo</em> vs. <em>habló</em>).<br><br>
-    The SEGA system is actually a <strong>default assumption + exception marking</strong> system. Spanish assumes that most words are Grave (stress on 2nd-to-last syllable). Words that deviate from this assumption must mark their deviation with a tilde. This is why Grave words ending in N, S, or vowel need no accent — the default assumption is already correct for them.
+    The Spanish tilde system was codified in the 18th century by the <strong>Real Academia Española</strong> to resolve print ambiguity — without tildes, readers had no signal for stress, and stress changes meaning entirely (<em>hablo</em> vs. <em>habló</em>).<br><br>
+    The deeper logic: Spanish inherited Latin's <strong>phonemic stress</strong> (stress that changes word identity), but collapsed Latin's distinct verb endings into similar-looking forms. The tilde is a compensatory device — it rescues the distinctions Latin made through sound that Spanish's simplified endings can no longer make automatically.<br><br>
+    The Grave category dominates: roughly <strong>75–80% of Spanish words</strong> are Grave (stress on second-to-last). This is why the default assumption works so well — most words you encounter need no tilde at all.
   </div>
 </div>
 
-    <table class="sega-table">
-      <thead><tr><th>Letter</th><th>Name</th><th>Stress position</th><th>Rule for accent mark</th><th>Examples</th></tr></thead>
-      <tbody>
-        <tr>
-          <td class="td-letter">S</td>
-          <td class="td-name">Sobreesdrújula</td>
-          <td>4th from right</td>
-          <td style="color:var(--text-mid);font-size:13px"><strong style="color:var(--red)">Always</strong> requires accent</td>
-          <td class="td-ex">Mán-da-me-lo · Prépáramelo</td>
-        </tr>
-        <tr>
-          <td class="td-letter">E</td>
-          <td class="td-name">Esdrújula</td>
-          <td>3rd from right</td>
-          <td style="color:var(--text-mid);font-size:13px"><strong style="color:var(--red)">Always</strong> requires accent</td>
-          <td class="td-ex">A-ná-li-sis · Bús-ca-lo</td>
-        </tr>
-        <tr>
-          <td class="td-letter">G</td>
-          <td class="td-name">Grave / Llana</td>
-          <td>2nd from right</td>
-          <td style="color:var(--text-mid);font-size:13px">Only if ends in consonant <strong>other than N or S</strong></td>
-          <td class="td-ex">Fá-cil · Ú-til (accent) · Da-tos · Ga-to (no accent)</td>
-        </tr>
-        <tr>
-          <td class="td-letter">A</td>
-          <td class="td-name">Aguda</td>
-          <td>1st from right (last)</td>
-          <td style="color:var(--text-mid);font-size:13px">Only if ends in <strong>N, S, or vowel</strong></td>
-          <td class="td-ex">Ca-fé · Ja-pón (accent) · Tra-ba-jar (no accent)</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rule">
-      <div class="rule-label">Pronoun attachment shifts the stress position</div>
-      <div class="rule-body">
-        Adding pronouns to a verb command pushes the stressed syllable further back, changing its SEGA category:<br><br>
-        <code>Prepara</code> (Grave, no accent) → <code>Prepáralo</code> (Esdrújula, accent required) → <code>Prepáramelo</code> (Sobreesdrújula, accent required)<br><br>
-        Without the accent, native speakers would read it as "man-DA-lo" instead of "MAN-da-lo."
-      </div>
-    </div>
-
-    <div class="rule">
-      <div class="rule-label">Vowel sounds — fixed, always</div>
-      <div class="rule-body">
-        A = "ah" · E = "eh" · I = "ee" · O = "oh" · U = "oo"<br>
-        Unlike English, Spanish vowels never change sound. Ever.
-      </div>
-    </div>
-
     <div class="examples">
-  <div class="ex-group-label ar">-AR Verb context · SEGA classification</div>
-  <div class="ex-item good">
-    <span class="ex-tag ar">-AR · Aguda Rule (A)</span>
-    <div class="ex-sp">La palabra <strong>café</strong> (ca-FÉ) es Aguda porque el acento cae en la última sílaba y termina en vocal — por eso requiere tilde.</div>
-    <div class="ex-en">The word "café" is Aguda because the stress falls on the last syllable and it ends in a vowel — that is why it requires an accent mark.</div>
-    <div class="ex-why">Aguda rule: stress on last syllable + ends in N, S, or vowel = accent required. Café ends in é (vowel) → accent mark mandatory. Words like "hablar" (stress on last syllable, ends in R) need NO accent because R is not N, S, or vowel — the default assumption for words ending in other consonants already places stress on the last syllable. The mark is only written when the word deviates from what the rule predicts — or when it matches the exception class (ends in N/S/vowel).</div>
-  </div>
-  <div class="ex-group-label er" style="color:#0891B2">-ER Verb context · Esdrújula rule</div>
-  <div class="ex-item good">
-    <span class="ex-tag er">-ER · Esdrújula Rule (E)</span>
-    <div class="ex-sp">La palabra <strong>análisis</strong> (a-NÁ-li-sis) es Esdrújula — el acento cae en la tercera sílaba desde la derecha. Todas las Esdrújulas siempre llevan tilde, sin excepción.</div>
-    <div class="ex-en">The word "análisis" is Esdrújula — the stress falls on the third syllable from the right. All Esdrújulas always carry a written accent mark, without exception.</div>
-    <div class="ex-why">Esdrújulas never need to check a rule — they always get an accent. This category includes academic vocabulary: análisis, matemáticas, gramática, física, lingüística, estadística. If you're writing a word and the stress falls on the third-to-last syllable, put the accent mark and move on — it is not optional. This is the most predictable category in the entire system.</div>
-  </div>
-  <div class="ex-group-label ir" style="color:#7C3AED">-IR Verb context · Pronoun attachment shift</div>
-  <div class="ex-item good">
-    <span class="ex-tag ir">-IR · Sobreesdrújula cascade</span>
-    <div class="ex-sp">El espresso está listo: <strong>prepara</strong> (Grave, no accent) → <strong>prepáralo</strong> (Esdrújula, accent required) → <strong>prepáramelo</strong> (Sobreesdrújula, accent required).</div>
-    <div class="ex-en">The espresso is ready: prepare (stress on 2nd-to-last, no mark) → prepare it (stress pushed to 3rd-to-last, mark required) → prepare it for me (stress pushed to 4th-to-last, mark required).</div>
-    <div class="ex-why">This three-step cascade demonstrates exactly why accent marks on commands are not optional decoration — they protect the original stress position as pronouns are added. Each pronoun appended shifts the word one SEGA category higher. The accent mark stays on the same vowel (the A in prepAra) throughout — it simply becomes more obligatory with each step. Without the accent marks, a native speaker would read "preparalo" as pre-pa-RA-lo (wrong stress) and "preparamelo" as pre-pa-ra-ME-lo (entirely wrong).</div>
-  </div>
-  <div class="ex-group-label err">Common Errors</div>
+  <div class="ex-group-label ar">Common errors applying SEGA</div>
   <div class="ex-item warn">
-    <span class="ex-tag err">Error Type · Missing Tense-Distinguishing Accent</span>
-    <div class="ex-sp"><span class="wrong">El hablo con el director ayer por la tarde.</span> → <span class="right">Él habló con el director ayer por la tarde.</span></div>
-    <div class="ex-why">Two simultaneous errors that compound each other: (1) "El" without accent = "the" (definite article). "Él" with accent = "he" (subject pronoun). Writing "El hablo" means "The speaks" — the article cannot be a subject. (2) "hablo" without accent = yo present tense. "habló" with accent on ó = él/ella preterite. The sentence needs both accents: the pronoun to establish the subject, and the verb accent to establish past tense. "Ayer" (yesterday) demands preterite — without the ó accent the tense signal disappears entirely.</div>
-  </div>
-  <div class="ex-item warn">
-    <span class="ex-tag err">Error Type · Incorrect Accent on Default Grave Word</span>
+    <span class="ex-tag err">Error · Over-accenting default Grave words</span>
     <div class="ex-sp"><span class="wrong">Los dátos de Snowflake están lístos para el análisis.</span> → <span class="right">Los datos de Snowflake están listos para el análisis.</span></div>
-    <div class="ex-why">Both "datos" and "listos" are Grave words ending in S — they follow the default assumption (stress on second-to-last syllable, no accent needed). Adding accents to them is an overcorrection error. The system only requires written marks when a word DEVIATES from the default. DA-tos and LIS-tos already stress the correct syllable naturally — writing dátos and lístos is like writing "thé" in English. Only "análisis" in this sentence correctly carries an accent, because it is Esdrújula.</div>
+    <div class="ex-why">"Datos" ends in S → default stress is position 2 → DA-tos is already correct → no tilde. "Listos" ends in S → same logic → LIS-tos → no tilde. Adding tildes to these is an overcorrection — you are marking words that are following the rule perfectly. Only "análisis" earns its tilde because stress is at position 3 (Esdrújula), which is never the default for any word.</div>
+  </div>
+  <div class="ex-item warn">
+    <span class="ex-tag err">Error · Missing tilde on a deviation word</span>
+    <div class="ex-sp"><span class="wrong">El examen fue facil pero util para el analisis del proyecto.</span> → <span class="right">El examen fue fácil pero útil para el análisis del proyecto.</span></div>
+    <div class="ex-why">Three misses, same rule: "fácil" ends in L (consonant, not N/S) → default is stress on position 1 → but stress is on position 2 (FÁ-cil) → deviation → tilde required. "útil" same pattern: ends in L → default position 1 → stress is on position 2 (Ú-til) → tilde required. "análisis" ends in S → default position 2 → but stress is position 3 → Esdrújula → tilde required. All three are deviating from their default. None of the tildes are optional.</div>
+  </div>
+  <div class="ex-item warn">
+    <span class="ex-tag err">Error · Missing verb tense accent (the most costly error)</span>
+    <div class="ex-sp"><span class="wrong">Mi jefe hablo con el cliente ayer.</span> → <span class="right">Mi jefe habló con el cliente ayer.</span></div>
+    <div class="ex-why">"habló" ends in a vowel (o) → default stress is position 2. But the preterite él/ella form stresses the final syllable (ha-BLÓ, position 1) → that deviates from the default → tilde required. Without it, "hablo" = yo present tense (I speak) — the subject "mi jefe" is third person but the verb is first person, producing a grammatically broken sentence. One missing tilde creates both a tense error and a person agreement error simultaneously.</div>
   </div>
 </div>
   </section>
