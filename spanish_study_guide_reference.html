@@ -2383,6 +2383,211 @@ body {
   max-height: 0;
 }
 
+
+/* ── Level Overview Card ── */
+.level-overview {
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+.lo-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 22px 28px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-subtle);
+}
+.lo-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+.lo-sub {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-left: auto;
+  font-style: italic;
+}
+.lo-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+}
+.lo-can-do {
+  padding: 20px 28px;
+  border-right: 1px solid var(--line);
+}
+.lo-can-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+.lo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lo-list li {
+  font-size: 13px;
+  color: var(--text-mid);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.lo-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--emerald);
+  font-size: 11px;
+  font-weight: 700;
+}
+.lo-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 160px;
+}
+.lo-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.lo-stat:last-child { border-bottom: none; }
+.lo-stat-num {
+  font-family: var(--roboto);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.lo-stat-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-soft);
+}
+
+/* ── Word Bank ── */
+.word-bank {
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  margin-top: 32px;
+  overflow: hidden;
+}
+.wb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--bg-subtle);
+  border-bottom: 2px solid var(--line);
+}
+.wb-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+}
+.wb-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-soft);
+}
+.wb-note {
+  font-size: 11.5px;
+  color: var(--text-soft);
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(139,92,246,.04);
+  font-style: italic;
+}
+.wb-section {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.wb-section:last-child { border-bottom: none; }
+.wb-cat {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+.wb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 6px 16px;
+}
+.wb-word {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 0;
+}
+.wb-es {
+  font-family: var(--roboto);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+.wb-en {
+  font-size: 12px;
+  color: var(--text-mid);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wb-type {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-soft);
+  background: var(--bg-subtle);
+  padding: 1px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* ── Dark mode overrides ── */
+[data-theme="dark"] .level-overview,
+[data-theme="dark"] .word-bank {
+  background: #1E293B;
+  border-color: #334155;
+}
+[data-theme="dark"] .lo-header,
+[data-theme="dark"] .wb-header,
+[data-theme="dark"] .wb-note { background: #293548; }
+[data-theme="dark"] .wb-note { background: rgba(139,92,246,.08); }
+[data-theme="dark"] .lo-stat-num { color: #F1F5F9; }
+[data-theme="dark"] .wb-es { color: #F1F5F9; }
+[data-theme="dark"] .wb-en { color: #94A3B8; }
+[data-theme="dark"] .wb-type { background: #293548; color: #64748B; }
+
 </style>
 </head>
 <body>
@@ -2557,13 +2762,40 @@ body {
        01 — PRESENTE INDICATIVO
   ══════════════════════════════ -->
 
-  <div class="level-divider" id="level-a1">
-    <div class="ld-inner">
-      <div class="ld-badge" style="background:#ECFDF5;color:#065F46;border-color:#10B981">Nivel A1</div>
-      <div class="ld-title">Foundations</div>
-      <div class="ld-desc">The absolute foundation. Master these before everything else.</div>
+  <div class="level-overview" id="level-a1">
+  <div class="lo-header">
+    <span class="level-badge a1" style="font-size:12px;padding:3px 10px">A1</span>
+    <div class="lo-title">Nivel A1 — Foundation</div>
+    <div class="lo-sub">Basic exchanges about familiar, everyday topics</div>
+  </div>
+  <div class="lo-body">
+    <div class="lo-can-do">
+      <div class="lo-can-title">What you can do at this level</div>
+      <ul class="lo-list">
+        <li>Introduce yourself, say where you're from, and describe what you do</li>
+        <li>Ask and answer simple questions: what, who, where, when, how much</li>
+        <li>Express basic needs: I want, I need, I have, I like / I don't like</li>
+        <li>Describe things using adjectives: size, color, quality, nationality</li>
+        <li>Talk about existence: there is / there are / there was</li>
+        <li>Form simple negatives: I don't work here / I never go</li>
+      </ul>
+    </div>
+    <div class="lo-stats">
+      <div class="lo-stat">
+        <div class="lo-stat-num">~300</div>
+        <div class="lo-stat-label">core words target</div>
+      </div>
+      <div class="lo-stat">
+        <div class="lo-stat-num">~70%</div>
+        <div class="lo-stat-label">basic conv. coverage</div>
+      </div>
+      <div class="lo-stat">
+        <div class="lo-stat-num">8</div>
+        <div class="lo-stat-label">grammar modules</div>
+      </div>
     </div>
   </div>
+</div>
 
 
 <section class="section" id="n4b">
@@ -3016,7 +3248,7 @@ body {
   <div class="vr-header">
     <div class="vr-header-top">
       <div class="vr-label">📋 Words to Review</div>
-      <div class="vr-count">12 words</div>
+      <div class="vr-count">50 words</div>
     </div>
     <div class="vr-desc">A1 vocabulary from the test that need more practice.</div>
   </div>
@@ -3038,7 +3270,7 @@ body {
 <div class="fc-drill" id="fc-vocab-a1">
   <div class="fc-drill-header">
     <span class="fc-drill-label">📋 Vocab Review</span>
-    <span class="fc-drill-meta">A1 · Vocabulary · 12 cards</span>
+    <span class="fc-drill-meta">A1 · Vocabulary · 50 cards</span>
   </div>
   <div class="fc-progress-bar"><div class="fc-progress-fill" style="width:0%"></div></div>
   <div class="fc-body"></div>
@@ -3054,6 +3286,112 @@ body {
 </div>
     <div class="section-next"><span class="sn-label">NEXT →</span><a href="#n4d" style="color:var(--text-mid);text-decoration:none">Interrogativas</a></div>
   </section>
+
+
+<div class="word-bank" id="wb-a1">
+  <div class="wb-header">
+    <span class="wb-title">📖 A1 Core Word Bank</span>
+    <span class="wb-count">67 words</span>
+  </div>
+  <div class="wb-note">These 67 words are the highest-frequency vocabulary at A1. Knowing them well gives you the building blocks for ~70% of basic conversation — before memorizing anything else, own these.</div>
+  <div class="wb-section">
+    <div class="wb-cat">Core Verbs — master these 15 first</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">ser</span><span class="wb-en">to be (identity, nature)</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">estar</span><span class="wb-en">to be (state, location)</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">tener</span><span class="wb-en">to have</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">hacer</span><span class="wb-en">to do / make</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">ir</span><span class="wb-en">to go</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">querer</span><span class="wb-en">to want</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">poder</span><span class="wb-en">can / to be able to</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">hablar</span><span class="wb-en">to speak / talk</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">comer</span><span class="wb-en">to eat</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">vivir</span><span class="wb-en">to live</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">saber</span><span class="wb-en">to know (facts)</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">dar</span><span class="wb-en">to give</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">ver</span><span class="wb-en">to see</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">venir</span><span class="wb-en">to come</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">necesitar</span><span class="wb-en">to need</span><span class="wb-type">verb</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">People & Identity</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">el hombre</span><span class="wb-en">man</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la mujer</span><span class="wb-en">woman</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el chico</span><span class="wb-en">boy / guy</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la chica</span><span class="wb-en">girl</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el amigo/a</span><span class="wb-en">friend</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la familia</span><span class="wb-en">family</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el nombre</span><span class="wb-en">name</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la persona</span><span class="wb-en">person</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el año</span><span class="wb-en">year</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la edad</span><span class="wb-en">age</span><span class="wb-type">noun</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Places</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">la casa</span><span class="wb-en">house / home</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el trabajo</span><span class="wb-en">work / job</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la ciudad</span><span class="wb-en">city</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la calle</span><span class="wb-en">street</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el restaurante</span><span class="wb-en">restaurant</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la tienda</span><span class="wb-en">shop / store</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la escuela</span><span class="wb-en">school</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el país</span><span class="wb-en">country</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el bar</span><span class="wb-en">bar / café</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la oficina</span><span class="wb-en">office</span><span class="wb-type">noun</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Time & Frequency</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">hoy</span><span class="wb-en">today</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">mañana</span><span class="wb-en">tomorrow / morning</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">ayer</span><span class="wb-en">yesterday</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">ahora</span><span class="wb-en">now</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">siempre</span><span class="wb-en">always</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">nunca</span><span class="wb-en">never</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">a veces</span><span class="wb-en">sometimes</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">tarde</span><span class="wb-en">late / afternoon</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">temprano</span><span class="wb-en">early</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">el día</span><span class="wb-en">day</span><span class="wb-type">noun</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Core Adjectives</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">bueno/a</span><span class="wb-en">good</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">malo/a</span><span class="wb-en">bad</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">grande</span><span class="wb-en">big / large</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">pequeño/a</span><span class="wb-en">small</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">nuevo/a</span><span class="wb-en">new</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">viejo/a</span><span class="wb-en">old</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">fácil</span><span class="wb-en">easy</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">difícil</span><span class="wb-en">difficult</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">barato/a</span><span class="wb-en">cheap</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">caro/a</span><span class="wb-en">expensive</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">rápido/a</span><span class="wb-en">fast</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">lento/a</span><span class="wb-en">slow</span><span class="wb-type">adj</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Essential Connectors</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">y</span><span class="wb-en">and</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">o</span><span class="wb-en">or</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">pero</span><span class="wb-en">but</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">porque</span><span class="wb-en">because</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">que</span><span class="wb-en">that / which</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">también</span><span class="wb-en">also / too</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">cuando</span><span class="wb-en">when</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">si</span><span class="wb-en">if</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">muy</span><span class="wb-en">very</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">mucho/a</span><span class="wb-en">a lot / much / many</span><span class="wb-type">adv</span></div>
+    </div>
+  </div>
+</div>
 
 <section class="section" id="n4d">
   <div class="section-header">
@@ -3526,6 +3864,32 @@ body {
 </div>
     <div class="section-next"><span class="sn-label">NEXT →</span><a href="#n5" style="color:var(--text-mid);text-decoration:none">Presente Continuo — A2 begins</a></div>
   </section>
+
+<div class="level-overview" id="level-a2">
+  <div class="lo-header">
+    <span class="level-badge a2" style="font-size:12px;padding:3px 10px">A2</span>
+    <div class="lo-title">Nivel A2 — Elementary</div>
+    <div class="lo-sub">Routine tasks and direct exchanges about familiar matters</div>
+  </div>
+  <div class="lo-body">
+    <div class="lo-can-do">
+      <div class="lo-can-title">What you can do at this level</div>
+      <ul class="lo-list">
+        <li>Describe daily routines, past events, and planned future actions</li>
+        <li>Talk about people's appearance, personality, and relationships</li>
+        <li>Handle shopping, ordering food, and making appointments</li>
+        <li>Use reflexive actions and object pronouns naturally</li>
+        <li>Express preferences using gustar-type verbs</li>
+        <li>Give and follow simple instructions and commands</li>
+      </ul>
+    </div>
+    <div class="lo-stats">
+      <div class="lo-stat"><div class="lo-stat-num">~600</div><div class="lo-stat-label">core words target</div></div>
+      <div class="lo-stat"><div class="lo-stat-num">~80%</div><div class="lo-stat-label">daily conv. coverage</div></div>
+      <div class="lo-stat"><div class="lo-stat-num">11</div><div class="lo-stat-label">grammar modules</div></div>
+    </div>
+  </div>
+</div>
 
 <section class="section" id="n5">
     <div class="section-header">
@@ -4242,6 +4606,105 @@ body {
     <div class="section-next"><span class="sn-label">NEXT →</span><a href="#n11c" style="color:var(--text-mid);text-decoration:none">Demostrativos</a></div>
   </section>
 
+
+<div class="word-bank" id="wb-a2">
+  <div class="wb-header">
+    <span class="wb-title">📖 A2 Core Word Bank</span>
+    <span class="wb-count">60 words</span>
+  </div>
+  <div class="wb-note">These 60 words are the highest-frequency additions at A2 — beyond the A1 bank. Together, A1 + A2 covers ~80% of daily conversation scenarios.</div>
+  <div class="wb-section">
+    <div class="wb-cat">Daily Routines & Body</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">levantarse</span><span class="wb-en">to get up</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">ducharse</span><span class="wb-en">to shower</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">vestirse</span><span class="wb-en">to get dressed</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">acostarse</span><span class="wb-en">to go to bed</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">despertarse</span><span class="wb-en">to wake up</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">el desayuno</span><span class="wb-en">breakfast</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el almuerzo</span><span class="wb-en">lunch</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la cena</span><span class="wb-en">dinner</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">cocinar</span><span class="wb-en">to cook</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">beber</span><span class="wb-en">to drink</span><span class="wb-type">verb</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Emotions & States</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">contento/a</span><span class="wb-en">happy / pleased</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">triste</span><span class="wb-en">sad</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">cansado/a</span><span class="wb-en">tired</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">enfermo/a</span><span class="wb-en">sick / ill</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">nervioso/a</span><span class="wb-en">nervous</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">aburrido/a</span><span class="wb-en">bored / boring</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">sorprendido/a</span><span class="wb-en">surprised</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">tener hambre</span><span class="wb-en">to be hungry</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">tener sed</span><span class="wb-en">to be thirsty</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">tener miedo</span><span class="wb-en">to be afraid</span><span class="wb-type">phrase</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Travel & Getting Around</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">viajar</span><span class="wb-en">to travel</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">llegar</span><span class="wb-en">to arrive</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">salir</span><span class="wb-en">to leave / go out</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">volver</span><span class="wb-en">to return</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">el tren</span><span class="wb-en">train</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el avión</span><span class="wb-en">plane</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el coche</span><span class="wb-en">car</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el metro</span><span class="wb-en">metro / subway</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el billete</span><span class="wb-en">ticket</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el hotel</span><span class="wb-en">hotel</span><span class="wb-type">noun</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Shopping & Money</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">comprar</span><span class="wb-en">to buy</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">vender</span><span class="wb-en">to sell</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">pagar</span><span class="wb-en">to pay</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">costar</span><span class="wb-en">to cost</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">el dinero</span><span class="wb-en">money</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el precio</span><span class="wb-en">price</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la tienda</span><span class="wb-en">shop / store</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el mercado</span><span class="wb-en">market</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">gratis</span><span class="wb-en">free (no cost)</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">la oferta</span><span class="wb-en">deal / sale offer</span><span class="wb-type">noun</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Social & Communication</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">conocer</span><span class="wb-en">to know / to meet</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">quedar</span><span class="wb-en">to meet up</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">llamar</span><span class="wb-en">to call</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">mandar</span><span class="wb-en">to send</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">el mensaje</span><span class="wb-en">message</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la reunión</span><span class="wb-en">meeting</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la fiesta</span><span class="wb-en">party</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">invitar</span><span class="wb-en">to invite</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">agradecer</span><span class="wb-en">to thank</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">disculpar</span><span class="wb-en">to apologize</span><span class="wb-type">verb</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Describing People & Things</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">alto/a</span><span class="wb-en">tall</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">bajo/a</span><span class="wb-en">short</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">delgado/a</span><span class="wb-en">thin / slim</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">gordo/a</span><span class="wb-en">fat</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">joven</span><span class="wb-en">young</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">mayor</span><span class="wb-en">older / elderly</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">simpático/a</span><span class="wb-en">friendly / nice</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">inteligente</span><span class="wb-en">intelligent</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">trabajador/a</span><span class="wb-en">hardworking</span><span class="wb-type">adj</span></div>
+      <div class="wb-word"><span class="wb-es">parecido/a</span><span class="wb-en">similar / alike</span><span class="wb-type">adj</span></div>
+    </div>
+  </div>
+</div>
+
 <section class="section" id="n11c">
   <div class="section-header">
     <div class="section-num">16</div>
@@ -4465,6 +4928,29 @@ body {
     <div class="section-next"><span class="sn-label">NEXT →</span><a href="#n12" style="color:var(--text-mid);text-decoration:none">Por vs. Para — Bridge begins</a></div>
   </section>
 
+<div class="level-overview" id="level-a2b1">
+  <div class="lo-header">
+    <span class="level-badge" style="font-size:12px;padding:3px 10px;background:#FAF5FF;color:#6D28D9;border:1px solid #DDD6FE">A2→B1</span>
+    <div class="lo-title">Bridge — Transition</div>
+    <div class="lo-sub">Three pivotal structures that unlock B1 reasoning</div>
+  </div>
+  <div class="lo-body">
+    <div class="lo-can-do">
+      <div class="lo-can-title">What the Bridge unlocks</div>
+      <ul class="lo-list">
+        <li>Explain purpose vs. cause: I did it <em>to</em> help vs. I did it <em>because</em> of him</li>
+        <li>Compare and rank: bigger than, as fast as, the most important</li>
+        <li>Decide between infinitive and subjunctive as the complement of a verb</li>
+      </ul>
+    </div>
+    <div class="lo-stats">
+      <div class="lo-stat"><div class="lo-stat-num">3</div><div class="lo-stat-label">grammar modules</div></div>
+      <div class="lo-stat"><div class="lo-stat-num">~30</div><div class="lo-stat-label">key phrases</div></div>
+      <div class="lo-stat"><div class="lo-stat-num">pivot</div><div class="lo-stat-label">unlocks B1 logic</div></div>
+    </div>
+  </div>
+</div>
+
 <section class="section" id="n12">
     <div class="section-header">
       <div class="section-num">20</div>
@@ -4638,6 +5124,32 @@ body {
 </div>
     <div class="section-next"><span class="sn-label">NEXT →</span><a href="#n16" style="color:var(--text-mid);text-decoration:none">Futuro Simple — B1 begins</a></div>
   </section>
+
+<div class="level-overview" id="level-b1">
+  <div class="lo-header">
+    <span class="level-badge b1" style="font-size:12px;padding:3px 10px">B1</span>
+    <div class="lo-title">Nivel B1 — Intermediate</div>
+    <div class="lo-sub">Express opinions, handle most travel and work situations</div>
+  </div>
+  <div class="lo-body">
+    <div class="lo-can-do">
+      <div class="lo-can-title">What you can do at this level</div>
+      <ul class="lo-list">
+        <li>Express and defend opinions, hypotheses, and possibilities</li>
+        <li>Discuss past, present, and future in connected, extended speech</li>
+        <li>Handle most real-world situations: work, travel, social, media</li>
+        <li>Use si-clauses to reason through real, hypothetical, and impossible scenarios</li>
+        <li>Report what others said with correct tense and pronoun shift</li>
+        <li>Extend sentences with relative clauses and discourse connectors</li>
+      </ul>
+    </div>
+    <div class="lo-stats">
+      <div class="lo-stat"><div class="lo-stat-num">~1200</div><div class="lo-stat-label">core words target</div></div>
+      <div class="lo-stat"><div class="lo-stat-num">~90%</div><div class="lo-stat-label">adult conv. coverage</div></div>
+      <div class="lo-stat"><div class="lo-stat-num">10</div><div class="lo-stat-label">grammar modules</div></div>
+    </div>
+  </div>
+</div>
 
 <section class="section" id="n16">
     <div class="section-header">
@@ -5376,6 +5888,105 @@ body {
   <div class="fc-progress-bar"><div class="fc-progress-fill" style="width:0%"></div></div>
   <div class="fc-body"></div>
 </div>
+
+<div class="word-bank" id="wb-b1">
+  <div class="wb-header">
+    <span class="wb-title">📖 B1 Core Word Bank</span>
+    <span class="wb-count">60 words</span>
+  </div>
+  <div class="wb-note">These 60 words unlock the B1 layer: discourse, hypothesis, professional communication, and abstract reasoning. Combined with A1 + A2, you cover ~90% of adult conversation.</div>
+  <div class="wb-section">
+    <div class="wb-cat">Opinion & Thought</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">creer</span><span class="wb-en">to believe / think</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">pensar</span><span class="wb-en">to think</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">opinar</span><span class="wb-en">to have an opinion</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">parecer</span><span class="wb-en">to seem / appear</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">esperar</span><span class="wb-en">to hope / wait / expect</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">dudar</span><span class="wb-en">to doubt</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">según</span><span class="wb-en">according to</span><span class="wb-type">prep</span></div>
+      <div class="wb-word"><span class="wb-es">en mi opinión</span><span class="wb-en">in my opinion</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">desde mi punto de vista</span><span class="wb-en">from my point of view</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">al contrario</span><span class="wb-en">on the contrary</span><span class="wb-type">phrase</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Discourse Connectors</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">sin embargo</span><span class="wb-en">however / nevertheless</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">por lo tanto</span><span class="wb-en">therefore / so</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">además</span><span class="wb-en">furthermore / also</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">aunque</span><span class="wb-en">although / even if</span><span class="wb-type">conj</span></div>
+      <div class="wb-word"><span class="wb-es">es decir</span><span class="wb-en">that is / in other words</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">por ejemplo</span><span class="wb-en">for example</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">en cambio</span><span class="wb-en">on the other hand</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">a pesar de</span><span class="wb-en">despite / in spite of</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">debido a</span><span class="wb-en">due to / because of</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">por último</span><span class="wb-en">finally / lastly</span><span class="wb-type">phrase</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Work & Professional Life</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">la empresa</span><span class="wb-en">company / firm</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el proyecto</span><span class="wb-en">project</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el plazo</span><span class="wb-en">deadline</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el equipo</span><span class="wb-en">team</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el puesto</span><span class="wb-en">position / job role</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el sueldo</span><span class="wb-en">salary</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">contratar</span><span class="wb-en">to hire</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">despedir</span><span class="wb-en">to fire / dismiss</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">encargarse de</span><span class="wb-en">to be in charge of</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">llevar a cabo</span><span class="wb-en">to carry out</span><span class="wb-type">phrase</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Hypothesis & Possibility</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">posiblemente</span><span class="wb-en">possibly</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">probablemente</span><span class="wb-en">probably</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">quizás</span><span class="wb-en">maybe / perhaps</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">tal vez</span><span class="wb-en">maybe / perhaps</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">seguramente</span><span class="wb-en">surely / certainly</span><span class="wb-type">adv</span></div>
+      <div class="wb-word"><span class="wb-es">en caso de que</span><span class="wb-en">in case / if it happens</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">siempre que</span><span class="wb-en">as long as / whenever</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">a menos que</span><span class="wb-en">unless</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">como si</span><span class="wb-en">as if</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">ojalá</span><span class="wb-en">hopefully / I wish</span><span class="wb-type">interj</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Abstract & Social Concepts</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">la sociedad</span><span class="wb-en">society</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el medioambiente</span><span class="wb-en">environment</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la economía</span><span class="wb-en">economy</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el gobierno</span><span class="wb-en">government</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la ley</span><span class="wb-en">law</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el derecho</span><span class="wb-en">right / law (field)</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la crisis</span><span class="wb-en">crisis</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el acuerdo</span><span class="wb-en">agreement / deal</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">el problema</span><span class="wb-en">problem</span><span class="wb-type">noun</span></div>
+      <div class="wb-word"><span class="wb-es">la solución</span><span class="wb-en">solution</span><span class="wb-type">noun</span></div>
+    </div>
+  </div>
+  <div class="wb-section">
+    <div class="wb-cat">Expressing Change & Duration</div>
+    <div class="wb-grid">
+      <div class="wb-word"><span class="wb-es">mejorar</span><span class="wb-en">to improve / get better</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">empeorar</span><span class="wb-en">to worsen</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">aumentar</span><span class="wb-en">to increase</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">reducir</span><span class="wb-en">to reduce</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">cambiar</span><span class="wb-en">to change</span><span class="wb-type">verb</span></div>
+      <div class="wb-word"><span class="wb-es">seguir + ger.</span><span class="wb-en">to keep doing (ongoing)</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">dejar de + inf.</span><span class="wb-en">to stop doing</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">llevar + ger.</span><span class="wb-en">to have been doing (for)</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">hace + tiempo</span><span class="wb-en">ago / for (duration)</span><span class="wb-type">phrase</span></div>
+      <div class="wb-word"><span class="wb-es">desde hace</span><span class="wb-en">since / for (period)</span><span class="wb-type">phrase</span></div>
+    </div>
+  </div>
+</div>
+
     <div class="section-next"><span class="sn-label">✓</span>B1 complete.</div>
   </section>
 
@@ -5735,169 +6346,195 @@ function expandGroupForSection(sectionId) {
         { word:'dar',        prompt:'yo · Subjuntivo',             answer:'dé',          irregular:true  },
       ]
     },
-    'vocab-a1': {
+        'vocab-a1': {
       mode: 'reveal',
       cards: [
-        { front:'la cena',         back:'dinner',                        type:'noun',   irregular:false },
-        { front:'ahora',           back:'now',                           type:'phrase', irregular:false },
-        { front:'el almuerzo',     back:'lunch',                         type:'noun',   irregular:false },
-        { front:'necesitar',       back:'to need',                       type:'verb',   irregular:false },
-        { front:'lento/a',         back:'slow',                          type:'adj',    irregular:false },
-        { front:'la mañana',       back:'morning',                       type:'noun',   irregular:false },
-        { front:'el campo',        back:'countryside',                   type:'noun',   irregular:false },
-        { front:'la librería',     back:'bookshop / bookstore',          type:'noun',   irregular:false },
-        { front:'el móvil',        back:'mobile phone / cell phone',     type:'noun',   irregular:false },
-        { front:'encantar',        back:'to love (something)',            type:'verb',   irregular:true  },
-        { front:'pasarlo bien',    back:'to have fun / have a good time', type:'phrase', irregular:false },
-        { front:'la revista',      back:'magazine',                      type:'noun',   irregular:false },
+        // ── Core Verbs ──
+        { front:'ser',          back:'to be (identity/nature)',        type:'verb',   irregular:true  },
+        { front:'estar',        back:'to be (state/location)',         type:'verb',   irregular:true  },
+        { front:'tener',        back:'to have',                        type:'verb',   irregular:true  },
+        { front:'hacer',        back:'to do / make',                   type:'verb',   irregular:true  },
+        { front:'ir',           back:'to go',                          type:'verb',   irregular:true  },
+        { front:'querer',       back:'to want',                        type:'verb',   irregular:true  },
+        { front:'poder',        back:'can / to be able to',            type:'verb',   irregular:true  },
+        { front:'saber',        back:'to know (facts)',                type:'verb',   irregular:true  },
+        { front:'dar',          back:'to give',                        type:'verb',   irregular:true  },
+        { front:'ver',          back:'to see',                         type:'verb',   irregular:true  },
+        { front:'venir',        back:'to come',                        type:'verb',   irregular:true  },
+        { front:'hablar',       back:'to speak / talk',                type:'verb',   irregular:false },
+        { front:'comer',        back:'to eat',                         type:'verb',   irregular:false },
+        { front:'vivir',        back:'to live',                        type:'verb',   irregular:false },
+        { front:'necesitar',    back:'to need',                        type:'verb',   irregular:false },
+        // ── People ──
+        { front:'el hombre',    back:'man',                            type:'noun',   irregular:false },
+        { front:'la mujer',     back:'woman',                          type:'noun',   irregular:false },
+        { front:'el amigo/a',   back:'friend',                         type:'noun',   irregular:false },
+        { front:'la familia',   back:'family',                         type:'noun',   irregular:false },
+        { front:'el nombre',    back:'name',                           type:'noun',   irregular:false },
+        // ── Places ──
+        { front:'la casa',      back:'house / home',                   type:'noun',   irregular:false },
+        { front:'el trabajo',   back:'work / job',                     type:'noun',   irregular:false },
+        { front:'la ciudad',    back:'city',                           type:'noun',   irregular:false },
+        { front:'el restaurante',back:'restaurant',                    type:'noun',   irregular:false },
+        { front:'la tienda',    back:'shop / store',                   type:'noun',   irregular:false },
+        { front:'el país',      back:'country',                        type:'noun',   irregular:false },
+        // ── Time ──
+        { front:'hoy',          back:'today',                          type:'adv',    irregular:false },
+        { front:'mañana',       back:'tomorrow / morning',             type:'adv',    irregular:false },
+        { front:'ayer',         back:'yesterday',                      type:'adv',    irregular:false },
+        { front:'ahora',        back:'now',                            type:'adv',    irregular:false },
+        { front:'siempre',      back:'always',                         type:'adv',    irregular:false },
+        { front:'nunca',        back:'never',                          type:'adv',    irregular:false },
+        { front:'a veces',      back:'sometimes',                      type:'phrase', irregular:false },
+        // ── Adjectives ──
+        { front:'bueno/a',      back:'good',                           type:'adj',    irregular:false },
+        { front:'malo/a',       back:'bad',                            type:'adj',    irregular:false },
+        { front:'grande',       back:'big / large',                    type:'adj',    irregular:false },
+        { front:'pequeño/a',    back:'small',                          type:'adj',    irregular:false },
+        { front:'nuevo/a',      back:'new',                            type:'adj',    irregular:false },
+        { front:'fácil',        back:'easy',                           type:'adj',    irregular:false },
+        { front:'difícil',      back:'difficult',                      type:'adj',    irregular:false },
+        { front:'barato/a',     back:'cheap',                          type:'adj',    irregular:false },
+        { front:'caro/a',       back:'expensive',                      type:'adj',    irregular:false },
+        // ── Connectors ──
+        { front:'pero',         back:'but',                            type:'conj',   irregular:false },
+        { front:'porque',       back:'because',                        type:'conj',   irregular:false },
+        { front:'también',      back:'also / too',                     type:'adv',    irregular:false },
+        { front:'muy',          back:'very',                           type:'adv',    irregular:false },
+        { front:'mucho/a',      back:'a lot / much / many',            type:'adv',    irregular:false },
+        // ── Extras ──
+        { front:'la cena',      back:'dinner',                         type:'noun',   irregular:false },
+        { front:'el almuerzo',  back:'lunch',                          type:'noun',   irregular:false },
+        { front:'el móvil',     back:'mobile phone / cell phone',      type:'noun',   irregular:false },
+        { front:'encantar',     back:'to love (something) — gustar type', type:'verb',irregular:true  },
+        { front:'pasarlo bien', back:'to have fun / have a good time', type:'phrase', irregular:false },
       ]
     },
-    'vocab-a2': {
+        'vocab-a2': {
       mode: 'reveal',
       cards: [
-        { front:'conocer',           back:'to meet / to know (people)', type:'verb',   irregular:true  },
-        { front:'salir',             back:'to go out',                  type:'verb',   irregular:true  },
-        { front:'quedar',            back:'to meet up / to arrange',    type:'verb',   irregular:false },
-        { front:'el/la ex',          back:'ex (partner)',               type:'noun',   irregular:false },
-        { front:'tener química',     back:'to have chemistry',          type:'phrase', irregular:false },
-        { front:'coquetear',         back:'to flirt',                   type:'verb',   irregular:false },
-        { front:'la pareja',         back:'partner / couple',           type:'noun',   irregular:false },
-        { front:'la cita médica',    back:"doctor's appointment",       type:'noun',   irregular:false },
-        { front:'descansar',         back:'to rest',                    type:'verb',   irregular:false },
-        { front:'el resfriado',      back:'cold (illness)',             type:'noun',   irregular:false },
-        { front:'sorprendido/a',     back:'surprised',                  type:'adj',    irregular:false },
-        { front:'el sentimiento',    back:'feeling',                    type:'noun',   irregular:false },
-        { front:'el miedo',          back:'fear',                       type:'noun',   irregular:false },
-        { front:'el descuento',      back:'discount',                   type:'noun',   irregular:false },
-        { front:'la maleta',         back:'suitcase',                   type:'noun',   irregular:false },
-        { front:'perder el vuelo',   back:'to miss a flight',           type:'verb',   irregular:true  },
-        { front:'el/la aficionado/a',back:'fan / enthusiast',           type:'noun',   irregular:false },
-        { front:'la receta',         back:'recipe',                     type:'noun',   irregular:false },
-        { front:'la novela',         back:'novel',                      type:'noun',   irregular:false },
-        { front:'el alquiler',       back:'rent',                       type:'noun',   irregular:false },
-        { front:'mudarse',           back:'to move (home)',             type:'verb',   irregular:false },
-        { front:'el propietario',    back:'landlord / owner',           type:'noun',   irregular:false },
-        { front:'los muebles',       back:'furniture',                  type:'noun',   irregular:false },
-        { front:'el dormitorio',     back:'bedroom',                    type:'noun',   irregular:false },
-        { front:'el/la profesor/a',  back:'teacher',                    type:'noun',   irregular:false },
-        { front:'el diccionario',    back:'dictionary',                 type:'noun',   irregular:false },
-        { front:'la izquierda',      back:'left',                       type:'noun',   irregular:false },
-        { front:'recto / derecho',   back:'straight ahead',             type:'phrase', irregular:false },
-        { front:'el semáforo',       back:'traffic light',              type:'noun',   irregular:false },
-        { front:'el horario',        back:'schedule',                   type:'noun',   irregular:false },
-        { front:'el sueldo',         back:'salary',                     type:'noun',   irregular:false },
-        { front:'contratar',         back:'to hire',                    type:'verb',   irregular:false },
-        { front:'renunciar',         back:'to quit (a job)',            type:'verb',   irregular:false },
-        { front:'el puesto',         back:'position / job title',       type:'noun',   irregular:false },
-        { front:'intentar',          back:'to try',                     type:'verb',   irregular:false },
-        { front:'descubrir',         back:'to discover',                type:'verb',   irregular:false },
-        { front:'sorprender',        back:'to surprise',                type:'verb',   irregular:false },
-        { front:'traducir',          back:'to translate',               type:'verb',   irregular:true  },
-        { front:'conducir',          back:'to drive',                   type:'verb',   irregular:true  },
-        { front:'la ilusión',        back:'excitement / eager anticipation', type:'noun', irregular:false },
-        { front:'el entusiasmo',     back:'enthusiasm',                 type:'noun',   irregular:false },
-        { front:'el consejo',        back:'advice / tip',               type:'noun',   irregular:false },
+        // ── Daily Routines ──
+        { front:'levantarse',    back:'to get up',                     type:'verb',   irregular:false },
+        { front:'ducharse',      back:'to shower',                     type:'verb',   irregular:false },
+        { front:'vestirse',      back:'to get dressed',                type:'verb',   irregular:true  },
+        { front:'acostarse',     back:'to go to bed',                  type:'verb',   irregular:true  },
+        { front:'despertarse',   back:'to wake up',                    type:'verb',   irregular:true  },
+        { front:'el desayuno',   back:'breakfast',                     type:'noun',   irregular:false },
+        { front:'cocinar',       back:'to cook',                       type:'verb',   irregular:false },
+        { front:'beber',         back:'to drink',                      type:'verb',   irregular:false },
+        // ── Emotions ──
+        { front:'contento/a',    back:'happy / pleased',               type:'adj',    irregular:false },
+        { front:'triste',        back:'sad',                           type:'adj',    irregular:false },
+        { front:'cansado/a',     back:'tired',                         type:'adj',    irregular:false },
+        { front:'enfermo/a',     back:'sick / ill',                    type:'adj',    irregular:false },
+        { front:'nervioso/a',    back:'nervous',                       type:'adj',    irregular:false },
+        { front:'tener hambre',  back:'to be hungry',                  type:'phrase', irregular:false },
+        { front:'tener sed',     back:'to be thirsty',                 type:'phrase', irregular:false },
+        { front:'tener miedo',   back:'to be afraid',                  type:'phrase', irregular:false },
+        // ── Travel ──
+        { front:'viajar',        back:'to travel',                     type:'verb',   irregular:false },
+        { front:'llegar',        back:'to arrive',                     type:'verb',   irregular:false },
+        { front:'volver',        back:'to return',                     type:'verb',   irregular:true  },
+        { front:'el billete',    back:'ticket',                        type:'noun',   irregular:false },
+        { front:'el vuelo',      back:'flight',                        type:'noun',   irregular:false },
+        { front:'el hotel',      back:'hotel',                         type:'noun',   irregular:false },
+        // ── Shopping ──
+        { front:'comprar',       back:'to buy',                        type:'verb',   irregular:false },
+        { front:'pagar',         back:'to pay',                        type:'verb',   irregular:false },
+        { front:'costar',        back:'to cost',                       type:'verb',   irregular:true  },
+        { front:'el precio',     back:'price',                         type:'noun',   irregular:false },
+        { front:'el dinero',     back:'money',                         type:'noun',   irregular:false },
+        // ── Social ──
+        { front:'conocer',       back:'to know / to meet (people)',    type:'verb',   irregular:true  },
+        { front:'quedar',        back:'to meet up / arrange to meet',  type:'verb',   irregular:false },
+        { front:'llamar',        back:'to call',                       type:'verb',   irregular:false },
+        { front:'invitar',       back:'to invite',                     type:'verb',   irregular:false },
+        { front:'la fiesta',     back:'party',                         type:'noun',   irregular:false },
+        { front:'la reunión',    back:'meeting',                       type:'noun',   irregular:false },
+        // ── Describing People ──
+        { front:'alto/a',        back:'tall',                          type:'adj',    irregular:false },
+        { front:'bajo/a',        back:'short',                         type:'adj',    irregular:false },
+        { front:'delgado/a',     back:'thin / slim',                   type:'adj',    irregular:false },
+        { front:'joven',         back:'young',                         type:'adj',    irregular:false },
+        { front:'mayor',         back:'older / elderly',               type:'adj',    irregular:false },
+        { front:'simpático/a',   back:'friendly / nice',               type:'adj',    irregular:false },
+        { front:'inteligente',   back:'intelligent / smart',           type:'adj',    irregular:false },
+        // ── Existing ──
+        { front:'salir',         back:'to leave / go out',             type:'verb',   irregular:true  },
+        { front:'la pareja',     back:'partner / couple',              type:'noun',   irregular:false },
+        { front:'descansar',     back:'to rest',                       type:'verb',   irregular:false },
+        { front:'mudarse',       back:'to move (house)',               type:'verb',   irregular:false },
+        { front:'la cita',       back:'appointment / date',            type:'noun',   irregular:false },
+        { front:'la vez',        back:'time / occasion (una vez = once)', type:'noun',irregular:false },
+        { front:'tener química', back:'to have chemistry',             type:'phrase', irregular:false },
+        { front:'coquetear',     back:'to flirt',                      type:'verb',   irregular:false },
+        { front:'el/la ex',      back:'ex (partner)',                  type:'noun',   irregular:false },
+        { front:'intentar',      back:'to try / attempt',              type:'verb',   irregular:false },
       ]
     },
-    'vocab-b1': {
+        'vocab-b1': {
       mode: 'reveal',
       cards: [
-        { front:'la deuda',              back:'debt',                        type:'noun',   irregular:false },
-        { front:'el plazo',              back:'deadline',                    type:'noun',   irregular:false },
-        { front:'la reunión',            back:'meeting',                     type:'noun',   irregular:false },
-        { front:'el informe',            back:'report',                      type:'noun',   irregular:false },
-        { front:'el presupuesto',        back:'budget',                      type:'noun',   irregular:false },
-        { front:'negociar',              back:'to negotiate',                type:'verb',   irregular:false },
-        { front:'el rendimiento',        back:'performance',                 type:'noun',   irregular:false },
-        { front:'el colega',             back:'colleague',                   type:'noun',   irregular:false },
-        { front:'la habilidad',          back:'skill',                       type:'noun',   irregular:false },
-        { front:'el cargo',              back:'position / role',             type:'noun',   irregular:false },
-        { front:'la reunión remota',     back:'remote meeting',              type:'noun',   irregular:false },
-        { front:'el teletrabajo',        back:'remote work',                 type:'noun',   irregular:false },
-        { front:'el ascenso',            back:'promotion',                   type:'noun',   irregular:false },
-        { front:'la beca',               back:'scholarship',                 type:'noun',   irregular:false },
-        { front:'el máster',             back:"master's degree",             type:'noun',   irregular:false },
-        { front:'la tesis',              back:'thesis',                      type:'noun',   irregular:false },
-        { front:'la especialización',    back:'specialization',              type:'noun',   irregular:false },
-        { front:'investigar',            back:'to research',                 type:'verb',   irregular:false },
-        { front:'el aprendizaje',        back:'learning',                    type:'noun',   irregular:false },
-        { front:'la asignatura',         back:'subject / course',            type:'noun',   irregular:false },
-        { front:'el síntoma',            back:'symptom',                     type:'noun',   irregular:false },
-        { front:'la receta médica',      back:'prescription',                type:'noun',   irregular:false },
-        { front:'el seguro médico',      back:'health insurance',            type:'noun',   irregular:false },
-        { front:'la consulta',           back:'consultation / office visit', type:'noun',   irregular:false },
-        { front:'la cirugía',            back:'surgery',                     type:'noun',   irregular:false },
-        { front:'el bienestar',          back:'wellbeing',                   type:'noun',   irregular:false },
-        { front:'la ansiedad',           back:'anxiety',                     type:'noun',   irregular:false },
-        { front:'discutir',              back:'to argue / discuss',          type:'verb',   irregular:false },
-        { front:'la comprensión',        back:'understanding',               type:'noun',   irregular:false },
-        { front:'el compromiso',         back:'commitment',                  type:'noun',   irregular:false },
-        { front:'la ruptura',            back:'breakup',                     type:'noun',   irregular:false },
-        { front:'apoyar',                back:'to support',                  type:'verb',   irregular:false },
-        { front:'la red social',         back:'social network',              type:'noun',   irregular:false },
-        { front:'actualizar',            back:'to update',                   type:'verb',   irregular:false },
-        { front:'la nube',               back:'the cloud',                   type:'noun',   irregular:false },
-        { front:'el itinerario',         back:'itinerary',                   type:'noun',   irregular:false },
-        { front:'la excursión',          back:'excursion / day trip',        type:'noun',   irregular:false },
-        { front:'el seguro de viaje',    back:'travel insurance',            type:'noun',   irregular:false },
-        { front:'el alojamiento',        back:'accommodation',               type:'noun',   irregular:false },
-        { front:'la aduana',             back:'customs',                     type:'noun',   irregular:false },
-        { front:'opinar',                back:'to have an opinion',          type:'verb',   irregular:false },
-        { front:'estar de acuerdo',      back:'to agree',                    type:'phrase', irregular:false },
-        { front:'estar en desacuerdo',   back:'to disagree',                 type:'phrase', irregular:false },
-        { front:'desde mi punto de vista', back:'from my point of view',     type:'phrase', irregular:false },
-        { front:'el argumento',          back:'argument (debate)',           type:'noun',   irregular:false },
-        { front:'la ventaja',            back:'advantage',                   type:'noun',   irregular:false },
-        { front:'la desventaja',         back:'disadvantage',                type:'noun',   irregular:false },
-        { front:'sin duda',              back:'without a doubt',             type:'phrase', irregular:false },
-        { front:'es cierto que',         back:'it is true that',             type:'phrase', irregular:false },
-        { front:'el titular',            back:'headline',                    type:'noun',   irregular:false },
-        { front:'el suceso',             back:'event / happening',           type:'noun',   irregular:false },
-        { front:'el desastre',           back:'disaster',                    type:'noun',   irregular:false },
-        { front:'la huelga',             back:'strike',                      type:'noun',   irregular:false },
-        { front:'el acuerdo',            back:'agreement / deal',            type:'noun',   irregular:false },
-        { front:'la ley',                back:'law',                         type:'noun',   irregular:false },
-        { front:'la desigualdad',        back:'inequality',                  type:'noun',   irregular:false },
-        { front:'la política',           back:'politics / policy',           type:'noun',   irregular:false },
-        { front:'el medio ambiente',     back:'environment',                 type:'noun',   irregular:false },
-        { front:'el cambio climático',   back:'climate change',              type:'noun',   irregular:false },
-        { front:'reciclar',              back:'to recycle',                  type:'verb',   irregular:false },
-        { front:'la energía renovable',  back:'renewable energy',            type:'noun',   irregular:false },
-        { front:'la contaminación',      back:'pollution',                   type:'noun',   irregular:false },
-        { front:'sostenible',            back:'sustainable',                 type:'adj',    irregular:false },
-        { front:'la sequía',             back:'drought',                     type:'noun',   irregular:false },
-        { front:'la naturaleza',         back:'nature',                      type:'noun',   irregular:false },
-        { front:'el presupuesto personal', back:'personal budget',           type:'noun',   irregular:false },
-        { front:'ahorrar',               back:'to save (money)',             type:'verb',   irregular:false },
-        { front:'invertir',              back:'to invest',                   type:'verb',   irregular:true  },
-        { front:'el préstamo',           back:'loan',                        type:'noun',   irregular:false },
-        { front:'la inflación',          back:'inflation',                   type:'noun',   irregular:false },
-        { front:'el costo de vida',      back:'cost of living',              type:'noun',   irregular:false },
-        { front:'la hipoteca',           back:'mortgage',                    type:'noun',   irregular:false },
-        { front:'la exposición',         back:'exhibition',                  type:'noun',   irregular:false },
-        { front:'la obra de teatro',     back:'play (theater)',              type:'noun',   irregular:false },
-        { front:'la escultura',          back:'sculpture',                   type:'noun',   irregular:false },
-        { front:'el patrimonio',         back:'heritage',                    type:'noun',   irregular:false },
-        { front:'el festival',           back:'festival',                    type:'noun',   irregular:false },
-        { front:'el entrenamiento',      back:'training',                    type:'noun',   irregular:false },
-        { front:'el/la atleta',          back:'athlete',                     type:'noun',   irregular:false },
-        { front:'la lesión',             back:'injury',                      type:'noun',   irregular:false },
-        { front:'el campeonato',         back:'championship',                type:'noun',   irregular:false },
-        { front:'la gastronomía',        back:'gastronomy / food culture',   type:'noun',   irregular:false },
-        { front:'la especialidad',       back:'specialty',                   type:'noun',   irregular:false },
-        { front:'la temporada',          back:'season (TV)',                 type:'noun',   irregular:false },
-        { front:'el documental',         back:'documentary',                 type:'noun',   irregular:false },
-        { front:'la plataforma',         back:'platform (streaming)',        type:'noun',   irregular:false },
-        { front:'la reseña',             back:'review',                      type:'noun',   irregular:false },
-        { front:'el contenido',          back:'content',                     type:'noun',   irregular:false },
-        { front:'el ayuntamiento',       back:'city hall / town council',    type:'noun',   irregular:false },
-        { front:'la diversidad',         back:'diversity',                   type:'noun',   irregular:false },
-        { front:'el robo',               back:'theft / robbery',             type:'noun',   irregular:false },
-        { front:'denunciar',             back:'to report (a crime)',         type:'verb',   irregular:false },
-        { front:'el extranjero',         back:'abroad / foreign country',    type:'noun',   irregular:false },
-        { front:'la entonación',         back:'intonation',                  type:'noun',   irregular:false },
+        // ── Opinion & Thought ──
+        { front:'creer',             back:'to believe / think',           type:'verb',   irregular:false },
+        { front:'opinar',            back:'to have an opinion',           type:'verb',   irregular:false },
+        { front:'parecer',           back:'to seem / appear',             type:'verb',   irregular:true  },
+        { front:'esperar',           back:'to hope / wait / expect',      type:'verb',   irregular:false },
+        { front:'dudar',             back:'to doubt',                     type:'verb',   irregular:false },
+        { front:'en mi opinión',     back:'in my opinion',                type:'phrase', irregular:false },
+        { front:'desde mi punto de vista', back:'from my point of view', type:'phrase', irregular:false },
+        // ── Discourse Connectors ──
+        { front:'sin embargo',       back:'however / nevertheless',       type:'conj',   irregular:false },
+        { front:'por lo tanto',      back:'therefore / so',               type:'conj',   irregular:false },
+        { front:'además',            back:'furthermore / also',           type:'adv',    irregular:false },
+        { front:'aunque',            back:'although / even if',           type:'conj',   irregular:false },
+        { front:'es decir',          back:'that is / in other words',     type:'phrase', irregular:false },
+        { front:'por ejemplo',       back:'for example',                  type:'phrase', irregular:false },
+        { front:'a pesar de',        back:'despite / in spite of',        type:'phrase', irregular:false },
+        { front:'debido a',          back:'due to / because of',          type:'phrase', irregular:false },
+        // ── Work & Professional ──
+        { front:'la empresa',        back:'company / firm',               type:'noun',   irregular:false },
+        { front:'el proyecto',       back:'project',                      type:'noun',   irregular:false },
+        { front:'el plazo',          back:'deadline',                     type:'noun',   irregular:false },
+        { front:'el equipo',         back:'team',                         type:'noun',   irregular:false },
+        { front:'el puesto',         back:'position / job role',          type:'noun',   irregular:false },
+        { front:'encargarse de',     back:'to be in charge of',           type:'phrase', irregular:false },
+        { front:'llevar a cabo',     back:'to carry out / implement',     type:'phrase', irregular:false },
+        // ── Hypothesis & Possibility ──
+        { front:'probablemente',     back:'probably',                     type:'adv',    irregular:false },
+        { front:'quizás',            back:'maybe / perhaps',              type:'adv',    irregular:false },
+        { front:'tal vez',           back:'maybe / perhaps',              type:'phrase', irregular:false },
+        { front:'ojalá',             back:'hopefully / I wish',           type:'interj', irregular:false },
+        { front:'a menos que',       back:'unless',                       type:'phrase', irregular:false },
+        { front:'siempre que',       back:'as long as / whenever',        type:'phrase', irregular:false },
+        { front:'como si',           back:'as if',                        type:'phrase', irregular:false },
+        // ── Social & Abstract ──
+        { front:'la sociedad',       back:'society',                      type:'noun',   irregular:false },
+        { front:'el medioambiente',  back:'environment',                  type:'noun',   irregular:false },
+        { front:'la ley',            back:'law',                          type:'noun',   irregular:false },
+        { front:'el acuerdo',        back:'agreement / deal',             type:'noun',   irregular:false },
+        { front:'la crisis',         back:'crisis',                       type:'noun',   irregular:false },
+        { front:'la solución',       back:'solution',                     type:'noun',   irregular:false },
+        // ── Change & Time Expressions ──
+        { front:'mejorar',           back:'to improve / get better',      type:'verb',   irregular:false },
+        { front:'aumentar',          back:'to increase',                  type:'verb',   irregular:false },
+        { front:'reducir',           back:'to reduce',                    type:'verb',   irregular:false },
+        { front:'seguir + gerundio', back:'to keep doing (ongoing action)', type:'phrase',irregular:false },
+        { front:'dejar de + inf.',   back:'to stop doing something',      type:'phrase', irregular:false },
+        { front:'llevar + gerundio', back:'to have been doing (for duration)', type:'phrase',irregular:false },
+        { front:'hace + tiempo',     back:'ago / duration marker',        type:'phrase', irregular:false },
+        { front:'desde hace',        back:'since / for (ongoing period)', type:'phrase', irregular:false },
+        // ── From existing deck ──
+        { front:'negociar',          back:'to negotiate',                 type:'verb',   irregular:false },
+        { front:'investigar',        back:'to investigate / research',    type:'verb',   irregular:false },
+        { front:'discutir',          back:'to discuss / argue',           type:'verb',   irregular:false },
+        { front:'actualizar',        back:'to update',                    type:'verb',   irregular:true  },
+        { front:'ahorrar',           back:'to save (money/time)',         type:'verb',   irregular:false },
+        { front:'invertir',          back:'to invest',                    type:'verb',   irregular:true  },
+        { front:'apoyar',            back:'to support',                   type:'verb',   irregular:false },
+        { front:'reciclar',          back:'to recycle',                   type:'verb',   irregular:false },
       ]
-    }
+    },
   };
 
   const state = {};
