@@ -2714,6 +2714,23 @@ body {
 [data-theme="dark"] .sa-verb { background: #1C0A0C; color: #FCA5A5; }
 [data-theme="dark"] .sa-pro  { background: #1C1A08; color: #FCD34D; }
 
+
+/* ── Nav level-start link ── */
+.nav-level-start {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+  padding: 10px 20px 6px;
+  text-decoration: none;
+  opacity: .75;
+  transition: opacity .15s;
+}
+.nav-level-start:hover { opacity: 1; }
+[data-theme="dark"] .nav-level-start { opacity: .6; }
+
 </style>
 </head>
 <body>
@@ -2743,6 +2760,7 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
+      <a class="nav-level-start" href="#level-a1" style="color:var(--emerald)">↳ Level Overview</a>
       <a class="nav-link" href="#n_pos"><span class="nav-num">00</span>Parts of Speech <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
       <a class="nav-link" href="#n4b"><span class="nav-num">01</span>Género y Número <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
       <a class="nav-link" href="#n4c"><span class="nav-num">02</span>Artículos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
@@ -2773,6 +2791,7 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
+      <a class="nav-level-start" href="#level-a2" style="color:var(--indigo)">↳ Level Overview</a>
       <a class="nav-link" href="#n7"><span class="nav-num">19</span>Pretérito Indefinido <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
       <a class="nav-link" href="#n8"><span class="nav-num">20</span>Pretérito Imperfecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
       <a class="nav-link" href="#n15"><span class="nav-num">21</span>Pluscuamperfecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
@@ -2789,6 +2808,7 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
+      <a class="nav-level-start" href="#level-a2b1" style="color:#6B21A8">↳ Level Overview</a>
       <a class="nav-link" href="#n13"><span class="nav-num">24</span>Infinitivo vs. Que <span class="level-badge bridge" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
       </div>
     </div>
@@ -2798,6 +2818,7 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
+      <a class="nav-level-start" href="#level-b1" style="color:var(--red)">↳ Level Overview</a>
       <a class="nav-link" href="#n6"><span class="nav-num">25</span>Futuro Próximo <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
       <a class="nav-link" href="#n16"><span class="nav-num">26</span>Futuro Simple <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
       <a class="nav-link" href="#n17"><span class="nav-num">27</span>Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
@@ -2890,13 +2911,6 @@ body {
   <!-- ══════════════════════════════
        01 — PRESENTE INDICATIVO
   ══════════════════════════════ -->
-
-  <div class="level-overview" id="level-a1">
-  <div class="lo-header">
-    <span class="level-badge a1" style="font-size:12px;padding:3px 10px">A1</span>
-    <div class="lo-title">Nivel A1 — Foundation</div>
-    <div class="lo-sub">Basic exchanges about familiar, everyday topics</div>
-  </div>
   <div class="lo-body">
     <div class="lo-can-do">
       <div class="lo-can-title">What you can do at this level</div>
@@ -4058,8 +4072,6 @@ body {
             </tr>
           </tbody>
         </table></div>
-      ody>
-        </table>
       </div>
     </div>
 
