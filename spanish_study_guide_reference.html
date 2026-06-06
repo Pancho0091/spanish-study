@@ -2731,6 +2731,51 @@ body {
 .nav-level-start:hover { opacity: 1; }
 [data-theme="dark"] .nav-level-start { opacity: .6; }
 
+
+/* ── Section outcomes block ── */
+.section-outcomes {
+  margin: 0 0 24px 0;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.so-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+.so-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.so-list li {
+  font-size: 13px;
+  color: var(--text-mid);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+.so-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--emerald);
+  font-size: 11px;
+  font-weight: 700;
+}
+[data-theme="dark"] .section-outcomes {
+  background: #1E293B;
+  border-color: #334155;
+}
+[data-theme="dark"] .so-list li { color: #94A3B8; }
+
 </style>
 </head>
 <body>
@@ -2942,6 +2987,15 @@ body {
     <h2 class="section-title">Parts of <em>Speech</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">The Seven Building Blocks — Know the jobs before applying the rules</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Identify the grammatical role (noun, verb, adjective, etc.) of any word in a sentence</li>
+        <li>Understand why Spanish rules work: adjectives match nouns, pronouns replace nouns, adverbs never change form</li>
+        <li>Read any grammar rule and know which word type it applies to before memorizing any endings</li>
+    </ul>
+  </div>
+
   <div class="section-desc">Every Spanish grammar rule you will learn is really just a rule about how one <em>type</em> of word interacts with another type. Before memorizing any endings, know what job each word is doing.</div>
   <div class="section-task">Identify the grammatical role (noun, verb, adjective, etc.) of any word in a sentence.</div>
 
@@ -3029,6 +3083,15 @@ body {
     <h2 class="section-title">Género y <em>Número</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Gender &amp; Number Agreement</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Assign masculine or feminine gender to any Spanish noun using ending patterns (-o → masc, -a → fem) and the key exceptions (Greek -ma words, abbreviations, true irregulars like la mano)</li>
+        <li>Form the plural of any noun by adding -s (vowel endings) or -es (consonant endings)</li>
+        <li>Apply the one-ending adjective rule: adjectives ending in -e or a consonant are gender-neutral — only adjectives ending in -o change to -a</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3172,6 +3235,15 @@ body {
     <h2 class="section-title"><em>Artículos</em> — Definidos e Indefinidos <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Definite &amp; Indefinite Articles — The 2×2 matrix</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Attach the correct definite article (el, la, los, las) to any noun based on gender and number</li>
+        <li>Use indefinite articles (un, una, unos, unas) to introduce things for the first time</li>
+        <li>Navigate the 2×2 matrix: 4 article forms from 2 gender choices × 2 number choices</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3220,6 +3292,15 @@ body {
       <div class="section-en">The Present Indicative</div>
     <div class="section-desc">The present indicative is your base-state tense: it describes what <em>is happening</em> right now, what <em>habitually happens</em>, and permanent or general truths. Master these endings first — every other tense is built by modifying or replacing them.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Conjugate any regular -AR, -ER, or -IR verb for all 6 pronouns in the present tense</li>
+        <li>Express habits, routines, and general truths using present indicative</li>
+        <li>Use the high-frequency irregular present forms: soy, estoy, voy, tengo, hago, quiero, puedo, sé</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3309,6 +3390,15 @@ body {
       <div class="section-en">Both mean "to be" — completely different functions</div>
     <div class="section-desc">Ser and estar both translate as "to be" — but they cover completely different territory. <strong>Ser</strong> handles identity, origin, and permanent characteristics. <strong>Estar</strong> handles location, states, and conditions that can change. When in doubt: if it can change tomorrow, use estar.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Choose ser for identity, origin, profession, material, and characteristics that define what something is</li>
+        <li>Choose estar for location, health, and conditions that can change — and for progressive tenses</li>
+        <li>Apply the quick test: if it could be different tomorrow, use estar; if it defines the noun, use ser</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3487,6 +3577,15 @@ body {
       <h2 class="section-title"><em>Hay, Había, Habrá</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Impersonal Haber — There is / There are</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>State that something exists (or existed) using hay — the single invariable present form of haber</li>
+        <li>Distinguish hay (existence — introducing something new) from está/están (location of a known thing)</li>
+        <li>Recognize that hay never agrees with the noun: hay un libro AND hay diez libros</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3662,6 +3761,15 @@ body {
     <h2 class="section-title">Palabras <em>Interrogativas</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Question Words — The eight core interrogatives</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Form questions using all 8 interrogative words: qué, quién, dónde, cuándo, cómo, cuánto, por qué, cuál</li>
+        <li>Choose correctly between ¿Qué es? (defining a concept) and ¿Cuál es? (selecting from a set)</li>
+        <li>Chain interrogatives in natural conversation: ¿Dónde vives? ¿Cuánto tiempo llevas ahí?</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3711,6 +3819,15 @@ body {
     <h2 class="section-title"><em>Negación</em> Básica <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Basic Negation — How to say no, nothing, never, nobody</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Negate any statement by placing no directly before the conjugated verb</li>
+        <li>Use nunca, nada, nadie before the verb (no 'no' needed) or after (double negative required)</li>
+        <li>Construct correct Spanish double negatives: no tengo nada — both no and nada stay</li>
+    </ul>
+  </div>
+
 
 
 
@@ -3761,6 +3878,15 @@ body {
       <h2 class="section-title">Acentos · <em>SEGA</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Accent Marks & Syllable Stress — The SEGA System</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Apply the two-question SEGA rule: predict expected stress from the ending, compare to actual stress, add tilde if they mismatch</li>
+        <li>Identify the 5 word categories: words ending in vowel/N/S expect stress on 2nd-to-last; all others expect last syllable</li>
+        <li>Explain accent-as-tense-signal: hablo (present) vs. habló (preterite) — identical spelling, stress placement changes meaning</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4102,6 +4228,15 @@ body {
       <div class="section-en">The Present Continuous</div>
     <div class="section-desc">The present continuous narrows focus to <em>this exact moment</em>. Where the present indicative covers habits and routines, the continuous says "I am doing this <em>right now</em>, as we speak." Built from <strong>estar</strong> (conjugated) + the gerund (-ando/-iendo).</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Form the gerund of any verb: -AR → -ando, -ER/-IR → -iendo (with key irregulars: siendo, yendo, pudiendo)</li>
+        <li>Build the present continuous: estar (correctly conjugated) + gerund to describe an action happening right now</li>
+        <li>Distinguish present continuous (this exact moment) from present indicative (habit or general truth)</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4175,6 +4310,15 @@ body {
     <h2 class="section-title">Verbos <em>Reflexivos</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Reflexive Verbs — When the subject does the action to itself</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Construct reflexive sentences where the subject acts on itself using me, te, se, nos, os, se before the verb</li>
+        <li>Place reflexive pronouns in two valid positions: before a conjugated verb OR attached to an infinitive</li>
+        <li>Use the core reflexive verbs: levantarse, ducharse, vestirse, acostarse, despertarse in context</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4225,6 +4369,15 @@ body {
       <h2 class="section-title">Verbos tipo <em>Gustar</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Gustar-type Verbs — Reverse-subject verbs</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Build gustar-type sentences where the thing causing the feeling is the grammatical subject (reversed from English)</li>
+        <li>Match the verb form to the noun triggering the feeling: me gusta el café (singular) vs. me gustan los libros (plural)</li>
+        <li>Use the same structure for encantar, molestar, parecer, importar, and doler</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4413,6 +4566,15 @@ body {
     <h2 class="section-title"><em>Demostrativos</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Demonstratives — This / That / That over there</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Point to near objects (este/esta/estos/estas — right here), medium distance (ese/esa), and far (aquel/aquella)</li>
+        <li>Match demonstratives to noun gender and number across the full 4×3 grid</li>
+        <li>Use the gender-neutral forms esto, eso, aquello when referring to an idea or unidentified thing</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4468,6 +4630,15 @@ body {
     <h2 class="section-title">Adjetivos y Pronombres <em>Posesivos</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Possessives — Short form (before noun) vs. Long form (after noun / standalone)</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Express ownership before a noun using unstressed forms: mi, tu, su, nuestro, vuestro, su</li>
+        <li>Use stressed possessive pronouns (mío, tuyo, suyo, nuestro) as standalone replacements: El libro es mío</li>
+        <li>Make possessives agree with the THING possessed, not the owner: su libro (his/her/their book)</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4505,6 +4676,16 @@ body {
       <h2 class="section-title"><em>Pronombres</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Direct, Indirect & Reflexive Pronouns</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Replace direct objects (the thing receiving the action) with lo, la, los, las based on noun gender</li>
+        <li>Replace indirect objects (the person receiving the action) with le — which is gender-neutral</li>
+        <li>Place pronouns before conjugated verbs or attached to infinitives — and apply le→se when both appear together</li>
+        <li>Identify the optical illusion: the pronoun gender (lo/la) and verb ending (-o/-a) do completely different jobs</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4751,6 +4932,15 @@ body {
     <h2 class="section-title">Oraciones Relativas con <em>que</em> <span class="level-badge a1">A1</span></h2>
     <div class="section-en">Relative Clauses with "que" — Connecting a noun to its description</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Extend any noun phrase with que + clause to add information about who or what you mean</li>
+        <li>Keep a preposition before que when the relative clause requires one: el proyecto en que trabajo</li>
+        <li>Build complex, natural-sounding sentences: el amigo que conocí, la empresa para la que trabajo</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4794,6 +4984,15 @@ body {
       <div class="section-en">Commands — Affirmative and Negative</div>
     <div class="section-desc">The imperative is the <em>command form</em> — it gives instructions, orders, or requests. Affirmative commands (do it!) and negative commands (don't do it!) use different forms. The tú affirmative is simply the present indicative él/ella form for regular verbs.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Form affirmative tú commands using the él/ella present-indicative form (regular verbs): habla, come, escribe</li>
+        <li>Form negative tú commands using the tú present-subjunctive form: no hables, no comas, no escribas</li>
+        <li>Apply the 8 irregular affirmative tú commands: ven, di, haz, ve, sé, ten, pon, sal</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4879,6 +5078,15 @@ body {
       <h2 class="section-title">Comparativos y <em>Superlativos</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Comparatives & Superlatives</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Compare two things using más/menos + adjective + que and tan + adjective + como for equality</li>
+        <li>Form superlatives: el/la + más/menos + adjective + de to rank within a group</li>
+        <li>Use the 4 irregular comparative forms: mejor, peor, mayor, menor without más</li>
+    </ul>
+  </div>
+
 
 
 
@@ -4939,6 +5147,15 @@ body {
       <h2 class="section-title"><em>Por</em> vs. <em>Para</em> <span class="level-badge a1">A1</span></h2>
       <div class="section-en">Both can mean "for" — completely different directions</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Choose por for cause/reason, agent of an action, exchange, duration, and movement through a place</li>
+        <li>Choose para for purpose/goal, destination, deadline, recipient, and employment</li>
+        <li>Apply the quick test: 'why it happened' (por — backward-looking) vs. 'what it's for' (para — forward-looking)</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5020,6 +5237,15 @@ body {
       <div class="section-en">The Simple Past — Preterite</div>
     <div class="section-desc">The preterite is your <em>completed-action past</em> tense. Use it for events with a clear beginning and end — things that happened once, at a specific moment, and are definitively over. Think of it as a series of snapshots on a timeline.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Conjugate regular -AR/-ER/-IR verbs in the preterite for all 6 pronouns and recognize the tilde on yo (-é) and él/ella (-ó)</li>
+        <li>Use the preterite for events with a clear start and end — things that happened once and are definitively over</li>
+        <li>Produce the most critical irregular preterites from memory: fui, tuve, hice, estuve, vine, puse, dije, pude</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5154,6 +5380,15 @@ body {
       <div class="section-en">The Imperfect Past</div>
     <div class="section-desc">The imperfect describes the <em>past as a background or ongoing state</em>. Use it for habits that used to happen, descriptions of how things were, ongoing actions that were interrupted, and telling the time or age in the past. It paints the scene; the preterite adds the plot events.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Conjugate regular verbs in the imperfect: -AR → -aba endings, -ER/-IR → -ía endings, all six pronouns</li>
+        <li>Use the imperfect for ongoing past states, habitual past actions, background descriptions, and telling time/age in the past</li>
+        <li>Choose between preterite (plot event — happened and ended) and imperfect (scene-setting — was happening)</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5260,6 +5495,15 @@ body {
       <div class="section-en">The Past Perfect — Pluperfect</div>
     <div class="section-desc">The pluperfect (past perfect) reaches <em>further back in time</em> than any other past tense. Use it for the action that happened <em>before</em> the action you are already describing in the past. Always a step further back. Built from <strong>había</strong> (imperfect of haber) + past participle.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Form the pluperfect tense: había/habías/había/habíamos/habían + past participle</li>
+        <li>Use it to describe the action that was already complete before another past action occurred</li>
+        <li>Recognize the 'had done' meaning as a step further back in time than any simple past</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5332,6 +5576,15 @@ body {
     <h2 class="section-title">Pronombres <em>Indefinidos</em> <span class="level-badge a2">A2</span></h2>
     <div class="section-en">Indefinite Pronouns — Someone, something, any, none, whatever</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Use algo (something) and nada (nothing), alguien (someone) and nadie (nobody) in the correct negative position</li>
+        <li>Place nada/nadie before the verb to avoid double negative; place them after the verb and add no before the verb</li>
+        <li>Use alguno/ninguno correctly and apply the apocope rule before masculine nouns: algún, ningún</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5380,6 +5633,15 @@ body {
     <h2 class="section-title">El <em>Estilo Indirecto</em> <span class="level-badge a2">A2</span></h2>
     <div class="section-en">Indirect Speech — Reporting what someone said</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Report what someone said by shifting the tense back one level: presente → imperfecto, indefinido → pluscuamperfecto</li>
+        <li>Apply pronoun shifts: yo → él/ella, tú → yo, etc. depending on the reporting perspective</li>
+        <li>Use decir que + subordinate clause and handle wh-questions in indirect speech with preguntar si/qué/dónde</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5448,6 +5710,15 @@ body {
       <h2 class="section-title">Infinitivo vs. <em>Que</em> + Subjuntivo <span class="level-badge bridge">BRIDGE</span></h2>
       <div class="section-en">When to use infinitive vs. when to trigger subjunctive</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Choose the infinitive when both the main and subordinate clauses share the same subject: Quiero ir (I want to go)</li>
+        <li>Choose que + subjunctive when subjects differ and the main verb expresses influence, desire, or doubt: Quiero que vayas</li>
+        <li>Identify the two triggers: same subject → infinitive; different subjects + influence verb → que + subjunctive</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5531,6 +5802,15 @@ body {
       <div class="section-en">The Near Future — "Going to"</div>
     <div class="section-desc">The near future expresses a <em>planned action or strong intention</em> that is already in motion. The key difference from the simple future: there is present evidence that it is going to happen. Built from <strong>ir</strong> (present) + <strong>a</strong> + infinitive.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Express planned intent and near-future events using ir (present) + a + infinitive</li>
+        <li>Distinguish near future (present evidence of intention: voy a llamar) from simple future (pure prediction: llamaré)</li>
+        <li>Form negatives and questions: No voy a ir. / ¿Vas a venir?</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5601,6 +5881,15 @@ body {
       <div class="section-en">The Simple Future — "Will"</div>
     <div class="section-desc">The simple future expresses what <em>will</em> happen. Unlike the near future (ir + a), it makes no reference to present evidence — it is a pure future projection. For regular verbs, add endings directly to the <strong>full infinitive</strong>. Irregular stems change the base, not the endings.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Add future endings directly to the infinitive for all regular verbs: -é, -ás, -á, -emos, -éis, -án</li>
+        <li>Apply the 12 irregular future stems from memory: tendr-, podr-, har-, dir-, saldr-, vendr-, pondr-, etc.</li>
+        <li>Use the future tense for predictions, promises, and expressing probability about the present: Estará en casa</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5696,6 +5985,15 @@ body {
       <div class="section-en">The Simple Conditional — "Would"</div>
     <div class="section-desc">The conditional expresses what <em>would</em> happen under certain conditions. It is the "polite possibility" tense — used for hypotheticals, softened requests, and the consequence clause in if-sentences. Same endings as the simple future; same irregular stems.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Form the conditional by adding -ía endings to the infinitive (regular) or to the irregular future stems</li>
+        <li>Use the conditional for hypothetical outcomes, polite requests (¿Podría ayudarme?), and the consequence of if-clauses</li>
+        <li>Recognize that the conditional and imperfect share the same endings (-ía) — context distinguishes them</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5766,6 +6064,15 @@ body {
     <div class="section-en">Conditional Si-Clauses — Real, likely, and hypothetical conditions</div>
     <div class="section-desc">Si-clauses encode the <em>relationship between a condition and its outcome</em>. The tense combination you choose signals whether the scenario is real/likely, hypothetical/unlikely, or impossible/contrary-to-fact. The formula is fixed: each category has one and only one tense pairing.</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Build real/possible conditions: si + present indicative → future or present (Si llueve, me quedo en casa)</li>
+        <li>Build hypothetical conditions: si + imperfect subjunctive → conditional (Si tuviera dinero, viajaría)</li>
+        <li>Build impossible/contrary-to-fact conditions: si + pluperfect subjunctive → conditional perfect (Si hubiera sabido, no habría ido)</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5809,6 +6116,15 @@ body {
       <div class="section-en">The Present Subjunctive</div>
     <div class="section-desc">The present subjunctive is not a time marker — it is a <em>mood</em>. Use it when the main clause contains doubt, desire, emotion, or judgment directed at a different subject. The key trigger: <strong>que</strong> joins a subjunctive verb to a main clause that expresses influence, not certainty.</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Derive the present subjunctive form of any verb from its yo present-indicative stem: hablo → habl- → hable</li>
+        <li>Identify the trigger categories that require subjunctive: desire (querer que), doubt (dudar que), emotion (alegrarse de que), judgment (es importante que)</li>
+        <li>Build que + subjunctive complement clauses: Espero que llegues a tiempo</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5882,6 +6198,15 @@ body {
     <h2 class="section-title">La <em>Voz Pasiva</em> <span class="level-badge b1">B1</span></h2>
     <div class="section-en">The Passive Voice — ser + participio vs. estar + participio</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Form ser-passive (formal): ser + past participle, which agrees in gender and number with the subject</li>
+        <li>Form estar + past participle to describe the resultant state of a completed action (not the action itself)</li>
+        <li>Use the se-passive as the natural everyday alternative: Se venden casas — no agent, no awkward passive</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5929,6 +6254,15 @@ body {
     <h2 class="section-title">Pronombres <em>Relativos</em> <span class="level-badge b1">B1</span></h2>
     <div class="section-en">Relative Pronouns — Beyond que: quien, lo que, el cual, donde</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Extend noun phrases with que (things), quien/quienes (people after prepositions), and donde (places)</li>
+        <li>Choose el/la cual and el/la que for formal writing or when ambiguity needs resolving</li>
+        <li>Identify the antecedent and make the relative pronoun agree with it in number</li>
+    </ul>
+  </div>
+
 
 
 
@@ -5975,6 +6309,15 @@ body {
       <h2 class="section-title">Conectores del <em>Discurso</em> <span class="level-badge b1">B1</span></h2>
       <div class="section-en">Discourse Connectors — The glue of B1 writing and speaking</div>
     </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Link ideas with addition connectors: además, también, asimismo, incluso</li>
+        <li>Signal contrast and concession: sin embargo, aunque, a pesar de, no obstante, en cambio</li>
+        <li>Express cause (porque, ya que, puesto que, debido a) and consequence (por lo tanto, así que, en consecuencia)</li>
+    </ul>
+  </div>
+
 
 
 
@@ -6268,6 +6611,15 @@ body {
     <h2 class="section-title">Mexican <em>Spanish Notes</em> <span class="level-badge b1">B1</span></h2>
     <div class="section-en">Regional patterns, shortcuts, and cultural phrases from Mexican street-level speech</div>
   </div>
+  <div class="section-outcomes">
+    <div class="so-label">After this section you can</div>
+    <ul class="so-list">
+        <li>Swap estar for andar in casual speech to express being actively caught up in doing something: ando buscando</li>
+        <li>Default to the preterite for all past events — including recent ones — instead of the present perfect</li>
+        <li>Deploy Que + present subjunctive as a polished, natural sign-off in social and professional settings</li>
+    </ul>
+  </div>
+
   <div class="section-desc">Standard Spanish is the foundation — but in Mexico, the language has regional shortcuts, tense preferences, and social formulas that differ from what textbooks teach. These are the patterns you will actually hear.</div>
   <div class="section-task">Recognize and use key Mexican Spanish variants in casual and professional contexts.</div>
 
