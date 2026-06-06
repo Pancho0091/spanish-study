@@ -2776,6 +2776,16 @@ body {
 }
 [data-theme="dark"] .so-list li { color: #94A3B8; }
 
+
+/* ── Nav link English sub-text ── */
+.nav-link { align-items: flex-start !important; gap: 6px; }
+.nav-link-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.nav-link-es { font-size: 12.5px; color: var(--text); line-height: 1.3; }
+.nav-link-en { font-size: 10px; color: var(--text-soft); font-style: italic; line-height: 1.2; margin-top: 1px; }
+.nav-link.active .nav-link-es { color: var(--indigo); }
+[data-theme="dark"] .nav-link-es { color: #F1F5F9; }
+[data-theme="dark"] .nav-link-en { color: #475569; }
+
 </style>
 </head>
 <body>
@@ -2805,29 +2815,29 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
-      <a class="nav-level-start" href="#level-a1" style="color:var(--emerald)">↳ Level Overview</a>
-      <a class="nav-link" href="#n_pos"><span class="nav-num">00</span>Parts of Speech <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n4b"><span class="nav-num">01</span>Género y Número <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n4c"><span class="nav-num">02</span>Artículos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n1"><span class="nav-num">03</span>Presente Indicativo <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n2"><span class="nav-num">04</span>Ser vs. Estar <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n4"><span class="nav-num">05</span>Hay · Existe <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n4d"><span class="nav-num">06</span>Interrogativas <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n4e"><span class="nav-num">07</span>Negación Básica <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n3"><span class="nav-num">08</span>Acentos · SEGA <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n5"><span class="nav-num">09</span>Presente Continuo <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n11b"><span class="nav-num">10</span>Verbos Reflexivos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n11"><span class="nav-num">11</span>Verbos tipo Gustar <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n11c"><span class="nav-num">12</span>Demostrativos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n11d"><span class="nav-num">13</span>Posesivos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n10"><span class="nav-num">14</span>Pronombres OD/OI <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n11e"><span class="nav-num">15</span>Oraciones con que <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n9"><span class="nav-num">16</span>Imperativo <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n14"><span class="nav-num">17</span>Comparativos <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-link" href="#n12"><span class="nav-num">18</span>Por vs. Para <span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
-      <a class="nav-drill-link vocab" href="#fc-vocab-a1">📋 Vocab Review</a>
-      <a class="nav-drill-link conj"  href="#fc-a1">⚡ Conjugation Drill</a>
-      <a class="nav-drill-link vocab" href="#wb-a1" style="color:var(--emerald)">📖 Word Bank</a>
+      <a class="nav-level-start" href="#level-a1" style="color:#065F46">&#8618; Level Overview</a>
+      <a class="nav-link" href="#n_pos"><span class="nav-num">00</span><span class="nav-link-text"><span class="nav-link-es">Parts of Speech</span><span class="nav-link-en">The 7 building blocks</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4b"><span class="nav-num">01</span><span class="nav-link-text"><span class="nav-link-es">G&eacute;nero y N&uacute;mero</span><span class="nav-link-en">Noun gender + plurals</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4c"><span class="nav-num">02</span><span class="nav-link-text"><span class="nav-link-es">Art&iacute;culos</span><span class="nav-link-en">el/la · un/una</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n1"><span class="nav-num">03</span><span class="nav-link-text"><span class="nav-link-es">Presente Indicativo</span><span class="nav-link-en">What you do / habitually</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n2"><span class="nav-num">04</span><span class="nav-link-text"><span class="nav-link-es">Ser vs. Estar</span><span class="nav-link-en">Two verbs for "to be"</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4"><span class="nav-num">05</span><span class="nav-link-text"><span class="nav-link-es">Hay &middot; Existe</span><span class="nav-link-en">There is / there are</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4d"><span class="nav-num">06</span><span class="nav-link-text"><span class="nav-link-es">Interrogativas</span><span class="nav-link-en">qué · quién · dónde…</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n4e"><span class="nav-num">07</span><span class="nav-link-text"><span class="nav-link-es">Negaci&oacute;n B&aacute;sica</span><span class="nav-link-en">no · nunca · nada</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n3"><span class="nav-num">08</span><span class="nav-link-text"><span class="nav-link-es">Acentos &middot; SEGA</span><span class="nav-link-en">When to write a tilde</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n5"><span class="nav-num">09</span><span class="nav-link-text"><span class="nav-link-es">Presente Continuo</span><span class="nav-link-en">Happening right now</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n11b"><span class="nav-num">10</span><span class="nav-link-text"><span class="nav-link-es">Verbos Reflexivos</span><span class="nav-link-en">Subject acts on itself</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n11"><span class="nav-num">11</span><span class="nav-link-text"><span class="nav-link-es">Verbos tipo Gustar</span><span class="nav-link-en">Me gusta / me encantan</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n11c"><span class="nav-num">12</span><span class="nav-link-text"><span class="nav-link-es">Demostrativos</span><span class="nav-link-en">este · ese · aquel</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n11d"><span class="nav-num">13</span><span class="nav-link-text"><span class="nav-link-es">Posesivos</span><span class="nav-link-en">mi · tu · su · nuestro</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n10"><span class="nav-num">14</span><span class="nav-link-text"><span class="nav-link-es">Pronombres OD/OI</span><span class="nav-link-en">lo · la · le</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n11e"><span class="nav-num">15</span><span class="nav-link-text"><span class="nav-link-es">Oraciones con que</span><span class="nav-link-en">Relative clauses</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n9"><span class="nav-num">16</span><span class="nav-link-text"><span class="nav-link-es">Imperativo</span><span class="nav-link-en">Affirmative & negative</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n14"><span class="nav-num">17</span><span class="nav-link-text"><span class="nav-link-es">Comparativos</span><span class="nav-link-en">más · menos · tan</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-link" href="#n12"><span class="nav-num">18</span><span class="nav-link-text"><span class="nav-link-es">Por vs. Para</span><span class="nav-link-en">Two meanings of "for"</span></span><span class="level-badge a1" style="font-size:9px;padding:1px 6px;margin-left:4px">A1</span></a>
+      <a class="nav-drill-link vocab" href="#fc-vocab-a1">&#128203; Vocab Review</a>
+      <a class="nav-drill-link conj"  href="#fc-a1">&#9889; Conjugation Drill</a>
+      <a class="nav-drill-link vocab" href="#wb-a1" style="color:var(--emerald)">&#128218; Word Bank</a>
       </div>
     </div>
     <div class="nav-group collapsed" data-group="a2">
@@ -2836,15 +2846,15 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
-      <a class="nav-level-start" href="#level-a2" style="color:var(--indigo)">↳ Level Overview</a>
-      <a class="nav-link" href="#n7"><span class="nav-num">19</span>Pretérito Indefinido <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-      <a class="nav-link" href="#n8"><span class="nav-num">20</span>Pretérito Imperfecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-      <a class="nav-link" href="#n15"><span class="nav-num">21</span>Pluscuamperfecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-      <a class="nav-link" href="#n26"><span class="nav-num">22</span>Pronombres Indefinidos <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-      <a class="nav-link" href="#n22"><span class="nav-num">23</span>Estilo Indirecto <span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
-      <a class="nav-drill-link vocab" href="#fc-vocab-a2">📋 Vocab Review</a>
-      <a class="nav-drill-link conj"  href="#fc-a2">⚡ Conjugation Drill</a>
-      <a class="nav-drill-link vocab" href="#wb-a2" style="color:var(--emerald)">📖 Word Bank</a>
+      <a class="nav-level-start" href="#level-a2" style="color:#3730A3">&#8618; Level Overview</a>
+      <a class="nav-link" href="#n7"><span class="nav-num">19</span><span class="nav-link-text"><span class="nav-link-es">Pret&eacute;rito Indefinido</span><span class="nav-link-en">Completed actions</span></span><span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n8"><span class="nav-num">20</span><span class="nav-link-text"><span class="nav-link-es">Pret&eacute;rito Imperfecto</span><span class="nav-link-en">Habits & background</span></span><span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n15"><span class="nav-num">21</span><span class="nav-link-text"><span class="nav-link-es">Pluscuamperfecto</span><span class="nav-link-en">Had already done</span></span><span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n26"><span class="nav-num">22</span><span class="nav-link-text"><span class="nav-link-es">Pronombres Indefinidos</span><span class="nav-link-en">algo · nada · alguien</span></span><span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-link" href="#n22"><span class="nav-num">23</span><span class="nav-link-text"><span class="nav-link-es">Estilo Indirecto</span><span class="nav-link-en">He said that…</span></span><span class="level-badge a2" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-drill-link vocab" href="#fc-vocab-a2">&#128203; Vocab Review</a>
+      <a class="nav-drill-link conj"  href="#fc-a2">&#9889; Conjugation Drill</a>
+      <a class="nav-drill-link vocab" href="#wb-a2" style="color:var(--emerald)">&#128218; Word Bank</a>
       </div>
     </div>
     <div class="nav-group collapsed" data-group="bridge">
@@ -2853,8 +2863,8 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
-      <a class="nav-level-start" href="#level-a2b1" style="color:#6B21A8">↳ Level Overview</a>
-      <a class="nav-link" href="#n13"><span class="nav-num">24</span>Infinitivo vs. Que <span class="level-badge bridge" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
+      <a class="nav-level-start" href="#level-a2b1" style="color:#6B21A8">&#8618; Level Overview</a>
+      <a class="nav-link" href="#n13"><span class="nav-num">24</span><span class="nav-link-text"><span class="nav-link-es">Infinitivo vs. Que</span><span class="nav-link-en">Same or diff. subject?</span></span><span class="level-badge bridge" style="font-size:9px;padding:1px 6px;margin-left:4px">A2</span></a>
       </div>
     </div>
     <div class="nav-group collapsed" data-group="b1">
@@ -2863,19 +2873,19 @@ body {
         <span class="ng-chevron">&#9662;</span>
       </div>
       <div class="ng-items">
-      <a class="nav-level-start" href="#level-b1" style="color:var(--red)">↳ Level Overview</a>
-      <a class="nav-link" href="#n6"><span class="nav-num">25</span>Futuro Próximo <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n16"><span class="nav-num">26</span>Futuro Simple <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n17"><span class="nav-num">27</span>Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n24"><span class="nav-num">28</span>Si Condicional <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n19"><span class="nav-num">29</span>Presente Subjuntivo <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n21"><span class="nav-num">30</span>Voz Pasiva <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n23"><span class="nav-num">31</span>Pronombres Relativos <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n20"><span class="nav-num">32</span>Conectores <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-link" href="#n_mex"><span class="nav-num">MX</span>Mexican Spanish Notes <span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
-      <a class="nav-drill-link vocab" href="#fc-vocab-b1">📋 Vocab Review</a>
-      <a class="nav-drill-link conj"  href="#fc-b1">⚡ Conjugation Drill</a>
-      <a class="nav-drill-link vocab" href="#wb-b1" style="color:var(--emerald)">📖 Word Bank</a>
+      <a class="nav-level-start" href="#level-b1" style="color:#991B1B">&#8618; Level Overview</a>
+      <a class="nav-link" href="#n6"><span class="nav-num">25</span><span class="nav-link-text"><span class="nav-link-es">Futuro Pr&oacute;ximo</span><span class="nav-link-en">Going to do…</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n16"><span class="nav-num">26</span><span class="nav-link-text"><span class="nav-link-es">Futuro Simple</span><span class="nav-link-en">Will do…</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n17"><span class="nav-num">27</span><span class="nav-link-text"><span class="nav-link-es">Condicional</span><span class="nav-link-en">Would do…</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n24"><span class="nav-num">28</span><span class="nav-link-text"><span class="nav-link-es">Si Condicional</span><span class="nav-link-en">Real / hypothetical</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n19"><span class="nav-num">29</span><span class="nav-link-text"><span class="nav-link-es">Presente Subjuntivo</span><span class="nav-link-en">Doubt · wish · emotion</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n21"><span class="nav-num">30</span><span class="nav-link-text"><span class="nav-link-es">Voz Pasiva</span><span class="nav-link-en">ser/estar + participle</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n23"><span class="nav-num">31</span><span class="nav-link-text"><span class="nav-link-es">Pronombres Relativos</span><span class="nav-link-en">que · quien · donde</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n20"><span class="nav-num">32</span><span class="nav-link-text"><span class="nav-link-es">Conectores</span><span class="nav-link-en">Link & sequence ideas</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-link" href="#n_mex"><span class="nav-num">MX</span><span class="nav-link-text"><span class="nav-link-es">Mexican Spanish</span><span class="nav-link-en">Regional patterns</span></span><span class="level-badge b1" style="font-size:9px;padding:1px 6px;margin-left:4px">B1</span></a>
+      <a class="nav-drill-link vocab" href="#fc-vocab-b1">&#128203; Vocab Review</a>
+      <a class="nav-drill-link conj"  href="#fc-b1">&#9889; Conjugation Drill</a>
+      <a class="nav-drill-link vocab" href="#wb-b1" style="color:var(--emerald)">&#128218; Word Bank</a>
       </div>
     </div>
   </nav>
@@ -4088,7 +4098,7 @@ body {
 
     <div class="rule">
       <div class="rule-label">Worked examples — apply the two questions to each word</div>
-      <div class="rule-body"
+      <div class="rule-body">
         <div class="tbl-wrap"><table style="width:100%;border-collapse:collapse;font-size:13px">
           <thead>
             <tr style="background:var(--bg-subtle)">
